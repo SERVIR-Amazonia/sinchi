@@ -90,7 +90,7 @@ var add_cloud_bands = function(img) {
 };
 
 //----------------------------------------------------//
-//Add shadow bands
+//Agregar bandas de sombras
 
 var add_shadow_bands = function(img) {
     var not_water = img.select('SCL').neq(6);
