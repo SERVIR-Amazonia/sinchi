@@ -1,0 +1,227 @@
+var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+var aoi = Region_100K.first().geometry();
+//visualise the extent of Colombian Amazon
+Map.addLayer(Region_100K, {}, "REgion_100K");
+Map.centerObject(Region_100K);
+// Define constants
+//These lines set up constants that will be used later in the script. 
+//They represent different thresholds and parameters. 
+var CLOUD_FILTER = 70; //it will be used to filter out images where more than 70% of the pixels are cloudy.
+var CLD_PRB_THRESH = 40;//defines the cloud probability threshold for classifying pixels as cloud or not cloud based on the s2cloudless model.
+var NIR_DRK_THRESH = 0.15; //threshold used to identify "dark" pixels in the NIR band (specifically the B8 band) that are not water (potential cloud shadow pixels).
+var CLD_PRJ_DIST = 2;
+var BUFFER = 10;
+var start_year = 2022;
+var end_year = 2022;
+var SR_BAND_SCALE = 1e4;
+var model_inputs = {
+    'percentileOptions': [10,25,50,75,90],
+    'addJRCWater': false,  // Include JRC Water Variables?
+    'addTopography': false,// Include Topography Variables?
+  
+    
+    // ... other model_inputs options can go here.
+};
+
+
+// Dates for the collection
+var start_date = '2022-01-01';
+var end_date = '2022-12-31';
+
+
+// Define the AOI for the Colombian Amazon
+//var aoi = geometry;
+
+
+// 1. Function to get Sentinel-2 SR with Cloud Probability
+//It retrieves Sentinel-2 Surface Reflectance (SR) images 
+//and join them with the cloud probability for the same images. 
+//The output is a collection of S2 SR images, each paired with its cloud probability data
+
+var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
+    // Import and filter S2 SR.
+    var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR')
+        .filterBounds(aoi)
+        .filterDate(start_date, end_date)
+        .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', CLOUD_FILTER));
+    
+    // Import and filter s2cloudless.
+    var s2_cloudless_col = ee.ImageCollection('COPERNICUS/S2_CLOUD_PROBABILITY')
+        .filterBounds(aoi)
+        .filterDate(start_date, end_date);
+
+    // Join the filtered s2cloudless collection to the SR collection by the 'system:index' property.
+    var join = ee.Join.saveFirst('s2cloudless');
+    var filter = ee.Filter.equals({
+        leftField: 'system:index',
+        rightField: 'system:index'
+    });
+
+    return ee.ImageCollection(join.apply({
+        primary: s2_sr_col,
+        secondary: s2_cloudless_col,
+        condition: filter
+    }));
+};
+
+
+//----------------------------------------------------//
+
+//Agregar bandas que indican la probabilidad de presencia de nubes 
+//y una máscara binaria de nubes a la imagen.
+var add_cloud_bands = function(img) {
+    var cld_prb = ee.Image(img.get('s2cloudless')).select('probability');
+    var is_cloud = cld_prb.gt(CLD_PRB_THRESH).rename('clouds');
+    return img.addBands(ee.Image([cld_prb, is_cloud]));
+};
+
+//----------------------------------------------------//
+//Add shadow bands
+
+var add_shadow_bands = function(img) {
+    var not_water = img.select('SCL').neq(6);
+    var dark_pixels = img.select('B8').lt(NIR_DRK_THRESH * SR_BAND_SCALE).multiply(not_water).rename('dark_pixels');
+    var shadow_azimuth = ee.Number(90).subtract(ee.Number(img.get('MEAN_SOLAR_AZIMUTH_ANGLE')));
+    var cld_proj = img.select('clouds').directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST * 10)
+        .reproject({
+            crs: img.select(0).projection(),
+            scale: 100
+        })
+        .select('distance')
+        .mask()
+        .rename('cloud_transform');
+    var shadows = cld_proj.multiply(dark_pixels).rename('shadows');
+    return img.addBands(ee.Image([dark_pixels, cld_proj, shadows]));
+};
+
+var add_cld_shdw_mask = function(img) {
+    var img_cloud = add_cloud_bands(img);
+    var img_cloud_shadow = add_shadow_bands(img_cloud);
+    var is_cld_shdw = img_cloud_shadow.select('clouds').add(img_cloud_shadow.select('shadows')).gt(0);
+    var is_cld_shdw = is_cld_shdw.focal_min(2).focal_max(BUFFER * 2 / 20)
+        .reproject({
+            crs: img.select([0]).projection(),
+            scale: 20
+        })
+        .rename('cloudmask');
+    return img.addBands(is_cld_shdw);
+};
+
+var apply_cld_shdw_mask = function(img) {
+    var not_cld_shdw = img.select('cloudmask').not();
+    return img.select('B.*').updateMask(not_cld_shdw);
+};
+
+//t(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
+    
+
+
+var add_ndvi = function(img) {
+  var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
+  var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
+
+  img=img.addBands(ndvi);
+ img= img.select(covariates);
+  return img;
+}
+//---------------------------//
+
+
+
+
+
+//--------------//
+
+
+var s2process = function(aoi, start_year, end_year) {
+    var start_date = ee.Date.fromYMD(start_year, 1, 1);
+    var end_date = ee.Date.fromYMD(end_year, 12, 31);
+    
+    var s2_sr_cld_col = get_s2_sr_cld_col(aoi, start_date, end_date);
+    
+    var imgColl = s2_sr_cld_col.map(add_cld_shdw_mask)
+        .map(apply_cld_shdw_mask)
+        .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
+        .map(add_ndvi);
+    
+
+   var percentile_options = model_inputs['percentileOptions'];	    
+   var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	
+   //Omití harmonics
+   var stack = ee.Image(percentiles);
+    if (model_inputs['addJRCWater']) {
+        stack = idx.addJRC(stack).unmask(0);
+    }
+    
+    if (model_inputs['addTopography']) {
+         stack = idx.addTopography(stack).unmask(0);
+    }
+    
+    return stack;
+}
+   
+//------------
+// Function to add altitude and slope from DEM to an image
+var addAltitudeAndSlope = function(img) {
+  // Use the SRTM DEM to get altitude information
+  var dem = ee.Image('USGS/SRTMGL1_003');
+  
+  // Calculate slope from the DEM
+  var slope = ee.Terrain.slope(dem);
+  
+  // Add the altitude and slope bands to the existing image
+  return img.addBands(dem.rename('altitude')).addBands(slope.rename('slope'));
+};
+
+
+//---
+
+// Buffer the aoi by 1km and process the satellite data inside the aoi
+
+
+
+var assetId = 'pc300-samz-sinchi';
+
+
+
+var region = aoi.buffer(1000);
+var img = s2process(aoi, start_year, end_year);
+// Use your existing 'processedCollection' image (or replace with your actual image)
+// Assume processedCollection is your existing image after all the previous processing.
+var processedCollection = ee.Image(img);
+
+// Add the altitude and slope bands to the processed image
+var img = addAltitudeAndSlope(processedCollection);
+
+
+img = img.toFloat();
+print(img)
+
+// Export the image to an Earth Engine asset.
+Export.image.toAsset({
+   image: img,
+   description: 'composite_colombian_amazon',
+   assetId: assetId,
+   region: region,
+   scale: 10,
+   maxPixels:  10000000000000  // specify a larger maxPixels value
+});
+
+Export.image.toDrive({
+  
+   image: img,
+   description: 'piloto_mosaico',
+   folder: 'sinchi',  // Optional: specify a folder name if you want. Otherwise, it will be saved in the root.
+   region: region,
+   scale: 10,
+   maxPixels: 10000000000000  // specify a larger maxPixels value
+});
+//After running the script, the image will be exported to your Google Drive. Depending on the size of the image and your internet speed, this process can take some time. Once the image has been exported to your Google Drive, you can download it to your computer directly from there.
+
+
+// Visualizing the processed image
+//Map.addLayer(img.select('NDVI_p50'), {    min: -1,
+//max: 1,    palette: ['blue', 'white', 'green'] }, 'Processed NDVI');
+
+//Map.centerObject(aoi, 12); // Setting the map center to the defined aoi and zoom level 12
+
