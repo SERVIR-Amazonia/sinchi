@@ -1,9 +1,4 @@
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
-var aoi = Region_100K.first().geometry();
-
-//visualise the extent of Colombian Amazon
-Map.addLayer(Region_100K, {}, "REgion_100K");
-Map.centerObject(Region_100K);
 
 
 // Definir constantes
@@ -26,14 +21,22 @@ var model_inputs = {
     // ... other model_inputs options can go here.
 };
 
-
 // Dates for the collection
 var start_date = '2022-01-01';
 var end_date = '2022-12-31';
 
-
-// Define the AOI for the Colombian Amazon
+// ---------------------------//
+//AOI
+// Define aoi piloto dentro de Amazonia Colombiana
 //var aoi = geometry;
+
+//AOI Amazonia Colombiana
+var aoi = Region_100K.first().geometry();
+
+//visualizar el extent de la Amazonia Colombiana 
+Map.addLayer(Region_100K, {}, "REgion_100K");
+Map.centerObject(Region_100K);
+
 
 
 // 1. Function to get Sentinel-2 SR with Cloud Probability
