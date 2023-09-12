@@ -3,10 +3,9 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-71.42833478544651, -0.4710745453900222],
           [-71.28555757004561, -0.4642040686029912],
           [-71.28279257339491, -0.3392525511020995],
-          [-71.43109766013782, -0.34748871459006164]]]);
+          [-71.43109766013782, -0.34748871459006164]]]),
+    Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-
-var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 
 
 // Definir constantes
@@ -39,6 +38,7 @@ var end_date = '2022-12-31';
 //var aoi = geometry;
 
 //AOI Amazonia Colombiana
+
 var aoi = Region_100K.first().geometry();
 
 //visualizar el extent de la Amazonia Colombiana 
