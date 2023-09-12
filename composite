@@ -126,9 +126,6 @@ var apply_cld_shdw_mask = function(img) {
     return img.select('B.*').updateMask(not_cld_shdw);
 };
 
-//t(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
-    
-
 
 var add_ndvi = function(img) {
   var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
