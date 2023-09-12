@@ -1,9 +1,12 @@
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var aoi = Region_100K.first().geometry();
+
 //visualise the extent of Colombian Amazon
 Map.addLayer(Region_100K, {}, "REgion_100K");
 Map.centerObject(Region_100K);
-// Define constants
+
+
+// Definir constantes
 //These lines set up constants that will be used later in the script. 
 //They represent different thresholds and parameters. 
 var CLOUD_FILTER = 70; //it will be used to filter out images where more than 70% of the pixels are cloudy.
