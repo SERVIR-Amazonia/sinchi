@@ -20,7 +20,7 @@ var start_year = 2022;
 var end_year = 2022;
 var SR_BAND_SCALE = 1e4;
 var model_inputs = {
-    'percentileOptions': [10,25,50,75,90],
+    'percentileOptions': [25,50,75],
     'addJRCWater': false,  // Include JRC Water Variables?
     'addTopography': false,// Include Topography Variables?
   
@@ -42,7 +42,7 @@ var end_date = '2022-12-31';
 var aoi = Region_100K.first().geometry();
 
 //visualizar el extent de la Amazonia Colombiana 
-Map.addLayer(Region_100K, {}, "REgion_100K");
+Map.addLayer(Region_100K, {}, "Region_100K");
 Map.centerObject(Region_100K);
 
 
