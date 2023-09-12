@@ -220,7 +220,6 @@ Export.image.toDrive({
    scale: 10,
    maxPixels: 10000000000000  
 });
-//After running the script, the image will be exported to your Google Drive. Depending on the size of the image and your internet speed, this process can take some time. Once the image has been exported to your Google Drive, you can download it to your computer directly from there.
 
 
 // Visualizing the processed image
