@@ -138,11 +138,7 @@ var add_ndvi = function(img) {
 //---------------------------//
 
 
-
-
-
-//--------------//
-
+// Ejecutatr todas las funciones de procesamiento de las imagenes
 
 var s2process = function(aoi, start_year, end_year) {
     var start_date = ee.Date.fromYMD(start_year, 1, 1);
@@ -187,8 +183,7 @@ var addAltitudeAndSlope = function(img) {
 
 //---
 
-// Buffer the aoi by 100 mm and process the satellite data inside the aoi
-
+// Buffer the aoi by 100 m and process the satellite data inside the aoi
 
 var assetId = 'pc300-samz-sinchi';
 
