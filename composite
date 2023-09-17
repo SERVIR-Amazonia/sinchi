@@ -189,8 +189,8 @@ var img = s2process(aoi, start_year, end_year);
 // Use your existing 'processedCollection' image (or replace with your actual image)
 // Assume processedCollection is your existing image after all the previous processing.
 img = img.toFloat();
-print(img)
-var mosaic_img=img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);
+print(img);
+var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);
 
 var processedCollection = ee.Image(mosaic_img);
 
