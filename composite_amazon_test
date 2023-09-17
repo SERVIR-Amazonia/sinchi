@@ -27,7 +27,8 @@ var s2c = ee.ImageCollection('COPERNICUS/S2_CLOUD_PROBABILITY');
 var s2Sr = ee.ImageCollection('COPERNICUS/S2_SR');
 
 // ROI
-var roi = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K").geometry().simplify(100);
+//var roi = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K").geometry().simplify(100);
+var roi = geometry;
 Map.centerObject(roi, 12);
 Map.addLayer(roi, {}, 'roi', false);
 
