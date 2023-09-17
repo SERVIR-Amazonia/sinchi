@@ -205,7 +205,7 @@ Export.image.toAsset({
 });
 
 var assetId_temp = 'ee-servir-sinchi-lccv';
-// Export the image to an Earth Engine asset personal I dont have permissions yet.
+// Export the image to a personal Earth Engine asset  I dont have permissions yet.
 Export.image.toAsset({
    image: img,
    description: 'composite_colombian_amazon_temp',
