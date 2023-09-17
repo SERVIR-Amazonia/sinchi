@@ -26,11 +26,11 @@ var model_inputs = {
 // Dates for the collection
 
 var start_year = 2022;
-var start_month = 1;
+var start_month = 7;
 var start_day = 1;
 var end_year = 2022;
-var end_month = 6;
-var end_day = 30;
+var end_month = 12;
+var end_day = 31;
 
 var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
 var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
@@ -197,7 +197,7 @@ print(img)
 // Export the image to an Earth Engine asset.
 Export.image.toAsset({
    image: img,
-   description: 'composite_colombian_amazon',
+   description: 'composite_colombian_amazon_sem2',
    assetId: assetId,
    region: region,
    scale: 10,
