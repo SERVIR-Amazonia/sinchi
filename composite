@@ -191,8 +191,7 @@ var img = s2process(aoi, start_year, end_year);
 // Assume processedCollection is your existing image after all the previous processing.
 var processedCollection = ee.Image(img);
 
-// Add the altitude and slope bands to the processed image
-var img = addAltitudeAndSlope(processedCollection);
+
 
 
 img = img.toFloat();
