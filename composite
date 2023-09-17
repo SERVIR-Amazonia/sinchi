@@ -141,9 +141,9 @@ var add_ndvi = function(img) {
 var calculateEVI = function(img) {
   var evi = img.expression(
     '2.5 * ((NIR - Red) / (NIR + 6 * Red - 7.5 * Blue + 1))', {
-      'NIR': image.select('nir'),
-      'Red': image.select('red'),
-      'Blue': image.select('blue')
+      'NIR': img.select('nir'),
+      'Red': img.select('red'),
+      'Blue': img.select('blue')
     });
   return img.addBands(evi.rename('EVI'));
 };
