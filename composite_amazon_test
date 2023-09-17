@@ -24,7 +24,7 @@ Map.addLayer(roi, {}, 'roi', false);
 
 // Dates over which to create a median composite.
 var start = ee.Date('2022-01-01');
-var end = ee.Date('2023-01-01');
+var end = ee.Date('2022-06-30');
 
 // S2 L1C for Cloud Displacement Index (CDI) bands.
 s2 = s2.filterBounds(roi).filterDate(start, end)
