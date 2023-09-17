@@ -33,7 +33,7 @@ var end_month = 6;
 var end_day = 30;
 
 var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
-var end_date = ee.Date.fromYMD(end_year, end_mont, end_day);
+var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 
 
 // ---------------------------//
