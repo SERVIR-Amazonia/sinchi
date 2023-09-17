@@ -215,7 +215,7 @@ var assetId_temp = 'ee-servi-sinchi-lccv';
 // Export the image to an Earth Engine asset personal I donot have permissions yet.
 Export.image.toAsset({
    image: img,
-   description: 'composite_colombian_amazon',
+   description: 'composite_colombian_amazon_temp',
    assetId: assetId_temp,
    region: region,
    scale: 10,
