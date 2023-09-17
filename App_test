@@ -10,7 +10,7 @@ Map.centerObject(composite, 10);
 
 
 // Parametros de visualización
-var compositeVis = {"bands":["red","green","blue"],"min":100,"max":2554,"gamma":1.8};
+var compositeVis = {"bands":["red","green","blue"],"min":1100,"max":1794,"gamma":1.8};
 
 // Agregar al mapa.
 Map.addLayer(composite, compositeVis, 'Color natural');
