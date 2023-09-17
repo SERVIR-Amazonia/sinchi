@@ -32,6 +32,8 @@ var end_year1 = 2022;
 var end_month1 = 6;
 var end_day1 = 30;
 
+var start_date_sem1 = ee.Date.fromYMD(start_year1, start_month1, start_day1);
+var end_date_sem1 = ee.Date.fromYMD(end_year1, end_mont1, end_day1);
 
 //Fechas para semestre 2
 var start_year2 = 2022;
@@ -41,12 +43,8 @@ var end_year2 = 2022;
 var end_month2 = 12;
 var end_day2 = 31;
 
-var start_date_sem1 = ee.Date.fromYMD(start_year1, start_month1, start_day1)
-var end_date_sem1 = ee.Date.fromYMD(end_year1, end_mont1, end_day1)
-
-var start_date_sem2 = ee.Date.fromYMD(start_year2, start_month2, start_day2)
-var end_date_sem2 = ee.Date.fromYMD(end_year2, end_month2, end_day2)
-
+var start_date_sem2 = ee.Date.fromYMD(start_year2, start_month2, start_day2);
+var end_date_sem2 = ee.Date.fromYMD(end_year2, end_month2, end_day2);
 
 // ---------------------------//
 //AOI
