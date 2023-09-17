@@ -122,7 +122,7 @@ Export.image.toDrive({
    image: median,
    description: 's2_cloudless_mosaic',
    folder: 'sinchi',  
-   region: region,
+   region: roi,
    scale: 10,
    maxPixels: 10000000000000  
 });
