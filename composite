@@ -16,12 +16,7 @@ var CLD_PRB_THRESH = 40;//defines the cloud probability threshold for classifyin
 var NIR_DRK_THRESH = 0.15; //threshold used to identify "dark" pixels in the NIR band (specifically the B8 band) that are not water (potential cloud shadow pixels).
 var CLD_PRJ_DIST = 2;
 var BUFFER = 10;
-var start_year = 2022;
-var start_month = 1;
-var start_day = 1;
-var end_year = 2022;
-var end_month = 12;
-var end_day = 31;
+
 var SR_BAND_SCALE = 1e4;
 var model_inputs = {
     'percentileOptions': [50],
@@ -29,8 +24,28 @@ var model_inputs = {
 };
 
 // Dates for the collection
-var start_date = ee.Date.fromYMD(start_year, start_month, start_day)
-var end_date = ee.Date.fromYMD(end_year, end_month, end_day)
+//Fechas para semestre 1
+var start_year1 = 2022;
+var start_month1 = 1;
+var start_day1 = 1;
+var end_year1 = 2022;
+var end_month1 = 6;
+var end_day1 = 30;
+
+
+//Fechas para semestre 2
+var start_year2 = 2022;
+var start_month2 = 7;
+var start_day2 = 1;
+var end_year2 = 2022;
+var end_month2 = 12;
+var end_day2 = 31;
+
+var start_date_sem1 = ee.Date.fromYMD(start_year1, start_month1, start_day1)
+var end_date_sem1 = ee.Date.fromYMD(end_year1, end_mont1, end_day1)
+
+var start_date_sem2 = ee.Date.fromYMD(start_year2, start_month2, start_day2)
+var end_date_sem2 = ee.Date.fromYMD(end_year2, end_month2, end_day2)
 
 
 // ---------------------------//
