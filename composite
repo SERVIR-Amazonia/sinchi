@@ -135,6 +135,20 @@ var add_ndvi = function(img) {
  img= img.select(covariates);
   return img;
 }
+
+
+// Function to calculate EVI for a single image.
+var calculateEVI = function(img) {
+  var evi = img.expression(
+    '2.5 * ((NIR - Red) / (NIR + 6 * Red - 7.5 * Blue + 1))', {
+      'NIR': image.select('nir'),
+      'Red': image.select('red'),
+      'Blue': image.select('blue')
+    });
+  return img.addBands(evi.rename('EVI'));
+};
+
+
 //---------------------------//
 
 
@@ -149,8 +163,9 @@ var s2process = function(aoi, start_year, end_year) {
     var imgColl = s2_sr_cld_col.map(add_cld_shdw_mask)
         .map(apply_cld_shdw_mask)
         .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
-        .map(add_ndvi);
+        .map(add_ndvi).map(calculateEVI);
     
+
 
    var percentile_options = model_inputs['percentileOptions'];	    
    var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	
