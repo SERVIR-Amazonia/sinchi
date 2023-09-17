@@ -195,7 +195,6 @@ print(mosaic_img);
 var processedCollection = ee.Image(mosaic_img);
 
 
-
 // Export the image to an Earth Engine asset.
 Export.image.toAsset({
    image: mosaic_img,
@@ -209,7 +208,7 @@ Export.image.toAsset({
 var assetId_temp = 'ee-servir-sinchi-lccv';
 // Export the image to a personal Earth Engine asset  I dont have permissions yet.
 Export.image.toAsset({
-   image: img,
+   image: mosaic_img,
    description: 'composite_colombian_amazon_temp',
    assetId: assetId_temp,
    region: region,
