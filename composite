@@ -217,16 +217,6 @@ Export.image.toAsset({
    maxPixels:  10000000000000 
 });
 
-Export.image.toDrive({
-  
-   image: img,
-   description: 'piloto_mosaico',
-   folder: 'sinchi',  
-   region: region,
-   scale: 10,
-   maxPixels: 10000000000000  
-});
-
 
 // Visualizing the processed image
 //Map.addLayer(img.select('NDVI_p50'), {    min: -1,
