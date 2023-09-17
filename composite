@@ -24,27 +24,17 @@ var model_inputs = {
 };
 
 // Dates for the collection
-//Fechas para semestre 1
-var start_year1 = 2022;
-var start_month1 = 1;
-var start_day1 = 1;
-var end_year1 = 2022;
-var end_month1 = 6;
-var end_day1 = 30;
 
-var start_date_sem1 = ee.Date.fromYMD(start_year1, start_month1, start_day1);
-var end_date_sem1 = ee.Date.fromYMD(end_year1, end_mont1, end_day1);
+var start_year = 2022;
+var start_month = 1;
+var start_day = 1;
+var end_year = 2022;
+var end_month = 6;
+var end_day = 30;
 
-//Fechas para semestre 2
-var start_year2 = 2022;
-var start_month2 = 7;
-var start_day2 = 1;
-var end_year2 = 2022;
-var end_month2 = 12;
-var end_day2 = 31;
+var start_date = ee.Date.fromYMD(start_year1, start_month1, start_day1);
+var end_date = ee.Date.fromYMD(end_year1, end_mont1, end_day1);
 
-var start_date_sem2 = ee.Date.fromYMD(start_year2, start_month2, start_day2);
-var end_date_sem2 = ee.Date.fromYMD(end_year2, end_month2, end_day2);
 
 // ---------------------------//
 //AOI
@@ -58,7 +48,6 @@ var aoi = Region_100K.first().geometry();
 //visualizar el extent de la Amazonia Colombiana 
 Map.addLayer(Region_100K, {}, "Region_100K");
 Map.centerObject(Region_100K);
-
 
 
 // Función para obtener Sentinel-2 SR con Probabilidad de Nube
