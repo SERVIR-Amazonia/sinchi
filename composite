@@ -61,9 +61,9 @@ Map.centerObject(Region_100K);
 
 
 
-// 1. Function to get Sentinel-2 SR with Cloud Probability
-//It retrieves Sentinel-2 Surface Reflectance (SR) images 
-//and join them with the cloud probability for the same images. 
+// Función para obtener Sentinel-2 SR con Probabilidad de Nube
+// Esta función recupera imágenes de Reflectancia Superficial (SR) de Sentinel-2
+// y las une con la probabilidad de nube para las mismas imágenes
 //The output is a collection of S2 SR images, each paired with its cloud probability data
 
 var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
