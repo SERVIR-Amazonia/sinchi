@@ -17,16 +17,17 @@ var NIR_DRK_THRESH = 0.15; //threshold used to identify "dark" pixels in the NIR
 var CLD_PRJ_DIST = 2;
 var BUFFER = 10;
 var start_year = 2022;
+var start_month = 1;
+var start_day = 1;
 var end_year = 2022;
 var SR_BAND_SCALE = 1e4;
 var model_inputs = {
     'percentileOptions': [50],
     'addJRCWater': false,  // Include JRC Water Variables?
-
 };
 
 // Dates for the collection
-var start_date = '2022-01-01';
+
 var end_date = '2022-06-31';
 
 // ---------------------------//
@@ -149,7 +150,7 @@ var calculateEVI = function(img) {
 //---------------------------//
 
 
-// Ejecutatr todas las funciones de procesamiento de las imagenes
+// Ejecutar todas las funciones de procesamiento de las imagenes
 
 var s2process = function(aoi, start_year, end_year) {
     var start_date = ee.Date.fromYMD(start_year, 1, 1);
