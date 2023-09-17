@@ -178,20 +178,6 @@ var s2process = function(aoi, start_year, end_year) {
   return stack;
 }
    
-//------------
-// Function to add altitude and slope from DEM to an image
-var addAltitudeAndSlope = function(img) {
-  // Use the SRTM DEM to get altitude information
-  var dem = ee.Image('USGS/SRTMGL1_003');
-  
-  // Calculate slope from the DEM
-  var slope = ee.Terrain.slope(dem);
-  
-  // Add the altitude and slope bands to the existing image
-  return img.addBands(dem.rename('altitude')).addBands(slope.rename('slope'));
-};
-
-
 //---
 
 // Buffer the aoi by 100 m and process the satellite data inside the aoi
