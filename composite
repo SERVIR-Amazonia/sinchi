@@ -9,9 +9,9 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
 
 
 // Definir constantes
-//These lines set up constants that will be used later in the script. 
+// Estas líneas definen constantes que se usarán más adelante en el script.
 //They represent different thresholds and parameters. 
-var CLOUD_FILTER = 70; //it will be used to filter out images where more than 70% of the pixels are cloudy.
+var CLOUD_FILTER = 70; //Se usará para filtrar imágenes donde más del 70% de los píxeles estén cubiertos por nubes.
 var CLD_PRB_THRESH = 40;//defines the cloud probability threshold for classifying pixels as cloud or not cloud based on the s2cloudless model.
 var NIR_DRK_THRESH = 0.15; //threshold used to identify "dark" pixels in the NIR band (specifically the B8 band) that are not water (potential cloud shadow pixels).
 var CLD_PRJ_DIST = 2;
@@ -22,10 +22,7 @@ var SR_BAND_SCALE = 1e4;
 var model_inputs = {
     'percentileOptions': [50],
     'addJRCWater': false,  // Include JRC Water Variables?
-    'addTopography': false,// Include Topography Variables?
-  
-    
-    // ... other model_inputs options can go here.
+
 };
 
 // Dates for the collection
