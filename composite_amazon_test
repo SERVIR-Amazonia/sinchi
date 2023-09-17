@@ -119,7 +119,7 @@ Export.image.toAsset({
 
 Export.image.toDrive({
   
-   image: img,
+   image: median,
    description: 's2_cloudless_mosaic',
    folder: 'sinchi',  
    region: region,
