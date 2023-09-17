@@ -211,6 +211,17 @@ Export.image.toAsset({
    maxPixels:  10000000000000 
 });
 
+var assetId_temp = 'ee-servi-sinchi-lccv';
+// Export the image to an Earth Engine asset personal I donot have permissions yet.
+Export.image.toAsset({
+   image: img,
+   description: 'composite_colombian_amazon',
+   assetId: assetId_temp,
+   region: region,
+   scale: 10,
+   maxPixels:  10000000000000 
+});
+
 Export.image.toDrive({
   
    image: img,
