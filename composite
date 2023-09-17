@@ -175,10 +175,6 @@ var s2process = function(aoi, start_year, end_year) {
         stack = idx.addJRC(stack).unmask(0);
     }
     
-  if (model_inputs['addTopography']) {
-         stack = idx.addTopography(stack).unmask(0);
-    }
-    
   return stack;
 }
    
