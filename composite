@@ -20,6 +20,8 @@ var start_year = 2022;
 var start_month = 1;
 var start_day = 1;
 var end_year = 2022;
+var end_month = 12;
+var end_day = 31;
 var SR_BAND_SCALE = 1e4;
 var model_inputs = {
     'percentileOptions': [50],
@@ -27,8 +29,9 @@ var model_inputs = {
 };
 
 // Dates for the collection
+var start_date = ee.Date.fromYMD(start_year, start_month, start_day)
+var end_date = ee.Date.fromYMD(end_year, end_month, end_day)
 
-var end_date = '2022-06-31';
 
 // ---------------------------//
 //AOI
