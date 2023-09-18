@@ -209,7 +209,7 @@ var assetId_temp = 'ee-servir-sinchi-lccv';
 // Export the image to a personal Earth Engine asset  I dont have permissions yet.
 Export.image.toAsset({
    image: mosaic_img,
-   description: 'comp_colomb_amazon_temp_s1',
+   description: 'comp_colomb_amazon_temp_s2',
    assetId: assetId_temp,
    region: region,
    scale: 10,
