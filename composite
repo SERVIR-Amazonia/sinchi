@@ -39,11 +39,11 @@ var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 // ---------------------------//
 //AOI
 // Define aoi piloto dentro de Amazonia Colombiana
-var aoi = geometry;
+//var aoi = geometry;
 
 //AOI Amazonia Colombiana
 
-//var aoi = Region_100K.first().geometry();
+var aoi = Region_100K.first().geometry();
 
 //visualizar el extent de la Amazonia Colombiana 
 Map.addLayer(Region_100K, {}, "Region_100K");
