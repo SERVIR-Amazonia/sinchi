@@ -143,7 +143,7 @@ var add_ndvi = function(img) {
 // Function to calculate EVI for a single image.
 var calculateEVI = function(img) {
   var evi = img.expression(
-    '2.5 * ((NIR - Red) / (NIR + 6 * Red - 7.5 * Blue + 1))', {
+    '2.5 * (((NIR/10000) - (Red/10000)) / ((NIR/10000) + 6 * (Red/10000) - 7.5 * (Blue/10000) + 1))', {
       'NIR': img.select('nir'),
       'Red': img.select('red'),
       'Blue': img.select('blue')
