@@ -223,3 +223,12 @@ Export.image.toAsset({
 
 //Map.centerObject(aoi, 12); // Setting the map center to the defined aoi and zoom level 12
 
+Export.image.toDrive({
+  
+   image: img,
+   description: 'piloto_evi_test',
+   folder: 'sinchi',  
+   region: region,
+   scale: 10,
+   maxPixels: 10000000000000  
+});
