@@ -38,7 +38,7 @@ var BUFFER = 10;      //Distancia (m) para dilatar el borde de los objetos ident
 var SR_BAND_SCALE = 1e4; //Almacena el valor 1e4 (10,000). 
 
 var model_inputs = {
-    'percentileOptions': [50],// opciones de percentil,en este caso solo se selecciona el percentil 50
+    'percentileOptions': [50],// opciones de percentil,en este caso solo se incluye el percentil 50
     };
 
 // Fechas para generar el mosaico
@@ -86,7 +86,8 @@ var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
         .filterBounds(aoi)
         .filterDate(start_date, end_date);
 
-    // Join the filtered s2cloudless collection to the SR collection by the 'system:index' property.
+    // Une las colecciones SR y s2cloudless basándose en la propiedad 'system:index', 
+    // lo que garantiza que cada imagen SR se empareje con su correspondiente imagen de probabilidad de nubes.
     var join = ee.Join.saveFirst('s2cloudless');
     var filter = ee.Filter.equals({
         leftField: 'system:index',
