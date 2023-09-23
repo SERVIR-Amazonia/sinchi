@@ -21,19 +21,22 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
 **/
 
 var CLOUD_FILTER = 70; //Se usará para filtrar imágenes donde más del 70% de los píxeles estén cubiertos por nubes.
-var CLD_PRB_THRESH = 40;/* define el umbral de probabilidad de nubes para clasificar píxeles como nube o no nube basado en el modelo s2cloudless. 
-                         Establece un umbral de probabilidad para determinar si un píxel se clasifica como nube o no, según el modelo s2cloudless. 
-                         Es decir, cualquier píxel que tenga una probabilidad superior al 40% de ser una nube se clasificará como tal.
-                        */
-var NIR_DRK_THRESH = 0.15; /* Umbral para identificar píxeles oscuros en la banda NIR que no son agua (banda B8). 
-                          Estos píxeles oscuros que no son agua son potencialmente sombras de nubes. 
-                          Si un píxel tiene un valor menor que 0.15 en esta banda, es posible que esté indicando la sombra de una nube.
-                          */
+
+var CLD_PRB_THRESH = 40; //Define el umbral de probabilidad de nubes para clasificar píxeles como nube o no nube basado en el modelo s2cloudless. 
+                         //Establece un umbral de probabilidad para determinar si un píxel se clasifica como nube o no, según el modelo s2cloudless. 
+                         //Es decir, cualquier píxel que tenga una probabilidad superior al 40% de ser una nube se clasificará como tal.
+
+var NIR_DRK_THRESH = 0.15; //Umbral para identificar píxeles oscuros en la banda NIR que no son agua (banda B8). 
+                           //Estos píxeles oscuros que no son agua son potencialmente sombras de nubes. 
+                           //Si un píxel tiene un valor menor que 0.15 en esta banda, es posible que esté indicando la sombra de una nube.
+                          
 
 var CLD_PRJ_DIST = 2; //Distancia máxima (km) para buscar sombras de nubes desde los bordes de las nubes.
+
 var BUFFER = 10;      //Distancia (m) para dilatar el borde de los objetos identificados como nubes
 
-var SR_BAND_SCALE = 1e4;
+var SR_BAND_SCALE = 1e4; //Almacena el valor 1e4 (10,000). 
+
 var model_inputs = {
     'percentileOptions': [50],// opciones de percentil,en este caso solo se selecciona el percentil 50
     };
@@ -51,38 +54,34 @@ var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
 var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 
 
-// AOI
-// Define aoi piloto dentro de Amazonia Colombiana
-//var aoi = geometry; //AOI temporal para probar el código
+// AOI Amazonia Colombiana
+/*
+var aoi = geometry; //Define aoi piloto dentro de Amazonia Colombiana para probar el código
+*/
 
 //AOI Amazonia Colombiana
-
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
 
-//visualizar el extent de la Amazonia Colombiana 
-//Map.addLayer(Region_100K, {}, "Region_100K");
-//Map.centerObject(Region_100K);
+/* 
+// Visualizar el extent de la Amazonia Colombiana 
+ * Map.addLayer(Region_100K, {}, "Region_100K");
+ * Map.centerObject(Region_100K);
+*/
 
 
-/** 
- *get_s2_sr_cld_col almacena una colección de imágenes de reflectancia superficial SR de Sentinel-2,
- *Cada imagen está emparejada con datos de probabilidad de nubes.
-**/ 
+// get_s2_sr_cld_col almacena una colección de imágenes de reflectancia superficial SR de Sentinel-2,
+//Cada imagen está emparejada con datos de probabilidad de nubes.
 var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
   
-    /* 
-     *s2_sr_col filtra la colección de imágenes SR de Sentinel-2 para el Área de Interés (AOI) y entre las fechas de inicio y fin indicadas.
-     *Excluye imágenes con un porcentaje de píxeles nublados mayor al umbral definido en CLOUD_FILTER
-    */ 
+    // s2_sr_col filtra la colección de imágenes SR de Sentinel-2 para el Área de Interés (AOI) y entre las fechas de inicio y fin indicadas.
+    // y excluye imágenes con un porcentaje de píxeles nublados mayor al umbral definido en CLOUD_FILTER
     var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR')
         .filterBounds(aoi)
         .filterDate(start_date, end_date)
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', CLOUD_FILTER));
     
-    /* 
-     *s2_cloudless_col filtra la colección de imágenes S2_CLOUD_PROBABILITY según el Área de Interés (AOI) y la fecha.
-     *La colección S2 cloud probability proporciona datos de probabilidad de nubes
-    */ 
+    //s2_cloudless_col filtra la colección de imágenes S2_CLOUD_PROBABILITY para el AOI y el rango de fechas.
+    //La colección S2 cloud probability proporciona datos de probabilidad de nubes
     var s2_cloudless_col = ee.ImageCollection('COPERNICUS/S2_CLOUD_PROBABILITY')
         .filterBounds(aoi)
         .filterDate(start_date, end_date);
