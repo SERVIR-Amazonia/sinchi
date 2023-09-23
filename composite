@@ -104,20 +104,18 @@ var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
     }));
 };
 
-
-//----------------------------------------------------//
-
 //Agregar bandas que indican la probabilidad de presencia de nubes 
 //y una máscara binaria de nubes a la imagen.
 var add_cloud_bands = function(img) {
-    var cld_prb = ee.Image(img.get('s2cloudless')).select('probability');
-    var is_cloud = cld_prb.gt(CLD_PRB_THRESH).rename('clouds');
-    return img.addBands(ee.Image([cld_prb, is_cloud]));
+    var cld_prb = ee.Image(img.get('s2cloudless')).select('probability');// Contiene la imagen con la probabilidad de presencia de nubes en una imagen según el modelo s2cloudless. 
+                                                                         //Accede a una imagen que proviene de la colección 's2cloudless'.
+    var is_cloud = cld_prb.gt(CLD_PRB_THRESH).rename('clouds');//Contiene una imagen binaria derivada de la probabilidad de nubosidad dada por 's2cloudless'. 
+                                                               //Evalúa si los valores en la variable cld_prb  son mayores que el umbral definido en CLD_PRB_THRESH. 
+                                                               
+    return img.addBands(ee.Image([cld_prb, is_cloud]));//Devuelve imagen binaria donde píxeles con probabilidad de nubosidad mayor que el umbral tienen un valor de 1 y los otros de 0.
 };
 
-//----------------------------------------------------//
 //Agregar bandas de sombras
-
 var add_shadow_bands = function(img) {
     var not_water = img.select('SCL').neq(6);
     var dark_pixels = img.select('B8').lt(NIR_DRK_THRESH * SR_BAND_SCALE).multiply(not_water).rename('dark_pixels');
