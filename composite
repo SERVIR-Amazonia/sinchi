@@ -93,7 +93,10 @@ var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
         leftField: 'system:index',
         rightField: 'system:index'
     });
-
+    
+    //se aplica la unión entre las dos colecciones de imágenes usando las condiciones definidas anteriormente.
+    //La función devuelve una colección de imágenes que contiene las imágenes SR 
+    //junto con sus correspondientes datos de probabilidad de nubes.
     return ee.ImageCollection(join.apply({
         primary: s2_sr_col,
         secondary: s2_cloudless_col,
