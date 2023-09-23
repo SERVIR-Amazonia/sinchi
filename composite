@@ -116,8 +116,16 @@ var add_cloud_bands = function(img) {
 };
 
 //Agregar bandas de sombras
+//Identifica y proyecta las sombras de las nubes. 
+//Luego, añade esta información como nuevas bandas a la imagen original. 
+//Utiliza el ángulo azimutal del sol y detecta píxeles oscuros que podrían indicar sombras y realiza una proyección de las sombras desde las ubicaciones de las nubes. 
+//Al final, combina la información de píxeles oscuros y las sombras proyectadas.
 var add_shadow_bands = function(img) {
-    var not_water = img.select('SCL').neq(6);
+    var not_water = img.select('SCL').neq(6);//Imagen binaria. Píxeles con valor 1 representan áreas que no son agua (basado en banda 'SCL' o Scene Classification Map)
+                                             //Los píxeles con valor 0 representan áreas de agua. 
+                                             //Específicamente, identifica píxeles de agua desde la banda SCL(Scene Classification Map). 
+                                             //Banda 'SCL' corresponde a clasificación de coberturas (Ver https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/scene-classification/)
+    
     var dark_pixels = img.select('B8').lt(NIR_DRK_THRESH * SR_BAND_SCALE).multiply(not_water).rename('dark_pixels');
     var shadow_azimuth = ee.Number(90).subtract(ee.Number(img.get('MEAN_SOLAR_AZIMUTH_ANGLE')));
     var cld_proj = img.select('clouds').directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST * 10)
