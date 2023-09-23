@@ -126,7 +126,13 @@ var add_shadow_bands = function(img) {
                                              //Específicamente, identifica píxeles de agua desde la banda SCL(Scene Classification Map). 
                                              //Banda 'SCL' corresponde a clasificación de coberturas (Ver https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/scene-classification/)
     
+    // dark_pixels es una imagen binaria de píxeles oscuros en B8 que son potenciales sombras de nube y que no son agua. 
+    //Donde 1 indica un píxel oscuro (potencial sombra) y 0 indica lo contrario. 
+    //Es el resultado de:
+    //1- Seleccionar la banda 'B8' (NIR) y verificar qué píxeles tienen un valor inferior a un umbral NIR_DRK_THRESH x SR_BAND_SCALE. Píxeles oscuros en NIR son indicadores de sombras de nubes.
+    //2- Multiplicar la imagen binaria resultante por la imagen not_water para asegurarse de que no está contando áreas cubiertas con agua.
     var dark_pixels = img.select('B8').lt(NIR_DRK_THRESH * SR_BAND_SCALE).multiply(not_water).rename('dark_pixels');
+    
     var shadow_azimuth = ee.Number(90).subtract(ee.Number(img.get('MEAN_SOLAR_AZIMUTH_ANGLE')));
     var cld_proj = img.select('clouds').directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST * 10)
         .reproject({
