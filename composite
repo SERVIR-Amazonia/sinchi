@@ -13,6 +13,8 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
  *Primero combina datos de Reflectancia Superficial (SR) de Sentinel-2 con un modelo de probabilidad de nubes. 
  *Luego aplica máscaras para remover nubes y sus sombras y calcula dos índices de vegetación: NDVI y EVI.
  *La salida es una imagen donde, para cada banda (r,g,b) y para cada píxel, se obtiene el percentil 50 de los valores que toma el píxel durante todo el periodo estudiado
+ * El Script acá presentado se basa en el script desarrollado por Kyle Woodward para Python (https://github.com/kyle-woodward)
+
 **/
 
 
