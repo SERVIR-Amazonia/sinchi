@@ -214,10 +214,9 @@ var calculateEVI = function(img) {
 };
 
 
-//---------------------------//
 
 // Ejecutar todas las funciones de procesamiento de las imagenes
-
+//descritas en getS2SrCldCol para  el rango de años proporcionado, prefiltrando imágenes con cnubes/sombras.
 var s2process = function(aoi, start_year, end_year) {
   var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
   var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
