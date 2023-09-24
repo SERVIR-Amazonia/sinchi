@@ -223,9 +223,9 @@ var s2process = function(aoi, start_year, end_year) {
   var s2_sr_cld_col = get_s2_sr_cld_col(aoi, start_date, end_date);
     
   var imgColl = s2_sr_cld_col.map(add_cld_shdw_mask)
-        .map(apply_cld_shdw_mask)
-        .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
-        .map(add_ndvi).map(calculateEVI);
+        .map(apply_cld_shdw_mask)//Aplica la función almacenada en apply_cld_shdw_mask a cada imagen en la colección.
+        .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])//Renombra las bandas.
+        .map(add_ndvi).map(calculateEVI);//Aplica las funciones add_ndvi y calculateEVI que generan bandas NDVI y EVI. 
 
   var percentile_options = model_inputs['percentileOptions'];	    
   var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	
