@@ -33,7 +33,7 @@ var NIR_DRK_THRESH = 0.15; //Umbral para identificar píxeles oscuros en la band
 
 var CLD_PRJ_DIST = 2; //Distancia máxima (km) para buscar sombras de nubes desde los bordes de las nubes.
 
-var BUFFER = 10;      //Distancia (m) para dilatar el borde de los objetos identificados como nubes
+var BUFFER = 10;    //Distancia (m) para dilatar el borde de los objetos identificados como nubes
 
 var SR_BAND_SCALE = 1e4; //Almacena el valor 1e4 (10,000). 
 
@@ -133,7 +133,13 @@ var add_shadow_bands = function(img) {
     //2- Multiplicar la imagen binaria resultante por la imagen not_water para asegurarse de que no está contando áreas cubiertas con agua.
     var dark_pixels = img.select('B8').lt(NIR_DRK_THRESH * SR_BAND_SCALE).multiply(not_water).rename('dark_pixels');
     
+    //shadow_azimuth determina la dirección para proyectar la sombra de las nubes 
+    //Se basa en una propiedad de la imagen que indica el ángulo azimutal del sol, y lo resta de 90 grados para obtener la dirección en la que se proyectaría la sombra de una nube.
     var shadow_azimuth = ee.Number(90).subtract(ee.Number(img.get('MEAN_SOLAR_AZIMUTH_ANGLE')));
+    
+    //cld_proj almacena la proyección de las sombras de las nubes.
+    //Indica la dirección y distancia en la que las nubes proyectarían sombras en el terreno, basándose en el azimut previamente calculado.
+    //Finalmente, renombra el resultado como 'cloud_transform'.
     var cld_proj = img.select('clouds').directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST * 10)
         .reproject({
             crs: img.select(0).projection(),
@@ -142,8 +148,13 @@ var add_shadow_bands = function(img) {
         .select('distance')
         .mask()
         .rename('cloud_transform');
+        
+    //La variable shadows identifica la intersección de los píxeles oscuros con la proyección de sombra de nube cld_proj. 
+    //Es decir, determina dónde es probable que las sombras de las nubes se manifiesten para mejorar su detección
     var shadows = cld_proj.multiply(dark_pixels).rename('shadows');
-    return img.addBands(ee.Image([dark_pixels, cld_proj, shadows]));
+    
+    return img.addBands(ee.Image([dark_pixels, cld_proj, shadows]));//La función retorna una imagen con 3 bandas:
+                                                                    //dark_pixels, cld_proj y shadows
 };
 
 var add_cld_shdw_mask = function(img) {
