@@ -232,9 +232,11 @@ var s2process = function(aoi, start_year, end_year) {
                                                                                               //En este caso genera una banda para el valor del percentil 50 (mediana) de los valores que toma un píxel durante todo el periodo 
                                                                                               //Puede generar valores para otros percentiles si se agregan en model_inputs['percentileOptions']
                                                     
-  var stack = ee.Image(percentiles);
+  var stack = ee.Image(percentiles);//Convierte la colección de percentiles en una única imagen.
 
-  return stack;
+  return stack;//La función devuelve la imagen procesada.
+
+
 }
    
 
