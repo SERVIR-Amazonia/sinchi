@@ -252,22 +252,13 @@ var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EV
 print(mosaic_img);//Imprime la información de mosaic_img en la consola de GEE
 var processedCollection = ee.Image(mosaic_img);//Se convierte mosaic_img a una imagen Earth Engine usando ee.Image(). 
                                                 //La imagen resultante se almacena en la variable processedCollection.
-// Export the image to an Earth Engine asset.
-Export.image.toAsset({
-   image: mosaic_img,
-   description: 'composite_colombian_amazon_s1',
-   assetId: assetId,
-   region: region,
-   scale: 10,
-   maxPixels:  1e13
-});
 
-var assetId_temp = 'ee-servir-sinchi-lccv';
-// Export the image to a personal Earth Engine asset  I dont have permissions yet.
+var assetId = 'ee-servir-sinchi-lccv';
+// Exporta la imagen a un "Asset" the image de Google Earth Engine
 Export.image.toAsset({
    image: mosaic_img,
    description: 'comp_colomb_amazon_temp_s1',
-   assetId: assetId_temp,
+   assetId: assetId,
    region: region,
    scale: 10,
    maxPixels:  1e13
