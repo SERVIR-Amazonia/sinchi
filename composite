@@ -184,6 +184,8 @@ var add_cld_shdw_mask = function(img) {
     return img.addBands(is_cld_shdw);
 };
 
+//apply_cld_shdw_mask aplica una máscara a las bandas de reflectancia de la imagen para "ocultar" los píxeles bajo nubes o con sombras de nubes. 
+//La función devuelve la imagen con las bandas de reflectancia actualizadas sin nubes ni sombras.
 var apply_cld_shdw_mask = function(img) {
     var not_cld_shdw = img.select('cloudmask').not();
     return img.select('B.*').updateMask(not_cld_shdw);
