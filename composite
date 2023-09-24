@@ -236,7 +236,6 @@ var s2process = function(aoi, start_year, end_year) {
 
   return stack;//La función devuelve la imagen procesada.
 
-
 }
    
 
