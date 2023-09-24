@@ -191,18 +191,19 @@ var apply_cld_shdw_mask = function(img) {
     return img.select('B.*').updateMask(not_cld_shdw);
 };
 
-
+//Estima NDVI y lo agrega como una banda
 var add_ndvi = function(img) {
   var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
   var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
 
-  img=img.addBands(ndvi);
+  img=img.addBands(ndvi);//Agrega NDVI como una banda
  img= img.select(covariates);
   return img;
 }
 
 
-// Function to calculate EVI for a single image.
+// Estima EVI y lo agrega como una banda
+//Se debe dividir por 10000 porque SR_BAND_SCALE habiamos multiplicado por 10000
 var calculateEVI = function(img) {
   var evi = img.expression(
     '2.5 * (((NIR/10000) - (Red/10000)) / ((NIR/10000) + 6 * (Red/10000) - 7.5 * (Blue/10000) + 1))', {
@@ -210,7 +211,7 @@ var calculateEVI = function(img) {
       'Red': img.select('red'),
       'Blue': img.select('blue')
     });
-  return img.addBands(evi.rename('EVI'));
+  return img.addBands(evi.rename('EVI'));//Agrega imagen con NDVI
 };
 
 
