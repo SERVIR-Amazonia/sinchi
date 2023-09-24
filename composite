@@ -196,6 +196,7 @@ var add_ndvi = function(img) {
   var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
   var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
 
+
   img=img.addBands(ndvi);//Agrega NDVI como una banda
  img= img.select(covariates);
   return img;
