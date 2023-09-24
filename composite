@@ -243,13 +243,15 @@ var region = aoi.buffer(100);
 var assetId = 'pc300-samz-sinchi';// Este probablemente es el ID del recurso o "asset" en Google Earth Engine donde se almacenará la imagen
 var img = s2process(aoi, start_year, end_year);//Ejecuta las funciones definidas dentro de s2process.
 
-img = img.toFloat();
-
-var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);
-print(mosaic_img);
-var processedCollection = ee.Image(mosaic_img);
+img = img.toFloat(); //Convierte los valores de la imagen a números flotantes.
+                     //Útil para realizar operaciones matemáticas en los valores de los píxeles sin perder precisión.
 
 
+var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);//Se seleccionan solo las bandas de la imagen deseadas.
+                                                                                         //El resultado se almacena en mosaic_img.
+print(mosaic_img);//Imprime la información de mosaic_img en la consola de GEE
+var processedCollection = ee.Image(mosaic_img);//Se convierte mosaic_img a una imagen Earth Engine usando ee.Image(). 
+                                                //La imagen resultante se almacena en la variable processedCollection.
 // Export the image to an Earth Engine asset.
 Export.image.toAsset({
    image: mosaic_img,
@@ -257,7 +259,7 @@ Export.image.toAsset({
    assetId: assetId,
    region: region,
    scale: 10,
-   maxPixels:  10000000000000 
+   maxPixels:  1e13
 });
 
 var assetId_temp = 'ee-servir-sinchi-lccv';
@@ -268,7 +270,7 @@ Export.image.toAsset({
    assetId: assetId_temp,
    region: region,
    scale: 10,
-   maxPixels:  10000000000000 
+   maxPixels:  1e13
 });
 
 
