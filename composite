@@ -227,14 +227,13 @@ var s2process = function(aoi, start_year, end_year) {
         .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])//Renombra las bandas.
         .map(add_ndvi).map(calculateEVI);//Aplica las funciones add_ndvi y calculateEVI que generan bandas NDVI y EVI. 
 
-  var percentile_options = model_inputs['percentileOptions'];	    
-  var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	
-
+  var percentile_options = model_inputs['percentileOptions'];// Trae los valores de los percentiles para los que se quieren generar bandas 
+  var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	//Reduce la colección de imágenes al conjunto de imágenes de percentiles usando las opciones de percentiles especificadas.
+                                                                                              //En este caso genera una banda para el valor del percentil 50 (mediana) de los valores que toma un píxel durante todo el periodo 
+                                                                                              //Puede generar valores para otros percentiles si se agregan en model_inputs['percentileOptions']
+                                                    
   var stack = ee.Image(percentiles);
-  if (model_inputs['addJRCWater']) {
-        stack = idx.addJRC(stack).unmask(0);
-    }
-    
+
   return stack;
 }
    
