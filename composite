@@ -248,7 +248,7 @@ img = img.toFloat(); //Convierte los valores de la imagen a números flotantes.
 
 
 var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);//Se seleccionan solo las bandas de la imagen deseadas.
-var mosaico_img = mosaico_fecha1.clip(region)                                                                                        //El resultado se almacena en mosaic_img.
+var mosaico_img = mosaic_img.clip(region)                                                                                        //El resultado se almacena en mosaic_img.
 print(mosaic_img);//Imprime la información de mosaic_img en la consola de GEE
 var processedCollection = ee.Image(mosaic_img);//Se convierte mosaic_img a una imagen Earth Engine usando ee.Image(). 
                                                 //La imagen resultante se almacena en la variable processedCollection.
