@@ -241,9 +241,8 @@ var s2process = function(aoi, start_year, end_year) {
 // Buffer the aoi by 100 m and process the satellite data inside the aoi
 var region = aoi.buffer(100);
 var assetId = 'pc300-samz-sinchi';// Este probablemente es el ID del recurso o "asset" en Google Earth Engine donde se almacenará la imagen
-var img = s2process(aoi, start_year, end_year);
-// Use your existing 'processedCollection' image (or replace with your actual image)
-// Assume processedCollection is your existing image after all the previous processing.
+var img = s2process(aoi, start_year, end_year);//Ejecuta las funciones definidas dentro de s2process.
+
 img = img.toFloat();
 
 var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);
