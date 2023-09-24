@@ -194,11 +194,9 @@ var apply_cld_shdw_mask = function(img) {
 //Estima NDVI y lo agrega como una banda
 var add_ndvi = function(img) {
   var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
+    img=img.addBands(ndvi);//Agrega NDVI como una banda
   var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
-
-
-  img=img.addBands(ndvi);//Agrega NDVI como una banda
- img= img.select(covariates);
+  img= img.select(covariates);
   return img;
 }
 
@@ -212,13 +210,12 @@ var calculateEVI = function(img) {
       'Red': img.select('red'),
       'Blue': img.select('blue')
     });
-  return img.addBands(evi.rename('EVI'));//Agrega imagen con NDVI
+  return img.addBands(evi.rename('EVI'));//Agrega imagen con EVI
 };
 
 
-
-// Ejecutar todas las funciones de procesamiento de las imagenes
-//descritas en getS2SrCldCol para  el rango de años proporcionado, prefiltrando imágenes con cnubes/sombras.
+// Ejecutar todas las funciones de procesamiento de las imagenes descritas en getS2SrCldCol 
+// para  el rango de años proporcionado, prefiltrando imágenes con cnubes/sombras.
 var s2process = function(aoi, start_year, end_year) {
   var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
   var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
@@ -232,7 +229,7 @@ var s2process = function(aoi, start_year, end_year) {
 
   var percentile_options = model_inputs['percentileOptions'];	    
   var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));	
-   //Omití harmonics
+
   var stack = ee.Image(percentiles);
   if (model_inputs['addJRCWater']) {
         stack = idx.addJRC(stack).unmask(0);
@@ -241,7 +238,6 @@ var s2process = function(aoi, start_year, end_year) {
   return stack;
 }
    
-//---
 
 // Buffer the aoi by 100 m and process the satellite data inside the aoi
 
