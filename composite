@@ -233,7 +233,6 @@ var s2process = function(aoi, start_year, end_year) {
                                                                                               //Puede generar valores para otros percentiles si se agregan en model_inputs['percentileOptions']
                                                     
   var stack = ee.Image(percentiles);//Convierte la colección de percentiles en una única imagen.
-
   return stack;//La función devuelve la imagen procesada.
 
 }
