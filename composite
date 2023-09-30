@@ -56,12 +56,13 @@ var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 
 
 // AOI Amazonia Colombiana
-/*
+
 var aoi = geometry; //Define aoi piloto dentro de Amazonia Colombiana para probar el código
-*/
+/*
 
 //AOI Amazonia Colombiana
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
+*/
 var region = aoi.buffer(10000);
 /* 
 // Visualizar el extent de la Amazonia Colombiana 
@@ -266,7 +267,7 @@ Export.image.toAsset({
    maxPixels:  1e13
 });
 
-
+/*
 
 //Visualizing the processed image
 Map.addLayer(mosaic_img.select('NDVI_p50'), {    min: -1,
@@ -274,3 +275,4 @@ max: 1,    palette: ['blue', 'white', 'green'] }, 'Processed NDVI');
 
 Map.centerObject(aoi, 8); // Setting the map center to the defined aoi and zoom level 12
 
+*/
