@@ -45,11 +45,11 @@ var model_inputs = {
 
 // Fechas para generar el mosaico
 var start_year = 2022;
-var start_month = 1;
+var start_month = 7;
 var start_day = 1;
 var end_year = 2022;
-var end_month = 6;
-var end_day = 30;
+var end_month = 12;
+var end_day = 31;
 
 // Generar fecha completa
 var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
@@ -261,7 +261,7 @@ var assetId = 'sinchi_temp_assets';
 // Exporta la imagen a un "Asset" the image de Google Earth Engine
 Export.image.toAsset({
    image: mosaic_img,
-   description: 'comp_colomb_amazon_temp_s1',
+   description: 'comp_colomb_amazon_temp_s2',
    assetId: assetId,
    region: region,
    scale: 10,
