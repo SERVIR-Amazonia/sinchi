@@ -1,9 +1,9 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-71.42833478544651, -0.4710745453900222],
-          [-71.28555757004561, -0.4642040686029912],
-          [-71.28279257339491, -0.3392525511020995],
-          [-71.43109766013782, -0.34748871459006164]]]),
+          [-71.31645661789717, -0.4662639372186059],
+          [-71.32193136734023, -0.37118095318751787],
+          [-71.42732110984485, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
@@ -63,7 +63,7 @@ var aoi = geometry; //Define aoi piloto dentro de Amazonia Colombiana para proba
 //AOI Amazonia Colombiana
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
 */
-var region = aoi.buffer(10000);
+var region = aoi.buffer(100);
 /* 
 // Visualizar el extent de la Amazonia Colombiana 
  * Map.addLayer(Region_100K, {}, "Region_100K");
