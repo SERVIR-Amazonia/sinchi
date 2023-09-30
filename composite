@@ -1,9 +1,10 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = /* color: #d63000 */ee.Geometry.Polygon(
-        [[[-71.42833478544651, -0.4710745453900222],
-          [-71.31645661789717, -0.4662639372186059],
+        [[[-71.40636212919651, -0.4545955909329242],
+          [-71.36415599236246, -0.45013054834153504],
+          [-71.32606965500655, -0.44497859961377856],
           [-71.32193136734023, -0.37118095318751787],
-          [-71.42732110984485, -0.37667056564592793]]]),
+          [-71.4135881996886, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
