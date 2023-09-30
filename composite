@@ -55,15 +55,15 @@ var end_day = 30;
 var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
 var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 
-
+/*
 // AOI Amazonia Colombiana
 
 var aoi = geometry; //Define aoi piloto dentro de Amazonia Colombiana para probar el código
-/*
 
+*/
 //AOI Amazonia Colombiana
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
-*/
+
 var region = aoi.buffer(100);
 /* 
 // Visualizar el extent de la Amazonia Colombiana 
