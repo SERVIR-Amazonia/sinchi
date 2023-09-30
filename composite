@@ -266,7 +266,7 @@ Export.image.toAsset({
    maxPixels:  1e13
 });
 
-/*
+
 
 //Visualizing the processed image
 Map.addLayer(mosaic_img.select('NDVI_p50'), {    min: -1,
@@ -274,4 +274,3 @@ max: 1,    palette: ['blue', 'white', 'green'] }, 'Processed NDVI');
 
 Map.centerObject(aoi, 8); // Setting the map center to the defined aoi and zoom level 12
 
-*/
