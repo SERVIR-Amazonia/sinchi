@@ -194,7 +194,7 @@ var apply_cld_shdw_mask = function(img) {
 
 //Estima NDVI y lo agrega como una banda
 var add_ndvi = function(img) {
-  var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
+  var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');c
     img=img.addBands(ndvi);//Agrega NDVI como una banda
   var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
   img= img.select(covariates);
