@@ -38,5 +38,5 @@ Export.image.toAsset({
   scale: 10,
   description: 's2Median2022csPlus',
   assetId: 'projects/pc300-samz-sinchi/assets/s2Median2022csPlus',
-  maxPixels: 1e10
+  maxPixels: 1e13
 });
