@@ -21,7 +21,7 @@ var dateEnd = '2023-01-01';
 
 // Point of interest.
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
-Map.centerObject(-72.0519, 2.2301,  12);
+Map.setCenter(-72.0519, 2.2301,  12);
 
 var composite = linkedCollection
   .filterDate(dateStart, dateEnd)
