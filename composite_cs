@@ -34,8 +34,9 @@ Map.addLayer(composite, s2Viz, 'median composite');
 
 Export.image.toAsset({
   image: composite,
+  region: Region_100K,
   scale: 10,
   description: 's2Median2022csPlus',
   assetId: 'projects/pc300-samz-sinchi/assets/s2Median2022csPlus',
-  maxPixels: 1e9
+  maxPixels: 1e10
 });
