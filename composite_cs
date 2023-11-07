@@ -27,7 +27,8 @@ var composite = linkedCollection
   .filterDate(dateStart, dateEnd)
   .filterBounds(Region_100K)
   .map(maskLowQA)
-  .median();
+  .median()
+  .select('B.*');
 
 var s2Viz = {bands: ['B4', 'B3', 'B2'], min: 0, max: 3000};
 Map.addLayer(composite, s2Viz, 'median composite');
