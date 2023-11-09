@@ -5,7 +5,22 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
           [-71.32606965500655, -0.44497859961377856],
           [-71.32193136734023, -0.37118095318751787],
           [-71.4135881996886, -0.37667056564592793]]]),
-    Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+    Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K"),
+    geometry2 = /* color: #d63000 */ee.Geometry.MultiPoint(
+        [[-75.12379838295996, 4.462515223950893],
+         [-75.13066483803809, 4.38994788285071]]),
+    geometry3 = 
+    /* color: #98ff00 */
+    /* displayProperties: [
+      {
+        "type": "rectangle"
+      }
+    ] */
+    ee.Geometry.Polygon(
+        [[[-75.14920426674902, 4.529599406486964],
+          [-75.14920426674902, 4.3598235112034125],
+          [-74.91025163003027, 4.3598235112034125],
+          [-74.91025163003027, 4.529599406486964]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
  *Este código  genera un mosaico  para procesar imágenes Sentinel-2, eliminando nubes y sombras, y luego calculando NDVI y EVI para las áreas de interés. A continuación, se desglosa cada parte del código:
@@ -55,15 +70,15 @@ var end_day = 31;
 var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
 var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
 
-/*
+
 // AOI Amazonia Colombiana
 
-var aoi = geometry; //Define aoi piloto dentro de Amazonia Colombiana para probar el código
+var aoi = geometry3; //Define aoi piloto dentro de Amazonia Colombiana para probar el código
 
-*/
+/*
 //AOI Amazonia Colombiana
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
-
+*/
 var region = aoi.buffer(1000);
 /* 
 // Visualizar el extent de la Amazonia Colombiana 
