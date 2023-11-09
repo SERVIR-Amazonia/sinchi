@@ -79,7 +79,7 @@ var aoi = geometry3; //Define aoi piloto dentro de Amazonia Colombiana para prob
 //AOI Amazonia Colombiana
 var aoi = Region_100K.first().geometry();//AOI para la amazonía Colombiana
 */
-var region = aoi.buffer(1000);
+var region = aoi.buffer(10);
 /* 
 // Visualizar el extent de la Amazonia Colombiana 
  * Map.addLayer(Region_100K, {}, "Region_100K");
