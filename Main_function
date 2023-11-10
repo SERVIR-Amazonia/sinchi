@@ -1,12 +1,19 @@
-// Importa el módulo usando la ruta completa del asset en tu cuenta de Earth Engine.
 var miModulo = require('users/an-sig/sinchi:Module_extract_samples');
 
-// Ahora puedes usar las variables y funciones del módulo.
-// Por ejemplo, para acceder a la geometría que has exportado, harías lo siguiente:
-var geometriaImportada = miModulo.geometry;
+// Ejecuta la función y recibe los resultados
+var visualizationResults = miModulo.executeAndVisualize();
 
-// Para utilizar una función exportada del módulo:
-var muestrasBalanceadas = miModulo.balanceSamples(miModulo.sampling_points_S1, 140);
+// Ahora puedes usar print para mostrar los resultados
+print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
+print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
+print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
+print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
 
-// Si tu módulo exporta una función para ejecutar y visualizar todo el proceso:
-miModulo.executeAndVisualize();
+// Y también puedes agregar las capas al mapa
+Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
+Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
+Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
+Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
+
+// Centrar el mapa en uno de los conjuntos de puntos
+Map.centerObject(visualizationResults.combinedResults_S1.training);
