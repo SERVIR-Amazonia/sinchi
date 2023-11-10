@@ -104,29 +104,12 @@ exports.balanceAndApplyCorrelation = function(featureCollection, estratos) {
 
 // Llama a la función para S1 y S2 y guarda los resultados
 exports.executeAndVisualize = function() {
-var combinedResults_S1 = balanceAndApplyCorrelation(sampling_points_S1, estratos_S1);
-var combinedResults_S2 = balanceAndApplyCorrelation(sampling_points_S2, estratos_S2);
-print("combinedResults_S1.training",combinedResults_S1.training)
-print("combinedResults_S1.testing",combinedResults_S1.testing)
-print("combinedResults_S2.training",combinedResults_S2.training)
-print("combinedResults_S2.testing",combinedResults_S2.testing)
-}
-
-//Visualizar puntos en el mapa:
-// Visualizar los puntos de entrenamiento para S1
-Map.addLayer(combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
-
-// Visualizar los puntos de prueba para S1
-Map.addLayer(combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
-
-// Visualizar los puntos de entrenamiento para S2
-Map.addLayer(combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
-
-// Visualizar los puntos de prueba para S2
-Map.addLayer(combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
-
-// Centrar el mapa en uno de los conjuntos de puntos
-Map.centerObject(combinedResults_S1.training);
-// A continuación, puedes imprimir o hacer algo con combinedResults_S1 y combinedResults_S2
-//script para correr imagen
-
+  var combinedResults_S1 = balanceAndApplyCorrelation(sampling_points_S1, estratos_S1);
+  var combinedResults_S2 = balanceAndApplyCorrelation(sampling_points_S2, estratos_S2);
+  
+  // En lugar de imprimir directamente, retorna los resultados
+  return {
+    combinedResults_S1: combinedResults_S1,
+    combinedResults_S2: combinedResults_S2
+  };
+};
