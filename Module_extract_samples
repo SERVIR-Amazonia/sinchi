@@ -45,7 +45,7 @@ exports.balanceSamples = function(featureCollection, numSamplesPerClass) {
 };
 
 
-function splitAndJoinDataset(data) {
+exports.splitAndJoinDataset=function(data) {
     // Split the dataset into training and testing sets.
     var trainingTesting = data.randomColumn();
     var trainingSet = trainingTesting
@@ -76,7 +76,7 @@ function splitAndJoinDataset(data) {
 //Balancear muestras para cada clase y generar puntos de entrenamiento y test dentro de cada clase
 //aseegurandose que las muestras de entrenamiento dentro de cada clase 
 //se encuentren separadas por mas de 100 m entre si den
-var balanceAndApplyCorrelation = function(featureCollection, estratos) {
+exports.balanceAndApplyCorrelation = function(featureCollection, estratos) {
   // Usa map para aplicar la correlación a cada estrato y acumula los conjuntos de entrenamiento y prueba
   var trainingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
