@@ -1,0 +1,12 @@
+// Importa el módulo usando la ruta completa del asset en tu cuenta de Earth Engine.
+var miModulo = require('users/tu_nombre_de_usuario/mis_modulos/miModulo');
+
+// Ahora puedes usar las variables y funciones del módulo.
+// Por ejemplo, para acceder a la geometría que has exportado, harías lo siguiente:
+var geometriaImportada = miModulo.geometry;
+
+// Para utilizar una función exportada del módulo:
+var muestrasBalanceadas = miModulo.balanceSamples(miModulo.sampling_points_S1, 140);
+
+// Si tu módulo exporta una función para ejecutar y visualizar todo el proceso:
+miModulo.executeAndVisualize();
