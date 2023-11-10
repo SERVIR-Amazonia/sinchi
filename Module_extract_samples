@@ -34,7 +34,7 @@ var muestrasBalanceadas_S2 = ee.List([]);
 
 // Definir una función para balancear las muestras
 // Exponer la función balanceSamples como un método del módulo.
-exports.balanceSamples = function(featureCollection, numSamplesPerClass) {
+function balanceSamples (featureCollection, numSamplesPerClass) {
   var uniqueClassesList = featureCollection.aggregate_array('nivel_1').distinct();
   var balancedSamplesPerClass = uniqueClassesList.map(function(classValue) {
     var classSamples = featureCollection.filter(ee.Filter.eq('nivel_1', classValue));
@@ -45,7 +45,7 @@ exports.balanceSamples = function(featureCollection, numSamplesPerClass) {
 };
 
 
-exports.splitAndJoinDataset=function(data) {
+function splitAndJoinDataset(data) {
     // Split the dataset into training and testing sets.
     var trainingTesting = data.randomColumn();
     var trainingSet = trainingTesting
@@ -76,7 +76,7 @@ exports.splitAndJoinDataset=function(data) {
 //Balancear muestras para cada clase y generar puntos de entrenamiento y test dentro de cada clase
 //aseegurandose que las muestras de entrenamiento dentro de cada clase 
 //se encuentren separadas por mas de 100 m entre si den
-exports.balanceAndApplyCorrelation = function(featureCollection, estratos) {
+function balanceAndApplyCorrelation (featureCollection, estratos) {
   // Usa map para aplicar la correlación a cada estrato y acumula los conjuntos de entrenamiento y prueba
   var trainingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
@@ -100,7 +100,11 @@ exports.balanceAndApplyCorrelation = function(featureCollection, estratos) {
     training: combinedTrainingSet,
     testing: combinedTestingSet
   };
-};
+}
+// Y luego exportarlas de esta manera:
+exports.balanceSamples = balanceSamples;
+exports.splitAndJoinDataset = splitAndJoinDataset;
+exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llama a la función para S1 y S2 y guarda los resultados
 exports.executeAndVisualize = function() {
