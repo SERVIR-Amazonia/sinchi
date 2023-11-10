@@ -1,15 +1,15 @@
 var miModulo = require('users/an-sig/sinchi:Module_extract_samples');
 
-// Ejecuta la función y recibe los resultados
+// Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
 
-// Ahora puedes usar print para mostrar los resultados
+// Mostrar los resultados
 print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
 print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
 print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
 
-// Y también puedes agregar las capas al mapa
+// Agregar las capas de los puntos de muestreo al mapa
 Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
 Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
 Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
