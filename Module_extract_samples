@@ -101,12 +101,12 @@ function balanceAndApplyCorrelation (featureCollection, estratos) {
     testing: combinedTestingSet
   };
 }
-// Y luego exportarlas de esta manera:
+// Y luego exportar funciones
 exports.balanceSamples = balanceSamples;
 exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
-// Llama a la función para S1 y S2 y guarda los resultados
+// Llamar a la función para S1 y S2 y guarda los resultados
 exports.executeAndVisualize = function() {
   var combinedResults_S1 = balanceAndApplyCorrelation(sampling_points_S1, estratos_S1);
   var combinedResults_S2 = balanceAndApplyCorrelation(sampling_points_S2, estratos_S2);
