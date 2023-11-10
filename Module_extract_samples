@@ -103,13 +103,14 @@ exports.balanceAndApplyCorrelation = function(featureCollection, estratos) {
 };
 
 // Llama a la función para S1 y S2 y guarda los resultados
+exports.executeAndVisualize = function() {
 var combinedResults_S1 = balanceAndApplyCorrelation(sampling_points_S1, estratos_S1);
 var combinedResults_S2 = balanceAndApplyCorrelation(sampling_points_S2, estratos_S2);
 print("combinedResults_S1.training",combinedResults_S1.training)
 print("combinedResults_S1.testing",combinedResults_S1.testing)
 print("combinedResults_S2.training",combinedResults_S2.training)
 print("combinedResults_S2.testing",combinedResults_S2.testing)
-
+}
 
 //Visualizar puntos en el mapa:
 // Visualizar los puntos de entrenamiento para S1
