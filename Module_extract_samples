@@ -5,12 +5,21 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
           [-71.32193136734023, -0.37118095318751787],
           [-71.4135881996886, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+
 // Load the shapefile as a feature collection
 var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
 var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
 
-//Aca vienen puntos que representan un pixel dentro del poligono
+//Acá vienen puntos que representan un pixel dentro del polígono
+//Este proceso se realizó en R
+
 var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
+
+// Exponer la geometría y las colecciones de regiones como propiedades del módulo.
+exports.geometry = geometry;
+exports.Region_100K = Region_100K;
+exports.sampling_points_S1 = sampling_points_S1;
+exports.sampling_points_S2 = sampling_points_S2;
 
 // Definir nivel_1 como el atributo a partir del cual se estratificarán las muestras.
 var estratoField = 'nivel_1';
@@ -24,25 +33,15 @@ var muestrasBalanceadas_S1 = ee.List([]);
 var muestrasBalanceadas_S2 = ee.List([]);
 
 // Definir una función para balancear las muestras
-
-var balanceSamples = function(featureCollection, numSamplesPerClass) {
-  // Obtener la lista de clases únicas en la columna 'nivel_1'
+// Exponer la función balanceSamples como un método del módulo.
+exports.balanceSamples = function(featureCollection, numSamplesPerClass) {
   var uniqueClassesList = featureCollection.aggregate_array('nivel_1').distinct();
-  
-  // Mapear sobre cada clase para seleccionar un número de muestras por clase
   var balancedSamplesPerClass = uniqueClassesList.map(function(classValue) {
-    // Filtrar las muestras por clase
     var classSamples = featureCollection.filter(ee.Filter.eq('nivel_1', classValue));
-    
-    // Seleccionar aleatoriamente numSamplesPerClass muestras de esta clase
     var randomSamples = classSamples.randomColumn('random', 0).sort('random').limit(numSamplesPerClass);
-    
     return randomSamples;
   });
-
-  // Combina todas las colecciones de muestras balanceadas en una sola FeatureCollection
-  var balancedSamples = ee.FeatureCollection(balancedSamplesPerClass).flatten();
-  return balancedSamples;
+  return ee.FeatureCollection(balancedSamplesPerClass).flatten();
 };
 
 
