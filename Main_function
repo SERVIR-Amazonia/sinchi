@@ -1,5 +1,5 @@
 // Importa el módulo usando la ruta completa del asset en tu cuenta de Earth Engine.
-var miModulo = require('users/an-sig/sinchi/Module_extract_samples');
+var miModulo = require('users/an-sig/sinchi:Module_extract_samples');
 
 // Ahora puedes usar las variables y funciones del módulo.
 // Por ejemplo, para acceder a la geometría que has exportado, harías lo siguiente:
