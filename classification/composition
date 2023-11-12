@@ -26,7 +26,7 @@ var CLD_PRJ_DIST = 2;
 var BUFFER = 10;
 var SR_BAND_SCALE = 1e4;
 var model_inputs = {
-  'percentileOptions': [50],
+  'percentileOptions': [20,50],
 };
 
 var start_year = 2022;
