@@ -124,16 +124,7 @@ var add_ndvi = function(img) {
   return img;
 };
 
-// Función para estimar EVI y agregarlo como banda.
-var calculateEVI = function(img) {
-  var evi = img.expression(
-    '2.5 * (((NIR/10000) - (Red/10000)) / ((NIR/10000) + 6 * (Red/10000) - 7.5 * (Blue/10000) + 1))', {
-      'NIR': img.select('nir'),
-      'Red': img.select('red'),
-      'Blue': img.select('blue')
-    });
-  return img.addBands(evi.rename('EVI'));
-};
+
 var module_covariates = require('users/an-sig/sinchi:classification/covariates');
 
 
@@ -147,7 +138,7 @@ var s2process = function(aoi, start_year, end_year) {
   var imgColl = s2_sr_cld_col.map(add_cld_shdw_mask)
     .map(apply_cld_shdw_mask)
     .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
-    .map(add_ndvi).map(module_covariates.EVI);
+    .map(module_covariates.EVI_corrected);
 
   var percentile_options = model_inputs['percentileOptions'];
   var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));
@@ -155,16 +146,6 @@ var s2process = function(aoi, start_year, end_year) {
   return stack;
 };
 
-// Función para procesar imágenes Sentinel-2, agregar DEM y recortar la región de interés.
-var processAndAddDEM = function(aoi, start_year, end_year) {
-  var img = s2process(aoi, start_year, end_year);
-  img = img.toFloat();
-  var mosaic_img = img.select(['blue_p50', 'green_p50', 'red_p50', 'NDVI_p50', 'EVI_p50']);
-  mosaic_img = mosaic_img.addBands(demResampled.rename('DEM'));
-  var mosaico_img = mosaic_img.clip(region)
-  return mosaico_img;
-  
-};
 
 // Llamar a la función 
 var processedImage = processAndAddDEM(aoi, start_year, end_year);
