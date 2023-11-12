@@ -1,5 +1,4 @@
 
-//functions 
 function ND_blue_green(img) {
     return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
 }
@@ -174,15 +173,39 @@ function returnCovariates(img) {
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
                       "R_swir1_nir", "R_red_swir1", "EVI", "EVI_corrected","SAVI", "IBI"];
 
-    // Assuming 'indices' is another function that provides the implementation for these indices
-    var index = indices(img); // Pass 'img' if indices function requires it
+    // Suponiendo que la función 'indices' está definida en otro lugar
+    // var index = indices();
 
-    // Additional logic for applying or using the indices would go here
-    // This is a placeholder since the exact implementation depends on what 'indices' does and how covariates are used
+    function scaleLandsat(image) {
+        var thermalBand = ee.List(['thermal']);
+        var thermal = image.select(thermalBand).divide(10);
+        var otherBands = image.bandNames().removeAll(thermalBand);
+        var scaled = image.select(otherBands).multiply(0.0001);
+        var combinedImage = scaled.addBands(thermal);
+        return combinedImage.copyProperties(image, image.propertyNames());
+    }
 
-    return img; // Return the modified image
+    img = scaleLandsat(img);
+
+    function addIndices(image, prefix) {
+        image = index.addAllTasselCapIndices(image);
+        image = index.getIndices(image, covariates);
+        image = index.addJRC(image).unmask(0);
+        image = index.addTopography(image).unmask(0);
+        if (prefix.length > 0) {
+            image = index.renameBands(image, prefix);
+        }
+        return image;
+    }
+
+    var down = addIndices(img.select(bandLow, bands), "p20");
+    var middle = addIndices(img.select(bands), "");
+    var up = addIndices(img.select(bandHigh, bands), "p80");
+
+    img = down.addBands(middle).addBands(up);
+
+    return img;
 }
-
 
 
 // Exporting functions
