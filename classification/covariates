@@ -113,13 +113,14 @@ function Indices() {
     
     
  this.getIndices = function(img, covariates) {
-        covariates.forEach((item) => {
-            if (this.functionList[item]) {
-                img = this.functionList[item](img);
-            }
-        });
-        return img;
-    };
+    var self = this; // Guardar una referencia a this
+    covariates.forEach(function(item) {
+        if (self.functionList[item]) {
+            img = self.functionList[item](img);
+        }
+    });
+    return img;
+};
     this.removeDuplicates = function(covariateList, bands) {
         return covariateList.filter(function(elem) {
             return bands.indexOf(elem) === -1;
