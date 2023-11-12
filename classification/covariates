@@ -112,17 +112,14 @@ function Indices() {
     };
     
     
-   this.getIndices = function(img, covariates) {
-    var self = this;
-    covariates.forEach(function(item) {
-        if (typeof self.functionList[item] === 'function') {
-            img = self.functionList[item](img);
-        } else {
-            console.error(item + " is not a function");
-        }
-    });
-    return img;
-};
+ this.getIndices = function(img, covariates) {
+        covariates.forEach((item) => {
+            if (this.functionList[item]) {
+                img = this.functionList[item](img);
+            }
+        });
+        return img;
+    };
     this.removeDuplicates = function(covariateList, bands) {
         return covariateList.filter(function(elem) {
             return bands.indexOf(elem) === -1;
