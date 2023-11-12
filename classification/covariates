@@ -202,3 +202,4 @@ exports.SAVI = SAVI;
 exports.IBI = IBI;
 exports.addTopography = addTopography;
 exports.returnCovariates=returnCovariates;
+exports.Indices = Indices;
