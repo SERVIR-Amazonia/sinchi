@@ -136,40 +136,27 @@ function returnCovariates(img) {
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
                       "R_swir1_nir", "R_red_swir1", "EVI", "EVI_corrected","SAVI", "IBI"];
 
-    // Suponiendo que la función 'indices' está definida en otro lugar
-    // var index = indices();
+     var indicesInstance = new Indices();
 
-    function scaleLandsat(image) {
-        var thermalBand = ee.List(['thermal']);
-        var thermal = image.select(thermalBand).divide(10);
-        var otherBands = image.bandNames().removeAll(thermalBand);
-        var scaled = image.select(otherBands).multiply(0.0001);
-        var combinedImage = scaled.addBands(thermal);
-        return combinedImage.copyProperties(image, image.propertyNames());
-    }
-
-    img = scaleLandsat(img);
-
-    function addIndices(image, prefix) {
-        image = index.addAllTasselCapIndices(image);
-        image = index.getIndices(image, covariates);
-        image = index.addJRC(image).unmask(0);
-        image = index.addTopography(image).unmask(0);
+    function addIndices(image, prefix, bandsList) {
+        image = indicesInstance.getIndices(image, indicesInstance.removeDuplicates(covariates, bandsList));
+        image = indicesInstance.addJRC(image).unmask(0);
+        image = indicesInstance.addTopography(image).unmask(0);
         if (prefix.length > 0) {
-            image = index.renameBands(image, prefix);
+            image = indicesInstance.renameBands(image, prefix);
         }
         return image;
     }
 
-    var down = addIndices(img.select(bandLow, bands), "p20");
-    var middle = addIndices(img.select(bands), "");
-    var up = addIndices(img.select(bandHigh, bands), "p80");
+    var bandNames = img.bandNames();
+    var down = addIndices(img.select(bandLow), "p20", bandNames);
+    var middle = addIndices(img.select(bands), "", bandNames);
+    var up = addIndices(img.select(bandHigh), "p80", bandNames);
 
     img = down.addBands(middle).addBands(up);
 
     return img;
 }
-
 
 // Exporting functions
 exports.ND_blue_green = ND_blue_green;
