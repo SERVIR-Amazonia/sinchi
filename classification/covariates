@@ -179,27 +179,6 @@ function returnCovariates(img) {
 }
 
 // Exporting functions
-exports.ND_blue_green = ND_blue_green;
-exports.ND_blue_red = ND_blue_red;
-exports.ND_blue_nir = ND_blue_nir;
-exports.ND_blue_swir1 = ND_blue_swir1;
-exports.ND_blue_swir2 = ND_blue_swir2;
-exports.ND_green_red = ND_green_red;
-exports.ND_green_nir = ND_green_nir;
-exports.ND_green_swir1 = ND_green_swir1;
-exports.ND_green_swir2 = ND_green_swir2;
-exports.ND_red_swir1 = ND_red_swir1;
-exports.ND_red_swir2 = ND_red_swir2;
-exports.ND_nir_red = ND_nir_red;
-exports.ND_nir_swir1 = ND_nir_swir1;
-exports.ND_nir_swir2 = ND_nir_swir2;
-exports.ND_swir1_swir2 = ND_swir1_swir2;
-exports.R_swir1_nir = R_swir1_nir;
-exports.R_red_swir1 = R_red_swir1;
-exports.EVI = EVI;
-exports.EVI_corrected=EVI_corrected;
-exports.SAVI = SAVI;
-exports.IBI = IBI;
-exports.addTopography = addTopography;
+
 exports.returnCovariates=returnCovariates;
 exports.Indices = Indices;
