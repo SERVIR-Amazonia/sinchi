@@ -151,8 +151,7 @@ function returnCovariates(img) {
         
         var otherBands = image.bandNames();
         var scaled = image.select(otherBands).multiply(0.0001);
-        var combinedImage = scaled.addBands(thermal);
-        return combinedImage.copyProperties(image, image.propertyNames());
+        return scaled;
     }
 
     img = scaleSentinel(img);
