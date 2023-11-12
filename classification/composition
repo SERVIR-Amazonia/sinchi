@@ -140,9 +140,7 @@ var s2process = function(aoi, start_year, end_year) {
     .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'])
     ;
 
-  var percentile_options = model_inputs['percentileOptions'];
-  var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));
-  var stack = ee.Image(percentiles);
+  var stack = ee.Image(imgColl);
   print("stack",stack)
   return stack;
 };
