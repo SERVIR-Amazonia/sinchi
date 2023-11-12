@@ -1,0 +1,119 @@
+
+//functions 
+function ND_blue_green(img) {
+    return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
+}
+
+function ND_blue_red(img) {
+    return img.addBands(img.normalizedDifference(['blue', 'red']).rename(['ND_blue_red']));
+}
+
+function ND_blue_nir(img) {
+    return img.addBands(img.normalizedDifference(['blue', 'nir']).rename(['ND_blue_nir']));
+}
+
+function ND_blue_swir1(img) {
+    return img.addBands(img.normalizedDifference(['blue', 'swir1']).rename(['ND_blue_swir1']));
+}
+
+function ND_blue_swir2(img) {
+    return img.addBands(img.normalizedDifference(['blue', 'swir2']).rename(['ND_blue_swir2']));
+}
+
+function ND_green_red(img) {
+    return img.addBands(img.normalizedDifference(['green', 'red']).rename(['ND_green_red']));
+}
+
+function ND_green_nir(img) {
+    return img.addBands(img.normalizedDifference(['green', 'nir']).rename(['ND_green_nir']));
+}
+
+function ND_green_swir1(img) {
+    return img.addBands(img.normalizedDifference(['green', 'swir1']).rename(['ND_green_swir1']));
+}
+
+function ND_green_swir2(img) {
+    return img.addBands(img.normalizedDifference(['green', 'swir2']).rename(['ND_green_swir2']));
+}
+
+function ND_red_swir1(img) {
+    return img.addBands(img.normalizedDifference(['red', 'swir1']).rename(['ND_red_swir1']));
+}
+
+function ND_red_swir2(img) {
+    return img.addBands(img.normalizedDifference(['red', 'swir2']).rename(['ND_red_swir2']));
+}
+
+function ND_nir_red(img) {
+    return img.addBands(img.normalizedDifference(['nir', 'red']).rename(['ND_nir_red']));
+}
+
+function ND_nir_swir1(img) {
+    return img.addBands(img.normalizedDifference(['nir', 'swir1']).rename(['ND_nir_swir1']));
+}
+
+function ND_nir_swir2(img) {
+    return img.addBands(img.normalizedDifference(['nir', 'swir2']).rename(['ND_nir_swir2']));
+}
+
+function ND_swir1_swir2(img) {
+    return img.addBands(img.normalizedDifference(['swir1', 'swir2']).rename(['ND_swir1_swir2']));
+}
+
+function R_swir1_nir(img) {
+    return img.addBands(img.select('swir1').divide(img.select('nir')).rename(['R_swir1_nir']));
+}
+
+function R_red_swir1(img) {
+    return img.addBands(img.select('red').divide(img.select('swir1')).rename(['R_red_swir1']));
+}
+
+function EVI(img) {
+    var evi = img.expression(
+        '2.5 * ((NIR - RED) / (NIR + 6 * RED - 7.5 * BLUE + 1))', {
+            'NIR': img.select('nir'),
+            'RED': img.select('red'),
+            'BLUE': img.select('blue')
+        }).float();
+    return img.addBands(evi.rename(['EVI']));
+}
+
+function SAVI(img) {
+    var savi = img.expression(
+        '(NIR - RED) * (1 + 0.5)/(NIR + RED + 0.5)', {
+            'NIR': img.select('nir'),
+            'RED': img.select('red')
+        }).float();
+    return img.addBands(savi.rename(['SAVI']));
+}
+
+function IBI(img) {
+    var ibi_a = img.expression(
+        '2 * SWIR1 / (SWIR1 + NIR)', {
+            'SWIR1': img.select('swir1'),
+            'NIR': img.select('nir')
+        }).rename(['IBI_A']);
+
+    var ibi_b = img.expression(
+        '(NIR / (NIR + RED)) + (GREEN / (GREEN + SWIR1))', {
+            'NIR': img.select('nir'),
+            'RED': img.select('red'),
+            'GREEN': img.select('green'),
+            'SWIR1': img.select('swir1')
+        }).rename(['IBI_B']);
+
+    var ibi = ibi_a.addBands(ibi_b).normalizedDifference(['IBI_A', 'IBI_B']);
+    return img.addBands(ibi.rename(['IBI']));
+}
+
+function addTopography(img) {
+    var elevation = ee.Image("USGS/SRTMGL1_003");
+    var topo = ee.Algorithms.Terrain(elevation);
+    var deg2rad = ee.Number(Math.PI / 180);
+    var aspect = topo.select(['aspect']);
+    var aspect_rad = aspect.multiply(deg2rad);
+    var eastness = aspect_rad.sin().rename(['eastness']).float();
+    var northness = aspect_rad.cos().rename(['northness']).float();
+    topo = topo.select(['elevation', 'slope', 'aspect']).addBands(eastness).addBands(northness);
+    return img.addBands(topo);
+}
