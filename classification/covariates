@@ -172,7 +172,7 @@ function returnCovariates(img) {
     var covariates = ["ND_blue_green", "ND_blue_red", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
                       "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
-                      "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
+                      "R_swir1_nir", "R_red_swir1", "EVI", "EVI_corrected","SAVI", "IBI"];
 
     // Assuming 'indices' is another function that provides the implementation for these indices
     var index = indices(img); // Pass 'img' if indices function requires it
