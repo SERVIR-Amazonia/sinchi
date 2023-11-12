@@ -143,6 +143,7 @@ var s2process = function(aoi, start_year, end_year) {
   var percentile_options = model_inputs['percentileOptions'];
   var percentiles = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));
   var stack = ee.Image(percentiles);
+  print("stack",stack)
   return stack;
 };
 
