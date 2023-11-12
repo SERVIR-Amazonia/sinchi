@@ -115,16 +115,6 @@ var apply_cld_shdw_mask = function(img) {
   return img.select('B.*').updateMask(not_cld_shdw);
 };
 
-// Función para estimar NDVI y agregarlo como banda.
-var add_ndvi = function(img) {
-  var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
-  img = img.addBands(ndvi);
-  var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
-  img = img.select(covariates);
-  return img;
-};
-
-
 var module_covariates = require('users/an-sig/sinchi:classification/covariates');
 
 
@@ -141,7 +131,6 @@ var s2process = function(aoi, start_year, end_year) {
     ;
 
   var stack = ee.Image(imgColl);
-  print("stack",stack)
   return stack;
 };
 
