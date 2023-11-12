@@ -128,8 +128,38 @@ function addTopography(img) {
     topo = topo.select(['elevation', 'slope', 'aspect']).addBands(eastness).addBands(northness);
     return img.addBands(topo);
 }
+function returnCovariates(img) {
+    // Bands and covariates hardcoded inside the function
+    var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
+    var bandLow = ['p20_blue', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
+    var bandHigh = ['p80_blue', 'p80_green', 'p80_red', 'p80_nir', 'p80_swir1', 'p80_swir2'];
+    var bandmedian = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
 
+    var covariates = ["ND_blue_green", "ND_blue_red", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
+                      "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
+                      "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
+                      "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
 
+    // Assuming 'indices' is another function that provides the implementation for these indices
+    // var index = indices(); // You need to define or import 'indices' function
+
+    function scaleLandsat(image) {
+        var thermalBand = ['thermal'];
+        var thermal = image.select(thermalBand).divide(10);
+        
+        var otherBands = image.bandNames().removeAll(thermalBand);
+        var scaled = image.select(otherBands).multiply(0.0001);
+        var combinedImage = scaled.addBands(thermal);
+
+        return combinedImage.copyProperties(img, img.propertyNames());
+    }
+
+    img = scaleLandsat(img);
+
+    // Additional logic to apply the indices and other transformations would go here
+
+    return img; // Return the modified image
+}
 function returnCovariates(img) {
     // Bands and covariates hardcoded inside the function
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
