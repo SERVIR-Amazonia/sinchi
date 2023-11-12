@@ -157,7 +157,6 @@ function returnCovariates(img) {
     img = scaleSentinel(img);
 
     function addIndices(image, prefix) {
-        image = indicesInstance.addAllTasselCapIndices(image);
         image = indicesInstance.getIndices(image, covariates);
         image = indicesInstance.addJRC(image).unmask(0);
         image = indicesInstance.addTopography(image).unmask(0);
