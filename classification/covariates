@@ -128,6 +128,33 @@ function addTopography(img) {
     topo = topo.select(['elevation', 'slope', 'aspect']).addBands(eastness).addBands(northness);
     return img.addBands(topo);
 }
+
+
+function returnCovariates(img) {
+    // Bands and covariates hardcoded inside the function
+    var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
+    var bandLow = ['p20_blue', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
+    var bandHigh = ['p80_blue', 'p80_green', 'p80_red', 'p80_nir', 'p80_swir1', 'p80_swir2'];
+    var bandmedian = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
+
+
+    // List of covariate names
+    var covariates = ["ND_blue_green", "ND_blue_red", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
+                      "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
+                      "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
+                      "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
+
+    // Assuming 'indices' is another function that provides the implementation for these indices
+    var index = indices(img); // Pass 'img' if indices function requires it
+
+    // Additional logic for applying or using the indices would go here
+    // This is a placeholder since the exact implementation depends on what 'indices' does and how covariates are used
+
+    return img; // Return the modified image
+}
+
+
+
 // Exporting functions
 exports.ND_blue_green = ND_blue_green;
 exports.ND_blue_red = ND_blue_red;
@@ -151,3 +178,4 @@ exports.EVI_corrected=EVI_corrected;
 exports.SAVI = SAVI;
 exports.IBI = IBI;
 exports.addTopography = addTopography;
+exports.returnCovariates=returnCovariates;
