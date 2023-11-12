@@ -112,13 +112,17 @@ function Indices() {
     };
     
     
-    this.getIndices = function(img, covariates) {
-        var self = this;
-        covariates.forEach(function(item) {
+   this.getIndices = function(img, covariates) {
+    var self = this;
+    covariates.forEach(function(item) {
+        if (typeof self.functionList[item] === 'function') {
             img = self.functionList[item](img);
-        });
-        return img;
-    };
+        } else {
+            console.error(item + " is not a function");
+        }
+    });
+    return img;
+};
     this.removeDuplicates = function(covariateList, bands) {
         return covariateList.filter(function(elem) {
             return bands.indexOf(elem) === -1;
