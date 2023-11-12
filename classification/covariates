@@ -117,3 +117,6 @@ function addTopography(img) {
     topo = topo.select(['elevation', 'slope', 'aspect']).addBands(eastness).addBands(northness);
     return img.addBands(topo);
 }
+exports.ND_blue_green = ND_blue_green;
+exports.ND_blue_red = ND_blue_red;
+exports.EVI = EVI;
