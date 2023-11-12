@@ -1,3 +1,14 @@
+var geometry = /* color: #d63000 */ee.Geometry.Polygon(
+        [[[-71.40636212919651, -0.4545955909329242],
+          [-71.36415599236246, -0.45013054834153504],
+          [-71.32606965500655, -0.44497859961377856],
+          [-71.32193136734023, -0.37118095318751787],
+          [-71.4135881996886, -0.37667056564592793]]]),
+    Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+// Load the shapefile as a feature collection
+var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
+var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
+
 /**
  * Este código genera un mosaico para procesar imágenes Sentinel-2, eliminando nubes y sombras,
  * y luego calculando NDVI y EVI para las áreas de interés.
