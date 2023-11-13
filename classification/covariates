@@ -184,6 +184,7 @@ function returnCovariates(img) {
    print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=change_name_bands (down, 'p_20');
+    print("down",down)
     var down_composition=addIndices(down);
     
     var high= img.select(bandHigh);
