@@ -154,4 +154,4 @@ var s2process = function(aoi, start_year, end_year) {
 var processedImage = s2process(aoi, start_year, end_year);
 print("imagen", processedImage)
 var image_covariates=module_covariates.returnCovariates(processedImage)
-print("image_covariates",image_covariates)
+print("image_covariates",image_covariates);
