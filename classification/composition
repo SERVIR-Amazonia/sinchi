@@ -166,5 +166,6 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
 // Llamar a la función 
 var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
-var visualizationResults = miModulo.executeAndVisualize();
+var visualizationParams = {min: 0, max: 100, bands: ['red', 'green', 'blue']}; // Ajusta según tus bandas
+
 Map.addLayer(processedImage,visualizationParams,'processedImage');
