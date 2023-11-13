@@ -153,10 +153,9 @@ function returnCovariates(img) {
     
     function changeNameBands(img, wildcard) {
     // Asegurarse de que el comodín es un ee.String
-   img=img.rename(bands).bandNames();
+   img.rename(bands).bandNames();
    // Renombrar las bandas de la imagen
-   print("Renombrar las bandas de la imagen",img.bandNames())
-   return img;
+   return img.rename(bands).bandNames());
    }
 
     var indicesInstance = new Indices();
