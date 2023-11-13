@@ -211,12 +211,12 @@ function returnCovariates(img) {
    //print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
-    var down_composition=indicesInstance.addIndices(down);
+    var down_composition=addIndices(down);
 addIndices(down);
     
     var high= img.select(bandHigh);
     var high=changeBandNames (high, '_p80');
-    var high_composition=indicesInstance.addIndices(high);
+    var high_composition=addIndices(high);
     
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
