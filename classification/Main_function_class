@@ -46,7 +46,7 @@ print("processedImage",processedImage);
 //var image_covariates=moduloCovariates.returnCovariates(processedImage)
 //var image_covariates=image_covariates.clip(region)
 
-var band = processedImage.select('green_b50'); // You can change 'B4' to any band you're interested in
+var band = processedImage.select('green_p50'); // You can change 'B4' to any band you're interested in
 var projection = band.projection();
 var scale = projection.nominalScale();
 print('Pixel size (meters):', scale);
