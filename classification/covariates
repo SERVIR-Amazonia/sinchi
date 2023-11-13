@@ -170,9 +170,10 @@ function returnCovariates(img) {
     img = scaleSentinel(img);
 
     function addIndices(image) {
-        image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.getIndices(image, covariates).unmask(0);
         image = indicesInstance.ND_blue_green(image).unmask(0)
         image = indicesInstance.addTopography(image).unmask(0);
+
         return image;
     }
 
