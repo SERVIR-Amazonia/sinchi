@@ -85,7 +85,7 @@ function RFprim(trainingPts, inputImage) {
 // Entrenar el clasificador con los puntos de entrenamiento
 var classifiedImage = RFprim(S1_training, processedImage);
 var classifiedImage  = classifiedImage .multiply(255).toByte();
-Map.addLayer(image_covariates);
+Map.addLayer(classifiedImage);
 print("classifiedImage ",classifiedImage )
 
 // Mostrar los resultados
