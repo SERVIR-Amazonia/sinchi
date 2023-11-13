@@ -181,17 +181,17 @@ function returnCovariates(img) {
     var bandNames = img.bandNames();
    print("bandNames down",bandNames)
     var down = img.select(bandLow);
-    var down=changeBandNames(down, 'p_20')
+    var down=changeBandNames(down, '_p20')
     print("downbandnames",down.bandNames())
     print("down",down)
     //var down_composition=addIndices(down);
     
     var high= img.select(bandHigh);
-    var high=cchangeBandNames (high, 'p_80');
+    var high=cchangeBandNames (high, '_p80');
     //var high_composition=addIndices(high);
     
     var middle= img.select(bandMedian);
-    var middle=changeBandNames (middle, 'p_50');
+    var middle=changeBandNames (middle, '_p50');
     //var middle_composition=addIndices(middle);
 
 
