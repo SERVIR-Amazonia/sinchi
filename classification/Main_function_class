@@ -1,4 +1,5 @@
 var miModulo = require('users/an-sig/sinchi:classification/Module_extract_samples');
+var moduloCovariates = require('users/an-sig/sinchi:classification/Module_extract_samples');
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
