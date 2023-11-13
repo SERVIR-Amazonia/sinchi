@@ -137,15 +137,7 @@ function Indices() {
     
 }
 
-// Función para cambiar los nombres de las bandas de una imagen
-function changeBandNames(img, textToRemove) {
-  var bandNames = img.bandNames();
-  var newBandNames = bandNames.map(function(name) {
-    return ee.String(name).replace(textToRemove, '');
-  });
 
-  return img.rename(newBandNames);
-}
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
@@ -160,6 +152,15 @@ function returnCovariates(img) {
     
 
     var indicesInstance = new Indices();
+    // Función para cambiar los nombres de las bandas de una imagen
+function changeBandNames(img, textToRemove) {
+  var bandNames = img.bandNames();
+  var newBandNames = bandNames.map(function(name) {
+    return ee.String(name).replace(textToRemove, '');
+  });
+
+  return img.rename(newBandNames);
+}
 
     function scaleSentinel(image) {
         
