@@ -23,7 +23,7 @@ function Indices() {
         "IBI": this.IBI
     };
 
- this.ND_blue_green = function(img) {
+    this.ND_blue_green = function(img) {
         return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
     };
 
@@ -154,7 +154,7 @@ function Indices() {
     };
     
 
-this.getIndices = function(img, covariates) {
+    this.getIndices = function(img, covariates) {
         var self = this;
         covariates.forEach(function(item) {
             if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
@@ -164,9 +164,9 @@ this.getIndices = function(img, covariates) {
         return img;
 
     
-}
+  }
 
-}
+
 // Función para cambiar los nombres de las bandas de una imagen
 function changeBandNames(img, textToRemove) {
   var bandNames = img.bandNames();
@@ -175,7 +175,7 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
-
+}
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
