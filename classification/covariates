@@ -175,7 +175,7 @@ function returnCovariates(img) {
   });
 
   // Rename bands
-  var renamedImage = image.rename(modifiedBandNames);
+  var renamedImage = img.rename(modifiedBandNames);
   var down_composition=addIndices(img);
     
     
