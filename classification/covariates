@@ -173,7 +173,7 @@ function returnCovariates(img) {
     var middle = addIndices(img.select(bands), "p50", bandNames);
     var up = addIndices(img.select(bandHigh.concat(bands)), "p80", bandNames);
 
-    img = down.addBands(middle);
+    img = middle;
 
     return img;
 }
