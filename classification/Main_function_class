@@ -13,6 +13,18 @@ var S1_ttesting=visualizationResults.combinedResults_S1.testing
 
 
 
+
+
+
+
+var processedImage = s2process(aoi, start_year, end_year,start_month, start_day, end_month,end_day);
+print("imagen", processedImage)
+
+
+
+
+
+
 // Correr RF
 function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
