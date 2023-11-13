@@ -50,9 +50,9 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
-Map.addLayer(image_covariates);
+Map.addLayer(processedImage);
 
-print("image_covariates",processedImage);
+print("processedImage",processedImage);
 
 // Correr RF
 function RFprim(trainingPts, inputImage) {
