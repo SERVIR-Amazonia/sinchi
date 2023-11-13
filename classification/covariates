@@ -161,6 +161,26 @@ function returnCovariates(img) {
     function addIndices(image) {
         image = indicesInstance.getIndices(image, covariates);
         image = indicesInstance.addTopography(image).unmask(0);
+        image = indicesInstance.ND_blue_green(image).unmask(0);
+        image = indicesInstance.ND_blue_nir(image).unmask(0);
+        image = indicesInstance.ND_blue_swir1(image).unmask(0);
+        image = indicesInstance.ND_blue_swir2(image).unmask(0);
+        image = indicesInstance.ND_green_red(image).unmask(0);
+        image = indicesInstance.ND_green_nir(image).unmask(0);
+        image = indicesInstance.ND_green_swir1(image).unmask(0);
+        image = indicesInstance.ND_green_swir2(image).unmask(0);
+        image = indicesInstance.ND_red_swir1(image).unmask(0);
+        image = indicesInstance.ND_red_swir2(image).unmask(0);
+        image = indicesInstance.ND_nir_red(image).unmask(0);
+        image = indicesInstance.ND_nir_swir1(image).unmask(0);
+        image = indicesInstance.ND_nir_swir2(image).unmask(0);
+        image = indicesInstance.ND_swir1_swir2(image).unmask(0);
+        image = indicesInstance.R_swir1_nir(image).unmask(0);
+        image = indicesInstance.R_red_swir1(image).unmask(0);
+        image = indicesInstance.EVI(image).unmask(0);
+        image = indicesInstance.SAVI(image).unmask(0);
+        image = indicesInstance.IBI(image).unmask(0);
+
 
         return image;
     }
