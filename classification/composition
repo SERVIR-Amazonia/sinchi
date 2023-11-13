@@ -131,16 +131,6 @@ var add_ndvi = function(img) {
   return img;
 };
 
-// Función para estimar EVI y agregarlo como banda.
-var calculateEVI = function(img) {
-  var evi = img.expression(
-    '2.5 * (((NIR/10000) - (Red/10000)) / ((NIR/10000) + 6 * (Red/10000) - 7.5 * (Blue/10000) + 1))', {
-      'NIR': img.select('nir'),
-      'Red': img.select('red'),
-      'Blue': img.select('blue')
-    });
-  return img.addBands(evi.rename('EVI'));
-};
 
 // Función para procesar imágenes Sentinel-2.
 var s2process = function(aoi, start_year, end_year) {
