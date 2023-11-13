@@ -46,6 +46,11 @@ print("processedImage",processedImage);
 //var image_covariates=moduloCovariates.returnCovariates(processedImage)
 //var image_covariates=image_covariates.clip(region)
 
+var band = processedImage.select('green_b50'); // You can change 'B4' to any band you're interested in
+var projection = band.projection();
+var scale = projection.nominalScale();
+print('Pixel size (meters):', scale);
+
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [190, 260, 240],
@@ -57,6 +62,27 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 
+
+// Correr RF
+function RFprim(trainingPts, inputImage) {
+    var trainingData = inputImage.sampleRegions({
+        collection: trainingPts,
+        properties: ['nivel_1'],
+        scale: 30
+    });
+
+    var classifier = ee.Classifier.smileRandomForest(100).train({
+        features: trainingData,
+        classProperty: 'nivel_1',
+        inputProperties: inputImage.bandNames()
+    });
+
+    return inputImage.classify(classifier);
+}
+
+// Entrenar el clasificador con los puntos de entrenamiento
+var classifiedImage = RFprim(S1_training, processedImage);
+
 //print("classifiedImage ",classifiedImage )
 
 // Mostrar los resultados
@@ -67,7 +93,7 @@ Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 // Agregar las capas de los puntos de muestreo al mapa
 Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
-Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
+//Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
 //Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
 //Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
 
