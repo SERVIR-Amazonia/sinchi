@@ -147,7 +147,7 @@ function returnCovariates(img) {
     }
 
     img = scaleSentinel(img);
-    prin("lline150",img)
+    print("lline150",img)
 
     function addIndices(img) {
         image = indicesInstance.getIndices(image, covariates);
