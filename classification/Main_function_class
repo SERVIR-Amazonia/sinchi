@@ -63,7 +63,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
-
+Map.addLayer(image_covariates);
 // Correr RF
 function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
