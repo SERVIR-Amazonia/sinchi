@@ -153,6 +153,7 @@ var s2process = function(aoi, start_year, end_year) {
   var reducer =20
     var reduced_percentile = ee.Reducer.percentile([reducer]);
     var stack = ee.Image(reduced_percentile);
+    print("stack",stack)
   return stack;
   return reduced_image;
 };
