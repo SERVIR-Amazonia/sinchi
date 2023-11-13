@@ -248,9 +248,5 @@ function returnCovariates(img) {
 
 // Exporting functions
 
-
-
-
-
 exports.returnCovariates=returnCovariates;
 exports.Indices = Indices;
