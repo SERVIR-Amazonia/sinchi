@@ -172,7 +172,7 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
 // Llamar a la función 
 var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
-var visualizationParams = {  "bands": ["red_p50", "green_p50", "blue_p50"],
+var visualizationParams = {  "bands": ["nir_p50", "green_p50", "blue_p50"],
   "min": [190, 260, 240],
   "max": [1160,1100,1110],
   "gamma": 0.7,
