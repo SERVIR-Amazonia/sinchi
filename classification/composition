@@ -136,10 +136,9 @@ exports.s2process = function(region, start_year, end_year, start_month, start_da
     var reduced_percentile = imgColl.reduce(ee.Reducer.percentile([50]));
     //var composite = ee.ImageCollection(reduced_percentile.collection).toBands()
     var stack = ee.Image(reduced_percentile);
-    print("stack",reduced_percentile)
    var stack = stack.clip(region);
-   var stackFloat = stack.toFloat(); // Convierte todas las bandas a float
-  return stackFloat;
+   var stack = stack.toFloat(); // Convierte todas las bandas a float
+  return stack;
   
 };
 
