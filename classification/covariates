@@ -127,13 +127,6 @@ function Indices() {
         });
     };
 
-    this.renameBands = function(image, prefix) {
-        var bandnames = image.bandNames();
-        var newBandnames = bandnames.map(function(band) {
-            return ee.String(prefix).cat('_').cat(band);
-        });
-        return image.rename(newBandnames);
-    };
     
 }
 
