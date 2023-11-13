@@ -36,11 +36,11 @@ function Indices() {
     };
 
     this.ND_blue_swir1 = function(img) {
-        return img.addBands(img.normalizedDifference(['blue', 'swir1']).rename(['ND_blue_swir1 ']));
+        return img.addBands(img.normalizedDifference(['blue', 'swir1']).rename(['ND_blue_swir1']));
     };
     
         this.ND_blue_swir2 = function(img) {
-        return img.addBands(img.normalizedDifference(['blue', 'swir2']).rename(['ND_blue_swir2 ']));
+        return img.addBands(img.normalizedDifference(['blue', 'swir2']).rename(['ND_blue_swir2']));
     };
     this.ND_swir1_swir2 = function(img) {
         return img.addBands(img.normalizedDifference(['swir1', 'swir2']).rename(['ND_swir1_swir2']));
