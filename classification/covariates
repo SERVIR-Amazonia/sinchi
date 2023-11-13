@@ -137,14 +137,6 @@ function Indices() {
     
 }
 
-function changeNameBands(img, wildcard) {
-  // Asegurarse de que el comodín es un ee.String
-  img=img.rename(bands).bandNames();
-  // Renombrar las bandas de la imagen
-  print("Renombrar las bandas de la imagen",img.bandNames())
-  return img;
-}
-
 
 
 function returnCovariates(img) {
@@ -158,6 +150,17 @@ function returnCovariates(img) {
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
                       "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
 
+    
+    function changeNameBands(img, wildcard) {
+    // Asegurarse de que el comodín es un ee.String
+   img=img.rename(bands).bandNames();
+   // Renombrar las bandas de la imagen
+   print("Renombrar las bandas de la imagen",img.bandNames())
+   return img;
+   }
+
+
+    
     var indicesInstance = new Indices();
 
     function scaleSentinel(image) {
