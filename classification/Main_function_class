@@ -52,7 +52,7 @@ Map.addLayer(processedImage);
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
-Map.addLayer(image_covariates,'image_covariates');
+Map.addLayer(image_covariates);
 
 
 print("image_covariates",image_covariates);
