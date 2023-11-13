@@ -171,9 +171,9 @@ function returnCovariates(img) {
         return image;
     }
 
-    var down = changeNamesAndAddIndices(img, bandLow, '_p20', "p20");
+    var down = changeNamesAndAddIndices(img, bandLow, '_p20', "");
     var middle = changeNamesAndAddIndices(img, bandMedian, '_p50', "");
-    var up = changeNamesAndAddIndices(img, bandHigh, '_p80', "p80");
+    var up = changeNamesAndAddIndices(img, bandHigh, '_p80', "");
 
     img = down.addBands(middle).addBands(up);
 
