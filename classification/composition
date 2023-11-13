@@ -142,7 +142,7 @@ var s2process = function(aoi, start_year, end_year) {
     .map(apply_cld_shdw_mask)
     .select(["B2", "B3", "B4", "B8", "B11", "B12"], ['blue', 'green', 'red', 'nir', 'swir1', 'swir2']);
    
-  var reducer =20
+  var reducer =50
     //var reduced_percentile = imgColl .reduce(ee.Reducer.mean());
     var reduced_percentile = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));
     //var composite = ee.ImageCollection(reduced_percentile.collection).toBands()
