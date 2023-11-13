@@ -203,7 +203,6 @@ function returnCovariates(img) {
 
         img = this.addTopography(img).unmask(0);
 
-
         return img;
     };
     
@@ -229,4 +228,4 @@ function returnCovariates(img) {
 
 // Exporting functions
 
-exports.returnCovariates=returnCovariates;
+exports.returnCovariates=returnCovariates(img);
