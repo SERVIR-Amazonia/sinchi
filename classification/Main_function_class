@@ -84,7 +84,7 @@ function RFprim(trainingPts, inputImage) {
 
 // Entrenar el clasificador con los puntos de entrenamiento
 var classifiedImage = RFprim(S1_training, processedImage);
-var classifiedImage  = classifiedImage .multiply(255).toByte();
+//var classifiedImage  = classifiedImage .multiply(255).toByte();
 Map.addLayer(classifiedImage);
 print("classifiedImage ",classifiedImage )
 
@@ -102,3 +102,13 @@ Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 
 
 // Centrar el mapa en uno de los conjuntos de puntos
 Map.centerObject(visualizationResults.combinedResults_S1.training);
+var exportParams = {
+  image: classifiedImage,
+  description: 'classified_image_export',
+  fileNamePrefix: 'classified_image',
+  scale: 32,  // Debe coincidir con la resolución utilizada para el análisis
+  region: region,  // Especifica la región que deseas exportar
+  fileFormat: 'GeoTIFF',
+  maxPixels: 1e13  // Ajusta según las necesidades
+};
+Export.image.toDrive(exportParams);
