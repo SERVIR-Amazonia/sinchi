@@ -177,7 +177,6 @@ function returnCovariates(img) {
         image = indicesInstance.getIndices(image, covariates);
         image = indicesInstance.ND_blue_green(image).unmask(0)
         image = indicesInstance.addTopography(image).unmask(0);
-
         return image;
     }
 
@@ -193,11 +192,11 @@ function returnCovariates(img) {
     var high_composition=addIndices(high);
     
     var middle= img.select(bandMedian);
-    var middle=change_name_bands (middle, 'p_80');
+    var middle=change_name_bands (middle, 'p_50');
     var middle_composition=addIndices(middle);
 
 
-    img = middle;
+    img = middle_composition;
     print("img",img)
     return img;
 }
