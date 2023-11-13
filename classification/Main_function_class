@@ -49,9 +49,7 @@ print("processedImage",processedImage);
 
 
 //print("processedImage",image_covariates);
-var projection = band.projection();
-var scale = projection.nominalScale();
-print('Pixel size (meters):', scale);
+
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
