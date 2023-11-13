@@ -155,15 +155,14 @@ function Indices() {
     
     
 this.getIndices = function(img, covariates) {
-        var self = this;
-        covariates.forEach(function(item) {
-            if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
-                img = self.functionList[item].call(self, img).unmask(0);
-            }
-        });
-        return img;
-    };
-
+    var self = this;
+    covariates.forEach(function(item) {
+        if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
+            img = self.functionList[item].call(self, img).unmask(0);
+        }
+    });
+    return img;
+};
 
     
 }
