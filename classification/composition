@@ -138,7 +138,7 @@ exports.s2process = function(region, start_year, end_year, start_month, start_da
     var stack = ee.Image(reduced_percentile);
     print("stack",reduced_percentile)
    var stack = stack.clip(region);
-   var stack = stack.toFloat().multiply(255).toByte();
+   var stack = stack.multiply(255).toByte();
   return stack;
 };
 
