@@ -129,7 +129,6 @@ var visualizationParams = {
 
 // Agregar la imagen al mapa
 Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
-
 // Crear un panel para la leyenda
 var legend = ui.Panel({
   style: {
