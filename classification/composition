@@ -1,3 +1,4 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-71.40636212919651, -0.4545955909329242],
           [-71.36415599236246, -0.45013054834153504],
@@ -5,6 +6,8 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
           [-71.32193136734023, -0.37118095318751787],
           [-71.4135881996886, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+
 var aoi =geometry
 //var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
@@ -166,6 +169,6 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
 // Llamar a la función 
 var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
-var visualizationParams = {min: 0, max: 100, bands: ['red_p50', 'green_p50', 'blue_p50']}; // Ajusta según tus bandas
+var visualizationParams = {min: 500, max: 5000, bands: ['red_p50', 'green_p50', 'blue_p50']}; // Ajusta según tus bandas
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
