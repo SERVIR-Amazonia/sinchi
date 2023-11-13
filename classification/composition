@@ -40,7 +40,7 @@ var demResampled = dem.resample('bicubic');
 // Función para obtener la colección de imágenes SR y de probabilidad de nubes.
 var get_s2_sr_cld_col = function(region, start_date, end_date) {
   var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
-    .filterBounds(aoi)
+    .filterBounds(region)
     .filterDate(start_date, end_date)
     .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', CLOUD_FILTER));
     
