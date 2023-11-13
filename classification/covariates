@@ -199,14 +199,13 @@ function returnCovariates(img) {
 
     img = scaleSentinel(img);
 
-   this.addIndices = function(img) {
-
+    this.addIndices = function(img) {
         img = this.getIndices(img, covariates); // Asegúrate de que 'covariates' esté definido
-
         img = this.addTopography(img).unmask(0);
-
+        // Agrega otras llamadas a funciones según sea necesario
         return img;
     };
+
     
     var bandNames = img.bandNames();
    //print("bandNames down",bandNames)
@@ -222,6 +221,9 @@ function returnCovariates(img) {
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
     var middle_composition=indicesInstance.addIndices(middle);
+    var down_composition = indicesInstance.addIndices(down);
+    var high_composition = indicesInstance.addIndices(high);
+    var middle_composition = indicesInstance.addIndices(middle);
 
 
     img = middle_composition;
