@@ -194,14 +194,15 @@ function returnCovariates(img) {
         
         var otherBands = image.bandNames();
         var scaled = image.select(otherBands).multiply(0.0001);
+        var scaled = scaled.toFloat()
         return scaled;
     }
 
     img = scaleSentinel(img);
 
     function addIndices(image) {
-        image = indicesInstance.getIndices(image, covariates);
-         image = indicesInstance.ND_blue_green(image).unmask(0);
+        //image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.ND_blue_green(image).unmask(0);
         image = indicesInstance.ND_blue_nir(image).unmask(0);
         image = indicesInstance.ND_blue_swir1(image).unmask(0);
         image = indicesInstance.ND_blue_swir2(image).unmask(0);
