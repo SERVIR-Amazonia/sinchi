@@ -57,27 +57,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 
-
-// Correr RF
-function RFprim(trainingPts, inputImage) {
-    var trainingData = inputImage.sampleRegions({
-        collection: trainingPts,
-        properties: ['nivel_1'],
-        scale: 30
-    });
-
-    var classifier = ee.Classifier.smileRandomForest(100).train({
-        features: trainingData,
-        classProperty: 'nivel_1',
-        inputProperties: inputImage.bandNames()
-    });
-
-    return inputImage.classify(classifier);
-}
-
-// Entrenar el clasificador con los puntos de entrenamiento
-var classifiedImage = RFprim(S1_training, processedImage);
-
 //print("classifiedImage ",classifiedImage )
 
 // Mostrar los resultados
