@@ -138,14 +138,19 @@ function Indices() {
 }
 
 function changeNameBands(img, wildcard) {
-  // Obtener nombres de bandas y reemplazar el comodín
+  // Asegurarse de que el comodín es un ee.String
+  var wildcardEE = ee.String(wildcard);
+
+  // Mapear sobre los nombres de las bandas y reemplazar el comodín
   var modifiedBandNames = img.bandNames().map(function(name) {
-    return ee.String(name).replace(wildcard, '');
+    return ee.String(name).replace(wildcardEE, '');
   });
-  print("modifiedBandNames",modifiedBandNames)
+
   // Renombrar las bandas de la imagen
+  print(img.bandNames())
   return img.rename(modifiedBandNames);
 }
+
 
 
 function returnCovariates(img) {
