@@ -152,7 +152,7 @@ function change_name_bands (img, wildcard){
 
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
-    var bandLow = ['blue_p20', 'green_p20', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
+    var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
     var bandHigh = ['blue_p80', 'green_p80', 'red_p80', 'nir_p80', 'swir1_p80', 'swir2_p80'];
     var bandMedian = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
 
