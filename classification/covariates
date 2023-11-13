@@ -213,7 +213,7 @@ function returnCovariates(img) {
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
     var down_composition=addIndices(down);
-addIndices(down);
+    
     
     var high= img.select(bandHigh);
     var high=changeBandNames(high, '_p80');
