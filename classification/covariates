@@ -151,12 +151,6 @@ function returnCovariates(img) {
                       "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
 
     
-    function changeNameBands(img, wildcard) {
-    // Asegurarse de que el comodín es un ee.String
-   img.rename(bands).bandNames();
-   // Renombrar las bandas de la imagen
-   return img.rename(bands).bandNames();
-   }
 
     var indicesInstance = new Indices();
 
