@@ -1,27 +1,13 @@
 function Indices() {
-
-      this.functionList = {
-        "ND_blue_green": this.ND_blue_green,
-        "ND_blue_red": this.ND_blue_red,
-        "ND_blue_nir": this.ND_blue_nir,
-        "ND_blue_swir1": this.ND_blue_swir1,
-        "ND_blue_swir2": this.ND_blue_swir2,
-        "ND_green_red": this.ND_green_red,
-        "ND_green_nir": this.ND_green_nir,
-        "ND_green_swir1": this.ND_green_swir1,
-        "ND_green_swir2": this.ND_green_swir2,
-        "ND_red_swir1": this.ND_red_swir1,
-        "ND_red_swir2": this.ND_red_swir2,
-        "ND_nir_red": this.ND_nir_red,
-        "ND_nir_swir1": this.ND_nir_swir1,
-        "ND_nir_swir2": this.ND_nir_swir2,
-        "ND_swir1_swir2": this.ND_swir1_swir2,
-        "R_swir1_nir": this.R_swir1_nir,
-        "R_red_swir1": this.R_red_swir1,
-        "EVI": this.EVI,
-        "SAVI": this.SAVI,
-        "IBI": this.IBI
+    this.addIndices = function(img, covariates) {
+        covariates.forEach(function(item) {
+            if (this[item]) {
+                img = this[item](img);
+            }
+        }, this); // Asegúrate de pasar el contexto correcto con ", this"
+        return img;
     };
+
 
   this.ND_blue_green = function(img) {
         return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
@@ -111,7 +97,7 @@ function Indices() {
         return img.addBands(topo);
     };
     
-    
+
  this.getIndices = function(img, covariates) {
     var self = this; // Guardar una referencia a this
     covariates.forEach(function(item) {
@@ -147,57 +133,38 @@ function changeBandNames(img, textToRemove) {
 }
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
-    var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
-    var bandHigh = ['blue_p80', 'green_p80', 'red_p80', 'nir_p80', 'swir1_p80', 'swir2_p80'];
-    var bandMedian = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
+    var bandLow = ['p20_blue', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
+    var bandHigh = ['p80_blue', 'p80_green', 'p80_red', 'p80_nir', 'p80_swir1', 'p80_swir2'];
+    var bandMedian = ['p50_blue', 'p50_green', 'p50_red', 'p50_nir', 'p50_swir1', 'p50_swir2'];
 
-    var covariates = ["ND_blue_green", "ND_blue_green", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
+    var covariates = ["ND_blue_green", "ND_blue_red", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
                       "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
                       "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
 
-    
-
     var indicesInstance = new Indices();
 
     function scaleSentinel(image) {
-        
-        var otherBands = image.bandNames();
-        var scaled = image.select(otherBands).multiply(0.0001);
-        return scaled;
+        var scaled = image.select(bands).multiply(0.0001);
+        return image.addBands(scaled, null, true); // Reemplaza las bandas originales
     }
 
     img = scaleSentinel(img);
 
-    function addIndices(image) {
-        image = indicesInstance.getIndices(image, covariates);
-        image = indicesInstance.addTopography(image).unmask(0);
+    // Procesa cada conjunto de bandas
+    var processedLow = changeBandNames(indicesInstance.addIndices(img.select(bandLow), covariates), '_p20');
+    var processedHigh = changeBandNames(indicesInstance.addIndices(img.select(bandHigh), covariates), '_p80');
+    var processedMiddle = changeBandNames(indicesInstance.addIndices(img.select(bandMedian), covariates), '_p50');
 
-        return image;
-    }
+    // Combina todas las bandas procesadas
+    img = processedLow.addBands(processedMiddle).addBands(processedHigh);
 
-    
-    var bandNames = img.bandNames();
-   print("bandNames down",bandNames)
-    var down = img.select(bandLow);
-    var down=changeBandNames(down, '_p20')
-    var down_composition=addIndices(down);
-    
-    var high= img.select(bandHigh);
-    var high=changeBandNames (high, '_p80');
-    var high_composition=addIndices(high);
-    
-    var middle= img.select(bandMedian);
-    var middle=changeBandNames (middle, '_p50');
-    var middle_composition=addIndices(middle);
+    // Añadir topografía y otras transformaciones si es necesario
+    img = indicesInstance.addTopography(img);
 
-
-    img = middle_composition;
-    print("img",img)
     return img;
 }
 
-// Exporting functions
-
-exports.returnCovariates=returnCovariates;
+// Exportando funciones
+exports.returnCovariates = returnCovariates;
 exports.Indices = Indices;
