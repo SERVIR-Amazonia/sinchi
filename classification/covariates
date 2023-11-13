@@ -164,9 +164,11 @@ function returnCovariates(img) {
 
     function addIndices(image) {
         image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.addTopography(image).unmask(0);
 
         return image;
     }
+
     
     var bandNames = img.bandNames();
    print("bandNames down",bandNames)
