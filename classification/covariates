@@ -146,8 +146,7 @@ function change_name_bands (img, wildcard){
   });
   // Rename bands
   var renamedImage = img.rename(modifiedBandNames);
-  var renamedComposition=addIndices(renamedImage);
-  return renamedComposition
+  return renamedImage;
     
 }
 
