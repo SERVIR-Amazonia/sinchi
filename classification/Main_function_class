@@ -35,7 +35,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(aoi, start_year, end_year, start_month, start_day,end_month, end_day);
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
-
+var image_covariates=image_covariates.clip(aoi)
 Map.addLayer(image_covariates);
 
 print("image_covariates",image_covariates);
