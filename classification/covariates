@@ -23,74 +23,74 @@ function Indices() {
         "IBI": this.IBI
     };
 
- // Definición de las funciones en JavaScript para Google Earth Engine
-function ND_blue_green(img) {
-    return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
-}
-
-function ND_blue_red(img) {
-    return img.addBands(img.normalizedDifference(['blue', 'red']).rename(['ND_blue_red']));
-}
-
-function ND_blue_nir(img) {
-    return img.addBands(img.normalizedDifference(['blue', 'nir']).rename(['ND_blue_nir']));
-}
-
-function ND_blue_swir1(img) {
-    return img.addBands(img.normalizedDifference(['blue', 'swir1']).rename(['ND_blue_swir1']));
-}
-
-function ND_blue_swir2(img) {
-    return img.addBands(img.normalizedDifference(['blue', 'swir2']).rename(['ND_blue_swir2']));
-}
-
-function ND_green_red(img) {
-    return img.addBands(img.normalizedDifference(['green', 'red']).rename(['ND_green_red']));
-}
-
-function ND_green_nir(img) {
-    return img.addBands(img.normalizedDifference(['green', 'nir']).rename(['ND_green_nir']));
-}
-
-function ND_green_swir1(img) {
-    return img.addBands(img.normalizedDifference(['green', 'swir1']).rename(['ND_green_swir1']));
-}
-
-function ND_green_swir2(img) {
-    return img.addBands(img.normalizedDifference(['green', 'swir2']).rename(['ND_green_swir2']));
-}
-
-function ND_red_swir1(img) {
-    return img.addBands(img.normalizedDifference(['red', 'swir1']).rename(['ND_red_swir1']));
-}
-
-function ND_red_swir2(img) {
-    return img.addBands(img.normalizedDifference(['red', 'swir2']).rename(['ND_red_swir2']));
-}
-
-function ND_nir_red(img) {
-    return img.addBands(img.normalizedDifference(['nir', 'red']).rename(['ND_nir_red']));
-}
-
-function ND_nir_swir1(img) {
-    return img.addBands(img.normalizedDifference(['nir', 'swir1']).rename(['ND_nir_swir1']));
-}
-
-function ND_nir_swir2(img) {
-    return img.addBands(img.normalizedDifference(['nir', 'swir2']).rename(['ND_nir_swir2']));
-}
-
-function ND_swir1_swir2(img) {
-    return img.addBands(img.normalizedDifference(['swir1', 'swir2']).rename(['ND_swir1_swir2']));
-}
-
-function R_swir1_nir(img) {
-    return img.addBands(img.select('swir1').divide(img.select('nir')).rename(['R_swir1_nir']));
-}
-
-function R_red_swir1(img) {
-    return img.addBands(img.select('red').divide(img.select('swir1')).rename(['R_red_swir1']));
-}
+     // Definición de las funciones en JavaScript para Google Earth Engine
+    this.function ND_blue_green(img) {
+        return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
+    }
+    
+    this.function ND_blue_red(img) {
+        return img.addBands(img.normalizedDifference(['blue', 'red']).rename(['ND_blue_red']));
+    }
+    
+    function ND_blue_nir(img) {
+        return img.addBands(img.normalizedDifference(['blue', 'nir']).rename(['ND_blue_nir']));
+    }
+    
+    function ND_blue_swir1(img) {
+        return img.addBands(img.normalizedDifference(['blue', 'swir1']).rename(['ND_blue_swir1']));
+    }
+    
+    function ND_blue_swir2(img) {
+        return img.addBands(img.normalizedDifference(['blue', 'swir2']).rename(['ND_blue_swir2']));
+    }
+    
+    function ND_green_red(img) {
+        return img.addBands(img.normalizedDifference(['green', 'red']).rename(['ND_green_red']));
+    }
+    
+    function ND_green_nir(img) {
+        return img.addBands(img.normalizedDifference(['green', 'nir']).rename(['ND_green_nir']));
+    }
+    
+    function ND_green_swir1(img) {
+        return img.addBands(img.normalizedDifference(['green', 'swir1']).rename(['ND_green_swir1']));
+    }
+    
+    function ND_green_swir2(img) {
+        return img.addBands(img.normalizedDifference(['green', 'swir2']).rename(['ND_green_swir2']));
+    }
+    
+    function ND_red_swir1(img) {
+        return img.addBands(img.normalizedDifference(['red', 'swir1']).rename(['ND_red_swir1']));
+    }
+    
+    function ND_red_swir2(img) {
+        return img.addBands(img.normalizedDifference(['red', 'swir2']).rename(['ND_red_swir2']));
+    }
+    
+    function ND_nir_red(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'red']).rename(['ND_nir_red']));
+    }
+    
+    function ND_nir_swir1(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'swir1']).rename(['ND_nir_swir1']));
+    }
+    
+    function ND_nir_swir2(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'swir2']).rename(['ND_nir_swir2']));
+    }
+    
+    function ND_swir1_swir2(img) {
+        return img.addBands(img.normalizedDifference(['swir1', 'swir2']).rename(['ND_swir1_swir2']));
+    }
+    
+    function R_swir1_nir(img) {
+        return img.addBands(img.select('swir1').divide(img.select('nir')).rename(['R_swir1_nir']));
+    }
+    
+    function R_red_swir1(img) {
+        return img.addBands(img.select('red').divide(img.select('swir1')).rename(['R_red_swir1']));
+    }
 
 
     // Función para estimar EVI y agregarlo como banda.
