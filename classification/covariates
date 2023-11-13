@@ -147,11 +147,11 @@ function returnCovariates(img) {
     }
 
     img = scaleSentinel(img);
-    print("lline150",img)
+    print("lline150",img);
 
     function addIndices(img) {
-        image = indicesInstance.getIndices(image, covariates);
-        image = indicesInstance.addTopography(image).unmask(0);
+        image = indicesInstance.getIndices(img, covariates);
+        image = indicesInstance.addTopography(img).unmask(0);
 
         return image;
     }
