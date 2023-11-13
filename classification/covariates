@@ -124,12 +124,12 @@ function Indices() {
 }
 
 // Función para cambiar los nombres de las bandas de una imagen
+// Función para cambiar los nombres de las bandas de una imagen
 function changeBandNames(img, textToRemove) {
-  var bandNames = img.bandNames();
-  var newBandNames = bandNames.map(function(name) {
-    return ee.String(name).replace(textToRemove, '');
-  });
-  return img.rename(newBandNames);
+    var newBandNames = img.bandNames().map(function(name) {
+        return ee.String(name).replace(textToRemove, '');
+    });
+    return img.rename(newBandNames);
 }
 
 
@@ -156,9 +156,12 @@ function returnCovariates(img) {
     img = scaleSentinel(img);
 
     // Procesa cada conjunto de bandas
-    var processedLow = changeBandNames(indicesInstance.addIndices(img.select(bandLow), covariates), '_p20');
-    var processedHigh = changeBandNames(indicesInstance.addIndices(img.select(bandHigh), covariates), '_p80');
-    var processedMiddle = changeBandNames(indicesInstance.addIndices(img.select(bandMedian), covariates), '_p50');
+    var processedLow = changeBandNames(indicesInstance.
+      addIndices(img.select(bandLow), covariates), '_p20');
+    var processedHigh = changeBandNames(indicesInstance.
+      addIndices(img.select(bandHigh), covariates), '_p80');
+    var processedMiddle = changeBandNames(indicesInstance.
+      addIndices(img.select(bandMedian), covariates), '_p50');
 
     // Combina todas las bandas procesadas
     img = processedLow.addBands(processedMiddle).addBands(processedHigh);
