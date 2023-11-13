@@ -124,7 +124,7 @@ var add_ndvi = function(img) {
 
 
 // Función para procesar imágenes Sentinel-2.
-exports.s2process = function(aoi, start_year, end_year,start_month, start_day, end_month,end_day) {
+var s2process = function(aoi, start_year, end_year,start_month, start_day, end_month,end_day) {
   var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
   var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
     
@@ -142,5 +142,5 @@ exports.s2process = function(aoi, start_year, end_year,start_month, start_day, e
     print("stack",reduced_percentile)
   return stack;
 };
-
+exports.s2process = s2process;
 
