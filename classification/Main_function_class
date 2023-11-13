@@ -44,20 +44,20 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("processedImage",processedImage);
-var image_covariates=moduloCovariates.returnCovariates(processedImage)
-var image_covariates=image_covariates.clip(region)
+//var image_covariates=moduloCovariates.returnCovariates(processedImage)
+//var image_covariates=image_covariates.clip(region)
 
 
-print("processedImage",image_covariates);
-var projection = band.projection();
-var scale = projection.nominalScale();
-print('Pixel size (meters):', scale);
-var bandInfo = image_covariates.bandTypes();
+//print("processedImage",image_covariates);
+//var projection = band.projection();
+//var scale = projection.nominalScale();
+//print('Pixel size (meters):', scale);
+//var bandInfo = image_covariates.bandTypes();
 print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [0, 0,0],
-  "max": [0.026,0.026,0.03],
+  "max": [5000,5000,50000],
   "gamma": 0.3,
 }; // Ajusta según tus bandas
 
