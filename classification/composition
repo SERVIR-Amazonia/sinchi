@@ -1,29 +1,3 @@
-/**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var geometry = 
-    /* color: #d63000 */
-    /* shown: false */
-    ee.Geometry.Polygon(
-        [[[-71.40636212919651, -0.4545955909329242],
-          [-71.36415599236246, -0.45013054834153504],
-          [-71.32606965500655, -0.44497859961377856],
-          [-71.32193136734023, -0.37118095318751787],
-          [-71.4135881996886, -0.37667056564592793]]]),
-    Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
-/***** End of imports. If edited, may not auto-convert in the playground. *****/
-
-var aoi =geometry
-//var aoi = Region_100K.first().geometry();
-var region = aoi.buffer(100);
-//Decalrar variables
-var start_year = 2022;
-var start_month = 7;
-var start_day = 1;
-var end_year = 2022;
-var end_month = 12;
-var end_day = 31;
-
-
-
 // Load the shapefile as a feature collection
 var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
 var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
@@ -159,10 +133,17 @@ exports.s2process = function(region, start_year, end_year, start_month, start_da
    
   var reducer =50
     //var reduced_percentile = imgColl .reduce(ee.Reducer.mean());
-    var reduced_percentile = imgColl.reduce(ee.Reducer.percentile([20, 50]));
+    var reduced_percentile = imgColl.reduce(ee.Reducer.percentile([50]));
     //var composite = ee.ImageCollection(reduced_percentile.collection).toBands()
     var stack = ee.Image(reduced_percentile);
     print("stack",reduced_percentile)
    stack = stack.clip(region);
   return stack;
 };
+
+
+
+// Llamar a la función 
+//var processedImage = s2process(aoi, start_year, end_year, start_month, start_day,end_month, end_day);
+//print("imagen", processedImage)
+
