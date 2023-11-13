@@ -229,8 +229,3 @@ function returnCovariates(img) {
     print("img",img)
     return img;
 }
-
-// Exporting functions
-
-exports.returnCovariates=returnCovariates;
-exports.Indices = Indices;
