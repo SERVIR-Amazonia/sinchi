@@ -49,8 +49,8 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("processedImage",processedImage);
-var image_covariates=moduloCovariates.returnCovariates(processedImage)
-var image_covariates=image_covariates.clip(region)
+//var image_covariates=moduloCovariates.returnCovariates(processedImage)
+//var image_covariates=image_covariates.clip(region)
 
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
@@ -59,7 +59,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "gamma": 0.8,
 }; // Ajusta según tus bandas
 
-Map.addLayer(processedImage,visualizationParams,'processedImage');
+
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
