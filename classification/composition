@@ -141,7 +141,7 @@ var s2process = function(aoi, start_year, end_year) {
    
   var reducer =50
     //var reduced_percentile = imgColl .reduce(ee.Reducer.mean());
-    var reduced_percentile = imgColl.reduce(ee.Reducer.percentile({percentiles: percentile_options}));
+    var reduced_percentile = imgColl.reduce(ee.Reducer.percentile({percentiles: 'percentileOptions'}));
     //var composite = ee.ImageCollection(reduced_percentile.collection).toBands()
     var stack = ee.Image(reduced_percentile);
     print("stack",reduced_percentile)
