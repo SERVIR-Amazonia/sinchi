@@ -169,9 +169,9 @@ function returnCovariates(img) {
 
     var bandNames = img.bandNames();
 
-    var down = addIndices(img.select(bandLow.concat(bands)),  bandNames);
-    var middle = addIndices(img.select(bands), bandNames);
-    var up = addIndices(img.select(bandHigh.concat(bands)), bandNames);
+    var down = addIndices(img.select(bandLow),  bandNames);
+    var middle = addIndices(img.select(bandMedian), bandNames);
+    var up = addIndices(img.select(bandHigh), bandNames);
 
     img = middle;
 
