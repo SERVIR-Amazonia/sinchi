@@ -37,8 +37,6 @@ var end_month = 12;
 var end_day = 31;
 
 
-var dem = ee.Image('USGS/SRTMGL1_003');
-var demResampled = dem.resample('bicubic');
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(1000);
 
