@@ -142,5 +142,11 @@ var s2process = function(aoi, start_year, end_year,start_month, start_day, end_m
     print("stack",reduced_percentile)
   return stack;
 };
+
+	// Llamar a la función 	
+	var processedImage = s2process(aoi, start_year, end_year,start_month, start_day, end_month,end_day);	
+	print("imagen", processedImage)	
+	var image_covariates=module_covariates.returnCovariates(processedImage)	
+	print("image_covariates",image_covariates);
 exports.s2process = s2process;
 
