@@ -143,7 +143,7 @@ function changeBandNames(img, textToRemove) {
   var newBandNames = bandNames.map(function(name) {
     return ee.String(name).replace(textToRemove, '');
   });
-print("nws",img.rename(newBandNames))
+print("nws",newBandNames)
   return img.rename(newBandNames);
 }
 function returnCovariates(img) {
