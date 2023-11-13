@@ -43,7 +43,7 @@ function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
         properties: ['nivel_1'],
-        scale: 100
+        scale: 500
     });
 
     var classifier = ee.Classifier.smileRandomForest(100).train({
