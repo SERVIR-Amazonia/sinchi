@@ -28,11 +28,11 @@ function Indices() {
     };
 
     this.ND_blue_red = function(img) {
-        return img.addBands(img.normalizedDifference(['blue', 'red']).rename(['ND_blue_red']));
+        return img.addBands(img.normalizedDifference(['blue_p50', 'red']).rename(['ND_blue_red']));
     };
 
     this.ND_blue_nir = function(img) {
-        return img.addBands(img.normalizedDifference(['blue', 'nir']).rename(['ND_blue_nir']));
+        return img.addBands(img.normalizedDifference(['blue_p50', 'nir']).rename(['ND_blue_nir']));
     };
 
     this.ND_swir1_swir2 = function(img) {
