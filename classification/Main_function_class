@@ -19,7 +19,7 @@ var end_day = 31;
 
 var miModulo = require('users/an-sig/sinchi:classification/Module_extract_samples');
 var moduloCovariates = require('users/an-sig/sinchi:classification/covariates');
-var Foo = require('users/username/default:Modules/FooModule.js');
+
 // Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
 var balanceAndApplyCorrelation=miModulo.balanceAndApplyCorrelation
