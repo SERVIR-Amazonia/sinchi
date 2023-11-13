@@ -38,7 +38,7 @@ var image_covariates=moduloCovariates.returnCovariates(processedImage)
 
 Map.addLayer(image_covariates);
 
-//print("image_covariates",image_covariates);
+print("image_covariates",image_covariates);
 
 // Correr RF
 function RFprim(trainingPts, inputImage) {
