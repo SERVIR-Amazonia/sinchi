@@ -54,7 +54,41 @@ function Indices() {
     this.ND_green_swir1 = function(img) {
         return img.addBands(img.normalizedDifference(['green', 'swir1']).rename(['ND_green_swir1']));
     };
+this.ND_green_swir2 = function(img) {
+        return img.addBands(img.normalizedDifference(['green', 'swir2']).rename(['ND_green_swir2']));
+    };
 
+    this.ND_red_swir1 = function(img) {
+        return img.addBands(img.normalizedDifference(['red', 'swir1']).rename(['ND_red_swir1']));
+    };
+
+    this.ND_red_swir2 = function(img) {
+        return img.addBands(img.normalizedDifference(['red', 'swir2']).rename(['ND_red_swir2']));
+    };
+
+    this.ND_nir_red = function(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'red']).rename(['ND_nir_red']));
+    };
+
+    this.ND_nir_swir1 = function(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'swir1']).rename(['ND_nir_swir1']));
+    };
+
+    this.ND_nir_swir2 = function(img) {
+        return img.addBands(img.normalizedDifference(['nir', 'swir2']).rename(['ND_nir_swir2']));
+    };
+
+    this.ND_swir1_swir2 = function(img) {
+        return img.addBands(img.normalizedDifference(['swir1', 'swir2']).rename(['ND_swir1_swir2']));
+    };
+
+    this.R_swir1_nir = function(img) {
+        return img.addBands(img.select('swir1').divide(img.select('nir')).rename(['R_swir1_nir']));
+    };
+
+    this.R_red_swir1 = function(img) {
+        return img.addBands(img.select('red').divide(img.select('swir1')).rename(['R_red_swir1']));
+    };
 
     // Función para estimar EVI y agregarlo como banda.
     this.EVI_corregido = function(img) {
