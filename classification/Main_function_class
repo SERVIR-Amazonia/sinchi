@@ -5,6 +5,7 @@ var visualizationResults = miModulo.executeAndVisualize();
 var balanceAndApplyCorrelation=miModulo.balanceAndApplyCorrelation
 // Mostrar los resultados
 var S1_training=visualizationResults.combinedResults_S1.training;
+var S1_ttesting=visualizationResults.combinedResults_S1.testing
 print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
 print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
 print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
