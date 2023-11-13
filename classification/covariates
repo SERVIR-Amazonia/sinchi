@@ -136,6 +136,21 @@ function Indices() {
     };
     
 }
+
+function change_name_bands (img, wildcard){
+  var bandNames = img.bandNames()
+  // Remove a specific character (e.g., '_') from each band name
+  var modifiedBandNames = img.bandNames().map(function(name) {
+    return ee.String(name).replace(wildcard, ''); // Replace '_' with an empty string
+    
+  });
+  // Rename bands
+  var renamedImage = img.rename(modifiedBandNames);
+  var renamedComposition=addIndices(renamedImage);
+  return renamedComposition
+    
+}
+
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
@@ -166,30 +181,21 @@ function returnCovariates(img) {
         return image;
     }
 
+    
     var bandNames = img.bandNames();
    print("bandNames down",bandNames)
     var down = img.select(bandLow);
-    // Remove a specific character (e.g., '_') from each band name
-  var modifiedBandNames = down.bandNames().map(function(name) {
-    return ee.String(name).replace('_p50', ''); // Replace '_' with an empty string
-  });
+    var down=change_name_bands (down, 'p_20');
+    var down_composition=addIndices(down);
+    
+    var high= img.select(bandHigh);
+    var high=change_name_bands (high, 'p_80');
+    var high_composition=addIndices(high);
+    
+    var middle= img.select(bandMedian);
+    var middle=change_name_bands (middle, 'p_80');
+    var middle_composition=addIndices(middle);
 
-  // Rename bands
-  var renamedImage = down.rename(modifiedBandNames);
-  var down_composition=addIndices(renamedImage);
-    
-    
-    var middle = img.select(bandLow)
-    // Remove a specific character (e.g., '_') from each band name
-    var modifiedBandNames = middle .bandNames().map(function(name) {
-    return ee.String(name).replace('_p50', ''); // Replace '_' with an empty string
-  });
-
-    // Rename bands
-    var renamedImage = middle.rename(modifiedBandNames);
-    middle =addIndices(renamedImage.select(bandMedian));
-    var up = addIndices(img.select(bandHigh));
-    
 
     img = middle;
     print("img",img)
