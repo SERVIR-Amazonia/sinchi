@@ -131,6 +131,10 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
+
+
+
+
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['p20_blue', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
@@ -167,4 +171,63 @@ function returnCovariates(img) {
 
 // Exportando funciones
 exports.returnCovariates = returnCovariates;
+exports.Indices = Indices;
+
+
+
+function returnCovariates(img) {
+    var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
+    var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
+    var bandHigh = ['blue_p80', 'green_p80', 'red_p80', 'nir_p80', 'swir1_p80', 'swir2_p80'];
+    var bandMedian = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
+
+    var covariates = ["ND_blue_green", "ND_blue_green", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
+                      "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
+                      "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
+                      "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
+
+    
+
+    var indicesInstance = new Indices();
+
+    function scaleSentinel(image) {
+        
+        var otherBands = image.bandNames();
+        var scaled = image.select(otherBands).multiply(0.0001);
+        return scaled;
+    }
+
+    img = scaleSentinel(img);
+
+    function addIndices(image) {
+        image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.addTopography(image).unmask(0);
+
+        return image;
+    }
+
+    
+    var bandNames = img.bandNames();
+   print("bandNames down",bandNames)
+    var down = img.select(bandLow);
+    var down=changeBandNames(down, '_p20')
+    var down_composition=addIndices(down);
+    
+    var high= img.select(bandHigh);
+    var high=changeBandNames (high, '_p80');
+    var high_composition=addIndices(high);
+    
+    var middle= img.select(bandMedian);
+    var middle=changeBandNames (middle, '_p50');
+    var middle_composition=addIndices(middle);
+
+
+    img = middle_composition;
+    print("img",img)
+    return img;
+}
+
+// Exporting functions
+
+exports.returnCovariates=returnCovariates;
 exports.Indices = Indices;
