@@ -142,7 +142,7 @@ function changeNameBands(img, wildcard) {
   var modifiedBandNames = img.bandNames().map(function(name) {
     return ee.String(name).replace(wildcard, '');
   });
-
+  print("modifiedBandNames",modifiedBandNames)
   // Renombrar las bandas de la imagen
   return img.rename(modifiedBandNames);
 }
