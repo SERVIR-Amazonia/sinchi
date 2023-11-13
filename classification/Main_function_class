@@ -20,7 +20,7 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
           [-71.4135881996886, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var aoi =geometry
-//var aoi = Region_100K.first().geometry();
+var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 //Decalrar variables
 var start_year = 2022;
@@ -48,13 +48,9 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
-//Map.addLayer(processedImage);
-
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
-
-var visualizationParams = {min: 0, max: 1, bands: ['blue', 'green', 'red']}; // Ajusta según tus bandas
-Map.addLayer(image_covariates,visualizationParams ,'image_covariates');
+Map.addLayer(image_covariates);
 
 print("image_covariates",image_covariates);
 
@@ -81,14 +77,14 @@ var classifiedImage = RFprim(S1_training, processedImage);
 //print("classifiedImage ",classifiedImage )
 
 // Mostrar los resultados
-print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
-print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
+//print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
+//print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
 //print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
 //print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
 
 // Agregar las capas de los puntos de muestreo al mapa
 Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
-Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
+//Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
 //Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
 //Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
 
