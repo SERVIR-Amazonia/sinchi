@@ -197,12 +197,15 @@ function returnCovariates(img) {
 
     img = scaleSentinel(img);
 
-function addIndices(image) {
-    var indicesInstance = new Indices();
-    image = indicesInstance.getIndices(image, covariates);
-    image = indicesInstance.addTopography(image).unmask(0);
-    return image;
-}
+   this.addIndices = function(img) {
+
+        img = this.getIndices(img, covariates); // Asegúrate de que 'covariates' esté definido
+
+        img = this.addTopography(img).unmask(0);
+
+
+        return img;
+    };
     
     var bandNames = img.bandNames();
    //print("bandNames down",bandNames)
