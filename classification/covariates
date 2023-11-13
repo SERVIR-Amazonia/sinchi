@@ -147,7 +147,7 @@ function changeNameBands(img, wildcard) {
   });
 
   // Renombrar las bandas de la imagen
-  print(img.bandNames())
+  print("Renombrar las bandas de la imagen",img.bandNames())
   return img.rename(modifiedBandNames);
 }
 
