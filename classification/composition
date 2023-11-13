@@ -77,7 +77,7 @@ var add_shadow_bands = function(img) {
   var cld_proj = img.select('clouds').directionalDistanceTransform(shadow_azimuth, CLD_PRJ_DIST * 10)
     .reproject({
       crs: img.select(0).projection(),
-      scale: 100
+      scale: 20
     })
     .select('distance')
     .mask()
