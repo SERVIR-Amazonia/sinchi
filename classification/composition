@@ -174,7 +174,7 @@ var processedImage = s2process(region, start_year, end_year, start_month, start_
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["nir_p50", "green_p50", "blue_p50"],
   "min": [190, 260, 240],
-  "max": [8060,5000,4010],
+  "max": [6060,6000,6010],
   "gamma": 0.7,
 }; // Ajusta según tus bandas
 
