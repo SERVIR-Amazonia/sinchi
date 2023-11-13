@@ -147,12 +147,7 @@ function changeNameBands(img, wildcard) {
   return img.rename(modifiedBandNames);
 }
 
-// Ejemplo de uso
-var image = ee.Image('COPERNICUS/S2_SR/20200805T105629_20200805T105631_T31TDF');
-var newImage = changeNameBands(image, '_');
 
-// Imprimir los nuevos nombres de bandas para verificar
-print("Nuevos nombres de bandas:", newImage.bandNames());
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
