@@ -187,7 +187,7 @@ function returnCovariates(img) {
     //var down_composition=addIndices(down);
     
     var high= img.select(bandHigh);
-    var high=cchangeBandNames (high, '_p80');
+    var high=changeBandNames (high, '_p80');
     //var high_composition=addIndices(high);
     
     var middle= img.select(bandMedian);
