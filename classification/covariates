@@ -165,7 +165,7 @@ function Indices() {
 
     
   }
-
+}
 
 // Función para cambiar los nombres de las bandas de una imagen
 function changeBandNames(img, textToRemove) {
@@ -228,7 +228,7 @@ addIndices(down);
     print("img",img)
     return img;
 }
-}
+
 // Exporting functions
 exports.Indices = Indices;
 exports.returnCovariates=returnCovariates;
