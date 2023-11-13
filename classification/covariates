@@ -165,6 +165,7 @@ this.getIndices = function(img, covariates) {
 
     
 }
+}
 
 // Función para cambiar los nombres de las bandas de una imagen
 function changeBandNames(img, textToRemove) {
