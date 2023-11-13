@@ -52,13 +52,12 @@ print("processedImage",processedImage);
 //var projection = band.projection();
 //var scale = projection.nominalScale();
 //print('Pixel size (meters):', scale);
-//var bandInfo = image_covariates.bandTypes();
-//print('Band Information:', bandInfo);
+var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [200, 200,200],
   "max": [5000,5000,50000],
-  "gamma": 0.3,
+  "gamma": 0.5,
 }; // Ajusta según tus bandas
 
 
