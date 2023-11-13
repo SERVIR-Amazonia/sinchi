@@ -156,11 +156,15 @@ function Indices() {
     
 this.getIndices = function(img, covariates) {
     var self = this;
+
+    console.log('functionList:', self.functionList);
+    console.log('covariates:', covariates);
+
     covariates.forEach(function(item) {
         if (self.functionList.hasOwnProperty(item)) {
             var func = self.functionList[item];
             if (typeof func === 'function') {
-                img = func.call(self, img); // Llamar a la función
+                img = func.call(self, img);
             } else {
                 console.log('Función no definida:', item);
             }
@@ -168,9 +172,8 @@ this.getIndices = function(img, covariates) {
             console.log('Índice no encontrado en functionList:', item);
         }
     });
-    return img.unmask(0); // Desenmascarar la imagen resultante una vez al final
+    return img.unmask(0);
 };
-
     
 }
 
