@@ -175,12 +175,21 @@ function returnCovariates(img) {
   });
 
   // Rename bands
-  var renamedImage = img.rename(modifiedBandNames);
-  var down_composition=addIndices(img);
+  var renamedImage = down.rename(modifiedBandNames);
+  var down_composition=addIndices(renamedImage);
     
     
-    var middle = addIndices(img.select(bandMedian));
+    var middle = img.select(bandLow)
+    // Remove a specific character (e.g., '_') from each band name
+    var modifiedBandNames = middle .bandNames().map(function(name) {
+    return ee.String(name).replace('_p50', ''); // Replace '_' with an empty string
+  });
+
+    // Rename bands
+    var renamedImage = middle.rename(modifiedBandNames);
+    middle =addIndices(renamedImage.select(bandMedian));
     var up = addIndices(img.select(bandHigh));
+    
 
     img = middle;
     print("img",img)
