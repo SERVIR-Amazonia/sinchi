@@ -139,16 +139,10 @@ function Indices() {
 
 function changeNameBands(img, wildcard) {
   // Asegurarse de que el comodín es un ee.String
-  var wildcardEE = ee.String(wildcard);
-
-  // Mapear sobre los nombres de las bandas y reemplazar el comodín
-  var modifiedBandNames = img.bandNames().map(function(name) {
-    return ee.String(name).replace(wildcardEE, '');
-  });
-
+  img=img.rename(bands).bandNames();
   // Renombrar las bandas de la imagen
   print("Renombrar las bandas de la imagen",img.bandNames())
-  return img.rename(modifiedBandNames);
+  return img;
 }
 
 
