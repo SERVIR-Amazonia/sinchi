@@ -206,7 +206,7 @@ function returnCovariates(img) {
             image = indicesInstance.functionList[covariate](image).unmask(0);
         }
     });
-
+            image = indicesInstance.addTopography(image).unmask(0);
         return image;
     }
 
