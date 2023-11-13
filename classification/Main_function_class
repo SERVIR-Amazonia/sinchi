@@ -1,16 +1,16 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = 
-    /* color: #d63000 */
+    /* color: #0b4a8b */
     /* displayProperties: [
       {
         "type": "rectangle"
       }
     ] */
     ee.Geometry.Polygon(
-        [[[-73.67379038127784, 4.737839976836269],
-          [-73.67379038127784, 4.529782151122899],
-          [-73.16841928752784, 4.529782151122899],
-          [-73.16841928752784, 4.737839976836269]]], null, false);
+        [[[-71.86653940471534, 1.3730610302358368],
+          [-71.86653940471534, 1.1835941228893079],
+          [-71.52596323284034, 1.1835941228893079],
+          [-71.52596323284034, 1.3730610302358368]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var aoi =geometry
