@@ -175,7 +175,7 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
-}
+
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
@@ -228,7 +228,7 @@ addIndices(down);
     print("img",img)
     return img;
 }
-
+}
 // Exporting functions
 exports.Indices = Indices;
 exports.returnCovariates=returnCovariates;
