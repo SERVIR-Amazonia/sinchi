@@ -44,11 +44,13 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("processedImage",processedImage);
-//var image_covariates=moduloCovariates.returnCovariates(processedImage)
-//var image_covariates=image_covariates.clip(region)
 
 
-//print("processedImage",image_covariates);
+var image_covariates=moduloCovariates.returnCovariates(processedImage)
+var image_covariates=image_covariates.clip(region)
+
+
+print("image_covariates",image_covariates);
 
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 print("imagen", processedImage)
@@ -60,7 +62,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
-
 
 
 // Correr RF
