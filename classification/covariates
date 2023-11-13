@@ -137,18 +137,24 @@ function Indices() {
     
 }
 
-function change_name_bands (img, wildcard){
-  var bandNames = img.bandNames()
-  // Remove a specific character (e.g., '_') from each band name
-  var modifiedBandNames = img.bandNames().map(function(name) {
-    return ee.String(name).replace(wildcard, ''); // Replace '_' with an empty string
-    
+function change_name_bands(img, wildcard) {
+  var bandNames = img.bandNames();
+  // Convert 'wildcard' to ee.String if it's not already
+  var wildcardString = typeof wildcard === 'string' ? ee.String(wildcard) : wildcard;
+
+  // Remove a specific character from each band name
+  var modifiedBandNames = bandNames.map(function(name) {
+    return ee.String(name).replace(wildcardString, '');
   });
+
+  // Convert ee.List back to a normal JavaScript array
+  var newBandNames = modifiedBandNames.getInfo();
+
   // Rename bands
-  var renamedImage = img.rename(modifiedBandNames);
-  print("renamedImage",renamedImage)
-  return renamedImage.bandNames();
-    
+  var renamedImage = img.rename(newBandNames);
+
+  print("Renamed band names:", renamedImage.bandNames());
+  return renamedImage;
 }
 
 function returnCovariates(img) {
