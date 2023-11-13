@@ -86,7 +86,7 @@ function RFprim(trainingPts, inputImage) {
 
 // Entrenar el clasificador con los puntos de entrenamiento
 var classifiedImage = RFprim(S1_training, processedImage);
-
+var stack = stack.multiply(255).toByte();
 //print("classifiedImage ",classifiedImage )
 
 // Mostrar los resultados
