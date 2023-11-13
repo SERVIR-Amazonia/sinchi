@@ -50,7 +50,9 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
-Map.addLayer(processedImage);
+var visualizationParams = {min: 0, max: 100, bands: ['red', 'green', 'blue']}; // Ajusta según tus bandas
+
+Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 print("processedImage",processedImage);
 
