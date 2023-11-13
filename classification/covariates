@@ -153,27 +153,16 @@ function Indices() {
         return img.addBands(topo);
     };
     
-    
+
 this.getIndices = function(img, covariates) {
-    var self = this;
-
-    console.log('functionList:', self.functionList);
-    console.log('covariates:', covariates);
-
-    covariates.forEach(function(item) {
-        if (self.functionList.hasOwnProperty(item)) {
-            var func = self.functionList[item];
-            if (typeof func === 'function') {
-                img = func.call(self, img);
-            } else {
-                console.log('Función no definida:', item);
+        var self = this;
+        covariates.forEach(function(item) {
+            if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
+                img = self.functionList[item](img);
             }
-        } else {
-            console.log('Índice no encontrado en functionList:', item);
-        }
-    });
-    return img.unmask(0);
-};
+        });
+        return img;
+
     
 }
 
@@ -210,15 +199,13 @@ function returnCovariates(img) {
 
 function addIndices(image) {
     var indicesInstance = new Indices();
-    // Primero aplicar todos los índices
     image = indicesInstance.getIndices(image, covariates);
-    // Luego aplicar topografía
     image = indicesInstance.addTopography(image).unmask(0);
     return image;
 }
     
     var bandNames = img.bandNames();
-    //print("bandNames down",bandNames)
+   //print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
     var down_composition=addIndices(down);
