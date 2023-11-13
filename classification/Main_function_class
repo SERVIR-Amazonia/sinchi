@@ -112,3 +112,58 @@ var exportParams = {
   maxPixels: 1e13  // Ajusta según las necesidades
 };
 Export.image.toDrive(exportParams);
+
+// Mostrar imagen clasificada en mapa:
+// Suponiendo que classifiedImage es tu imagen de clasificación
+
+// Definir la paleta de colores y nombres de clases
+var palette = ['red', 'green', 'blue', 'yellow', 'purple']; // Colores
+var classNames = ['Clase 1', 'Clase 2', 'Clase 3', 'Clase 4', 'Clase 5']; // Nombres
+
+// Parámetros de visualización para la imagen
+var visualizationParams = {
+  min: 1,
+  max: 5,
+  palette: palette
+};
+
+// Agregar la imagen al mapa
+Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
+
+// Crear un panel para la leyenda
+var legend = ui.Panel({
+  style: {
+    position: 'bottom-left',
+    padding: '8px 15px'
+  }
+});
+
+// Agregar título a la leyenda
+var legendTitle = ui.Label({
+  value: 'Leyenda',
+  style: {
+    fontWeight: 'bold',
+    fontSize: '16px',
+    margin: '0 0 4px 0',
+    padding: '0'
+  }
+});
+legend.add(legendTitle);
+
+// Agregar las entradas de la leyenda
+classNames.forEach(function(name, index){
+  var color = palette[index];
+  var label = ui.Label({
+    value: name,
+    style: {
+      color: 'black',
+      backgroundColor: color,
+      margin: '2px',
+      padding: '2px'
+    }
+  });
+  legend.add(label);
+});
+
+// Agregar la leyenda al mapa
+Map.add(legend);
