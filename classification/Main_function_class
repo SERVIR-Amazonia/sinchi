@@ -22,6 +22,7 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
 var aoi =geometry
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(1000);
+
 //Decalrar variables
 var start_year = 2022;
 var start_month = 7;
@@ -49,7 +50,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
-var image_covariates=image_covariates.clip(aoi)
+var image_covariates=image_covariates.clip(region)
 Map.addLayer(image_covariates);
 
 print("image_covariates",image_covariates);
