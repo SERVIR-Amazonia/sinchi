@@ -164,7 +164,7 @@ function Indices() {
         return img;
 
     
-  }
+    }
 }
 
 // Función para cambiar los nombres de las bandas de una imagen
