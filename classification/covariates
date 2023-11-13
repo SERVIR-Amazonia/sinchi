@@ -24,15 +24,15 @@ function Indices() {
     };
 
   this.ND_blue_green = function(img) {
-        return img.addBands(img.normalizedDifference(['blue_p50', 'green_p50']).rename(['ND_blue_green']));
+        return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
     };
 
     this.ND_blue_red = function(img) {
-        return img.addBands(img.normalizedDifference(['blue_p50', 'red']).rename(['ND_blue_red']));
+        return img.addBands(img.normalizedDifference(['blue', 'red']).rename(['ND_blue_red']));
     };
 
     this.ND_blue_nir = function(img) {
-        return img.addBands(img.normalizedDifference(['blue_p50', 'nir']).rename(['ND_blue_nir']));
+        return img.addBands(img.normalizedDifference(['blue', 'nir']).rename(['ND_blue_nir']));
     };
 
     this.ND_swir1_swir2 = function(img) {
@@ -168,7 +168,17 @@ function returnCovariates(img) {
 
     var bandNames = img.bandNames();
    print("bandNames",bandNames)
-    var down = addIndices(img.select(bandLow));
+    var down = img.select(bandLow);
+    // Remove a specific character (e.g., '_') from each band name
+  var modifiedBandNames = down.bandNames().map(function(name) {
+    return ee.String(name).replace('_p50', ''); // Replace '_' with an empty string
+  });
+
+// Rename bands
+var renamedImage = image.rename(modifiedBandNames);
+
+    
+    
     var middle = addIndices(img.select(bandMedian));
     var up = addIndices(img.select(bandHigh));
 
