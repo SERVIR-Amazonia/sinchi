@@ -52,8 +52,9 @@ Map.addLayer(processedImage);
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
-Map.addLayer(image_covariates);
 
+var visualizationParams = {min: 0, max: 1, bands: ['blue', 'green', 'red']}; // Ajusta según tus bandas
+Map.addLayer(image_covariates,visualizationParams ,'image_covariates');
 
 print("image_covariates",image_covariates);
 
