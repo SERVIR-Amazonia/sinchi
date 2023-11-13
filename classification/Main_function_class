@@ -20,7 +20,7 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
           [-71.4135881996886, -0.37667056564592793]]]),
     Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var aoi =geometry
-var aoi = Region_100K.first().geometry();
+//var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 //Decalrar variables
 var start_year = 2022;
@@ -58,7 +58,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "max": [6060,5000,5010],
   "gamma": 0.8,
 }; // Ajusta según tus bandas
-
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
