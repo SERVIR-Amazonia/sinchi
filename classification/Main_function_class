@@ -13,8 +13,7 @@ var S1_ttesting=visualizationResults.combinedResults_S1.testing
 
 
 
-
-// Adaptar la función RFprim para trabajar con GEE
+// Correr RF
 function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
