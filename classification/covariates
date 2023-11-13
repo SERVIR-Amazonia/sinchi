@@ -137,7 +137,7 @@ function Indices() {
     
 }
 function returnCovariates(img) {
-    var bands = ['blue_p50', 'green', 'red', 'nir', 'swir1', 'swir2'];
+    var bands = ['blue_p50', 'green_p50', 'red_p50', 'nir_p50', 'swir1_p50', 'swir2_p50'];
     var bandLow = ['blue_p20', 'p20_green', 'p20_red', 'p20_nir', 'p20_swir1', 'p20_swir2'];
     var bandHigh = ['p80_blue', 'p80_green', 'p80_red', 'p80_nir', 'p80_swir1', 'p80_swir2'];
     var bandMedian = ['blue_p50', 'green_p50', 'p50_red', 'p50_nir', 'p50_swir1', 'p50_swir2'];
