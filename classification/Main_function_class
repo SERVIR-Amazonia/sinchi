@@ -81,8 +81,7 @@ function RFprim(trainingPts, inputImage) {
 }
 
 var bands = processedImage.bandNames();
-
-bands.evaluate(function(bandNames) {
+processedImage.bandNames().evaluate(function(bandNames) {
   bandNames.forEach(function(bandName) {
     var band = processedImage.select(bandName);
     var projection = band.projection();
