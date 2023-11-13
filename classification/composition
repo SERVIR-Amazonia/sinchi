@@ -8,7 +8,10 @@ var geometry = /* color: #d63000 */ee.Geometry.Polygon(
 // Load the shapefile as a feature collection
 var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
 var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
-
+var model_inputs = {
+  'percentileOptions': [50],
+};
+var percentile_options = model_inputs['percentileOptions'];
 /**
  * Este código genera un mosaico para procesar imágenes Sentinel-2, eliminando nubes y sombras,
  * y luego calculando NDVI y EVI para las áreas de interés.
