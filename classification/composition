@@ -156,7 +156,6 @@ var s2process = function(aoi, start_year, end_year) {
     var stack = ee.Image(reduced_percentile);
     print("stack",stack)
   return stack;
-  return reduced_image;
 };
 
 // Función para procesar imágenes Sentinel-2, agregar DEM y recortar la región de interés.
