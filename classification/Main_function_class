@@ -1,6 +1,7 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = 
     /* color: #ffc82d */
+    /* shown: false */
     /* displayProperties: [
       {
         "type": "rectangle"
@@ -56,8 +57,8 @@ var bandInfo = image_covariates.bandTypes();
 print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
-  "min": [0, 0, 240],
-  "max": [300,255,255],
+  "min": [0, 0,0],
+  "max": [250,255,255],
   "gamma": 0.8,
 }; // Ajusta según tus bandas
 
