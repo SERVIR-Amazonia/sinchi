@@ -116,16 +116,12 @@ this.getIndices = function(img, covariates) {
         var self = this;
         covariates.forEach(function(item) {
             if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
-                img = self.functionList[item].call(self, img);
+                img = self.functionList[item].call(self, img).unmask(0);
             }
         });
         return img;
     };
-    this.removeDuplicates = function(covariateList, bands) {
-        return covariateList.filter(function(elem) {
-            return bands.indexOf(elem) === -1;
-        });
-    };
+
 
     
 }
