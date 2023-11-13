@@ -167,16 +167,16 @@ function returnCovariates(img) {
     }
 
     var bandNames = img.bandNames();
-   print("bandNames",bandNames)
+   print("bandNames down",bandNames)
     var down = img.select(bandLow);
     // Remove a specific character (e.g., '_') from each band name
   var modifiedBandNames = down.bandNames().map(function(name) {
     return ee.String(name).replace('_p50', ''); // Replace '_' with an empty string
   });
 
-// Rename bands
-var renamedImage = image.rename(modifiedBandNames);
-
+  // Rename bands
+  var renamedImage = image.rename(modifiedBandNames);
+  var down_composition=addIndices(img);
     
     
     var middle = addIndices(img.select(bandMedian));
