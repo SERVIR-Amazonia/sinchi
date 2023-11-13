@@ -56,7 +56,7 @@ print("processedImage",processedImage);
 //print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
-  "min": [0, 0,0],
+  "min": [200, 200,200],
   "max": [5000,5000,50000],
   "gamma": 0.3,
 }; // Ajusta según tus bandas
