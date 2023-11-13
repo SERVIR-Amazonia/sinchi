@@ -1,5 +1,8 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var geometry = /* color: #d63000 */ee.Geometry.Polygon(
+var geometry = 
+    /* color: #d63000 */
+    /* shown: false */
+    ee.Geometry.Polygon(
         [[[-71.40636212919651, -0.4545955909329242],
           [-71.36415599236246, -0.45013054834153504],
           [-71.32606965500655, -0.44497859961377856],
@@ -169,6 +172,6 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
 // Llamar a la función 
 var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
-var visualizationParams = {min: 500, max: 5000, bands: ['red_p50', 'green_p50', 'blue_p50']}; // Ajusta según tus bandas
+var visualizationParams = {min: 500, max: 50000, bands: ['red_p50', 'green_p50', 'blue_p50']}; // Ajusta según tus bandas
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
