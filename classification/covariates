@@ -155,7 +155,7 @@ function returnCovariates(img) {
     // Asegurarse de que el comodín es un ee.String
    img.rename(bands).bandNames();
    // Renombrar las bandas de la imagen
-   return img.rename(bands).bandNames());
+   return img.rename(bands).bandNames();
    }
 
     var indicesInstance = new Indices();
