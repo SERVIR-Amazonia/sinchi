@@ -24,7 +24,7 @@ function Indices() {
     };
 
   this.ND_blue_green = function(img) {
-        return img.addBands(img.normalizedDifference(['blue_p50', 'green_p50']).rename(['ND_blue_green_p50']));
+        return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
     };
 
     this.ND_blue_red = function(img) {
@@ -160,6 +160,7 @@ function returnCovariates(img) {
 
     function addIndices(image) {
         image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.ND_blue_green(image).unmask(0)
         image = indicesInstance.addTopography(image).unmask(0);
 
         return image;
