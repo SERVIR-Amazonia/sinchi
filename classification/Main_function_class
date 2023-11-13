@@ -43,9 +43,11 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("processedImage",processedImage);
-//var image_covariates=moduloCovariates.returnCovariates(processedImage)
-//var image_covariates=image_covariates.clip(region)
+var image_covariates=moduloCovariates.returnCovariates(processedImage)
+var image_covariates=image_covariates.clip(region)
 
+
+print("processedImage",image_covariates);
 var band = processedImage.select('green_p50'); // You can change 'B4' to any band you're interested in
 var projection = band.projection();
 var scale = projection.nominalScale();
