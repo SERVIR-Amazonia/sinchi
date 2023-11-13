@@ -147,7 +147,7 @@ var add_ndvi = function(img) {
 
 
 // Función para procesar imágenes Sentinel-2.
-var s2process = function(region, start_year, end_year, start_month, start_day,end_month, end_day) {
+exports.s2process = function(region, start_year, end_year, start_month, start_day,end_month, end_day) {
   var start_date = ee.Date.fromYMD(start_year, start_month, start_day);
   var end_date = ee.Date.fromYMD(end_year, end_month, end_day);
     
@@ -166,16 +166,3 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
    stack = stack.clip(region);
   return stack;
 };
-
-
-
-// Llamar a la función 
-var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
-print("imagen", processedImage)
-var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
-  "min": [190, 260, 240],
-  "max": [6060,5000,5010],
-  "gamma": 0.8,
-}; // Ajusta según tus bandas
-
-Map.addLayer(processedImage,visualizationParams,'processedImage');
