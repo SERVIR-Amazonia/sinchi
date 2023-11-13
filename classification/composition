@@ -152,9 +152,8 @@ var s2process = function(aoi, start_year, end_year) {
     .map(add_ndvi).map(calculateEVI);
   var reducer =20
     var reduced_percentile = ee.Reducer.percentile([reducer]);
-    var combinedBandsImage = reduced_percentile.toBands();
-    
-    print("reduced_image",reduced_image)
+    var stack = ee.Image(reduced_percentile);
+  return stack;
   return reduced_image;
 };
 
