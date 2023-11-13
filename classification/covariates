@@ -155,7 +155,7 @@ function returnCovariates(img) {
 
   img = scaleSentinel(img);
 
-    // Nueva función para cambiar los nombres y luego aplicar índices
+     // Nueva función para cambiar los nombres y luego aplicar índices
     function changeNamesAndAddIndices(image, bandNamesToSelect, textToRemove, prefix) {
         var selectedImage = image.select(bandNamesToSelect);
         var renamedImage = changeBandNames(selectedImage, textToRemove);
@@ -188,7 +188,6 @@ function changeBandNames(img, textToRemove) {
     });
     return img.rename(newBandNames);
 }
-
 
 // Exportando funciones
 exports.returnCovariates = returnCovariates;
