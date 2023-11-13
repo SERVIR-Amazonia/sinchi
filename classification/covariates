@@ -23,7 +23,7 @@ function Indices() {
         "IBI": this.IBI
     };
 
-    this.ND_blue_green = function(img) {
+ this.ND_blue_green = function(img) {
         return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
     };
 
@@ -153,18 +153,19 @@ function Indices() {
         return img.addBands(topo);
     };
     
-
-    this.getIndices = function(img, covariates) {
+    
+this.getIndices = function(img, covariates) {
         var self = this;
         covariates.forEach(function(item) {
             if (self.functionList.hasOwnProperty(item) && typeof self.functionList[item] === 'function') {
-                img = self.functionList[item](img);
+                img = self.functionList[item].call(self, img).unmask(0);
             }
         });
         return img;
+    };
+
 
     
-    }
 }
 
 // Función para cambiar los nombres de las bandas de una imagen
@@ -175,7 +176,6 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
-
 function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
@@ -199,28 +199,47 @@ function returnCovariates(img) {
 
     img = scaleSentinel(img);
 
-    this.addIndices = function(img) {
-        img = this.getIndices(img, covariates); // Asegúrate de que 'covariates' esté definido
-        img = this.addTopography(img).unmask(0);
-        // Agrega otras llamadas a funciones según sea necesario
-        return img;
-    };
+    function addIndices(image) {
+        image = indicesInstance.getIndices(image, covariates);
+        image = indicesInstance.addTopography(image).unmask(0);
+        image = indicesInstance.ND_blue_green(image).unmask(0);
+        image = indicesInstance.ND_blue_nir(image).unmask(0);
+        image = indicesInstance.ND_blue_swir1(image).unmask(0);
+        image = indicesInstance.ND_blue_swir2(image).unmask(0);
+        image = indicesInstance.ND_green_red(image).unmask(0);
+        image = indicesInstance.ND_green_nir(image).unmask(0);
+        image = indicesInstance.ND_green_swir1(image).unmask(0);
+        image = indicesInstance.ND_green_swir2(image).unmask(0);
+        image = indicesInstance.ND_red_swir1(image).unmask(0);
+        image = indicesInstance.ND_red_swir2(image).unmask(0);
+        image = indicesInstance.ND_nir_red(image).unmask(0);
+        image = indicesInstance.ND_nir_swir1(image).unmask(0);
+        image = indicesInstance.ND_nir_swir2(image).unmask(0);
+        image = indicesInstance.ND_swir1_swir2(image).unmask(0);
+        image = indicesInstance.R_swir1_nir(image).unmask(0);
+        image = indicesInstance.R_red_swir1(image).unmask(0);
+        image = indicesInstance.EVI(image).unmask(0);
+        image = indicesInstance.SAVI(image).unmask(0);
+        image = indicesInstance.IBI(image).unmask(0);
+        image = indicesInstance.addTopography(image).unmask(0);
+
+        return image;
+    }
 
     
     var bandNames = img.bandNames();
-   //print("bandNames down",bandNames)
+   print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
     var down_composition=addIndices(down);
     
-    
     var high= img.select(bandHigh);
-    var high=changeBandNames(high, '_p80');
+    var high=changeBandNames (high, '_p80');
     var high_composition=addIndices(high);
     
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
-    var middle_composition=indicesInstance.addIndices(middle);
+    var middle_composition=addIndices(middle);
 
 
     img = middle_composition;
@@ -231,4 +250,4 @@ function returnCovariates(img) {
 // Exporting functions
 
 exports.returnCovariates=returnCovariates;
-
+exports.Indices = Indices;
