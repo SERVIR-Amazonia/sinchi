@@ -142,8 +142,5 @@ var s2process = function(aoi, start_year, end_year,start_month, start_day, end_m
     print("stack",reduced_percentile)
   return stack;
 };
-
-
-
-// Llamar a la función 
 exports.s2process = s2process;
+
