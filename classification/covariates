@@ -229,4 +229,4 @@ function returnCovariates(img) {
 
 // Exporting functions
 
-exports.returnCovariates=returnCovariates(img);
+exports.returnCovariates=returnCovariates;
