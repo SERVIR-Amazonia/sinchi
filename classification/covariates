@@ -201,8 +201,7 @@ function returnCovariates(img) {
 
     function addIndices(image) {
         image = indicesInstance.getIndices(image, covariates);
-        image = indicesInstance.addTopography(image).unmask(0);
-        image = indicesInstance.ND_blue_green(image).unmask(0);
+         image = indicesInstance.ND_blue_green(image).unmask(0);
         image = indicesInstance.ND_blue_nir(image).unmask(0);
         image = indicesInstance.ND_blue_swir1(image).unmask(0);
         image = indicesInstance.ND_blue_swir2(image).unmask(0);
