@@ -1,16 +1,16 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var geometry = 
-    /* color: #0b4a8b */
+    /* color: #ffc82d */
     /* displayProperties: [
       {
         "type": "rectangle"
       }
     ] */
     ee.Geometry.Polygon(
-        [[[-71.86653940471534, 1.3730610302358368],
-          [-71.86653940471534, 1.1835941228893079],
-          [-71.52596323284034, 1.1835941228893079],
-          [-71.52596323284034, 1.3730610302358368]]], null, false);
+        [[[-72.31295735716925, 2.9494364109240045],
+          [-72.31295735716925, 2.6305251294291145],
+          [-71.60845906615363, 2.6305251294291145],
+          [-71.60845906615363, 2.9494364109240045]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var aoi =geometry
@@ -87,7 +87,7 @@ var classifiedImage = RFprim(S1_training, processedImage);
 //print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
 
 // Agregar las capas de los puntos de muestreo al mapa
-Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
+//Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
 //Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
 //Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
 //Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
