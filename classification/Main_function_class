@@ -19,6 +19,7 @@ var end_day = 31;
 
 var miModulo = require('users/an-sig/sinchi:classification/Module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
+var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
@@ -33,7 +34,8 @@ var S1_testing=visualizationResults.combinedResults_S1.testing
 
 
 var processedImage = moduloComposite.s2process(aoi, start_year, end_year, start_month, start_day,end_month, end_day);
-
+var image_covariates=moduleCovariates.returnCovariates(processedImage)
+//print("image_covariates",image_covariates);
 print("processedImage",processedImage)
 
 // Correr RF
