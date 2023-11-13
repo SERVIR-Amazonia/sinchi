@@ -206,7 +206,7 @@ function addIndices(image) {
 }
     
     var bandNames = img.bandNames();
-   print("bandNames down",bandNames)
+    //print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
     var down_composition=addIndices(down);
