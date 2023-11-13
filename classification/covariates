@@ -24,7 +24,7 @@ function Indices() {
     };
 
   this.ND_blue_green = function(img) {
-        return img.addBands(img.normalizedDifference(['blue', 'green']).rename(['ND_blue_green']));
+        return img.addBands(img.normalizedDifference(['blue_p50', 'green_p50']).rename(['ND_blue_green']));
     };
 
     this.ND_blue_red = function(img) {
