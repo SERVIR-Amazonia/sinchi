@@ -216,11 +216,11 @@ addIndices(down);
     
     var high= img.select(bandHigh);
     var high=changeBandNames (high, '_p80');
-    var high_composition=addIndices(high);
+    var high_composition=indicesInstance.addIndices(high);
     
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
-    var middle_composition=addIndices(middle);
+    var middle_composition=indicesInstance.addIndices(middle);
 
 
     img = middle_composition;
