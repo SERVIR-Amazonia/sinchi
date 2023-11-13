@@ -166,4 +166,5 @@ var s2process = function(region, start_year, end_year, start_month, start_day,en
 // Llamar a la función 
 var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
+var visualizationResults = miModulo.executeAndVisualize();
 Map.addLayer(processedImage,visualizationParams,'processedImage');
