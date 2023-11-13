@@ -2,8 +2,9 @@ var miModulo = require('users/an-sig/sinchi:classification/Module_extract_sample
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
+var balanceAndApplyCorrelation=miModulo.balanceAndApplyCorrelation
 // Mostrar los resultados
-var S1_training=combinedResults_S1.training;
+var S1_training=balanceAndApplyCorrelationcombined.Results_S1.training;
 print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
 print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
 print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
