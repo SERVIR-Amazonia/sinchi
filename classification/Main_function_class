@@ -80,18 +80,6 @@ function RFprim(trainingPts, inputImage) {
     return inputImage.classify(classifier);
 }
 
-var bands = processedImage.bandNames();
-processedImage.bandNames().evaluate(function(bandNames) {
-  bandNames.forEach(function(bandName) {
-    var band = processedImage.select(bandName);
-    var projection = band.projection();
-    var scale = projection.nominalScale();
-    scale.evaluate(function(value) {
-      print('Pixel size of band ' + bandName + ':', value);
-    });
-  });
-});
-
 
 // Entrenar el clasificador con los puntos de entrenamiento
 var classifiedImage = RFprim(S1_training, processedImage);
