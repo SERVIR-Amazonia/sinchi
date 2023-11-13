@@ -147,7 +147,7 @@ function change_name_bands (img, wildcard){
   // Rename bands
   var renamedImage = img.rename(modifiedBandNames);
   print("renamedImage",renamedImage)
-  return renamedImage;
+  return renamedImage.bandNames();
     
 }
 
