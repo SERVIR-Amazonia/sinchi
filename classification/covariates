@@ -158,19 +158,17 @@ function returnCovariates(img) {
 
     img = scaleSentinel(img);
 
-    function addIndices(image, prefix) {
+    function addIndices(image) {
         image = indicesInstance.getIndices(image, covariates);
         image = indicesInstance.addTopography(image).unmask(0);
-        if (prefix.length > 0) {
-            image = indicesInstance.renameBands(image, prefix);
-        }
+
         return image;
     }
 
     var bandNames = img.bandNames();
    print("bandNames",bandNames)
     var down = addIndices(img.select(bandLow));
-    var middle = addIndices(img.select(bandMedian), bandNames);
+    var middle = addIndices(img.select(bandMedian));
     var up = addIndices(img.select(bandHigh), bandNames);
 
     img = middle;
