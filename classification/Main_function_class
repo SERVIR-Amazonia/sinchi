@@ -52,8 +52,6 @@ print("processedImage",processedImage);
 var image_covariates=moduloCovariates.returnCovariates(processedImage)
 var image_covariates=image_covariates.clip(region)
 
-// Llamar a la función 
-var processedImage = s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [190, 260, 240],
