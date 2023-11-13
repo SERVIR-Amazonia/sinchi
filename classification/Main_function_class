@@ -56,8 +56,8 @@ var bandInfo = image_covariates.bandTypes();
 print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
-  "min": [190, 260, 240],
-  "max": [6060,5000,5010],
+  "min": [0, 0, 240],
+  "max": [300,255,255],
   "gamma": 0.8,
 }; // Ajusta según tus bandas
 
