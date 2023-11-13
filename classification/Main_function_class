@@ -52,7 +52,7 @@ var band = processedImage.select('green_p50'); // You can change 'B4' to any ban
 var projection = band.projection();
 var scale = projection.nominalScale();
 print('Pixel size (meters):', scale);
-var bandInfo = image.bandTypes();
+var bandInfo = image_covariates.bandTypes();
 print('Band Information:', bandInfo);
 print("imagen", processedImage)
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
