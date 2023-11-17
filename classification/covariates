@@ -110,7 +110,7 @@ function Indices() {
                          .rename('stdDev123457');
     
         // Calcula la desviación estándar para las bandas 3, 5 y 7
-        var stdDev2 = img.select(['NIR', 'swir1', 'swir2'])
+        var stdDev2 = img.select(['nir', 'swir1', 'swir2'])
                          .reduce(ee.Reducer.stdDev())
                          .rename('stdDev457');
     
