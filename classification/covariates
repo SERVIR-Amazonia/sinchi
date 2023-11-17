@@ -103,23 +103,19 @@ function Indices() {
     };
 
 
-    this.SVVI = function(img) {
-        // Calcula la desviación estándar para las bandas 1, 2 y 3, 4,5,7
-          var stdDev1 = img.select(['blue', 'green', 'red','nir','swir1','swir2'])
-                         .reduce(ee.Reducer.stdDev());
-    
-        // Calcula la desviación estándar para las bandas 3, 5 y 7
-        var stdDev2 = img.select(['nir', 'swir1', 'swir2'])
-                         .reduce(ee.Reducer.stdDev());
-    
-        // Resta la segunda desviación estándar de la primera
-        var SVVI = stdDev1.subtract(stdDev2);
-    
-        // Añade la nueva banda a la imagen original
-        return img.addBands(SVVI).rename('SVVI');
-    };
+this.SVVI = function(img) {
+    // Combina las bandas seleccionadas en una imagen multibanda
+    var combinedBands = img.select(['blue', 'green', 'red', 'nir', 'swir1', 'swir2']);
 
+    // Calcula la desviación estándar combinada de todas las bandas
+    var stdDevCombined = combinedBands.reduce(ee.Reducer.stdDev().combine({
+      reducer2: ee.Reducer.mean(),
+      sharedInputs: true
+    })).select(['stdDev']);
 
+    // Renombra la banda resultante y la añade a la imagen
+    return img.addBands(stdDevCombined.rename('SVVI'));
+};
 
 
 
