@@ -105,7 +105,7 @@ function Indices() {
 
     this.SVVI = function(img) {
         // Calcula la desviación estándar para las bandas 1, 2 y 3, 4,5,7
-          var stdDev1 = img.select(['Blue', 'Green', 'Red','NIR','swir1','swir2'])
+          var stdDev1 = img.select(['blue', 'green', 'red','nir','swir1','swir2'])
                          .reduce(ee.Reducer.stdDev())
                          .rename('stdDev123457');
     
