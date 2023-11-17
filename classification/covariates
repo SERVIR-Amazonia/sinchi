@@ -18,6 +18,7 @@ function Indices() {
         "ND_swir1_swir2": this.ND_swir1_swir2,
         "R_swir1_nir": this.R_swir1_nir,
         "R_red_swir1": this.R_red_swir1,
+        "SVVI": this.SVVI,
         "EVI": this.EVI,
         "SAVI": this.SAVI,
         "IBI": this.IBI
@@ -100,6 +101,26 @@ function Indices() {
         });
       return img.addBands(evi.rename('EVI'));
     };
+
+
+    this.customBand = function(img) {
+        // Calcula la desviación estándar para las bandas 1, 2 y 3, 4,5,7
+          var stdDev1 = img.select(['Blue', 'Green', 'Red','NIR','swir1','swir2'])
+                         .reduce(ee.Reducer.stdDev())
+                         .rename('stdDev123457');
+    
+        // Calcula la desviación estándar para las bandas 3, 5 y 7
+        var stdDev2 = img.select(['NIR', 'swir1', 'swir2'])
+                         .reduce(ee.Reducer.stdDev())
+                         .rename('stdDev357');
+    
+        // Resta la segunda desviación estándar de la primera
+        var newBand = stdDev1.subtract(stdDev2).rename('customBand');
+    
+        // Añade la nueva banda a la imagen original
+        return img.addBands(newBand);
+    };
+
 
 
 
