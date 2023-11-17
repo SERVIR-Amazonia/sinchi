@@ -103,7 +103,7 @@ function Indices() {
     };
 
 
-    this.customBand = function(img) {
+    this.SVVI = function(img) {
         // Calcula la desviación estándar para las bandas 1, 2 y 3, 4,5,7
           var stdDev1 = img.select(['Blue', 'Green', 'Red','NIR','swir1','swir2'])
                          .reduce(ee.Reducer.stdDev())
@@ -115,7 +115,7 @@ function Indices() {
                          .rename('stdDev457');
     
         // Resta la segunda desviación estándar de la primera
-        var newBand = stdDev1.subtract(stdDev2).rename('customBand');
+        var newBand = stdDev1.subtract(stdDev2).rename('SVVI');
     
         // Añade la nueva banda a la imagen original
         return img.addBands(newBand);
