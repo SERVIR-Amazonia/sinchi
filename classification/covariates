@@ -268,7 +268,7 @@ function returnCovariates(img) {
     print("line 265");
 
     img = middle_composition;
-    print("img",img)
+    print("img",img);
     return img;
 }
 
