@@ -115,10 +115,10 @@ function Indices() {
                          .rename('stdDev457');
     
         // Resta la segunda desviación estándar de la primera
-        var newBand = stdDev1.subtract(stdDev2).rename('SVVI');
+        var SVVI = stdDev1.subtract(stdDev2);
     
         // Añade la nueva banda a la imagen original
-        return img.addBands(newBand);
+        return img.addBands(SVVI).rename('SVVI');
     };
 
 
