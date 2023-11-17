@@ -123,7 +123,6 @@ function Indices() {
 
 
 
-
     this.EVI = function(img) {
         var evi = img.expression(
             '2.5 * ((NIR - RED) / (NIR + 6 * RED - 7.5 * BLUE + 1))', {
@@ -242,7 +241,9 @@ function returnCovariates(img) {
         image = indicesInstance.EVI(image).unmask(0);
         image = indicesInstance.SAVI(image).unmask(0);
         image = indicesInstance.IBI(image).unmask(0);
+        image = indicesInstance.SVVI(image).unmask(0);
         image = indicesInstance.addTopography(image).unmask(0);
+        
 
         return image;
     }
