@@ -32,7 +32,7 @@ var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = miModulo.executeAndVisualize();
-var balanceAndApplyCorrelation=miModulo.balanceAndApplyCorrelation
+var balanceAndApplyCorrelation=miModulo.balanceAndApplyCorrelation;
 
 
 // Traer puntos de muestreo para semestre 1 
@@ -46,11 +46,10 @@ var processedImage = moduloComposite.s2process(region, start_year, end_year, sta
 print("processedImage",processedImage);
 
 
-var image_covariates=moduloCovariates.returnCovariates(processedImage)
-var image_covariates=image_covariates.clip(region)
+var image_covariates=moduloCovariates.returnCovariates(processedImage);
+var image_covariates=image_covariates.clip(region);
 
-
-print("image_covariates",image_covariates);
+print("image_covariates2",image_covariates);
 
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 print("imagen", processedImage)
