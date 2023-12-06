@@ -113,21 +113,6 @@ var testing = S1_testing.map(function(feature) {
 // 'classified' es la clase predicha por tu modelo
 var confusionMatrix = testing.errorMatrix('class', 'classified');
 
-// Imprimir la matriz de confusión
-print('Matriz de Confusión', confusionMatrix);
-
-// Calcula y muestra las métricas
-var overallAccuracy = confusionMatrix.accuracy();
-print('Exactitud General', overallAccuracy);
-
-var kappa = confusionMatrix.kappa();
-print('Coeficiente Kappa', kappa);
-
-var userAccuracy = confusionMatrix.consumersAccuracy();
-print('Exactitud del Usuario (Error de Comisión)', userAccuracy);
-
-var producerAccuracy = confusionMatrix.producersAccuracy();
-print('Exactitud del Productor (Error de Omisión)', producerAccuracy);
 
 
 // Mostrar los resultados
