@@ -112,7 +112,7 @@ var testing = S1_testing.map(function(feature) {
 // Asegúrate de que las propiedades 'class' y 'classified' existan
 // 'class' debería ser la clase real en tus datos de prueba
 // 'classified' es la clase predicha por tu modelo
-var confusionMatrix = testing.errorMatrix('class', 'classified');
+var confusionMatrix = testing.errorMatrix('nivel_1', 'classified');
 
 // Imprimir la matriz de confusión
 print('Matriz de Confusión', confusionMatrix);
