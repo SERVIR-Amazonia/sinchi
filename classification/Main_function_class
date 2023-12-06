@@ -92,28 +92,23 @@ print("classifiedImage ",classifiedImage )
 ejemplo
 
 */
-// Extraer las clasificaciones de la imagen en los puntos de prueba
-var testing = S1_testing.map(function(feature) {
-    var sample = classifiedImage.sample({
-        region: feature.geometry(),
-        scale: 30 // Ajusta el 'scale' según sea necesario
-    }).first();
+// Function to extract the value from the image at each point
+var extractValues = function(feature) {
+  // Sample the image at the given point
+  var value = classifiedImage.sample({
+    region: feature.geometry(),
+    scale: 30 // Set the scale as per your requirement
+  }).first().toDictionary();
 
-    // Verificar si la muestra contiene la banda 'classification'
-    if (sample && sample.has('classification')) {
-        var classifiedValue = sample.get('classification');
-        return feature.set('predicted', classifiedValue);
-    } else {
-        // Manejar el caso en que la muestra no contenga la banda 'classification'
-        return feature.set('predicted', null);
-    }
-});
+  // Return the feature with the extracted value
+  return feature.set(value);
+};
 
-// Crear una matriz de confusión
-var confusionMatrix = testing.errorMatrix('nivel_1', 'predicted');
+// Map the function over the feature collection
+var extractedValues = S1_testing.map(extractValues);
 
-// Imprimir la matriz de confusión
-print('Matriz de Confusión', confusionMatrix);
+// Print the result
+print(extractedValues);
 
 
 
