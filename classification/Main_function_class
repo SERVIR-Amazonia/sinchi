@@ -87,31 +87,29 @@ var classifiedImage = RFprim(S1_training, processedImage);
 
 print("classifiedImage ",classifiedImage )
 
-
-
-
 /*
-Script para calcular exactitud
 
+ejemplo
 
 */
-
-
-// Mapear sobre S1_testing para extraer los valores de la imagen clasificada
+// Extraer las clasificaciones de la imagen en los puntos de prueba
 var testing = S1_testing.map(function(feature) {
-    // Asegúrate de que la banda 'classification' exista en 'classifiedImage'
     var classifiedValue = classifiedImage.sample({
         region: feature.geometry(),
-        scale: 30 // Ajusta el 'scale' según sea necesario
+        scale: 30 // Ajusta este valor según tu resolución espacial
     }).first().get('classification');
 
-    return feature.set('classified', classifiedValue);
+    return feature.set('predicted', classifiedValue);
 });
 
-// Asegúrate de que las propiedades 'class' y 'classified' existan
-// 'class' debería ser la clase real en tus datos de prueba
-// 'classified' es la clase predicha por tu modelo
-var confusionMatrix = testing.errorMatrix('class', 'classified');
+// Crear una matriz de confusión
+var confusionMatrix = testing.errorMatrix('nivel_1', 'predicted');
+
+// Imprimir la matriz de confusión
+print('Matriz de Confusión', confusionMatrix);
+
+
+
 
 
 
