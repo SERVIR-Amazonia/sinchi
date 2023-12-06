@@ -64,6 +64,34 @@ Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 
 // Correr RF
+function RFprim(trainingPts, inputImage) {
+    var trainingData = inputImage.sampleRegions({
+        collection: trainingPts,
+        properties: ['nivel_1'],
+        scale: 30
+    });
+
+    var classifier = ee.Classifier.smileRandomForest(100).train({
+        features: trainingData,
+        classProperty: 'nivel_1',
+        inputProperties: inputImage.bandNames()
+    });
+
+    return inputImage.classify(classifier);
+}
+
+
+// Entrenar el clasificador con los puntos de entrenamiento
+var classifiedImage = RFprim(S1_training, processedImage);
+//var classifiedImage  = classifiedImage .multiply(255).toByte();
+
+print("classifiedImage ",classifiedImage )
+
+/*
+
+ejemplo
+
+*/
 // Extraer las clasificaciones de la imagen en los puntos de prueba
 var testing = S1_testing.map(function(feature) {
     var sample = classifiedImage.sample({
@@ -79,27 +107,6 @@ var testing = S1_testing.map(function(feature) {
         // Manejar el caso en que la muestra no contenga la banda 'classification'
         return feature.set('predicted', null);
     }
-});
-
-// Entrenar el clasificador con los puntos de entrenamiento
-var classifiedImage = RFprim(S1_training, processedImage);
-//var classifiedImage  = classifiedImage .multiply(255).toByte();
-
-print("classifiedImage ",classifiedImage )
-
-/*
-
-ejemplo
-
-*/
-// Extraer las clasificaciones de la imagen en los puntos de prueba
-var testing = S1_testing.map(function(feature) {
-    var classifiedValue = classifiedImage.sample({
-        region: feature.geometry(),
-        scale: 20 // Ajusta este valor según tu resolución espacial
-    }).first().get('classification');
-
-    return feature.set('predicted', classifiedValue);
 });
 
 // Crear una matriz de confusión
