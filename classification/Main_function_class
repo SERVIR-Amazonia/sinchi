@@ -19,10 +19,10 @@ var aoi =geometry
 var region = aoi.buffer(100);
 //Decalrar variables
 var start_year = 2022;
-var start_month = 7;
+var start_month = 1;
 var start_day = 1;
 var end_year = 2022;
-var end_month = 12;
+var end_month = 7;
 var end_day = 31;
 
 
