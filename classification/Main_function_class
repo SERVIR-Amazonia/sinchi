@@ -14,7 +14,7 @@ var geometry =
           [-71.60845906615363, 2.9494364109240045]]], null, false);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
-var aoi =geometry
+var aoi =Region_100K
 //var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 //Decalrar variables
