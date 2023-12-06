@@ -92,22 +92,24 @@ print("classifiedImage ",classifiedImage )
 ejemplo
 
 */
-// Function to extract the value from the image at each point
 var extractValues = function(feature) {
   // Sample the image at the given point
-  var value = classifiedImage.sample({
+  var sampledFeature = classifiedImage.sample({
     region: feature.geometry(),
-    scale: 30 // Set the scale as per your requirement
-  }).first().toDictionary();
+    scale: 30 // Adjust scale as needed
+  }).first();
 
-  // Return the feature with the extracted value
-  return feature.set(value);
+  // Check if the sample returned a value
+  if (sampledFeature) {
+    var value = sampledFeature.toDictionary();
+    return feature.set(value);
+  } else {
+    // Handle null values - you can choose to set a default value or flag it
+    return feature.set('sampled_value', 'No data');
+  }
 };
 
-// Map the function over the feature collection
 var extractedValues = S1_testing.map(extractValues);
-
-// Print the result
 print(extractedValues);
 
 
