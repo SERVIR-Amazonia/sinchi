@@ -96,7 +96,7 @@ var extractValues = function(feature) {
   // Sample the image at the given point
   var sampledFeature = classifiedImage.sample({
     region: feature.geometry(),
-    scale: 30 // Adjust scale as needed
+    scale: 10 // Adjust scale as needed
   }).first();
 
   // Check if the sample returned a value
