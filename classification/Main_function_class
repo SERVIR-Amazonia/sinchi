@@ -87,34 +87,47 @@ var classifiedImage = RFprim(S1_training, processedImage);
 
 print("classifiedImage ",classifiedImage )
 
-/*
 
-ejemplo
+
+
+/*
+Script para calcular exactitud
+
 
 */
-var extractValues = function(feature) {
-  // Sample the image at the given point
-  var sampledFeature = classifiedImage.sample({
-    region: feature.geometry(),
-    scale: 10 // Adjust scale as needed
-  }).first();
-
-  // Check if the sample returned a value
-  if (sampledFeature) {
-    var value = sampledFeature.toDictionary();
-    return feature.set(value);
-  } else {
-    // Handle null values - you can choose to set a default value or flag it
-    return feature.set('sampled_value', 'No data');
-  }
-};
-
-var extractedValues = S1_testing.map(extractValues);
-print(extractedValues);
 
 
+// Mapear sobre S1_testing para extraer los valores de la imagen clasificada
+var testing = S1_testing.map(function(feature) {
+    // Asegúrate de que la banda 'classification' exista en 'classifiedImage'
+    var classifiedValue = classifiedImage.sample({
+        region: feature.geometry(),
+        scale: 30 // Ajusta el 'scale' según sea necesario
+    }).first().get('classification');
 
+    return feature.set('classified', classifiedValue);
+});
 
+// Asegúrate de que las propiedades 'class' y 'classified' existan
+// 'class' debería ser la clase real en tus datos de prueba
+// 'classified' es la clase predicha por tu modelo
+var confusionMatrix = testing.errorMatrix('class', 'classified');
+
+// Imprimir la matriz de confusión
+print('Matriz de Confusión', confusionMatrix);
+
+// Calcula y muestra las métricas
+var overallAccuracy = confusionMatrix.accuracy();
+print('Exactitud General', overallAccuracy);
+
+var kappa = confusionMatrix.kappa();
+print('Coeficiente Kappa', kappa);
+
+var userAccuracy = confusionMatrix.consumersAccuracy();
+print('Exactitud del Usuario (Error de Comisión)', userAccuracy);
+
+var producerAccuracy = confusionMatrix.producersAccuracy();
+print('Exactitud del Productor (Error de Omisión)', producerAccuracy);
 
 
 // Mostrar los resultados
