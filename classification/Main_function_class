@@ -285,4 +285,4 @@ classNames.forEach(function(name, index){
 // Agregar la leyenda al mapa
 Map.add(legend);
 
-/*
+*/
