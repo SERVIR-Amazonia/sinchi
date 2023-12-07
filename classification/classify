@@ -85,8 +85,7 @@ function RFprim(trainingPts, inputStack) {
             'model': model,
             'oobError': oobTop20
         });
-    print("outpput",output)
-
+    
     return output;
 };
 
