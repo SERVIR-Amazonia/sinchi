@@ -133,11 +133,16 @@ var withConfusionMatrix = testingPointsWithRasterValues.map(function(feature) {
 
 var confusionDict = withConfusionMatrix.aggregate_histogram('confusion');
 var confusionMatrix = ee.ConfusionMatrix(confusionDict);
-print('Confusion Matrix:', confusionMatrix);
+
+
+var accuracy = confusionMatrix.accuracy();
+var commissionErrors = confusionMatrix.consumersAccuracy();
+var omissionErrors = confusionMatrix.producersAccuracy();
+
+print('Confusion Matrix:', confusionMatrix.matrix());
 print('Overall Accuracy:', accuracy);
 print('Commission Errors:', commissionErrors);
 print('Omission Errors:', omissionErrors);
-
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
