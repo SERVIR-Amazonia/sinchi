@@ -131,21 +131,31 @@ var mappedConfusion = testingPointsWithRasterValues.map(function(feature) {
   return ee.Feature(null, {'actual': actual, 'predicted': predicted});
 });
 
-var confusionMatrix = ee.ConfusionMatrix(
-  mappedConfusion.reduceColumns({
-    reducer: ee.Reducer.confusionMatrix(),
-    selectors: ['actual', 'predicted']
-  }).get('confusionMatrix')
-);
+// Map over the collection to create pairs of actual and predicted values
+var confusionEntries = testingPointsWithRasterValues.map(function(feature) {
+  return ee.Feature(null, {
+    pair: ee.String(feature.get('nivel_1')).cat('_').cat(ee.String(feature.get('raster_value')))
+  });
+});
 
+// Reduce the collection to a dictionary of frequency counts
+var confusionDict = confusionEntries.reduceColumns({
+  reducer: ee.Reducer.frequencyHistogram(),
+  selectors: ['pair']
+}).get('frequency');
 
-var accuracy = confusionMatrix.accuracy();
-var commissionErrors = confusionMatrix.consumersAccuracy();
-var omissionErrors = confusionMatrix.producersAccuracy();
-print('Confusion Matrix:', confusionMatrix);
-print('Overall Accuracy:', accuracy);
-print('Commission Errors:', commissionErrors);
-print('Omission Errors:', omissionErrors);
+// Convert the dictionary to a confusion matrix
+confusionDict.evaluate(function(result) {
+  var matrix = ee.ConfusionMatrix(result);
+  var accuracy = matrix.accuracy();
+  var commissionErrors = matrix.consumersAccuracy();
+  var omissionErrors = matrix.producersAccuracy();
+
+  print('Confusion Matrix:', matrix);
+  print('Overall Accuracy:', accuracy);
+  print('Commission Errors:', commissionErrors);
+  print('Omission Errors:', omissionErrors);
+});
 
 
 // Mostrar los resultados
