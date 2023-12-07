@@ -18,7 +18,7 @@ var format_pts=function (pts) {
     function binaryPts(l) {
         var prim = pts.filter(ee.Filter.eq('nivel_1', l))
                      .map(function(f) { return f.set('PRIM', 1); });
-        var nonPrim = pts.filter(ee.Filter.neq('nivel_1'', l))
+        var nonPrim = pts.filter(ee.Filter.neq('nivel_1', l))
                          .map(function(f) { return f.set('PRIM', 0); });
         return ee.FeatureCollection(prim).merge(nonPrim);
     }
