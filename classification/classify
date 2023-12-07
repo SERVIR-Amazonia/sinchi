@@ -92,7 +92,7 @@ exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
 
     var primList = labels.map(function(label) {
-        var primPts = formatPts(trainingPts).get(label);
+        var primPts = format_pts(trainingPts).get(label);
         return RFprim(primPts, inputStack);
     });
 
