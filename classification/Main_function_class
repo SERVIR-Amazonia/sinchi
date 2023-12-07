@@ -126,10 +126,13 @@ testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.n
 //compare the nivel_1 (actual values) with raster_value (classified values).
 
 
-var confusionMatrix = testingPointsWithRasterValues.reduceColumns({
-  reducer: ee.Reducer.confusionMatrix(),
+var confusionMatrix = testingPointsWithRasterValues .reduceColumns({
+  reducer: ee.Reducer.frequencyHistogram().combine({
+    reducer2: ee.Reducer.frequencyHistogram(), 
+    sharedInputs: true
+  }), 
   selectors: ['nivel_1', 'raster_value']
-}).get('confusionMatrix');
+}).get('combined');
 //Calculate Overall Accuracy from the confusion matrix.
 
 
