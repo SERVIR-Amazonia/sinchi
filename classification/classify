@@ -20,7 +20,6 @@ var format_pts=function (pts) {
                      .map(function(f) { return f.set('PRIM', 1); });
         var nonPrim = pts.filter(ee.Filter.neq('nivel_1', l))
                          .map(function(f) { return f.set('PRIM', 0); });
-        print("linea23",ee.FeatureCollection(prim).merge(nonPrim))
         return ee.FeatureCollection(prim).merge(nonPrim);
     }
     var format_pts_output=ee.List(labels).map(binaryPts)
