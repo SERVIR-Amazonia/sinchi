@@ -38,7 +38,7 @@ var getTop20= function (dict) {
     }
 
     var keys = ee.Dictionary(dict).keys();
-    print('keys',keys)
+    print(keys.iterate(kvReturn, ee.List([])))
     return keys.iterate(kvReturn, ee.List([]));
 }
 
