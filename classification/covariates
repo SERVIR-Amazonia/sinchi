@@ -265,7 +265,6 @@ function returnCovariates(img) {
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
     var middle_composition=addIndices(middle);
-    print("line 265");
 
     img = middle_composition;
     print("img",img);
