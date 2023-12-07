@@ -120,33 +120,24 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 
 //Filter NA Values
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
+pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
 
-testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
-//Step 3: Create a Confusion Matrix
-//compare the nivel_1 (actual values) with raster_value (classified values).
+var createConfusionArray = function(pint) {
+  var pairs = pint.reduceColumns({
+    reducer: ee.Reducer.toList(),
+    selectors: ['nivel_1', 'raster_value']
+  }).get('list');
 
-var mappedConfusion = testingPointsWithRasterValues.map(function(feature) {
-  var actual = feature.get('nivel_1');
-  var predicted = feature.get('raster_value');
-  return ee.Feature(null, {'actual': actual, 'predicted': predicted});
-});
-
-// Map over the collection to create pairs of actual and predicted values
-var confusionEntries = testingPointsWithRasterValues.map(function(feature) {
-  return ee.Feature(null, {
-    pair: ee.String(feature.get('nivel_1')).cat('_').cat(ee.String(feature.get('raster_value')))
+  return ee.Array(pairs).reduce({
+    reducer: ee.Reducer.frequencyHistogram(),
+    axes: [0]
   });
-});
+};
 
-// Reduce the collection to a dictionary of frequency counts
-var confusionDict = confusionEntries.reduceColumns({
-  reducer: ee.Reducer.frequencyHistogram(),
-  selectors: ['pair']
-}).get('frequency');
+var confusionArray = createConfusionArray(pint);
 
-// Convert the dictionary to a confusion matrix
-confusionDict.evaluate(function(result) {
-  var matrix = ee.ConfusionMatrix(result);
+confusionArray.evaluate(function(array) {
+  var matrix = ee.ConfusionMatrix(array);
   var accuracy = matrix.accuracy();
   var commissionErrors = matrix.consumersAccuracy();
   var omissionErrors = matrix.producersAccuracy();
