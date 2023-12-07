@@ -97,7 +97,24 @@ test
 */
 print("S1_testing",S1_testing)
 
+var addRasterValueToFeature = function(feature) {
+    // Sample the classified image at the location of the feature
+    var sampledValue = classifiedImage.sample({
+        region: feature.geometry(),
+        scale: 30 // Choose an appropriate scale for your data
+    }).first();
 
+    // If the sample returns a value, add it to the feature
+    if (sampledValue) {
+        // Assuming your classified image has a single band, adjust if it has multiple bands
+        var rasterValue = sampledValue.get('classification'); // Replace 'classification' with the band name of your classified image
+        return feature.set('raster_value', rasterValue);
+    } else {
+        // Handle cases with no data
+        return feature.set('raster_value', null);
+    }
+};
+var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
 /*
 // Asegúrate de que las propiedades 'class' y 'classified' existan
 // 'class' debería ser la clase real en tus datos de prueba
