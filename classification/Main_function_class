@@ -36,7 +36,7 @@ var start_day = 1;
 var end_year = 2022;
 var end_month = 7;
 var end_day = 31;
-
+var clase='nivel_1'
 
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
@@ -75,7 +75,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
-var classified_image_S1 = modulo_classifier.rf(S1_training, processedImage);
+var classified_image_S1 = modulo_classifier.primitivesToCollection(image_covariates,S1_training,clase)
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 print("classified_image_S1  ",classified_image_S1  );
