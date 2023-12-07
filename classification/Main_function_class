@@ -103,7 +103,7 @@ var testing = S1_testing.map(function(feature) {
     var classifiedValue = classifiedImage.sample({
         region: feature.geometry(),
         scale: 30 // Ajusta el 'scale' según sea necesario
-    }).first().get(0);
+    }).first().get('classification');
 
     return feature.set('classified', classifiedValue);
 });
