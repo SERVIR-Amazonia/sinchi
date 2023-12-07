@@ -70,7 +70,10 @@ exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
     // Devuelve los resultados de calcular las métricas
     return nivel_1List.evaluate(function(n1Values) {
         classificationList.evaluate(function(classificationValues) {
-            return calculateMetrics(n1Values, classificationValues);
+          var results = calculateMetrics(n1Values, classificationValues);
+          // Usa los resultados aquí dentro
+          console.log('Results:', results);
+          
         });
     });
 };
