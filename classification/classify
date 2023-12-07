@@ -95,10 +95,17 @@ exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
 
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
 
-    var primList = labels.map(function(label) {
-        var primPts = format_pts(trainingPts).get(label);
-        return RFprim(primPts, inputStack);
-    });
+    var formattedPts = format_pts(trainingPts);
+    var primList = labels.map(function(label, index) {
+    var primPts = formattedPts.get(index);
+    return RFprim(primPts, inputStack);
+});
+
+    
+    
+    
+
+    
 
     return ee.ImageCollection.fromImages(primList);
 }
