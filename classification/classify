@@ -12,7 +12,7 @@ var format_pts =function (pts) {
         .aggregate_array(clase)
         .distinct()
         .sort();
-        print ("lebel",label)
+        print ("lebel",labels)
     function binaryPts(l) {
         var prim = pts.filter(ee.Filter.eq(clase, l))
             .map(function(f) { return f.set('PRIM', 1); });
