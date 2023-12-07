@@ -57,7 +57,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
-Map.addLayer(processedImage,visualizationParams,'processedImage');
+
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage);
 var image_covariates=image_covariates.clip(region);
@@ -73,16 +73,15 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 }; // Ajusta según tus bandas
 
 
+Map.addLayer(processedImage,visualizationParams,'processedImage');
 
-
-var salida = modulo_classifier.primitivesToCollection(image_covariates,S1_training,clase);
-
-//var classified_image_S1 = modulo_classifier.primitivesToCollection(processedImage,S1_training,"nivel1");
+var classified_image_S1 = modulo_classifier.rf(S1_training, processedImage);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 print("classified_image_S1  ",classified_image_S1  );
 
 var metricas_assess=modulo_acc_assess.calculateAccuracy(classified_image_S1, S1_testing);
+print("metricas_assess",metricas_assess)
 
 /*
 // Mostrar los resultados
