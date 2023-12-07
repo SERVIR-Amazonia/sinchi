@@ -59,7 +59,7 @@ var image_covariates=image_covariates.clip(region);
 print("image_covariates2",image_covariates);
 
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
-print("imagen", processedImage)
+
 var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [200, 200,200],
   "max": [5000,5000,50000],
@@ -131,7 +131,7 @@ print("separateValues", separateValues);
 var nivel_1List = separateValues.aggregate_array('nivel_1');
 var classificationList = separateValues.aggregate_array('classification');
 
-var calculateMetrics = function(nivel_1, classification) {
+var calculateMetrics = function(nivel_1List, classificationList) {
     var matrix = {};
     var total = 0;
     var correct = 0;
