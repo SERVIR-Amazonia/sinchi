@@ -152,7 +152,7 @@ var calculateMetrics = function(nivel_1List, classificationList) {
     var classCounts = {};
 
     nivel_1List.forEach(function(n1, index) {
-        var classPred = classification[index];
+        var classPred = classificationList[index];
         var key = n1 + '-' + classPred;
         matrix[key] = (matrix[key] || 0) + 1;
 
