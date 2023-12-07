@@ -88,7 +88,7 @@ test
 
 */
 
-var S1_testing_classified= classifiedImage.sampleRegions({
+var S1_testing_classified= classifiedImage_S1.sampleRegions({
   collection: S1_testing,
   scale: 20,
   geometries: true
