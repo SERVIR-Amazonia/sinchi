@@ -196,11 +196,11 @@ var calculateMetrics = function(nivel_1List, classificationList) {
 nivel_1List.evaluate(function(n1Values) {
     classificationList.evaluate(function(classificationValues) {
         var results = calculateMetrics(n1Values, classificationValues);
+        
         print('Confusion Matrix:', results.confusionMatrix);
-        console.log('Confusion Matrix:', results.confusionMatrix);
-        console.log('Overall Accuracy:', results.accuracy);
-        console.log('Commission Errors:', results.commissionErrors);
-        console.log('Omission Errors:', results.omissionErrors);
+        print('Overall Accuracy:', results.accuracy);
+        print('Commission Errors:', results.commissionErrors);
+       print('Omission Errors:', results.omissionErrors);
     });
 });
 
