@@ -72,7 +72,7 @@ exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
         classificationList.evaluate(function(classificationValues) {
           var results = calculateMetrics(n1Values, classificationValues);
           // Usa los resultados aquí dentro
-          console.log('Results:', results);
+          print('Results:', results);
           
         });
     });
