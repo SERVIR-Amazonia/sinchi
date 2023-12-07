@@ -122,32 +122,11 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
 var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
 
-var createConfusionArray = function(pint) {
-  var pairs = pint.reduceColumns({
-    reducer: ee.Reducer.toList(),
-    selectors: ['nivel_1', 'raster_value']
-  }).get('list');
+var uniqueActual = pint.aggregate_array('nivel_1').distinct();
+var uniquePredicted = pint.aggregate_array('raster_value').distinct();
 
-  return ee.Array(pairs).reduce({
-    reducer: ee.Reducer.frequencyHistogram(),
-    axes: [0]
-  });
-};
-
-var confusionArray = createConfusionArray(pint);
-
-confusionArray.evaluate(function(array) {
-  var matrix = ee.ConfusionMatrix(array);
-  var accuracy = matrix.accuracy();
-  var commissionErrors = matrix.consumersAccuracy();
-  var omissionErrors = matrix.producersAccuracy();
-
-  print('Confusion Matrix:', matrix);
-  print('Overall Accuracy:', accuracy);
-  print('Commission Errors:', commissionErrors);
-  print('Omission Errors:', omissionErrors);
-});
-
+var uniqueClasses = uniqueActual.merge(uniquePredicted).distinct().sort();
+print("uniqueClasses ",uniqueClasses)
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
