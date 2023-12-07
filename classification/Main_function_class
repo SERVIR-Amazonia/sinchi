@@ -125,7 +125,7 @@ testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.n
 //Step 3: Create a Confusion Matrix
 //compare the nivel_1 (actual values) with raster_value (classified values).
 
-var mappedConfusion = pint.map(function(feature) {
+var mappedConfusion = testingPointsWithRasterValues.map(function(feature) {
   var actual = feature.get('nivel_1');
   var predicted = feature.get('raster_value');
   return ee.Feature(null, {'actual': actual, 'predicted': predicted});
