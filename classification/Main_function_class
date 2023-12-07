@@ -104,14 +104,12 @@ var addRasterValueToFeature = function(feature) {
         scale: 30 // Adjust the scale as necessary
     });
 
-    // Check if the sampled collection has any elements
-    if (sampledCollection.size().getInfo() > 0) {
-        var rasterValue = ee.Feature(sampledCollection.first()).get('classification'); // Replace 'classification' with the correct band name
-        return feature.set('raster_value', rasterValue);
-    } else {
-        // Handle the case where the point falls outside the raster extent
-        return feature.set('raster_value', 'No data');
-    }
+    // Use ee.Algorithms.If to handle the conditional logic on the server-side
+    return ee.Feature(ee.Algorithms.If(
+        sampledCollection.size(),
+        feature.set('raster_value', ee.Feature(sampledCollection.first()).get('classification')), // Replace 'classification' with the correct band name
+        feature.set('raster_value', 'No data')
+    ));
 };
 
 var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
