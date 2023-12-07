@@ -1,6 +1,6 @@
 var format_pts=function (pts) {
     var labels = ee.FeatureCollection(pts)
-        .aggregate_array('LANDCOVER')
+        .aggregate_array('nivel_1')
         .distinct()
         .sort();
 
@@ -86,4 +86,17 @@ var primitivesToCollection =function (inputStack, trainingPts, className) {
     });
 
     return ee.ImageCollection.fromImages(primList);
+}
+
+Primitives.prototype.assembleMaxProbability = function() {
+    function maxProb(image) {
+        return image.toArray()
+            .arrayArgmax()
+            .arrayFlatten([['classification']])
+            .rename('classification');
+    }
+
+    var image = this.collection.toBands();
+    var maxProbability = maxProb(image);
+    return maxProbability.add(1).rename('LANDCOVER');
 }
