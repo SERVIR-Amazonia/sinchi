@@ -204,6 +204,7 @@ nivel_1List.evaluate(function(n1Values) {
     });
 });
 
+/*
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
@@ -284,3 +285,4 @@ classNames.forEach(function(name, index){
 // Agregar la leyenda al mapa
 Map.add(legend);
 
+/*
