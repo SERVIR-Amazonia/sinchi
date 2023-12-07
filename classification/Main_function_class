@@ -111,13 +111,13 @@ var addRasterValueToFeature = function(feature) {
     // Use ee.Algorithms.If to handle the conditional logic on the server-side
     return ee.Feature(ee.Algorithms.If(
         sampledCollection.size(),
-        feature.set('raster_value', ee.Number(ee.Feature(sampledCollection.first()).get('classification'))), // Cast to integer and replace 'classification' with the correct band name
-        feature.set('raster_value', null) // Set to null instead of 'No data'
+        feature.set('raster_value', ee.Feature(sampledCollection.first()).get('classification').toInt()), // Explicitly cast to integer
+        feature.set('raster_value', null)
     ));
 };
+
 var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
 print("testingPointsWithRasterValues",testingPointsWithRasterValues);
-
 //Confusion Matrix
 
 
