@@ -10,7 +10,7 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
 var S1_training=visualizationResults.combinedResults_S1.training;
 
-clase='nivel_1'
+var clase='nivel_1'
 
 
 var format_pts =function (pts) {
