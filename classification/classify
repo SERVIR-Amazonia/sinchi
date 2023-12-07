@@ -22,7 +22,7 @@ var format_pts=function (pts) {
                          .map(function(f) { return f.set('PRIM', 0); });
         return ee.FeatureCollection(prim).merge(nonPrim);
     }
-    format_pts_output=ee.List(labels).map(binaryPts)
+    var format_pts_output=ee.List(labels).map(binaryPts)
     print("format_pts_output",format_pts_output)
     return format_pts_output;
 };
