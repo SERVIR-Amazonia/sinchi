@@ -131,6 +131,8 @@ var pairs = S1_testing_classified.map(combineValues).aggregate_array('combined')
 // Initialize an empty dictionary for counts
 var counts = {};
 
+// Debugging before evaluate
+print("Pairs before evaluate:", pairs);
 // Count each combination
 pairs.evaluate(function(pairs) {
     pairs.forEach(function(pair) {
