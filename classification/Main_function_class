@@ -118,6 +118,10 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Confusion Matrix
 
 
+//Filter NA Values
+//Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
+var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
+
 var confusionData = pint.reduceColumns({
   reducer: ee.Reducer.frequencyHistogram(),
   selectors: ['nivel_1', 'raster_value']
@@ -140,8 +144,6 @@ confusionData.evaluate(function(hist) {
   print('Commission Errors:', commissionErrors);
   print('Omission Errors:', omissionErrors);
 });
-
-print("confusionMatrix",confusionMatrix)
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
