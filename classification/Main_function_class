@@ -107,6 +107,9 @@ var testing = S1_testing.map(function(feature) {
 
     return feature.set('classified', classifiedValue);
 });
+
+testing
+/*
 print("testing",testing)
 
 // Asegúrate de que las propiedades 'class' y 'classified' existan
@@ -130,6 +133,7 @@ print('Exactitud del Usuario (Error de Comisión)', userAccuracy);
 var producerAccuracy = confusionMatrix.producersAccuracy();
 print('Exactitud del Productor (Error de Omisión)', producerAccuracy);
 
+*/
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
