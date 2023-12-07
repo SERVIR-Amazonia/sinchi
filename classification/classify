@@ -1,4 +1,4 @@
-exports.s2process =function RFprim(trainingPts, inputImage) {
+exports.rf =function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
         properties: ['nivel_1'],
@@ -12,7 +12,5 @@ exports.s2process =function RFprim(trainingPts, inputImage) {
     });
 
     return inputImage.classify(classifier);
-}
+};
 
-// Exportar la función RFprim para que pueda ser utilizada por otros módulos
-module.exports = RFprim;
