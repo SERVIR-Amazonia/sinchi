@@ -5,7 +5,7 @@
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
 
-
+clase='nivel_1'
 var format_pts =function (pts) {
   //genera 5feature collections
     var labels = ee.FeatureCollection(pts)
