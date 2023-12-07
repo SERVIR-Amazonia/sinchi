@@ -129,7 +129,7 @@ var combineValues = function(feature) {
 // Map this function over the FeatureCollection
 var pairs = S1_testing_classified.map(combineValues);
 
-
+print(pairs)
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
