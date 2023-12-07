@@ -117,14 +117,17 @@ print("S1_testing_classified",S1_testing_classified)
 var combineValues = function(feature) {
     var nivel_1 = feature.get('nivel_1');
     var classification = feature.get('classification');
-    return ee.Feature(null, {'combined': [nivel_1, classification]});
+    return ee.Feature(null, {
+        'nivel_1': nivel_1,
+        'classification': classification
+    });
 };
 
 // Map this function over the FeatureCollection
-var pairs = S1_testing_classified.map(combineValues);
+var separateValues = S1_testing_classified.map(combineValues);
 
+print("separateValues", separateValues);
 
-print("pairs",pairs)
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
