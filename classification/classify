@@ -12,7 +12,7 @@ var format_pts =function (pts) {
         .aggregate_array(clase)
         .distinct()
         .sort();
-    print("labels",labels)
+    //print("labels",labels)
     function binaryPts(l) {
         var prim = pts.filter(ee.Filter.eq(clase, l))
             .map(function(f) { return f.set('PRIM', 1); });
@@ -38,6 +38,7 @@ var getTop20= function (dict) {
     }
 
     var keys = ee.Dictionary(dict).keys();
+    print('keys',keys)
     return keys.iterate(kvReturn, ee.List([]));
 }
 
