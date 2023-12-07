@@ -97,20 +97,7 @@ test
 */
 print("S1_testing",S1_testing)
 
-// Mapear sobre S1_testing para extraer los valores de la imagen clasificada
-var testing = S1_testing.map(function(feature) {
-    // Asegúrate de que la banda 'classification' exista en 'classifiedImage'
-    var classifiedValue = classifiedImage.sample({
-        region: feature.geometry(),
-        scale: 30 // Ajusta el 'scale' según sea necesario
-    }).first().get('classification');
 
-    return feature.set('classified', classifiedValue);
-});
-
-testing
-
-print("testing",testing)
 /*
 // Asegúrate de que las propiedades 'class' y 'classified' existan
 // 'class' debería ser la clase real en tus datos de prueba
