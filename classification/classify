@@ -4,14 +4,6 @@
 // Traer puntos de muestreo para semestre 1 
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
-var S1_training=visualizationResults.combinedResults_S1.training;
-var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
-
-
-var image_covariates=moduloCovariates.returnCovariates(processedImage);
-var image_covariates=image_covariates.clip(region);
-
-var clase='nivel_1'
 
 
 var format_pts =function (pts) {
