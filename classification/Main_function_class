@@ -102,7 +102,7 @@ var addRasterValueToFeature = function(feature) {
     // Sample the classified image at the location of the feature
     var sampledValue = classifiedImage.sample({
         region: feature.geometry(),
-        scale: 30 // Choose an appropriate scale for your data
+        scale: 20 // Choose an appropriate scale for your data
     }).first();
 
     // If the sample returns a value, add it to the feature
