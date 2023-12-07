@@ -97,9 +97,10 @@ exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
 
     var primList = labels.map(function(label) {
         var primPts = format_pts(trainingPts).get(label);
+        print("RFprim(primPts, inputStack)",RFprim(primPts, inputStack))
         return RFprim(primPts, inputStack);
     });
-    print(primList,"primList")
+    
     
     
 
