@@ -144,69 +144,15 @@ var classificationList = separateValues.aggregate_array('classification');
 
 
 var calculateConfusionMatrix = function(nivel_1, classification) {
-    var matrix = {};
-    var totalPredictions = 0;
-    var correctPredictions = 0;
-    var classCountsActual = {};
-    var classCountsPredicted = {};
-
-    nivel_1.forEach(function(n1, index) {
-        var predicted = classification[index];
-        var key = n1 + '-' + predicted;
-        matrix[key] = (matrix[key] || 0) + 1;
-
-        // Count actual and predicted for each class
-        classCountsActual[n1] = (classCountsActual[n1] || 0) + 1;
-        classCountsPredicted[predicted] = (classCountsPredicted[predicted] || 0) + 1;
-
-        // Count correct predictions
-        if (n1 === predicted) {
-            correctPredictions++;
-        }
-
-        totalPredictions++;
-    });
-
-    // Calculate overall accuracy
-    var overallAccuracy = correctPredictions / totalPredictions;
-
-    // Calculate commission and omission errors for each class
-    var commissionErrors = {};
-    var omissionErrors = {};
-    for (var classValue in classCountsActual) {
-        var falsePositives = 0;
-        var falseNegatives = 0;
-
-        for (var predValue in classCountsPredicted) {
-            var matrixKey = classValue + '-' + predValue;
-            var count = matrix[matrixKey] || 0;
-            if (classValue !== predValue) {
-                falsePositives += count; // Predicted as classValue, but not actually classValue
-                falseNegatives += matrix[predValue + '-' + classValue] || 0; // Actually classValue, but predicted as something else
-            }
-        }
-
-        commissionErrors[classValue] = falsePositives / (classCountsPredicted[classValue] || 1);
-        omissionErrors[classValue] = falseNegatives / (classCountsActual[classValue] || 1);
-    }
-
-    return {
-        'Confusion Matrix': matrix,
-        'Overall Accuracy': overallAccuracy,
-        'Commission Errors': commissionErrors,
-        'Omission Errors': omissionErrors
-    };
+    return {'Test Result': 'Function executed'};
 };
 
 nivel_1List.evaluate(function(nivel_1Values) {
-    print("nivel_1Values", nivel_1Values);
     classificationList.evaluate(function(classificationValues) {
-        print("classificationValues", classificationValues);
         var results = calculateConfusionMatrix(nivel_1Values, classificationValues);
         console.log('Results:', results);
     });
 });
-
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
