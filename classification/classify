@@ -72,7 +72,7 @@ function RFprim(trainingPts, inputStack) {
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model0",model)
+    
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -85,6 +85,7 @@ function RFprim(trainingPts, inputStack) {
             'model': model,
             'oobError': oobTop20
         });
+    print("outpput",output)
 
     return output;
 };
