@@ -1,4 +1,5 @@
-var ecosistemas
+var ecosistemas = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/ecosistemas");
+
 function Indices() {
 
       this.functionList = {
