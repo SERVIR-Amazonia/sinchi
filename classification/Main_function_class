@@ -77,9 +77,6 @@ Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 var classified_image_S1 = modulo_classifier.rf(S1_training, processedImage);
 
-
-// Entrenar el clasificador con los puntos de entrenamiento
-var classifiedImage = RFprim(S1_training, processedImage);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 print("classifiedImage ",classifiedImage )
