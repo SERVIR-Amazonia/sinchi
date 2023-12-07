@@ -96,10 +96,17 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
     var formattedPts = format_pts(trainingPts);  // Llama a format_pts una vez
 
-    var primList = labels.map(function(label, index) {
-        var primPts = formattedPts.get(index); // Usa index para acceder a los elementos
-        return RFprim(primPts, inputStack);
-    });
+var formattedPts = format_pts(trainingPts); // Lista de FeatureCollections
 
-    return ee.ImageCollection.fromImages(primList);
+var primList = []; // Lista vacía para almacenar los resultados
+
+    for (var i = 0; i < labels.length; i++) {
+        var primPts = formattedPts.get(i); // Usa el índice para acceder a los elementos
+        var output = RFprim(primPts, inputStack);
+        primList.push(output); // Agrega el resultado a la lista
+    }
+    
+    var imageCollection = ee.ImageCollection.fromImages(primList); // Crea una ImageCollection a partir de la lista
+
+    return imageCollection
 };
