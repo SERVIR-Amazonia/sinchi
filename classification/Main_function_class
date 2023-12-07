@@ -41,6 +41,7 @@ var end_day = 31;
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
 var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
+var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
@@ -74,22 +75,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 
-// Correr RF
-function RFprim(trainingPts, inputImage) {
-    var trainingData = inputImage.sampleRegions({
-        collection: trainingPts,
-        properties: ['nivel_1'],
-        scale: 20
-    });
-
-    var classifier = ee.Classifier.smileRandomForest(100).train({
-        features: trainingData,
-        classProperty: 'nivel_1',
-        inputProperties: inputImage.bandNames()
-    });
-
-    return inputImage.classify(classifier);
-}
 
 
 // Entrenar el clasificador con los puntos de entrenamiento
