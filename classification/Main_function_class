@@ -113,28 +113,9 @@ var addRasterValueToFeature = function(feature) {
 };
 
 var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
-print(testingPointsWithRasterValues);
-/*
-// Asegúrate de que las propiedades 'class' y 'classified' existan
-// 'class' debería ser la clase real en tus datos de prueba
-// 'classified' es la clase predicha por tu modelo
-var confusionMatrix = testing.errorMatrix('nivel_1', 'classified');
+print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 
-// Imprimir la matriz de confusión
-print('Matriz de Confusión', confusionMatrix);
 
-// Calcula y muestra las métricas
-var overallAccuracy = confusionMatrix.accuracy();
-print('Exactitud General', overallAccuracy);
-
-var kappa = confusionMatrix.kappa();
-print('Coeficiente Kappa', kappa);
-
-var userAccuracy = confusionMatrix.consumersAccuracy();
-print('Exactitud del Usuario (Error de Comisión)', userAccuracy);
-
-var producerAccuracy = confusionMatrix.producersAccuracy();
-print('Exactitud del Productor (Error de Omisión)', producerAccuracy);
 
 
 // Mostrar los resultados
@@ -216,4 +197,4 @@ classNames.forEach(function(name, index){
 
 // Agregar la leyenda al mapa
 Map.add(legend);
-*/
+
