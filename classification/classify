@@ -1,13 +1,4 @@
 // Ejecutar la función y recibe los resultados
-var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
-var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
-var moduloComposite= require('users/an-sig/sinchi:classification/composition');
-var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
-var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
-var modulo_acc_assess=require('users/an-sig/sinchi:classification/accuracy_assessment');
-
-var visualizationResults = module_extract_samples.executeAndVisualize();
-var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
 
 // Traer puntos de muestreo para semestre 1 
