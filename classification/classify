@@ -29,7 +29,7 @@ var format_pts=function (pts) {
 var var_a=format_pts(S1_training)
 
 print("var_a",var_a)
-getTop20=function (dict) {
+var getTop20=function (dict) {
     var sortedValues = ee.Dictionary(dict).values().sort();
     var cutoff = ee.Algorithms.If(sortedValues.size().gte(20), -20, sortedValues.size().multiply(-1));
 
