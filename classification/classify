@@ -16,10 +16,10 @@ var format_pts =function (pts) {
     function binaryPts(l) {
         var prim = pts.filter(ee.Filter.eq(clase, l))
             .map(function(f) { return f.set('PRIM', 1); });
-            print("prim",prim)
         var nonPrim = pts.filter(ee.Filter.neq(clase, l))
             .map(function(f) { return f.set('PRIM', 0); });
-        return ee.FeatureCollection(prim).merge(nonPrim);
+        var binary_pts= ee.FeatureCollection(prim).merge(nonPrim);
+        return binary_pts
     }
 
     print( ee.List(labels).map(binaryPts));
