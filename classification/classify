@@ -65,13 +65,14 @@ function RFprim(trainingPts, inputStack) {
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
 
     var top20 = getTop20(importanceAll);
-    print("top20",top20)
+    
 
     model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
         inputProperties: top20
     });
+    print("model0",model)
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
