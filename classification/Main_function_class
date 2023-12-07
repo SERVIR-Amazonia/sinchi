@@ -110,61 +110,14 @@ test
 */
 print("S1_testing",S1_testing)
 
-var addRasterValueToFeature = function(feature) {
-    var sampledCollection = classifiedImage.sample({
-        region: feature.geometry(),
-        scale: 30 // Adjust the scale as necessary
-    });
-
-    // Use ee.Algorithms.If to handle the conditional logic on the server-side
-    return ee.Feature(ee.Algorithms.If(
-        sampledCollection.size(),
-        feature.set('raster_value', ee.Number(ee.Feature(sampledCollection.first()).get('classification'))), // Cast to integer if data exists
-        feature.set('raster_value', null) // Set to null if no data
-    ));
-};
-
-var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
-print("testingPointsWithRasterValues",testingPointsWithRasterValues);
-//Confusion Matrix
-
-
-//Filter NA Values
-//Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
-var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
-
-
-pint = pint.map(function(feature) {
-  var rasterValue = feature.get('raster_value');
-  rasterValue = ee.Algorithms.If(
-    ee.String(rasterValue).compareTo('No data'),
-    null,
-    ee.Number.parse(rasterValue)
-  );
-  return feature.set('raster_value', rasterValue);
-}).filter(ee.Filter.notNull(['raster_value']));
-
-print("pint",pint)
-
-
-var confusionMatrix = pint.reduceColumns({
-  reducer: ee.Reducer.frequencyHistogram(),
-  selectors: ['nivel_1', 'raster_value']
-}).get('histogram');
-
-// Convert the histogram into a confusion matrix
-confusionMatrix.evaluate(function(hist) {
-  var matrix = ee.ConfusionMatrix(hist);
-  var accuracy = matrix.accuracy();
-  var commissionErrors = matrix.consumersAccuracy();
-  var omissionErrors = matrix.producersAccuracy();
-
-  print('Confusion Matrix:', matrix.matrix());
-  print('Overall Accuracy:', accuracy);
-  print('Commission Errors:', commissionErrors);
-  print('Omission Errors:', omissionErrors);
+var S1_testing_classified= classifiedImage.sampleRegions({
+  collection: S1_testing,
+  scale: 10,
+  geometries: true
 });
 
+
+print(S1_testing_classified)
 
 
 
