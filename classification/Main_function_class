@@ -200,9 +200,10 @@ var calculateConfusionMatrix = function(nivel_1, classification) {
     };
 };
 
-// Use evaluate to perform the operation client-side
 nivel_1List.evaluate(function(nivel_1Values) {
+    print("nivel_1Values", nivel_1Values);
     classificationList.evaluate(function(classificationValues) {
+        print("classificationValues", classificationValues);
         var results = calculateConfusionMatrix(nivel_1Values, classificationValues);
         console.log('Results:', results);
     });
