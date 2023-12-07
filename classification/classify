@@ -94,7 +94,7 @@ exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
     var trainingPts = ee.FeatureCollection(trainingPts);
 
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
-    print("labels",labels)
+    print("labels2",labels)
 
     var primList = labels.map(function(label) {
         var primPts = format_pts(trainingPts).get(label);
