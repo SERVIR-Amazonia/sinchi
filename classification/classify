@@ -94,10 +94,10 @@ exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
     var trainingPts = ee.FeatureCollection(trainingPts);
 
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
+    print("labels",labels)
 
     var primList = labels.map(function(label) {
         var primPts = format_pts(trainingPts).get(label);
-        print("RFprim(primPts, inputStack)",RFprim(primPts, inputStack))
         return RFprim(primPts, inputStack);
     });
     
