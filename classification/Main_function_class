@@ -81,7 +81,6 @@ var classified_image_S1 = modulo_classifier.rf(S1_training, processedImage);
 print("classified_image_S1  ",classified_image_S1  );
 
 var metricas_assess=modulo_acc_assess.calculateAccuracy(classified_image_S1, S1_testing);
-print("metricas_assess",metricas_assess)
 
 /*
 // Mostrar los resultados
