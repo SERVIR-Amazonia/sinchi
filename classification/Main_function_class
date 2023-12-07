@@ -132,8 +132,6 @@ print("separateValues", separateValues);
 
 
 
-
-
 // Map this function over the FeatureCollection
 var separateValues = S1_testing_classified.map(combineValues);
 
@@ -250,7 +248,7 @@ var visualizationParams = {
 };
 
 // Agregar la imagen al mapa
-Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
+//Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
 // Crear un panel para la leyenda
 var legend = ui.Panel({
   style: {
