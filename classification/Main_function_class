@@ -133,6 +133,7 @@ pint = pint.map(function(feature) {
   return feature.set('raster_value', rasterValue);
 }).filter(ee.Filter.notNull(['raster_value']));
 
+print("pint",pint)
 
 
 var confusionMatrix = pint.reduceColumns({
