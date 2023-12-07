@@ -121,7 +121,7 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Filter NA Values
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
 
-pint = pint.filter(ee.Filter.notNull(['raster_value']));
+testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
 //Step 3: Create a Confusion Matrix
 //compare the nivel_1 (actual values) with raster_value (classified values).
 
