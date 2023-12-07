@@ -14,6 +14,7 @@ var clase='nivel_1'
 
 
 var format_pts =function (pts) {
+  //genera 5feature collections
     var labels = ee.FeatureCollection(pts)
         .aggregate_array(clase)
         .distinct()
@@ -33,7 +34,8 @@ var format_pts =function (pts) {
 var var_a=format_pts(S1_training)
 
 print("var_a",var_a)
-var getTop20=function (dict) {
+
+var getTop20= function (dict) {
     var sortedValues = ee.Dictionary(dict).values().sort();
     var cutoff = ee.Algorithms.If(sortedValues.size().gte(20), -20, sortedValues.size().multiply(-1));
 
@@ -44,13 +46,14 @@ var getTop20=function (dict) {
 
     var keys = ee.Dictionary(dict).keys();
     return keys.iterate(kvReturn, ee.List([]));
-};
+}
 
-var RFprim= function (trainingPts, inputStack) {
+
+function RFprim(trainingPts, inputStack) {
     var inputs = ee.Image(inputStack);
     var samples = ee.FeatureCollection(trainingPts);
 
-    var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get('nivel_1'));
+    var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
     var classifier = ee.Classifier.smileRandomForest({
         numberOfTrees: 100,
@@ -89,14 +92,13 @@ var RFprim= function (trainingPts, inputStack) {
         });
 
     return output;
-}
+};
 
+exports.primitivesToCollection=function(inputStack, trainingPts, clase) {
+    var inputStack = ee.Image(inputStack);
+    var trainingPts = ee.FeatureCollection(trainingPts);
 
-exports.primitivesToCollection =function (image_covariates, trainingPts, className) {
-
-
-    var labels = trainingPts.aggregate_array(className).distinct().sort();
-    print("labels",labels)
+    var labels = trainingPts.aggregate_array(clase).distinct().sort();
 
     var primList = labels.map(function(label) {
         var primPts = formatPts(trainingPts).get(label);
@@ -104,5 +106,5 @@ exports.primitivesToCollection =function (image_covariates, trainingPts, classNa
     });
 
     return ee.ImageCollection.fromImages(primList);
-}
+};
 
