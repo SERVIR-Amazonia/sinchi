@@ -19,11 +19,11 @@ var format_pts =function (pts) {
         var nonPrim = pts.filter(ee.Filter.neq(clase, l))
             .map(function(f) { return f.set('PRIM', 0); });
         var binary_pts= ee.FeatureCollection(prim).merge(nonPrim);
-        print("binary_pts",binary_pts)
         return binary_pts
     }
 
     print( ee.List(labels).map(binaryPts));
+    return ee.List(labels).map(binaryPts);
 }
 
 
