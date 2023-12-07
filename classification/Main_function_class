@@ -128,17 +128,19 @@ var separateValues = S1_testing_classified.map(combineValues);
 
 print("separateValues", separateValues);
 
-var setProperties = function(feature) {
-    return ee.Feature(feature.geometry(), {
-        'nivel_1': feature.get('nivel_1'),
-        'classification': feature.get('classification')
-    });
-};
+
+
+
+
+
 
 // Map this function over the FeatureCollection
-var uniformFeatures = S1_testing_classified.map(setProperties);
+var separateValues = S1_testing_classified.map(combineValues);
 
-print("Uniform Features", uniformFeatures);
+// Extract nivel_1 and classification values
+var nivel_1List = separateValues.aggregate_array('nivel_1');
+var classificationList = separateValues.aggregate_array('classification');
+
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
