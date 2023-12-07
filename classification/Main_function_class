@@ -125,20 +125,18 @@ testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.n
 //Step 3: Create a Confusion Matrix
 //compare the nivel_1 (actual values) with raster_value (classified values).
 
+var withConfusionMatrix = testingPointsWithRasterValues.map(function(feature) {
+  var actual = feature.get('nivel_1');
+  var predicted = feature.get('raster_value');
+  return feature.set('confusion', [actual, predicted]);
+});
 
-var confusionMatrix = testingPointsWithRasterValues .reduceColumns({
-  reducer: ee.Reducer.frequencyHistogram().combine({
-    reducer2: ee.Reducer.frequencyHistogram(), 
-    sharedInputs: true
-  }), 
-  selectors: ['nivel_1', 'raster_value']
-}).get('combined');
-//Calculate Overall Accuracy from the confusion matrix.
-confusionMatrix = ee.ConfusionMatrix(confusionMatrix);
-
-
-print(confusionMatrix)
-
+var confusionDict = withConfusionMatrix.aggregate_histogram('confusion');
+var confusionMatrix = ee.ConfusionMatrix(confusionDict);
+print('Confusion Matrix:', confusionMatrix);
+print('Overall Accuracy:', accuracy);
+print('Commission Errors:', commissionErrors);
+print('Omission Errors:', omissionErrors);
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
