@@ -24,7 +24,6 @@ var format_pts =function (pts) {
     print( ee.List(labels).map(binaryPts));
 }
 
-var var_a=format_pts(S1_training)
 
 print("var_a",var_a)
 
