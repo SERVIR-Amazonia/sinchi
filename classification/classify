@@ -9,23 +9,26 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
 var S1_training=visualizationResults.combinedResults_S1.training;
-var format_pts=function (pts) {
+
+
+
+
+var formatPts =function (pts) {
     var labels = ee.FeatureCollection(pts)
-        .aggregate_array('nivel_1')
+        .aggregate_array('LANDCOVER')
         .distinct()
         .sort();
 
     function binaryPts(l) {
-        var prim = pts.filter(ee.Filter.eq('nivel_1', l))
-                     .map(function(f) { return f.set('PRIM', 1); });
-        var nonPrim = pts.filter(ee.Filter.neq('nivel_1', l))
-                         .map(function(f) { return f.set('PRIM', 0); });
+        var prim = pts.filter(ee.Filter.eq('LANDCOVER', l))
+            .map(function(f) { return f.set('PRIM', 1); });
+        var nonPrim = pts.filter(ee.Filter.neq('LANDCOVER', l))
+            .map(function(f) { return f.set('PRIM', 0); });
         return ee.FeatureCollection(prim).merge(nonPrim);
     }
-    var format_pts_output=ee.List(labels).map(binaryPts)
-    print("format_pts_output",format_pts_output)
-    return format_pts_output;
-};
+
+    return ee.List(labels).map(binaryPts);
+}
 
 var var_a=format_pts(S1_training)
 
