@@ -134,10 +134,10 @@ var classificationList = separateValues.aggregate_array('classification');
 
 nivel_1List.evaluate(function(nivel_1List) {
     print("nivel_1Values", nivel_1List);
-    classificationList.evaluate(function(classificationValues) {
-        print("classificationValues", classificationValues);
-        if (nivel_1Values && classificationValues) {
-            var results = calculateMetrics(nivel_1Values, classificationValues);
+    classificationList.evaluate(function(classificationList) {
+        print("classificationValues", classificationList);
+        if (nivel_1List && classificationList) {
+            var results = calculateMetrics(nivel_1List, classificationList);
             console.log('Results:', results);
         } else {
             console.log('Data is not available for processing.');
