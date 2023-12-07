@@ -141,8 +141,10 @@ var commissionErrors = confusionMatrix.consumersAccuracy();
 var omissionErrors = confusionMatrix.producersAccuracy();
 
 
-print("commissionErrors",commissionErrors)
-print("omissionErrors",omissionErrors)
+print('Confusion Matrix:', confusionMatrix);
+print('Overall Accuracy:', accuracy);
+print('Commission Errors:', commissionErrors);
+print('Omission Errors:', omissionErrors);
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
