@@ -78,4 +78,3 @@ exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
     });
 };
 
-
