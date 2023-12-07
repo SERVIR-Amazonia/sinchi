@@ -140,7 +140,8 @@ var accuracy = ee.ConfusionMatrix(confusionMatrix).accuracy();
 var commissionErrors = ee.ConfusionMatrix(confusionMatrix).consumersAccuracy();
 var omissionErrors = ee.ConfusionMatrix(confusionMatrix).producersAccuracy();
 
-
+print("commissionErrors",commissionErrors)
+print("omissionErrors",omissionErrors)
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
