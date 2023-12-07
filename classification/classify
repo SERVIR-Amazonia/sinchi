@@ -1,3 +1,14 @@
+// Ejecutar la función y recibe los resultados
+var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
+
+var visualizationResults = module_extract_samples.executeAndVisualize();
+var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
+
+
+// Traer puntos de muestreo para semestre 1 
+//Tenemos unafeature collection para muestreos de entrenamiento y validacion
+//el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
+var S1_training=visualizationResults.combinedResults_S1.training;
 var format_pts=function (pts) {
     var labels = ee.FeatureCollection(pts)
         .aggregate_array('nivel_1')
