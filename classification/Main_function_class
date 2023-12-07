@@ -115,6 +115,30 @@ var addRasterValueToFeature = function(feature) {
 var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
 print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 
+//Confusion Matrix
+
+
+//Filter NA Values
+//Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
+
+pint = pint.filter(ee.Filter.notNull(['raster_value']));
+//Step 3: Create a Confusion Matrix
+//compare the nivel_1 (actual values) with raster_value (classified values).
+
+
+var confusionMatrix = pint.reduceColumns({
+  reducer: ee.Reducer.confusionMatrix(),
+  selectors: ['nivel_1', 'raster_value']
+}).get('confusionMatrix');
+//Calculate Overall Accuracy from the confusion matrix.
+
+
+var accuracy = ee.ConfusionMatrix(confusionMatrix).accuracy();
+//Calculate Commission and Omission Errors calculated for each class. This part of the script will depend on the number of classes you have. Here's a general approach:
+
+
+var commissionErrors = ee.ConfusionMatrix(confusionMatrix).consumersAccuracy();
+var omissionErrors = ee.ConfusionMatrix(confusionMatrix).producersAccuracy();
 
 
 
