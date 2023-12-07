@@ -120,7 +120,28 @@ var S1_testing_classified= classifiedImage.sampleRegions({
 print("S1_testing_classified",S1_testing_classified)
 
 
+// Function to combine nivel_1 and classification into a pair
+var combineValues = function(feature) {
+    return [feature.get('nivel_1'), feature.get('classification')];
+};
 
+// Extract pairs of nivel_1 and classification
+var pairs = S1_testing_classified.map(combineValues).aggregate_array('combined');
+
+// Initialize an empty dictionary for counts
+var counts = {};
+
+// Count each combination
+pairs.evaluate(function(pairs) {
+    pairs.forEach(function(pair) {
+        var key = pair.join('-'); // Create a unique key for each pair, e.g., '1-2' for nivel_1: 1 and classification: 2
+        counts[key] = (counts[key] || 0) + 1; // Increment count
+    });
+
+    // Here you can convert counts into a confusion matrix format
+    // The format depends on the range and distribution of your nivel_1 and classification values
+    console.log(counts);
+});
 
 
 // Mostrar los resultados
