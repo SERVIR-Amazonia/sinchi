@@ -142,6 +142,27 @@ var nivel_1List = separateValues.aggregate_array('nivel_1');
 var classificationList = separateValues.aggregate_array('classification');
 
 
+
+
+
+var calculateConfusionMatrix = function(nivel_1, classification) {
+    var matrix = {};
+    nivel_1.forEach(function(n1, index) {
+        var key = n1 + '-' + classification[index];
+        matrix[key] = (matrix[key] || 0) + 1;
+    });
+
+    return matrix;
+};
+
+// Use evaluate to perform the operation client-side
+nivel_1List.evaluate(function(nivel_1Values) {
+    classificationList.evaluate(function(classificationValues) {
+        var confusionMatrix = calculateConfusionMatrix(nivel_1Values, classificationValues);
+        console.log('Confusion Matrix:', confusionMatrix);
+    });
+});
+
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
