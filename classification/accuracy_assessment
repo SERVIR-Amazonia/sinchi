@@ -73,6 +73,11 @@ exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
           var results = calculateMetrics(n1Values, classificationValues);
           // Usa los resultados aquí dentro
           print('Results:', results);
+          Export.table.toDrive({
+          collection: ee.FeatureCollection([ee.Feature(null, results)]),
+          description: 'classification_accuracy_results',
+          fileFormat: 'CSV'
+});
           
         });
     });
