@@ -131,17 +131,64 @@ print("separateValues", separateValues);
 var nivel_1List = separateValues.aggregate_array('nivel_1');
 var classificationList = separateValues.aggregate_array('classification');
 
+var calculateMetrics = function(nivel_1, classification) {
+    var matrix = {};
+    var total = 0;
+    var correct = 0;
+    var classCounts = {};
 
-var calculateConfusionMatrix = function(nivel_1, classification) {
-    return {'Test Result': 'Function executed'};
+    nivel_1.forEach(function(n1, index) {
+        var classPred = classification[index];
+        var key = n1 + '-' + classPred;
+        matrix[key] = (matrix[key] || 0) + 1;
+
+        // Count correct predictions
+        if (n1 === classPred) {
+            correct++;
+        }
+
+        // Initialize class counts
+        classCounts[n1] = classCounts[n1] || {total: 0, correct: 0, predicted: 0};
+        classCounts[classPred] = classCounts[classPred] || {total: 0, correct: 0, predicted: 0};
+
+        // Increment class counts
+        classCounts[n1].total++;
+        classCounts[classPred].predicted++;
+        if (n1 === classPred) {
+            classCounts[n1].correct++;
+        }
+
+        total++;
+    });
+
+    // Calculate accuracy and errors
+    var accuracy = correct / total;
+    var commissionErrors = {};
+    var omissionErrors = {};
+    Object.keys(classCounts).forEach(function(c) {
+        commissionErrors[c] = 1 - (classCounts[c].correct / (classCounts[c].predicted || 1));
+        omissionErrors[c] = 1 - (classCounts[c].correct / classCounts[c].total);
+    });
+
+    return {
+        confusionMatrix: matrix,
+        accuracy: accuracy,
+        commissionErrors: commissionErrors,
+        omissionErrors: omissionErrors
+    };
 };
 
-nivel_1List.evaluate(function(nivel_1Values) {
+// Perform the operation client-side
+nivel_1List.evaluate(function(n1Values) {
     classificationList.evaluate(function(classificationValues) {
-        var results = calculateConfusionMatrix(nivel_1Values, classificationValues);
-        console.log('Results:', results);
+        var results = calculateMetrics(n1Values, classificationValues);
+        console.log('Confusion Matrix:', results.confusionMatrix);
+        console.log('Overall Accuracy:', results.accuracy);
+        console.log('Commission Errors:', results.commissionErrors);
+        console.log('Omission Errors:', results.omissionErrors);
     });
 });
+
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
