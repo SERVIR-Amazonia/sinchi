@@ -38,7 +38,6 @@ var getTop20= function (dict) {
     }
 
     var keys = ee.Dictionary(dict).keys();
-    print(keys.iterate(kvReturn, ee.List([])))
     return keys.iterate(kvReturn, ee.List([]));
 }
 
@@ -66,6 +65,7 @@ function RFprim(trainingPts, inputStack) {
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
 
     var top20 = getTop20(importanceAll);
+    print("top20",top20)
 
     model = classifier.train({
         features: samples,
