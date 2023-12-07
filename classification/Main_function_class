@@ -104,7 +104,7 @@ test
 
 var S1_testing_classified= classifiedImage.sampleRegions({
   collection: S1_testing,
-  scale: 10,
+  scale: 20,
   geometries: true
 });
 
@@ -127,18 +127,9 @@ var separateValues = S1_testing_classified.map(combineValues);
 print("separateValues", separateValues);
 
 
-
-
-
-// Map this function over the FeatureCollection
-var separateValues = S1_testing_classified.map(combineValues);
-
 // Extract nivel_1 and classification values
 var nivel_1List = separateValues.aggregate_array('nivel_1');
 var classificationList = separateValues.aggregate_array('classification');
-
-
-
 
 
 var calculateConfusionMatrix = function(nivel_1, classification) {
