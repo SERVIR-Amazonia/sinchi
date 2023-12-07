@@ -137,6 +137,8 @@ var confusionMatrix = testingPointsWithRasterValues .reduceColumns({
 confusionMatrix = ee.ConfusionMatrix(confusionMatrix);
 
 
+print(confusionMatrix)
+
 
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
