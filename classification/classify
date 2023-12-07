@@ -94,10 +94,10 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
     var trainingPts = ee.FeatureCollection(trainingPts);
 
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
+    var formattedPts = format_pts(trainingPts);  // Llama a format_pts una vez
 
-    var primList = labels.map(function(label) {
-        // El error está en la siguiente línea
-        var primPts = format_pts(trainingPts).get(label);
+    var primList = labels.map(function(label, index) {
+        var primPts = formattedPts.get(index); // Usa index para acceder a los elementos
         return RFprim(primPts, inputStack);
     });
 
