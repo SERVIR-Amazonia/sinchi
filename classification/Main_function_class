@@ -122,12 +122,18 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
 var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
 
-var uniqueActual = pint.aggregate_array('nivel_1').distinct();
-var uniquePredicted = pint.aggregate_array('raster_value').distinct();
+var confusionMatrix = pint.reduceColumns({
+  reducer: ee.Reducer.frequencyHistogram().group({
+    groupField: 1,
+    groupName: 'nivel_1',
+  }),
+  selectors: ['nivel_1', 'raster_value']
+}).get('groups');
 
-var uniqueClasses = uniqueActual.merge(uniquePredicted).distinct().sort();
-print("uniqueClasses ",uniqueClasses)
-
+// Process the result into a confusion matrix
+confusionMatrix = ee.Array(confusionMatrix.map(function(group) {
+  return ee.Dictionary(group).get('histogram');
+}));
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
