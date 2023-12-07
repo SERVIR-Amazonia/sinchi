@@ -13,7 +13,7 @@ var S1_training=visualizationResults.combinedResults_S1.training;
 
 
 
-var formatPts =function (pts) {
+var format_pts =function (pts) {
     var labels = ee.FeatureCollection(pts)
         .aggregate_array('LANDCOVER')
         .distinct()
