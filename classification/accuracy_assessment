@@ -4,48 +4,32 @@ test
 
 */
 
-var S1_testing_classified= classified_image_S1.sampleRegions({
-  collection: S1_testing,
-  scale: 20,
-  geometries: true
-});
 
 
-var combineValues = function(feature) {
-    var nivel_1 = feature.get('nivel_1');
-    var classification = feature.get('classification');
-    return ee.Feature(null, {
-        'nivel_1': nivel_1,
-        'classification': classification
+// Función para calcular la exactitud
+exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
+    var S1_testing_classified = classified_image_S1.sampleRegions({
+        collection: S1_testing,
+        scale: 20,
+        geometries: true
     });
-};
 
-// Map this function over the FeatureCollection
-var separateValues = S1_testing_classified.map(combineValues);
+    var combineValues = function(feature) {
+        var nivel_1 = feature.get('nivel_1');
+        var classification = feature.get('classification');
+        return ee.Feature(null, {
+            'nivel_1': nivel_1,
+            'classification': classification
+        });
+    };
 
-print("separateValues", separateValues);
+    var separateValues = S1_testing_classified.map(combineValues);
 
+    var nivel_1List = separateValues.aggregate_array('nivel_1');
+    var classificationList = separateValues.aggregate_array('classification');
 
-// Extract nivel_1 and classification values
-var nivel_1List = separateValues.aggregate_array('nivel_1');
-var classificationList = separateValues.aggregate_array('classification');
-
-
-nivel_1List.evaluate(function(nivel_1List) {
-    print("nivel_1Values", nivel_1List);
-    classificationList.evaluate(function(classificationList) {
-        print("classificationValues", classificationList);
-        if (nivel_1List && classificationList) {
-            var results = calculateMetrics(nivel_1List, classificationList);
-            console.log('Results:', results);
-        } else {
-            console.log('Data is not available for processing.');
-        }
-    });
-});
-
-var calculateMetrics = function(nivel_1List, classificationList) {
-    var matrix = {};
+    var calculateMetrics = function(nivel_1List, classificationList) {
+         var matrix = {};
     var total = 0;
     var correct = 0;
     var classCounts = {};
@@ -89,16 +73,14 @@ var calculateMetrics = function(nivel_1List, classificationList) {
         commissionErrors: commissionErrors,
         omissionErrors: omissionErrors
     };
+    };
+
+    // Devuelve los resultados de calcular las métricas
+    return nivel_1List.evaluate(function(n1Values) {
+        classificationList.evaluate(function(classificationValues) {
+            return calculateMetrics(n1Values, classificationValues);
+        });
+    });
 };
 
-// Perform the operation client-side
-nivel_1List.evaluate(function(n1Values) {
-    classificationList.evaluate(function(classificationValues) {
-        var results = calculateMetrics(n1Values, classificationValues);
-        
-        print('Confusion Matrix:', results.confusionMatrix);
-        print('Overall Accuracy:', results.accuracy);
-        print('Commission Errors:', results.commissionErrors);
-       print('Omission Errors:', results.omissionErrors);
-    });
-});
+
