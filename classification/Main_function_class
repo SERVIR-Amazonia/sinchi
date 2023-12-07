@@ -118,23 +118,28 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Confusion Matrix
 
 
-//Filter NA Values
-//Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
-var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
-
-var confusionMatrix = pint.reduceColumns({
-  reducer: ee.Reducer.frequencyHistogram().group({
-    groupField: 1,
-    groupName: 'nivel_1',
-  }),
+var confusionData = pint.reduceColumns({
+  reducer: ee.Reducer.frequencyHistogram(),
   selectors: ['nivel_1', 'raster_value']
-}).get('groups');
+}).get('histogram');
 
-// Process the result into a confusion matrix
-confusionMatrix = ee.Array(confusionMatrix.map(function(group) {
-  return ee.Dictionary(group).get('histogram');
-}));
+// Convert the histogram into a confusion matrix
+confusionData.evaluate(function(hist) {
+  // Process the histogram to create a confusion matrix
+  // This step depends on the structure of your data and might require manual processing
+  // ...
 
+  // After processing, create the confusion matrix
+  var matrix = ee.ConfusionMatrix(/* your processed data here */);
+  var accuracy = matrix.accuracy();
+  var commissionErrors = matrix.consumersAccuracy();
+  var omissionErrors = matrix.producersAccuracy();
+
+  print('Confusion Matrix:', matrix);
+  print('Overall Accuracy:', accuracy);
+  print('Commission Errors:', commissionErrors);
+  print('Omission Errors:', omissionErrors);
+});
 
 print("confusionMatrix",confusionMatrix)
 // Mostrar los resultados
