@@ -109,9 +109,9 @@ var testing = S1_testing.map(function(feature) {
 });
 
 testing
-/*
-print("testing",testing)
 
+print("testing",testing)
+/*
 // Asegúrate de que las propiedades 'class' y 'classified' existan
 // 'class' debería ser la clase real en tus datos de prueba
 // 'classified' es la clase predicha por tu modelo
