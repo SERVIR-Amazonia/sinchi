@@ -51,7 +51,6 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
-print("processedImage",processedImage);
 
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage);
@@ -102,7 +101,6 @@ Script para calcular exactitud
 test
 
 */
-print("S1_testing",S1_testing)
 
 var S1_testing_classified= classifiedImage.sampleRegions({
   collection: S1_testing,
