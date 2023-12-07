@@ -118,7 +118,7 @@ var S1_testing_classified= classifiedImage.sampleRegions({
 
 
 
-var raster_results=classifiedImage.map(rasterExtraction).flatten();
+var raster_results=classifiedImage.map(S1_testing_classified).flatten();
 
 print("raster_results",raster_results)
 
