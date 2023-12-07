@@ -111,8 +111,8 @@ var addRasterValueToFeature = function(feature) {
     // Use ee.Algorithms.If to handle the conditional logic on the server-side
     return ee.Feature(ee.Algorithms.If(
         sampledCollection.size(),
-        feature.set('raster_value', ee.Feature(sampledCollection.first()).get('classification').toInt()), // Explicitly cast to integer
-        feature.set('raster_value', null)
+        feature.set('raster_value', ee.Number(ee.Feature(sampledCollection.first()).get('classification'))), // Cast to integer if data exists
+        feature.set('raster_value', null) // Set to null if no data
     ));
 };
 
