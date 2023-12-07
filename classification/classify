@@ -12,10 +12,11 @@ var format_pts =function (pts) {
         .aggregate_array(clase)
         .distinct()
         .sort();
-        print ("lebel",labels)
+        
     function binaryPts(l) {
         var prim = pts.filter(ee.Filter.eq(clase, l))
             .map(function(f) { return f.set('PRIM', 1); });
+            print("prim",prim)
         var nonPrim = pts.filter(ee.Filter.neq(clase, l))
             .map(function(f) { return f.set('PRIM', 0); });
         return ee.FeatureCollection(prim).merge(nonPrim);
