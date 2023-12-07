@@ -116,6 +116,7 @@ var addRasterValueToFeature = function(feature) {
     }
 };
 var testingPointsWithRasterValues = S1_testing.map(addRasterValueToFeature);
+print("testingPointsWithRasterValues",testingPointsWithRasterValues)
 /*
 // Asegúrate de que las propiedades 'class' y 'classified' existan
 // 'class' debería ser la clase real en tus datos de prueba
