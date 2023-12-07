@@ -1,4 +1,4 @@
-function RFprim(trainingPts, inputImage) {
+exports.s2process =function RFprim(trainingPts, inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
         properties: ['nivel_1'],
