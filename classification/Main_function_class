@@ -120,7 +120,7 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 
 //Filter NA Values
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
-pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
+pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster value']));
 
 var createConfusionArray = function(pint) {
   var pairs = pint.reduceColumns({
