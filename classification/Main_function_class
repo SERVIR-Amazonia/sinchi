@@ -126,7 +126,7 @@ testingPointsWithRasterValues = testingPointsWithRasterValues.filter(ee.Filter.n
 //compare the nivel_1 (actual values) with raster_value (classified values).
 
 
-var confusionMatrix = pint.reduceColumns({
+var confusionMatrix = testingPointsWithRasterValues.reduceColumns({
   reducer: ee.Reducer.confusionMatrix(),
   selectors: ['nivel_1', 'raster_value']
 }).get('confusionMatrix');
