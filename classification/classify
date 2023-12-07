@@ -13,4 +13,62 @@ var format_pts=function (pts) {
     }
 
     return ee.List(labels).map(binaryPts);
+};
+
+getTop20=function (dict) {
+    var sortedValues = ee.Dictionary(dict).values().sort();
+    var cutoff = ee.Algorithms.If(sortedValues.size().gte(20), -20, sortedValues.size().multiply(-1));
+
+    function kvReturn(key, passedObj) {
+        var val = ee.Number(ee.Dictionary(dict).get(key));
+        return ee.Algorithms.If(val.gte(cutoff), ee.List(passedObj).add(key), passedObj);
+    }
+
+    var keys = ee.Dictionary(dict).keys();
+    return keys.iterate(kvReturn, ee.List([]));
+}
+
+var RFprim= function (trainingPts, inputStack) {
+    var inputs = ee.Image(inputStack);
+    var samples = ee.FeatureCollection(trainingPts);
+
+    var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get('nivel_1'));
+
+    var classifier = ee.Classifier.smileRandomForest({
+        numberOfTrees: 100,
+        minLeafPopulation: 1,
+        bagFraction: 0.7,
+        seed: 51515
+    }).setOutputMode('PROBABILITY');
+
+    var model = classifier.train({
+        features: samples,
+        classProperty: 'PRIM',
+        inputProperties: inputs.bandNames()
+    });
+
+    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
+    var importanceAll = ee.Dictionary(model.explain()).get('importance');
+
+    var top20 = getTop20(importanceAll);
+
+    model = classifier.train({
+        features: samples,
+        classProperty: 'PRIM',
+        inputProperties: top20
+    });
+
+    var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
+    var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
+    var schema = ee.List(ee.Classifier(model).schema());
+    var output = inputs.classify(model, 'Probability')
+        .set({
+            'Primitive': classValue,
+            'importance': importanceTop20,
+            'schema': schema,
+            'model': model,
+            'oobError': oobTop20
+        });
+
+    return output;
 }
