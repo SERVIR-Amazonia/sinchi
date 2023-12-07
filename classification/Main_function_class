@@ -11,17 +11,26 @@ var geometry =
           [-72.31295735716925, 2.6305251294291145],
           [-71.60845906615363, 2.6305251294291145],
           [-71.60845906615363, 2.9494364109240045]]], null, false),
-    geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
+    geometry2 = 
+    /* color: #d63000 */
+    /* shown: false */
+    ee.Geometry.Polygon(
         [[[-75.90462396023023, 2.1430337082717195],
           [-73.72933099148023, 0.682335791561569],
           [-70.68611810085523, 3.2184997438148835],
-          [-74.76204583523023, 3.602339527808919]]]);
+          [-74.76204583523023, 3.602339527808919]]]),
+    geometry3 = /* color: #98ff00 */ee.Geometry.Polygon(
+        [[[-74.78745425975357, 1.3504036281205642],
+          [-74.16123355662857, 0.9769461714514519],
+          [-72.37046207225357, 1.6139870487184678],
+          [-71.41598077792919, 3.10748122186987],
+          [-74.44820734042919, 3.425566684522021]]]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
-var region=geometry2;
+var region=geometry3;
 //Decalrar variables
 var start_year = 2022;
 var start_month = 1;
