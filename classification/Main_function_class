@@ -122,28 +122,69 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //Since some classified values have NA values, you'll need to filter these out. This script assumes that NA values are represented as null.
 var pint = testingPointsWithRasterValues.filter(ee.Filter.notNull(['raster_value']));
 
-var confusionData = pint.reduceColumns({
+
+pint = pint.map(function(feature) {
+  var rasterValue = feature.get('raster_value');
+  rasterValue = ee.Algorithms.If(
+    ee.String(rasterValue).compareTo('No data'),
+    null,
+    ee.Number.parse(rasterValue)
+  );
+  return feature.set('raster_value', rasterValue);
+}).filter(ee.Filter.notNull(['raster_value']));
+
+
+
+var confusionMatrix = pint.reduceColumns({
   reducer: ee.Reducer.frequencyHistogram(),
   selectors: ['nivel_1', 'raster_value']
 }).get('histogram');
 
 // Convert the histogram into a confusion matrix
-confusionData.evaluate(function(hist) {
-  // Process the histogram to create a confusion matrix
-  // This step depends on the structure of your data and might require manual processing
-  // ...
-
-  // After processing, create the confusion matrix
-  var matrix = ee.ConfusionMatrix(/* your processed data here */);
+confusionMatrix.evaluate(function(hist) {
+  var matrix = ee.ConfusionMatrix(hist);
   var accuracy = matrix.accuracy();
   var commissionErrors = matrix.consumersAccuracy();
   var omissionErrors = matrix.producersAccuracy();
 
-  print('Confusion Matrix:', matrix);
+  print('Confusion Matrix:', matrix.matrix());
   print('Overall Accuracy:', accuracy);
   print('Commission Errors:', commissionErrors);
   print('Omission Errors:', omissionErrors);
 });
+
+
+var pint = ee.FeatureCollection('path_to_your_dataset');
+
+pint = pint.map(function(feature) {
+  var rasterValue = feature.get('raster_value');
+  rasterValue = ee.Algorithms.If(
+    ee.String(rasterValue).compareTo('No data'),
+    null,
+    ee.Number.parse(rasterValue)
+  );
+  return feature.set('raster_value', rasterValue);
+}).filter(ee.Filter.notNull(['raster_value']));
+
+var confusionMatrix = pint.reduceColumns({
+  reducer: ee.Reducer.frequencyHistogram(),
+  selectors: ['nivel_1', 'raster_value']
+}).get('histogram');
+
+confusionMatrix.evaluate(function(hist) {
+  var matrix = ee.ConfusionMatrix(hist);
+  var accuracy = matrix.accuracy();
+  var commissionErrors = matrix.consumersAccuracy();
+  var omissionErrors = matrix.producersAccuracy();
+
+  print('Confusion Matrix:', matrix.matrix());
+  print('Overall Accuracy:', accuracy);
+  print('Commission Errors:', commissionErrors);
+  print('Omission Errors:', omissionErrors);
+});
+
+
+
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
