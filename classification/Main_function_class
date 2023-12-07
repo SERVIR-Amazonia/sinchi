@@ -134,6 +134,9 @@ var confusionMatrix = pint.reduceColumns({
 confusionMatrix = ee.Array(confusionMatrix.map(function(group) {
   return ee.Dictionary(group).get('histogram');
 }));
+
+
+print("confusionMatrix",confusionMatrix)
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
 //print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
