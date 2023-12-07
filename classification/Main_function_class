@@ -36,7 +36,7 @@ var start_day = 1;
 var end_year = 2022;
 var end_month = 7;
 var end_day = 31;
-var clase='nivel_1'
+var clase= 'nivel_1'
 
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
