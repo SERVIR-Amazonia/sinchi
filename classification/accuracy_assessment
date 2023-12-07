@@ -1,11 +1,3 @@
-/*
-Script para calcular exactitud
-test
-
-*/
-
-
-
 // Función para calcular la exactitud
 exports.calculateAccuracy = function(classified_image_S1, S1_testing) {
     var S1_testing_classified = classified_image_S1.sampleRegions({
