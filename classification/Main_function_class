@@ -125,8 +125,8 @@ print("testingPointsWithRasterValues",testingPointsWithRasterValues);
 //print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
 
 // Agregar las capas de los puntos de muestreo al mapa
-Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
-//Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
+//Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
+Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
 //Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
 //Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
 
