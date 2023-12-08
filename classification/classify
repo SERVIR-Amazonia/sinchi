@@ -130,7 +130,7 @@ exports.primitives_class=function(training_points,clase,inputStack){
   var listOfPrimPts = formatPts(training_points,clase);
   print(listOfPrimPts);
   //Train and apply RF Probability classifier on a Primitive
-  var RFprim_class=RFprim(trainingPts, inputStack, clase)
+  var RFprim_class=RFprim(training_points, inputStack, clase)
   print(RFprim_class)
   return RFprim_class;
   
