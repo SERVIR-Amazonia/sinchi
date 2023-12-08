@@ -98,7 +98,6 @@ print('Consumers Accuracy:', confusion_matrix.consumersAccuracy());
 print('Kappa:', confusion_matrix.kappa());
 
 
-
 //////
 /*
 // Mostrar los resultados
