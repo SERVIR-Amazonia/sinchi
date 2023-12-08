@@ -18,6 +18,7 @@ function Indices() {
         "ND_swir1_swir2": this.ND_swir1_swir2,
         "R_swir1_nir": this.R_swir1_nir,
         "R_red_swir1": this.R_red_swir1,
+        "SVVI": this.SVVI,
         "EVI": this.EVI,
         "SAVI": this.SAVI,
         "IBI": this.IBI
@@ -102,6 +103,30 @@ function Indices() {
     };
 
 
+this.SVVI = function(img) {
+    // Combina las bandas seleccionadas en una imagen multibanda
+    var combinedBands1 = img.select(['blue', 'green', 'red', 'nir', 'swir1', 'swir2']);
+    var combinedBands2 = img.select(['nir', 'swir1', 'swir2']);
+
+    // Calcula la desviación estándar combinada de todas las bandas
+    var stdDevCombined1 = combinedBands1.reduce(ee.Reducer.stdDev().combine({
+      reducer2: ee.Reducer.mean(),
+      sharedInputs: true
+    })).select(['stdDev']);
+    var stdDevCombined2 = combinedBands2.reduce(ee.Reducer.stdDev().combine({
+      reducer2: ee.Reducer.mean(),
+      sharedInputs: true
+    })).select(['stdDev']);
+
+    // Realizar la resta entre stdDevCombined1 y stdDevCombined2
+    var SVVI = stdDevCombined1.subtract(stdDevCombined2).rename('SVVI');
+
+    // Añadir la banda resultante a la imagen y la retorna
+    return img.addBands(SVVI);
+};
+
+
+
 
     this.EVI = function(img) {
         var evi = img.expression(
@@ -163,43 +188,7 @@ this.getIndices = function(img, covariates) {
         });
         return img;
     };
-
-
     
-}
-
-
-
-//Funcion para normalizar las bandas de la imagen
-function normalize(image, boundary) {
-    if (!boundary) {
-        throw new Error('Boundary geometry must be provided');
-    }
-
-    var bandNames = image.bandNames();
-    // Compute min and max of the image
-    var minDict = image.reduceRegion({
-        reducer: ee.Reducer.min(),
-        geometry: boundary,
-        scale: 20,
-        maxPixels: 1e9,
-        bestEffort: true,
-        tileScale: 16
-    });
-    var maxDict = image.reduceRegion({
-        reducer: ee.Reducer.max(),
-        geometry: boundary,
-        scale: 20,
-        maxPixels: 1e9,
-        bestEffort: true,
-        tileScale: 16
-    });
-
-    var mins = ee.Image.constant(minDict.values(bandNames));
-    var maxs = ee.Image.constant(maxDict.values(bandNames));
-
-    var normalized = image.subtract(mins).divide(maxs.subtract(mins));
-    return normalized;
 }
 
 // Función para cambiar los nombres de las bandas de una imagen
@@ -210,7 +199,7 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
-function returnCovariates(img,boundary) {
+function returnCovariates(img) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
     var bandHigh = ['blue_p80', 'green_p80', 'red_p80', 'nir_p80', 'swir1_p80', 'swir2_p80'];
@@ -219,7 +208,7 @@ function returnCovariates(img,boundary) {
     var covariates = ["ND_blue_green", "ND_blue_green", "ND_blue_nir", "ND_blue_swir1", "ND_blue_swir2",
                       "ND_green_red", "ND_green_nir", "ND_green_swir1", "ND_green_swir2", "ND_red_swir1",
                       "ND_red_swir2", "ND_nir_red", "ND_nir_swir1", "ND_nir_swir2", "ND_swir1_swir2",
-                      "R_swir1_nir", "R_red_swir1", "EVI", "SAVI", "IBI"];
+                      "R_swir1_nir", "R_red_swir1", "SVVI","EVI", "SAVI", "IBI"];
 
 
     var indicesInstance = new Indices();
@@ -255,10 +244,8 @@ function returnCovariates(img,boundary) {
         image = indicesInstance.EVI(image).unmask(0);
         image = indicesInstance.SAVI(image).unmask(0);
         image = indicesInstance.IBI(image).unmask(0);
+        image = indicesInstance.SVVI(image).unmask(0);
         image = indicesInstance.addTopography(image).unmask(0);
-        
-        
-        image=normalize(image, boundary)
         
 
         return image;
@@ -278,15 +265,12 @@ function returnCovariates(img,boundary) {
     var middle= img.select(bandMedian);
     var middle=changeBandNames (middle, '_p50');
     var middle_composition=addIndices(middle);
-
+    print("line 265");
 
     img = middle_composition;
-    print("img",img)
+    print("img",img);
     return img;
 }
-
-
-
 
 // Exporting functions
 
