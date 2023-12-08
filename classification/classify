@@ -1,122 +1,15 @@
-// Ejecutar la función y recibe los resultados
-
-
-// Traer puntos de muestreo para semestre 1 
-//Tenemos unafeature collection para muestreos de entrenamiento y validacion
-//el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
-
-var clase='nivel_1'
-var format_pts =function (pts) {
-  //genera 5feature collections
-    var labels = ee.FeatureCollection(pts)
-        .aggregate_array(clase)
-        .distinct()
-        .sort();
-    //print("labels",labels)
-    function binaryPts(l) {
-        var prim = pts.filter(ee.Filter.eq(clase, l))
-            .map(function(f) { return f.set('PRIM', 1); });
-        var nonPrim = pts.filter(ee.Filter.neq(clase, l))
-            .map(function(f) { return f.set('PRIM', 0); });
-        var binary_pts= ee.FeatureCollection(prim).merge(nonPrim);
-        return binary_pts
-    }
-
-    print( ee.List(labels).map(binaryPts));
-    return ee.List(labels).map(binaryPts);
-}
-
-
-
-var getTop20= function (dict) {
-    var sortedValues = ee.Dictionary(dict).values().sort();
-    var cutoff = ee.Algorithms.If(sortedValues.size().gte(20), -20, sortedValues.size().multiply(-1));
-
-    function kvReturn(key, passedObj) {
-        var val = ee.Number(ee.Dictionary(dict).get(key));
-        return ee.Algorithms.If(val.gte(cutoff), ee.List(passedObj).add(key), passedObj);
-    }
-
-    var keys = ee.Dictionary(dict).keys();
-    return keys.iterate(kvReturn, ee.List([]));
-}
-
-
-function RFprim(trainingPts, inputStack) {
-    var inputs = ee.Image(inputStack);
-    var samples = ee.FeatureCollection(trainingPts);
-
-    var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
-
-    var classifier = ee.Classifier.smileRandomForest({
-        numberOfTrees: 100,
-        minLeafPopulation: 1,
-        bagFraction: 0.7,
-        seed: 51515
-    }).setOutputMode('PROBABILITY');
-
-    var model = classifier.train({
-        features: samples,
-        classProperty: 'PRIM',
-        inputProperties: inputs.bandNames()
+exports.rf =function RFprim(trainingPts, inputImage) {
+    var trainingData = inputImage.sampleRegions({
+        collection: trainingPts,
+        properties: ['nivel_1'],
+        scale: 20
     });
 
-    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
-    var importanceAll = ee.Dictionary(model.explain()).get('importance');
-
-    var top20 = getTop20(importanceAll);
-    
-
-    model = classifier.train({
-        features: samples,
-        classProperty: 'PRIM',
-        inputProperties: top20
+    var classifier = ee.Classifier.smileRandomForest(100).train({
+        features: trainingData,
+        classProperty: 'nivel_1',
+        inputProperties: inputImage.bandNames()
     });
-    
 
-    var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
-    var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
-    var schema = ee.List(ee.Classifier(model).schema());
-    var output = inputs.classify(model, 'Probability')
-        .set({
-            'Primitive': classValue,
-            'importance': importanceTop20,
-            'schema': schema,
-            'model': model,
-            'oobError': oobTop20
-        });
-    
-    return output;
+    return inputImage.classify(classifier);
 };
-
-exports.primitivesToCollection=function(inputStack, trainingPts, className) {
-    var inputStack = ee.Image(inputStack);
-    var trainingPts = ee.FeatureCollection(trainingPts);
-    
-    // Obtener las etiquetas de clase distintas y ordenadas
-    var labels = ee.FeatureCollection(trainingPts).aggregate_array(className).distinct().sort();
-
-    var primList = []; // Lista para almacenar las imágenes resultantes
-
-    // Convertir el proceso asincrónico en sincrónico usando evaluate
-    labels.evaluate(function(labels) {
-        labels.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(format_pts(trainingPts)).get(index));
-            var img = RFprim(primPts, inputStack);
-            primList.push(img);
-        });
-
-        // Opcional: Aquí puedes hacer algo con primList, como crear una ImageCollection
-        var imageCollection = ee.ImageCollection.fromImages(primList);
-        print("primList",primList)
-        // Ejemplo: imprimir o visualizar la colección
-        print('ImageCollection:', imageCollection);
-        return imageCollection;
-    });
-    
-}
-
-
-
-
- 
