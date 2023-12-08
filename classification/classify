@@ -4,6 +4,7 @@ exports.rf =function RFprim(trainingPts, inputImage) {
         properties: ['nivel_1'],
         scale: 20
     });
+    print(" trainingData", trainingData)
 
     var classifier = ee.Classifier.smileRandomForest(100).train({
         features: trainingData,
@@ -17,3 +18,8 @@ exports.rf =function RFprim(trainingPts, inputImage) {
 
 
 ///filter
+var RFclassifier=ee.Classifier.smileRandomForest(50).train({
+   features: trainingSet,
+   classProperty: 'class',
+   inputProperties: predictionBands
+});
