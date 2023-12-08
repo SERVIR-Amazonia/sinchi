@@ -55,7 +55,7 @@ formatPts=function (pts,clase) {
 };
 
 exports.primitives_class=function(training_points,clase){
-  listOfPrimPts=formatPts(training_points,clase);
+  var listOfPrimPts=formatPts(training_points,clase);
   print(listOfPrimPts)
   
 };
