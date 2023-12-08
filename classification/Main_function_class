@@ -95,6 +95,23 @@ print('Image CRS:', bandProjection);
 var firstFeatureProjection = Region_100K.first().geometry().projection();
 print('FeatureCollection CRS:', firstFeatureProjection);
 
+
+// get tjhe abnd crs all
+
+// Function to get projection of each band
+var getBandProjection = function(bandName) {
+  var bandProjection = image_covariates.select([bandName]).projection();
+  print('Projection of band ' + bandName + ':', bandProjection);
+};
+
+// Apply the function to each band
+bandNames.evaluate(function(names) {
+  names.forEach(function(name) {
+    getBandProjection(name);
+  });
+});
+
+//////
 /*
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
