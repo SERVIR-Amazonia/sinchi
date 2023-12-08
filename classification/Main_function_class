@@ -86,7 +86,7 @@ var testingData_S1=classify.testingData
 
 
 var confusion_mastrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_image_S1);
-
+print("confusion_mastrix",confusion_mastrix)
 print("classified_image_S1  ",classified_image_S1  );
 
 var metricas_assess=modulo_acc_assess.calculateAccuracy(classified_image_S1, S1_testing);
