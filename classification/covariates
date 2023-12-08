@@ -8,7 +8,7 @@ var rasterizedEcosistemas = ecosistemas.reduceToImage({
   properties: ['property_to_rasterize'],
   reducer: ee.Reducer.first()
 });
-
+/*
 // Step 2: Resample the rasterized layer to match 'img'
 var resampledEcosistemas = rasterizedEcosistemas
   .reproject({
@@ -19,7 +19,7 @@ var resampledEcosistemas = rasterizedEcosistemas
 
 // Step 3: Add the resampled layer to 'img' as a new band named 'eco'
 var combinedImage = img.addBands(resampledEcosistemas.rename('eco'));
-
+*/
 
 
 
