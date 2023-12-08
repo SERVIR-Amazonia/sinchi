@@ -133,7 +133,7 @@ exports.primitives_class=function(training_points,clase,inputStack){
  // var RFprim_class=RFprim(training_points, inputStack, clase)
   //print(RFprim_class)
   //return RFprim_class;
-  return RFprim_class;
+  return listOfPrimPts;
   
   
 };
