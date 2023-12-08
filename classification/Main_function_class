@@ -83,34 +83,9 @@ print("classified_image_S1  ",classified_image_S1  );
 
 var metricas_assess=modulo_acc_assess.calculateAccuracy(classified_image_S1, S1_testing);
 print("metricas_assess",metricas_assess)
-//GEt the coordinnate RS of image and feature collcetioon
-
-// Getting the CRS of the Image
-var bandProjection = image_covariates.select('blue').projection();
-print('Image CRS:', bandProjection);
 
 
 
-
-// Getting the CRS of the first feature in the FeatureCollection
-var firstFeatureProjection = Region_100K.first().geometry().projection();
-print('FeatureCollection CRS:', firstFeatureProjection);
-
-
-// get tjhe abnd crs all
-var bandNames = image_covariates.bandNames();
-// Function to get projection of each band
-var getBandProjection = function(bandName) {
-  var bandProjection = image_covariates.select([bandName]).projection();
-  print('Projection of band ' + bandName + ':', bandProjection);
-};
-
-// Apply the function to each band
-bandNames.evaluate(function(names) {
-  names.forEach(function(name) {
-    getBandProjection(name);
-  });
-});
 
 //////
 /*
