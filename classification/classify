@@ -52,10 +52,11 @@ formatPts=function (pts,clase) {
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
     return listOfPrimPts;
-}
+};
 
 exports.primitives_class=function(training_points,clase){
-  formatPts(training_points,clase);
+  listOfPrimPts=formatPts(training_points,clase);
+  print(listOfPrimPts)
   
 };
 
