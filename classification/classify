@@ -13,3 +13,7 @@ exports.rf =function RFprim(trainingPts, inputImage) {
 
     return inputImage.classify(classifier);
 };
+
+
+
+///filter
