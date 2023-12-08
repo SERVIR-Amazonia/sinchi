@@ -24,7 +24,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 
     return {
         classified_image: inputImage.classify(classifier),
-       rf_classifier: classifier
+        rfclassifier: classifier
     };
     
 };
