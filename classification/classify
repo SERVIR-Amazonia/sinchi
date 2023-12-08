@@ -39,6 +39,13 @@ exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
             actual: 'nivel_1',
             predicted: 'classification'
         });
+        // Print the results.
+      print('Confusion matrix:', confusion_matrix);
+      print('Overall Accuracy:', confusion_matrix.accuracy());
+      print('Producers Accuracy:', confusion_matrix.producersAccuracy());
+      print('Consumers Accuracy:', confusion_matrix.consumersAccuracy());
+      print('Kappa:', confusion_matrix.kappa());
+
 
     return confusionMatrix;
 };
