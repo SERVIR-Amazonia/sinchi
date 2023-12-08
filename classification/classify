@@ -32,7 +32,30 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     
 };
 
-exports.primitives_class=function(){
+formatPts=function (pts,clase) {
+    // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
+    // one point FC for each LC primitive
+
+    // Create sets of binary training pts for each class represented in the full training pts collection
+    var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
+
+    function binaryPts(l) {
+        // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
+        var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
+            return f.set('PRIM', 1);
+        });
+        var nonPrim = pts.filter(ee.Filter.neq(clase, l)).map(function(f) {
+            return f.set('PRIM', 0);
+        });
+        return ee.FeatureCollection(prim).merge(nonPrim);
+    }
+
+    var listOfPrimPts = ee.List(labels).map(binaryPts);
+    return listOfPrimPts;
+}
+
+exports.primitives_class=function(training_points,clase){
+  formatPts(training_points,clase);
   
 };
 
