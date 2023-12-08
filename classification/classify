@@ -4,7 +4,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
         properties: ['nivel_1'],
         scale: 20
     });
-    print(" trainingData", trainingData)
+    print(" trainingData", trainingData);
     
     var testingData = inputImage.sampleRegions({
         collection: testingPts,
@@ -75,6 +75,6 @@ exports.importance=function(classifier){
         title: 'Feature Importance',
         vAxis: {title: 'Importance'},
         hAxis: {title: 'Feature'}
-    })
-  print(chart)
-}
+    });
+  print(chart);
+};
