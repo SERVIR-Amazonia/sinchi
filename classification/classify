@@ -104,9 +104,10 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
             var primPts = ee.FeatureCollection(formattedPts.get(index)); // Acceder a los puntos formateados
             var img = RFprim(primPts, inputStack); // Ejecutar el modelo RF
             primList.push(img); // Agregar el resultado a la lista
+            print("primList",primList)
         });
    });
-   print("primList",primList)
+   
 }
 
 
