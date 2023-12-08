@@ -60,7 +60,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
-var image_covariates=moduloCovariates.returnCovariates(processedImage,region);
+var image_covariates=moduloCovariates.returnCovariates(processedImage,boundary);
 var image_covariates=image_covariates.clip(region);
 
 print("image_covariates2",image_covariates);
