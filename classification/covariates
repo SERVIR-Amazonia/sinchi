@@ -189,6 +189,26 @@ this.getIndices = function(img, covariates) {
     
 }
 
+//Agregar relieve
+
+var rasterisedRelieve = fcRelieve.reduceToImage({
+  properties: ['simb_relie'],
+  reducer: ee.Reducer.first()
+});
+
+// Step 2: Resample the rasterized layer to match 'img'
+var resampledRelieve = rasterisedRelieve
+  .reproject({
+    crs: img.projection().crs(),
+    scale: img.projection().nominalScale()
+  })
+  .clip(img.geometry());
+
+// Step 3: Add the resampled layer to 'img' as a new band named 'eco'
+var combinedImage = img.addBands(resampledRelieve.rename('relie'));
+
+
+
 
 
 //Funcion para normalizar las bandas de la imagen
