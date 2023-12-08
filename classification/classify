@@ -98,7 +98,7 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
 
     var primList = []; // Lista vacía para almacenar los resultados
 
-    for (var i = 0; i < labels.length; i++) {
+    for (var i = 1; i < labels.length; i++) {
         var label = labels.get(i); // Obtiene la etiqueta actual
         print("labe3",label)
         var primPts = formattedPts.get(i); // Usa el índice para acceder a los elementos
