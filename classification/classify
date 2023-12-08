@@ -100,6 +100,7 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
 
     for (var i = 0; i < labels.length; i++) {
         var label = labels.get(i); // Obtiene la etiqueta actual
+        print("labe3",label)
         var primPts = formattedPts.get(i); // Usa el índice para acceder a los elementos
         var output = RFprim(primPts, inputStack);
         primList.push(output); // Agrega el resultado a la lista
