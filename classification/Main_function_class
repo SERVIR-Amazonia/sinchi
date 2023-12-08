@@ -76,7 +76,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
-var classified_image_S1 = modulo_classifier.rf(S1_training, image_covariates);
+var classified_image_S1 = modulo_classifier.rf(S1_training, processedImage);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 print("classified_image_S1  ",classified_image_S1  );
