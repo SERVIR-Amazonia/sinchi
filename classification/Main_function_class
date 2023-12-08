@@ -87,6 +87,7 @@ var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1
 print("confusion_mastrix",confusion_matrix)
 var importance =imoprtance(classifier_S1)
 
+
 print("classified_image_S1  ",classified_image_S1  );
 
 
