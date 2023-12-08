@@ -77,6 +77,9 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 print("primitivos_funct",primitivos_funct)
+
+
+/* Verificar primeros features in the list of feature collectiosn
 // Printing a few features from each FeatureCollection in the list
 // Get the first FeatureCollection from the list
 var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
@@ -84,7 +87,7 @@ var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
 // Print the first three features of this FeatureCollection
 var firstThreeFeatures = firstFeatureCollection.limit(3);
 print('First three features of the first FeatureCollection:', firstThreeFeatures);
-
+*/
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
