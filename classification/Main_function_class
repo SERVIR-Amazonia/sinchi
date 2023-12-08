@@ -29,7 +29,6 @@ var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 var region=geometry4;
-var geometry = region;
 //Decalrar variables
 var start_year = 2022;
 var start_month = 1;
@@ -60,7 +59,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
-var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
+var image_covariates=moduloCovariates.returnCovariates(processedImage);
 var image_covariates=image_covariates.clip(region);
 
 print("image_covariates2",image_covariates);
@@ -84,10 +83,6 @@ print("classified_image_S1  ",classified_image_S1  );
 var metricas_assess=modulo_acc_assess.calculateAccuracy(classified_image_S1, S1_testing);
 print("metricas_assess",metricas_assess)
 
-
-
-
-//////
 /*
 // Mostrar los resultados
 //print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
