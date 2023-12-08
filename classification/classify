@@ -11,7 +11,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
         properties: ['nivel_1'],
         scale: 20
     });
-    print(" testinggData", testingData)
+    //print(" testinggData", testingData)
     
     
 
