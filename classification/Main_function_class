@@ -69,7 +69,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [200, 200,200],
   "max": [5000,5000,50000],
   "gamma": 0.5,
-}; // Ajusta según tus bandas
+}; // Ajusta según  bandas
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
