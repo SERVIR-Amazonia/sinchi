@@ -31,7 +31,7 @@ var format_pts =function (pts) {
 var getTop20= function (dict) {
     var sortedValues = ee.Dictionary(dict).values().sort();
     var cutoff = ee.Algorithms.If(sortedValues.size().gte(20), -20, sortedValues.size().multiply(-1));
-    print("linea32")
+xfd
     function kvReturn(key, passedObj) {
         var val = ee.Number(ee.Dictionary(dict).get(key));
         return ee.Algorithms.If(val.gte(cutoff), ee.List(passedObj).add(key), passedObj);
