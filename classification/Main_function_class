@@ -80,7 +80,7 @@ var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 var result = calculateConfusionMatrix(testingSet, RFclassifier);
 classified_image_S1=classify.classified_image
-classified_image_S1=classify.classified_image
+classified_image_S1=classify.rfclassifier
 console.log("Matriz de Confusión:", result.confusionMatrix);
 console.log("Precisión General:", result.accuracy);
 
