@@ -297,7 +297,7 @@ function returnCovariates(img,boundary,fcRelieve) {
         image = indicesInstance.IBI(image).unmask(0);
         image = indicesInstance.addTopography(image).unmask(0);
         image = indicesInstance.SVVI(image).unmask(0);
-        image = indicesInstance.addRelieve(image,fcRelieve).unmask(0);
+        //image = indicesInstance.addRelieve(image,fcRelieve).unmask(0);
         
         image=normalize(image, boundary)
         
