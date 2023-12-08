@@ -1,10 +1,19 @@
-exports.rf =function RFprim(trainingPts, inputImage) {
+exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
         properties: ['nivel_1'],
         scale: 20
     });
     print(" trainingData", trainingData)
+    
+    var testingData = inputImage.sampleRegions({
+        collection: testingPts,
+        properties: ['nivel_1'],
+        scale: 20
+    });
+    print(" testinggData", testingData)
+    
+    
 
     var classifier = ee.Classifier.smileRandomForest(100).train({
         features: trainingData,
