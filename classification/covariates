@@ -1,4 +1,27 @@
 var ecosistemas = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/ecosistemas");
+// Rasterise ecosystems FeatureCollection 
+
+// Step 1: Rasterize the 'ecosistemas' FeatureCollection
+// Note: This assumes that 'ecosistemas' has a property that you want to rasterize.
+// Replace 'property_to_rasterize' with the name of the property.
+var rasterizedEcosistemas = ecosistemas.reduceToImage({
+  properties: ['property_to_rasterize'],
+  reducer: ee.Reducer.first()
+});
+
+// Step 2: Resample the rasterized layer to match 'img'
+var resampledEcosistemas = rasterizedEcosistemas
+  .reproject({
+    crs: img.projection().crs(),
+    scale: img.projection().nominalScale()
+  })
+  .clip(img.geometry());
+
+// Step 3: Add the resampled layer to 'img' as a new band named 'eco'
+var combinedImage = img.addBands(resampledEcosistemas.rename('eco'));
+
+
+
 
 function Indices() {
 
