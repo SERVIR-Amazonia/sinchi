@@ -80,12 +80,12 @@ var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 classified_image_S1=classify.classified_image
-classified_image_S1=classify.rfclassifier
+classifier_image_S1=classify.rfclassifier
 trainingData_S1=classify.testingData
 testingData_S1=classify.testingData
 
 
-var confusion_mastrix =.  modulo_classifier.calculateConfusionMatrix(testingSet, RFclassifier);
+var confusion_mastrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_image_S1r);
 
 print("classified_image_S1  ",classified_image_S1  );
 
