@@ -254,7 +254,7 @@ function returnCovariates(img,boundary) {
         image = indicesInstance.addTopography(image).unmask(0);
         
         
-        iamge=normalize(image)
+        image=normalize(image)
         
 
         return image;
