@@ -106,6 +106,7 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
             primList.push(img); // Agregar el resultado a la lista
         });
    });
+   print("primList",primList)
 }
 
 
