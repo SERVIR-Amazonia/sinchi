@@ -76,6 +76,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 //primitives
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
+print("primitivos_funct",primitivos_funct)
 // Printing a few features from each FeatureCollection in the list
 // Get the first FeatureCollection from the list
 var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
