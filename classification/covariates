@@ -322,7 +322,7 @@ function returnCovariates(img,boundary,fcRelieve) {
 
 
     img = middle_composition;
-    print("img",img)
+    //print("img",img)
     return img;
 }
 
