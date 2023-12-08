@@ -108,6 +108,7 @@ exports.primitivesToCollection=function(inputStack, trainingPts, className) {
 
         // Opcional: Aquí puedes hacer algo con primList, como crear una ImageCollection
         var imageCollection = ee.ImageCollection.fromImages(primList);
+        print("primList",primList)
         // Ejemplo: imprimir o visualizar la colección
         print('ImageCollection:', imageCollection);
         
