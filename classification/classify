@@ -51,6 +51,7 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
+    print("listOfPrimPts",listOfPrimPts)
     return listOfPrimPts;
 };
 
