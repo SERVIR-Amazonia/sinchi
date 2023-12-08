@@ -89,12 +89,12 @@ var classifier_S1=classify.rfclassifier;
 var trainingData_S1=classify.testingData
 var testingData_S1=classify.testingData
 
-
+/*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
 var importance =modulo_classifier.importance(classifier_S1)
 print("importance",importance)
-/*
+
 
 
 //print("classified_image_S1  ",classified_image_S1  );
