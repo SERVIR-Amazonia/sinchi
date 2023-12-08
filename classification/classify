@@ -36,7 +36,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
     var confusionMatrix = testingSet.classify(RFclassifier)
         .errorMatrix({
-            actual: 'class',
+            actual: 'nivel_1',
             predicted: 'classification'
         });
 
