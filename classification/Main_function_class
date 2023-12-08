@@ -90,12 +90,6 @@ print("confusion_mastrix",confusion_matrix)
 
 
 print("classified_image_S1  ",classified_image_S1  );
-// Print the results.
-print('Confusion matrix:', confusion_matrix);
-print('Overall Accuracy:', confusion_matrix.accuracy());
-print('Producers Accuracy:', confusion_matrix.producersAccuracy());
-print('Consumers Accuracy:', confusion_matrix.consumersAccuracy());
-print('Kappa:', confusion_matrix.kappa());
 
 
 //////
