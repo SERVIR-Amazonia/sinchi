@@ -171,7 +171,7 @@ this.getIndices = function(img, covariates) {
 
 
 //Funcion para normalizar las bandas de la imagen
-function normalize(img){
+function normalize(image){
   var bandNames = image.bandNames();
   // Compute min and max of the image
   var minDict = image.reduceRegion({
