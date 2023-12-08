@@ -55,6 +55,26 @@ var formatPts=function (pts,clase) {
     return listOfPrimPts;
 };
 
+
+
+function getTop20(dict) {
+    // If total input features count < 20, take them all, otherwise take top 20 most important
+    dict = ee.Dictionary(dict);
+    var values = dict.values().sort();
+    var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
+
+    function kvReturn(key, passedObj) {
+        passedObj = ee.List(passedObj);
+        var val = ee.Number(dict.get(key));
+        var retObj = ee.Algorithms.If(val.gte(cutoff), passedObj.add(key), passedObj);
+        return retObj;
+    }
+
+    var newList = dict.keys().iterate(kvReturn, ee.List([]));
+    return newList;
+}
+
+
 exports.primitives_class=function(training_points,clase){
   var listOfPrimPts = formatPts(training_points,clase);
   print(listOfPrimPts);
