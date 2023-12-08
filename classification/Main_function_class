@@ -77,7 +77,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 print("primitivos_funct",primitivos_funct)
-var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
+//var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 
 
