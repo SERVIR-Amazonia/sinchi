@@ -186,9 +186,7 @@ function Indices() {
             crs: img.projection().crs(),
             scale: img.projection().nominalScale()
           })
-          .clip(img.geometry());
-                
-                return img.addBands(resampledRelieve.rename('relie'));
+          return img.addBands(resampledRelieve.rename('relie'));
             };
     
     
@@ -305,7 +303,7 @@ function returnCovariates(img,boundary) {
         image = indicesInstance.IBI(image).unmask(0);
         image = indicesInstance.addTopography(image).unmask(0);
         image = indicesInstance.SVVI(image).unmask(0);
-        
+        image = indicesInstance.addRelieve(image,fcRelieve).unmask(0);
         
         image=normalize(image, boundary)
         
