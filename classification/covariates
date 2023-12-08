@@ -205,12 +205,6 @@ this.getIndices = function(img, covariates) {
     
 }
 
-//Agregar relieve
-
-
-
-// Step 3: Add the resampled layer to 'img' as a new band named 'eco'
-var combinedImage = img
 
 
 
