@@ -42,7 +42,7 @@ var module_extract_samples = require('users/an-sig/sinchi:classification/module_
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
 var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
-
+var clase ='nivel_1'
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
@@ -75,7 +75,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 //primitives
 
-primitivos_funct=modulo_classifier.primitives_class()
+primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
