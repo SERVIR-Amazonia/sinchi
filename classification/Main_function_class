@@ -77,15 +77,13 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 // Printing a few features from each FeatureCollection in the list
-primitivos_funct.getInfo(function(list) {
-    list.forEach(function(fc, index) {
-        print('FeatureCollection ' + index + ':', fc);
-        var sampleFeatures = ee.FeatureCollection(fc).limit(5); // Limit to 5 features for display
-        sampleFeatures.getInfo(function(features) {
-            print('Sample features from FeatureCollection ' + index + ':', features);
-        });
-    });
-});
+// Get the first FeatureCollection from the list
+var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
+
+// Print the first three features of this FeatureCollection
+var firstThreeFeatures = firstFeatureCollection.limit(3);
+print('First three features of the first FeatureCollection:', firstThreeFeatures);
+
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
