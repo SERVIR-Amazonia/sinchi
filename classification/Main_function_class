@@ -76,8 +76,13 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
-var classified_image_S1 = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
+var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
+var result = calculateConfusionMatrix(testingSet, RFclassifier);
+classified_image_S1=classify.
+console.log("Matriz de Confusión:", result.confusionMatrix);
+console.log("Precisión General:", result.accuracy);
+
 
 print("classified_image_S1  ",classified_image_S1  );
 
