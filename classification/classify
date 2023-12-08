@@ -110,8 +110,9 @@ exports.primitivesToCollection=function(inputStack, trainingPts, className) {
         var imageCollection = ee.ImageCollection.fromImages(primList);
         // Ejemplo: imprimir o visualizar la colección
         print('ImageCollection:', imageCollection);
+        
     });
-    print('ImageCollection:', imageCollection);
+    return imageCollection;
 }
 
 
