@@ -111,9 +111,9 @@ exports.primitivesToCollection=function(inputStack, trainingPts, className) {
         print("primList",primList)
         // Ejemplo: imprimir o visualizar la colección
         print('ImageCollection:', imageCollection);
-        
+        return imageCollection;
     });
-    return imageCollection;
+    
 }
 
 
