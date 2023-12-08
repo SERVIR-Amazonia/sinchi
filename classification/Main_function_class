@@ -29,6 +29,7 @@ var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 var region=geometry4;
+var boundary = boundary.region();
 //Decalrar variables
 var start_year = 2022;
 var start_month = 1;
