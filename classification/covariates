@@ -256,7 +256,7 @@ function changeBandNames(img, textToRemove) {
   });
   return img.rename(newBandNames);
 }
-function returnCovariates(img,boundary) {
+function returnCovariates(img,boundary,fcRelieve) {
     var bands = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2'];
     var bandLow = ['blue_p20', 'green_p20', 'red_p20', 'nir_p20', 'swir1_p20', 'swir2_p20'];
     var bandHigh = ['blue_p80', 'green_p80', 'red_p80', 'nir_p80', 'swir1_p80', 'swir2_p80'];
