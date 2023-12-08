@@ -69,7 +69,13 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
   "min": [200, 200,200],
   "max": [5000,5000,50000],
   "gamma": 0.5,
+  
 }; // Ajusta según  bandas
+
+
+//primitives
+
+primitivos_funct=modulo_classifier.primitives_class()
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
@@ -87,6 +93,8 @@ var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1
 
 var importance =modulo_classifier.importance(classifier_S1)
 print("importance",importance)
+
+
 
 //print("classified_image_S1  ",classified_image_S1  );
 
