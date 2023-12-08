@@ -75,7 +75,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 //primitives
 
-primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
+var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
