@@ -78,12 +78,14 @@ Map.addLayer(processedImage,visualizationParams,'processedImage');
 
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
-var result = calculateConfusionMatrix(testingSet, RFclassifier);
+
 classified_image_S1=classify.classified_image
 classified_image_S1=classify.rfclassifier
 trainingData_S1=classify.testingData
 testingData_S1=classify.testingData
 
+
+var confusion_mastrix = calculateConfusionMatrix(testingSet, RFclassifier);
 
 print("classified_image_S1  ",classified_image_S1  );
 
