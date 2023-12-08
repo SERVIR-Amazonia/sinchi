@@ -90,6 +90,27 @@ function Indices() {
         return img.addBands(img.select('red').divide(img.select('swir1')).rename(['R_red_swir1']));
     };
 
+
+    this.SVVI = function(img) {	    
+      // Combina las bandas seleccionadas en una imagen multibanda	    
+        var combinedBands1 = img.select(['blue', 'green', 'red', 'nir', 'swir1', 'swir2']);	    
+        var combinedBands2 = img.select(['nir', 'swir1', 'swir2']);		   
+        // Calcula la desviación estándar combinada de todas las bandas	    
+        var stdDevCombined1 = combinedBands1.reduce(ee.Reducer.stdDev().combine({	      
+          reducer2: ee.Reducer.mean(),	      
+          sharedInputs: true	    
+        })).select(['stdDev']);	    
+        var stdDevCombined2 = combinedBands2.reduce(ee.Reducer.stdDev().combine({	      
+            reducer2: ee.Reducer.mean(),	      
+            sharedInputs: true	    
+        })).select(['stdDev']);		    
+        // Realizar la resta entre stdDevCombined1 y stdDevCombined2	    
+        var SVVI = stdDevCombined1.subtract(stdDevCombined2).rename('SVVI');		    
+        // Añadir la banda resultante a la imagen y la retorna	    
+        return img.addBands(SVVI);	
+      
+    };	
+
     // Función para estimar EVI y agregarlo como banda.
     this.EVI_corregido = function(img) {
       var evi = img.expression(
