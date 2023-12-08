@@ -80,6 +80,7 @@ var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 
+/*
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
@@ -97,7 +98,7 @@ print("importance",importance)
 
 
 //print("classified_image_S1  ",classified_image_S1  );
-
+*/
 //////
 /*
 // Mostrar los resultados
