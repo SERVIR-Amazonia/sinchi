@@ -97,7 +97,7 @@ print('FeatureCollection CRS:', firstFeatureProjection);
 
 
 // get tjhe abnd crs all
-
+var bandNames = image_covariates.bandNames();
 // Function to get projection of each band
 var getBandProjection = function(bandName) {
   var bandProjection = image_covariates.select([bandName]).projection();
