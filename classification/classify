@@ -25,3 +25,10 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 };
 
 
+// Now, to test the classification (verify model's accuracy),
+// we classify the testingSet and get a confusion matrix.
+var confusionMatrix=testingSet.classify(RFclassifier)
+   .errorMatrix({
+       actual: 'class',
+       predicted: 'classification'
+   });
