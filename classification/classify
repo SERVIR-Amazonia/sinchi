@@ -16,10 +16,3 @@ exports.rf =function RFprim(trainingPts, inputImage) {
 };
 
 
-
-///filter
-var RFclassifier=ee.Classifier.smileRandomForest(50).train({
-   features: trainingSet,
-   classProperty: 'class',
-   inputProperties: predictionBands
-});
