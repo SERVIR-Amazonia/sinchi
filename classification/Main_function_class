@@ -85,8 +85,11 @@ print("metricas_assess",metricas_assess)
 //GEt the coordinnate RS of image and feature collcetioon
 
 // Getting the CRS of the Image
-var imageProjection = image_covariates.projection();
-print('Image CRS:', imageProjection);
+var bandProjection = image_covariates.select('blue').projection();
+print('Image CRS:', bandProjection);
+
+
+
 
 // Getting the CRS of the first feature in the FeatureCollection
 var firstFeatureProjection = Region_100K.first().geometry().projection();
