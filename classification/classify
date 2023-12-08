@@ -126,10 +126,12 @@ RFprim=function (trainingPts, inputStack, clase) {
     return output;
 }
 
-exports.primitives_class=function(training_points,clase){
+exports.primitives_class=function(training_points,clase,inputStack){
   var listOfPrimPts = formatPts(training_points,clase);
   print(listOfPrimPts);
-  return listOfPrimPts;
+  //Train and apply RF Probability classifier on a Primitive
+  var RFprim_class=RFprim(trainingPts, inputStack, clase)
+  return RFprim_class;
   
   
 };
