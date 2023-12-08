@@ -88,7 +88,7 @@ print("confusion_mastrix",confusion_matrix)
 var importance =modulo_classifier.importance(classifier_S1)
 print("importance",importance)
 
-print("classified_image_S1  ",classified_image_S1  );
+//print("classified_image_S1  ",classified_image_S1  );
 
 
 //////
