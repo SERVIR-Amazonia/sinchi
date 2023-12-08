@@ -171,32 +171,36 @@ this.getIndices = function(img, covariates) {
 
 
 //Funcion para normalizar las bandas de la imagen
-function normalize(image,boundary){
-  var bandNames = image.bandNames();
-  // Compute min and max of the image
-  var minDict = image.reduceRegion({
-    reducer: ee.Reducer.min(),
-    geometry: boundary,
-    scale: 20,
-    maxPixels: 1e9,
-    bestEffort: true,
-    tileScale: 16
-  });
-  var maxDict = image.reduceRegion({
-    reducer: ee.Reducer.max(),
-    geometry: boundary,
-    scale: 20,
-    maxPixels: 1e9,
-    bestEffort: true,
-    tileScale: 16
-  });
-  var mins = ee.Image.constant(minDict.values(bandNames));
-  var maxs = ee.Image.constant(maxDict.values(bandNames));
+function normalize(image, boundary) {
+    if (!boundary) {
+        throw new Error('Boundary geometry must be provided');
+    }
 
-  var normalized = image.subtract(mins).divide(maxs.subtract(mins))
-  return normalized
+    var bandNames = image.bandNames();
+    // Compute min and max of the image
+    var minDict = image.reduceRegion({
+        reducer: ee.Reducer.min(),
+        geometry: boundary,
+        scale: 20,
+        maxPixels: 1e9,
+        bestEffort: true,
+        tileScale: 16
+    });
+    var maxDict = image.reduceRegion({
+        reducer: ee.Reducer.max(),
+        geometry: boundary,
+        scale: 20,
+        maxPixels: 1e9,
+        bestEffort: true,
+        tileScale: 16
+    });
+
+    var mins = ee.Image.constant(minDict.values(bandNames));
+    var maxs = ee.Image.constant(maxDict.values(bandNames));
+
+    var normalized = image.subtract(mins).divide(maxs.subtract(mins));
+    return normalized;
 }
-
 
 // Función para cambiar los nombres de las bandas de una imagen
 function changeBandNames(img, textToRemove) {
