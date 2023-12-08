@@ -108,6 +108,7 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
         var primPts = formattedPts.get(i); // Usa el índice para acceder a los elementos
         var output = RFprim(primPts, inputStack);
         primList.push(output); // Agrega el resultado a la lista
+        print("primList",primList)
     }
 
     return ee.ImageCollection.fromImages(primList); // Crea una ImageCollection a partir de la lista
