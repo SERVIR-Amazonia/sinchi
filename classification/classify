@@ -96,7 +96,7 @@ exports.primitivesToCollection = function(inputStack, trainingPts, clase) {
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
     
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
-    
+    print("labels 95",labels)
     var formattedPts = format_pts(trainingPts); // Llama a format_pts una vez
 
     var primList = []; // Lista vacía para almacenar los resultados
