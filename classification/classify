@@ -32,7 +32,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     
 };
 
-formatPts=function (pts,clase) {
+var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
     // one point FC for each LC primitive
 
