@@ -243,7 +243,7 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 
-//var primitives=createLCPrimitiveCollection(image_covariates, S1_training, clase) ;
+var primitives=createLCPrimitiveCollection(image_covariates, S1_training, clase) ;
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
