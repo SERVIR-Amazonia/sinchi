@@ -190,6 +190,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     */   
     print('Type of inputStack:', inputStack);
     inputStack = ee.Image(inputStack);
+    print('Type of inputStack:', inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
