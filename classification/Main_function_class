@@ -187,7 +187,9 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     
     returns:
         An object containing the ImageCollection, region, and training data
-    */   inputStack = ee.Image(inputStack);
+    */   
+    print('Type of inputStack:', inputStack);
+    inputStack = ee.Image(inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
