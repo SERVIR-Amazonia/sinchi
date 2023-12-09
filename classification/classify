@@ -141,24 +141,21 @@ exports.createLCPrimitiveCollection=function(inputStack, trainingPts, className)
     returns:
         An object containing the ImageCollection, region, and training data
     */
-
-    inputStack = ee.Image(inputStack);
+   inputStack = ee.Image(inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
-    var labels = trainingPts.aggregate_array(className).distinct().sort().getInfo();
-
-    var indices = [];
-    for (var i = 0; i < labels.length; i++) {
-        indices.push(i);
-    }
+    var labels = trainingPts.aggregate_array(className).distinct().sort();
 
     var primList = [];
-    for (var i = 0; i < indices.length; i++) {
-        var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(indices[i])); // Needs definition
-        var img = RFprim(primPts, inputStack); // Needs definition
-        primList.push(img);
-    }
+    labels.evaluate(function(labelsList) {
+        for (var i = 0; i < labelsList.length; i++) {
+            var label = labelsList[i];
+            var primPts = formatPts(trainingPts, label, className); // Needs definition
+            var img = RFprim(primPts, inputStack); // Needs definition
+            primList.push(img);
+        }
+    });
 
     var primitives = ee.ImageCollection.fromImages(primList);
     var region = ee.Image(inputStack).geometry().getInfo();
@@ -170,7 +167,6 @@ exports.createLCPrimitiveCollection=function(inputStack, trainingPts, className)
         trainingData: trainingData
     };
 }
-
 
 
 exports.primitives_class=function(training_points,clase,inputStack){
