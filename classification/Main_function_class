@@ -242,8 +242,7 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 
-//primitives=modulo_classifier.createLCPrimitiveCollection(inputStack, trainingPts, className) ;
-primitives=modulo_classifier.createLCPrimitiveCollection(S1_training, S1_training, clase) ;
+createLCPrimitiveCollection(inputStack, trainingPts, className) ;
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
