@@ -174,8 +174,7 @@ var RFprim=function (trainingPts,//
     return output;
 };
 
-var inputStack=image_covariates;
-print('Type of image_covariates:', image_covariates);
+
 var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     /*
     Create LC Primitive image for each LC class in training points.
@@ -244,8 +243,8 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 
+primitives=createLCPrimitiveCollection(image_covariates, S1_training, clase) ;
 
-primitives=createLCPrimitiveCollection(S1_training, S1_training, clase) ;
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
