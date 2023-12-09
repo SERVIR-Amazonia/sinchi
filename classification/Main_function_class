@@ -174,8 +174,8 @@ var RFprim=function (trainingPts,//
     return output;
 };
 
-var inputStack=image_covariates
-
+var inputStack=image_covariates;
+print('Type of image_covariates:', image_covariates);
 var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     /*
     Create LC Primitive image for each LC class in training points.
