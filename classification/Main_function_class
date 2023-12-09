@@ -100,8 +100,11 @@ var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 
 //var classified_image_S1=classify.classified_image;
 var classifier_S1=classify.rfclassifier;
-var trainingData_S1=classify.testingData
-var testingData_S1=classify.testingData
+var trainingData_S1=classify.testingData;
+var testingData_S1=classify.testingData;
+
+
+primitives=modulo_classifier.createLCPrimitiveCollection(inputStack, trainingPts, className) ;
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
