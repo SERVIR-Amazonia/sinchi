@@ -75,8 +75,8 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 //primitives
 
-var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
-print("primitivos_funct",primitivos_funct)
+//var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
+p//rint("primitivos_funct",primitivos_funct)
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 var formatPts=function (pts,clase) {
@@ -242,7 +242,8 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 
-createLCPrimitiveCollection(inputStack, trainingPts, className) ;
+
+primitives=modulo_classifier.createLCPrimitiveCollection(S1_training, S1_training, clase) ;
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
