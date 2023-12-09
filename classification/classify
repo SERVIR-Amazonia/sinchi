@@ -75,7 +75,8 @@ var getTop20=function (dict) {
 }
 
 
-var RFprim=function (trainingPts, inputStack, clase) {
+var RFprim=function (trainingPts,//
+        inputStack, clase) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     var samples = ee.FeatureCollection(trainingPts);
@@ -124,7 +125,53 @@ var RFprim=function (trainingPts, inputStack, clase) {
                     });
 
     return output;
+};
+
+
+
+function createLCPrimitiveCollection(inputStack, trainingPts, className) {
+    /*
+    Create LC Primitive image for each LC class in training points.
+
+    args:
+        inputStack (ee.Image): of all covariates and predictor
+        trainingPts (ee.FeatureCollection): training pts containing full LC typology
+        className (str): property name in training points containing model classes
+    
+    returns:
+        An object containing the ImageCollection, region, and training data
+    */
+
+    inputStack = ee.Image(inputStack);
+    trainingPts = ee.FeatureCollection(trainingPts);
+
+    // list of distinct LANDCOVER values
+    var labels = trainingPts.aggregate_array(className).distinct().sort().getInfo();
+
+    // converting to index of the list of distinct LANDCOVER primitive FC's
+    var indices = Array.from(Array(labels.length).keys());
+
+    var primList = [];
+    for (var i in indices) {
+        var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(i)); // Needs definition
+        var img = RFprim(primPts, inputStack); // Needs definition
+        primList.push(img);
+    }
+
+    var primitives = ee.ImageCollection.fromImages(primList);
+    var region = ee.Image(inputStack).geometry().getInfo();
+    var trainingData = ee.FeatureCollection(trainingPts);
+
+    return {
+        collection: primitives,
+        region: region,
+        trainingData: trainingData
+    };
 }
+
+
+
+
 
 exports.primitives_class=function(training_points,clase,inputStack){
   var listOfPrimPts = formatPts(training_points,clase);
@@ -153,6 +200,8 @@ exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
 
     return confusionMatrix;
 };
+
+
 
 exports.importance=function(classifier){
   
