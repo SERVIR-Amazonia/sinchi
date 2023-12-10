@@ -55,7 +55,7 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 var S1_training=visualizationResults.combinedResults_S1.training;
 var S1_testing=visualizationResults.combinedResults_S1.testing;
 
-
+print("S1_testing 32",S1_testin)
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
@@ -187,7 +187,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     var linea123=samples.sort('PRIM', false)
     print( linea123,"linea 123");
     var linea125=linea123.first();
-    print("linea133",linea125)
+    print("primeros features linea133",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
