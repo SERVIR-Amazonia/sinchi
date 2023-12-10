@@ -308,6 +308,26 @@ var testingData_S1=classify.testingData;
 
 
 
+// Función para verificar y manejar propiedades faltantes
+function checkAndHandleMissingProperties(feature) {
+    // Lista de todas las propiedades requeridas
+    var requiredProperties = ['blue', 'green', 'red'];  // y otras propiedades relevantes
+
+    requiredProperties.forEach(function(prop) {
+        if (!feature.has(prop)) {
+            // Manejar la propiedad faltante, por ejemplo, asignar un valor predeterminado
+            feature = feature.set(prop, defaultValue);  // defaultValue es un valor que eliges
+        }
+    });
+
+    return feature;
+}
+
+// Aplicar esta función a todas las características en la colección
+samples = samples.map(checkAndHandleMissingProperties);
+
+print("samples 303",samples)
+
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
