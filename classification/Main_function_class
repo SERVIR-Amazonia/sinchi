@@ -342,10 +342,7 @@ function checkAndHandleMissingProperties(feature) {
     return feature;
 }
 
-// Aplicar esta función a todas las características en la colección
-samples = samples.map(checkAndHandleMissingProperties);
 
-print("samples 303",samples)
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
