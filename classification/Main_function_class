@@ -251,7 +251,8 @@ print('First three features of the first FeatureCollection:', firstThreeFeatures
 */
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
-
+/////////////////
+//test simple classifier
 
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
@@ -261,8 +262,8 @@ var classifier_S1=classify.rfclassifier;
 var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
-
-var primitives=createLCPrimitiveCollection(image_covariates, S1_training, clase) ;
+/////////////////
+var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
