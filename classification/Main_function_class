@@ -143,8 +143,7 @@ var getTop20=function (dict) {
 }
 
 clase='nivel_1'
-var RFprim=function (trainingPts,//
-        inputStack, clase) {
+var RFprim=function (trainingPts,inputStack, clase) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     print("line 121 trainingPts",trainingPts)
