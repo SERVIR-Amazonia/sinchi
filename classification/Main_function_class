@@ -207,7 +207,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     });
     print("model 151",model);
     // Store for model performance exploration
-    explain=print(classifier.explain());
+    explain=print(model.explain());
     print("explain 185",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
     print("oobAll 154",oobAll)
