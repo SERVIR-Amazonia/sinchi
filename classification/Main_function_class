@@ -210,9 +210,8 @@ var RFprim=function (trainingPts,inputStack, clase) {
     var explain=print(model.explain());
     print("explain 190",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
-    
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
-    
+    print("importanceAll 188",importanceAll);
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
