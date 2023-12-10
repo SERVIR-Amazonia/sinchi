@@ -170,7 +170,7 @@ exports.createLCPrimitiveCollection=function(inputStack, trainingPts, className)
 
 exports.primitives_class=function(training_points,clase,inputStack){
   var listOfPrimPts = formatPts(training_points,clase);
-  print(listOfPrimPts);
+  //print(listOfPrimPts);
   //Train and apply RF Probability classifier on a Primitive
  // var RFprim_class=RFprim(training_points, inputStack, clase)
   //print(RFprim_class)
