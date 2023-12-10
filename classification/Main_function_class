@@ -67,7 +67,7 @@ var image_covariates=image_covariates.clip(region);
 var imageGeometry = image_covariates.geometry();
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
-var S1_training = pointsCollection.filterBounds(imageGeometry);
+var S1_training = S1_training.filterBounds(imageGeometry);
 
 
 
