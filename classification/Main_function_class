@@ -105,8 +105,7 @@ var formatPts=function (pts,clase) {
     // Create sets of binary training pts for each class represented in the full training pts collection
    var labels = ee.FeatureCollection(pts)
    print("labels81",labels)
-   print("clase82",clase)
-   var labels=labels.aggregate_array(clase.distinct().sort());
+   var labels=labels.aggregate_array(clase.toString()).distinct().sort();
    print("labels83",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
@@ -230,7 +229,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     labels.evaluate(function(labelsList) {
       print("labelsList 201",labelsList)
         labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
+            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
             print("primPts 203",primPts);
             var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
             primList.push(img);
