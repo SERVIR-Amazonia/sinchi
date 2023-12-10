@@ -146,10 +146,10 @@ var RFprim=function (trainingPts,//
     var inputs = ee.Image(inputStack);
     var samples = ee.FeatureCollection(trainingPts);
     print("samples",samples)
-    var linea123=classValue=samples.sort('PRIM', false)
-   print( linea123,"linea 123")
-   var linea125=linea123.first()
-   print("linea125",linea125)
+    var linea123=samples.sort('PRIM', false)
+    print( linea123,"linea 123");
+    var linea125=linea123.first();
+    print("linea125",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
