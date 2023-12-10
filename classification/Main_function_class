@@ -139,6 +139,7 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
+    print("newList 116",newList)
     return newList;
 }
 
