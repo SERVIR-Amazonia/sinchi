@@ -97,7 +97,7 @@ print("S1_training L72", S1_training)
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
-//print("primitivos_funct",primitivos_funct)
+print("primitivos_funct 74",primitivos_funct)
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 var formatPts=function (pts,clase) {
@@ -251,7 +251,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
 
 
-var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
+//var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 
 
