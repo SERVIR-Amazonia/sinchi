@@ -79,6 +79,10 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 
 
+
+
+
+
 // Función para convertir la propiedad 'nivel_1' de entero a string
 var convertNivel1ToString = function(feature) {
     // Obtener el valor actual de 'nivel_1' y convertirlo a string
@@ -248,7 +252,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
 
 
-var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
+var primitives=createLCPrimitiveCollection(image_covariates, S1_training, clase) ;
 
 
 
@@ -275,6 +279,8 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 /////////////////
+
+
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
