@@ -185,7 +185,8 @@ var RFprim=function (trainingPts,//
         classProperty: 'PRIM',
         inputProperties: top20
     });
-
+    print("model 162",model)
+    print("clase 163",clase)
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
     var schema = ee.List(ee.Classifier(model).schema());
