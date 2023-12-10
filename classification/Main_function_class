@@ -115,8 +115,9 @@ var formatPts=function (pts,clase) {
         return ee.FeatureCollection(prim).merge(nonPrim);
     }
 
-    var listOfPrimPts = ee.List(labels).map(binaryPts);
     
+    var listOfPrimPts = ee.List(labels).map(binaryPts);
+    print("listOfPrimPts linea92", listOfPrimPts)
     return listOfPrimPts;
 };
 
