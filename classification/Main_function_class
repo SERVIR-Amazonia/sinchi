@@ -101,6 +101,7 @@ print("primitivos_funct 74",primitivos_funct)
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
     // one point FC for each LC primitive
+    print("pts78",pts)
 
     // Create sets of binary training pts for each class represented in the full training pts collection
    var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
