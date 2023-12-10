@@ -223,6 +223,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
     // List of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(className).distinct().sort();
+    print("labels 200", labels);
 
     var primList = [];
     labels.evaluate(function(labelsList) {
