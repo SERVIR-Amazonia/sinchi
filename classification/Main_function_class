@@ -207,52 +207,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
 };
 
 
-var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
-    /*
-    Create LC Primitive image for each LC class in training points.
 
-    args:
-        inputStack (ee.Image): of all covariates and predictor
-        trainingPts (ee.FeatureCollection): training pts containing full LC typology
-        className (str): property name in training points containing model classes
-    
-    returns:
-        An object containing the ImageCollection, region, and training data
-    */   
-    
-    inputStack = ee.Image(inputStack);
-    print('Type of inputStack:', inputStack);
-    trainingPts = ee.FeatureCollection(trainingPts);
-
-    // list of distinct LANDCOVER values
-    var labels = trainingPts.aggregate_array(className).distinct().sort();
-    var primList = [];
-    labels.evaluate(function(labelsList) {
-      print("labelsList 201",labelsList)
-        labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 203", primPts)
-            var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
-            print("img 206",img)
-            primList.push(img);
-        });
-    });
-    print("primList 210",primList);
-    var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 211",primitives);
-    var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 213",region);
-    var region = ee.Image(inputStack).geom
-    var trainingData = ee.FeatureCollection(trainingPts);
-    print("216 ",trainingData);
-
-    return {
-        collection: primitives,
-        region: region,
-        trainingData: trainingData
-    };
-}
-////////
 
 
 function primitives_to_collection(inputStack, trainingPts, className) {
@@ -267,7 +222,7 @@ function primitives_to_collection(inputStack, trainingPts, className) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
-            var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
+            var img = RFprim(primPts, inputStack, classname); // Run RF primitive model, get output image and metrics
             primList.push(img);
         });
     });
@@ -278,8 +233,9 @@ function primitives_to_collection(inputStack, trainingPts, className) {
 
 ////
 
+var primitives=primitives_to_collection(image_covariates, trainingDataUpdated, clase) ;
 
-var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
+//var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
