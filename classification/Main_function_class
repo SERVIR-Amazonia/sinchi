@@ -189,7 +189,7 @@ var RFprim=function (trainingPts,//
     var schema = ee.List(ee.Classifier(model).schema());
     var output = inputs.classify(model, 'Probability')
                     .set({
-                        'Primitive': classValue,
+                        'Primitive': clase,
                         'importance': importanceTop20,
                         'schema': schema,
                         'model': model,
