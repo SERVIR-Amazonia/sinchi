@@ -230,8 +230,10 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     });
 
     var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives",primitives)
+    print("primitives 207",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
+    print("region 209",region);
+    var region = ee.Image(inputStack).geom
     var trainingData = ee.FeatureCollection(trainingPts);
     print("209 ",trainingData);
 
