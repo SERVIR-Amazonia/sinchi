@@ -48,6 +48,7 @@ var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
 
+
 // Traer puntos de muestreo para semestre 1 
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
@@ -60,6 +61,15 @@ var processedImage = moduloComposite.s2process(region, start_year, end_year, sta
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
 var image_covariates=image_covariates.clip(region);
+
+
+
+var imageGeometry = image_covariates.geometry();
+
+// Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
+var S1_training = pointsCollection.filterBounds(imageGeometry);
+
+
 
 print("image_covariates2",image_covariates);
 
