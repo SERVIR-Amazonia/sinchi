@@ -226,9 +226,9 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     labels.evaluate(function(labelsList) {
         for (var i = 0; i < labelsList.length; i++) {
             var label = labelsList[i];
-            var primPts = formatPts(trainingPts, label, className); // Needs definition
+            var primPts = formatPts(trainingPts, className); // Needs definition
             var img = RFprim(primPts, inputStack); // Needs definition
-            print("img 202", img)
+            print("img 205", img)
             primList.push(img);
         }
     });
