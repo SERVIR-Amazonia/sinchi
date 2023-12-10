@@ -147,12 +147,31 @@ var getTop20=function (dict) {
 }
 
 
+// Función para verificar y manejar propiedades faltantes
+function checkAndHandleMissingProperties(feature) {
+    // Lista de todas las propiedades requeridas
+    var requiredProperties = ['blue', 'green', 'red'];  // y otras propiedades relevantes
+
+    requiredProperties.forEach(function(prop) {
+        if (!feature.has(prop)) {
+            // Manejar la propiedad faltante, por ejemplo, asignar un valor predeterminado
+            feature = feature.set(prop, defaultValue);  // defaultValue es un valor que eliges
+        }
+    });
+
+    return feature;
+}
+
+
+
 var RFprim=function (trainingPts,inputStack, clase) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     print("line 121 trainingPts",trainingPts)
     var samples = ee.FeatureCollection(trainingPts);
     print("samples",samples)
+    // Aplicar esta función a todas las características en la colección
+    samples = samples.map(checkAndHandleMissingProperties);
     var linea123=samples.sort('PRIM', false)
     print( linea123,"linea 123");
     var linea125=linea123.first();
