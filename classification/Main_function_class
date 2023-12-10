@@ -228,6 +228,8 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
             var label = labelsList[i];
             var primPts = formatPts(trainingPts, className); // Needs definition
             print("primPts 203",primPts)
+            var firstFeatureCollection = ee.FeatureCollection(primPts.get(0));
+            print ("primPts 206",primPts)
             var img = RFprim(primPts, inputStack); // Needs definition
             print("img 205", img)
             primList.push(img);
