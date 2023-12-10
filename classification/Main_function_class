@@ -99,7 +99,6 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-print("trainingDataUpdated tieneen covariables76",trainingDataUpdated);
 var trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
@@ -139,18 +138,14 @@ var formatPts=function (pts,clase) {
 };
 
 
-
-
-
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
-    print("dict 104",dict)
     dict = ee.Dictionary(dict);
     print("dict 106",dict)
     var values = dict.values().sort();
     print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
-    print("cutoff 109",cutoff)
+    
     function kvReturn(key, passedObj) {
         passedObj = ee.List(passedObj);
         var val = ee.Number(dict.get(key));
@@ -159,10 +154,9 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
-    print("newList 116",newList)
+    print("newList 135",newList)
     return newList;
 }
-
 
 
 // Función para verificar y manejar propiedades faltantes
@@ -180,7 +174,6 @@ function checkAndHandleMissingProperties(feature) {
 
     return feature;
 }
-
 
 
 var RFprim=function (trainingPts,inputStack, clase) {
@@ -215,7 +208,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     
     // Store for model performance exploration
     var explain=print(model.explain());
-    print("explain 185",explain);
+    print("explain 190",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
     
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
@@ -230,7 +223,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model 207",model)
+    print("model 200",model)
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -243,7 +236,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 180",output);
+    print("output 213",output);
     return output;
 };
 
@@ -271,19 +264,19 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 207",primPts)
+            print("primPts 241",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
             primList.push(img);
         });
     });
     print("primList 214",primList);
     var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 216",primitives);
+    print("primitives 248",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 213",region);
+    print("region 50",region);
     var region = ee.Image(inputStack).geom
     var trainingData = ee.FeatureCollection(trainingPts);
-    print("216 ",trainingData);
+    print("253 ",trainingData);
 
     return {
         collection: primitives,
