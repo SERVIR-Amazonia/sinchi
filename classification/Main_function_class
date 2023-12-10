@@ -155,7 +155,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     print("samples",samples)
     var linea123=samples.sort('PRIM', false)
     print( linea123,"linea 123");
-    var linea125=linea123.last();
+    var linea125=linea123.first();
     print("linea133",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
@@ -255,6 +255,28 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 ////////
 
 
+function primitives_to_collection(inputStack, trainingPts, className) {
+    // Create LC Primitive image for each LC class in training points
+    inputStack = ee.Image(inputStack);
+    trainingPts = ee.FeatureCollection(trainingPts);
+
+    // List of distinct LANDCOVER values
+    var labels = trainingPts.aggregate_array(className).distinct().sort();
+
+    var primList = [];
+    labels.evaluate(function(labelsList) {
+        labelsList.forEach(function(label, index) {
+            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
+            var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
+            primList.push(img);
+        });
+    });
+
+    return ee.ImageCollection.fromImages(primList);
+}
+
+
+////
 
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
