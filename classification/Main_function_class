@@ -102,9 +102,7 @@ var formatPts=function (pts,clase) {
     // one point FC for each LC primitive
 
     // Create sets of binary training pts for each class represented in the full training pts collection
-   var labels = ee.FeatureCollection(pts)
-   print("labels81",labels)
-   var labels=labels.aggregate_array(clase.toString()).distinct().sort();
+   var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
    print("labels83",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
@@ -199,7 +197,7 @@ var RFprim=function (trainingPts,//
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 174",output)
+    print("output 174",output);
     return output;
 };
 
@@ -230,10 +228,11 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
 
             var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
+            print("img 206",img)
             primList.push(img);
         });
     });
-    print("primList 209",primList);
+    print("primList 210",primList);
     var primitives = ee.ImageCollection.fromImages(primList);
     print("primitives 211",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
