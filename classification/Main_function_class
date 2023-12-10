@@ -89,8 +89,7 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-print("trainingDataUpdated L71", trainingDataUpdated)
-print("S1_training L72", S1_training)
+
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
@@ -221,16 +220,15 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     inputStack = ee.Image(inputStack);
     print('Type of inputStack:', inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
-    print("195 trainingPts",trainingPts);
+
     // list of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(className).distinct().sort();
-      print("labels 198",labels)
     var primList = [];
     labels.evaluate(function(labelsList) {
       print("labelsList 201",labelsList)
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 203",primPts);
+
             var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
             primList.push(img);
         });
