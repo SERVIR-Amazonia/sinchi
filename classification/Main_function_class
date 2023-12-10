@@ -207,7 +207,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
 };
 
 
-var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
+var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     /*
     Create LC Primitive image for each LC class in training points.
 
@@ -228,18 +228,15 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     var labels = trainingPts.aggregate_array(className).distinct().sort();
     var primList = [];
     labels.evaluate(function(labelsList) {
-      print("labelsList 201",labelsList)
         labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 203", primPts)
+            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            print("img 210",img)
             primList.push(img);
         });
     });
-    print("primList 210",primList);
+    print("primList 214",primList);
     var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 211",primitives);
+    print("primitives 216",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
     print("region 213",region);
     var region = ee.Image(inputStack).geom
