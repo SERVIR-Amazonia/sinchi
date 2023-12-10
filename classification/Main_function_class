@@ -100,7 +100,7 @@ var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 //var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 //print("primitivos_funct",primitivos_funct)
-//var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
+var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
