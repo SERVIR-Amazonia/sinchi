@@ -227,19 +227,20 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
         for (var i = 0; i < labelsList.length; i++) {
             var label = labelsList[i];
             var primPts = formatPts(trainingPts, className); // Needs definition
+            print("primPts 203",primPts)
             var img = RFprim(primPts, inputStack); // Needs definition
             print("img 205", img)
             primList.push(img);
         }
     });
-    print("primList 205",primList)
+    print("primList 209",primList)
     var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 207",primitives);
+    print("primitives 211",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 209",region);
+    print("region 213",region);
     var region = ee.Image(inputStack).geom
     var trainingData = ee.FeatureCollection(trainingPts);
-    print("209 ",trainingData);
+    print("216 ",trainingData);
 
     return {
         collection: primitives,
