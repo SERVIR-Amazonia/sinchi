@@ -225,7 +225,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
-    var labels = trainingPts.aggregate_array(className).distinct().sort();
+    var labels = trainingPts.aggregate_array(clase).distinct().sort();
     var primList = [];
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
