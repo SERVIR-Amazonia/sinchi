@@ -116,9 +116,11 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
+    print("listOfPrimPts L 93_main",listOfPrimPts)
     
     return listOfPrimPts;
 };
+
 
 
 
