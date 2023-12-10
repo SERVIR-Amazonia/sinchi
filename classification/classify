@@ -50,6 +50,7 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
+    print("listOfPrimPts L53classify",listOfPrimPts)
     
     return listOfPrimPts;
 };
