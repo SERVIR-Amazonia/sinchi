@@ -276,7 +276,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     print("region 50",region);
     var region = ee.Image(inputStack).geom
     var trainingData = ee.FeatureCollection(trainingPts);
-    print("253 ",trainingData);
+    print("trainingData 253 ",trainingData);
 
     return {
         collection: primitives,
