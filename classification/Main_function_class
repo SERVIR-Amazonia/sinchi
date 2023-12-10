@@ -177,7 +177,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
-
+    print("top20 154",top20)
     // Re-train model with top 20 important features
     model = classifier.train({
         features: samples,
@@ -185,7 +185,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
         inputProperties: top20
     });
     print("model 162",model)
-    print("clase 163",clase)
+
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
     var schema = ee.List(ee.Classifier(model).schema());
