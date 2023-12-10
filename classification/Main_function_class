@@ -81,8 +81,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 
 
-
-
 // Función para convertir la propiedad 'nivel_1' de entero a string
 var convertNivel1ToString = function(feature) {
     // Obtener el valor actual de 'nivel_1' y convertirlo a string
@@ -98,9 +96,9 @@ print("trainingDataUpdated L71", trainingDataUpdated)
 print("S1_training L72", S1_training)
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
-//var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
+var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
 //print("primitivos_funct",primitivos_funct)
-var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
+//var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
