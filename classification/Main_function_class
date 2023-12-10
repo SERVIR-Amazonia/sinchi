@@ -252,7 +252,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-var listOfPrimPts = formatPts(trainingDataUpdated,clase)
+//var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
 // Printing a few features from each FeatureCollection in the list
