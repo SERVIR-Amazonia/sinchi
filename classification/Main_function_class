@@ -127,9 +127,9 @@ var formatPts=function (pts,clase) {
 
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
-    print("dict 105",dict)
+    print("dict 104",dict)
     dict = ee.Dictionary(dict);
-    print("dict 105",dict)
+    print("dict 106",dict)
     var values = dict.values().sort();
     print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
@@ -176,7 +176,8 @@ var RFprim=function (trainingPts,inputStack, clase) {
     });
     print("model 151",model)
     // Store for model performance exploration
-    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
+    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
+    print("oobAll 154",oobAll)
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
     print("importanceAll 155",importanceAll)
 
