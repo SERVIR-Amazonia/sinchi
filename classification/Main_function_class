@@ -100,6 +100,13 @@ var convertNivel1ToString = function(feature) {
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
 
+var trainingDataUpdated = image_covariates.sampleRegions({
+        collection: trainingDataUpdated,
+        properties: ['nivel_1'],
+        scale: 20
+    });
+
+print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
