@@ -99,7 +99,7 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-print("trainingDataUpdated 76",trainingDataUpdated);
+print("trainingDataUpdated tieneen covariables76",trainingDataUpdated);
 var trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
@@ -212,14 +212,14 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
-    print("model 151",model);
+    
     // Store for model performance exploration
     var explain=print(model.explain());
     print("explain 185",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
-    print("oobAll 154",oobAll)
+    
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
-    print("importanceAll 155",importanceAll)
+    
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
