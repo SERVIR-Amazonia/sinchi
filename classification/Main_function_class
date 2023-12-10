@@ -215,7 +215,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     inputStack = ee.Image(inputStack);
     print('Type of inputStack:', inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
-
+    print("192 ",trainingPts)
     // list of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(className).distinct().sort();
 
@@ -232,6 +232,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     var primitives = ee.ImageCollection.fromImages(primList);
     var region = ee.Image(inputStack).geometry().getInfo();
     var trainingData = ee.FeatureCollection(trainingPts);
+    print("209 ",trainingData)
 
     return {
         collection: primitives,
@@ -242,6 +243,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
 
 
+var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 
 
@@ -268,7 +270,6 @@ var trainingData_S1=classify.testingData;
 var testingData_S1=classify.testingData;
 
 /////////////////
-var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
