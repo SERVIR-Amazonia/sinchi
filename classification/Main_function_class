@@ -105,6 +105,7 @@ var formatPts=function (pts,clase) {
     // Create sets of binary training pts for each class represented in the full training pts collection
    var labels = ee.FeatureCollection(pts)
    print("labels81",labels)
+   print("clase82",clase)
    var labels=labels.aggregate_array(clase.distinct().sort());
    print("labels83",labels)
     function binaryPts(l) {
