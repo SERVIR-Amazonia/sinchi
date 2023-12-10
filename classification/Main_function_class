@@ -329,19 +329,23 @@ var testingData_S1=classify.testingData;
 
 // Función para verificar y manejar propiedades faltantes
 function checkAndHandleMissingProperties(feature) {
-    // Lista de todas las propiedades requeridas
     var requiredProperties = ['blue', 'green', 'red'];  // y otras propiedades relevantes
+    var defaultValue = 0; // Define un valor por defecto adecuado
 
     requiredProperties.forEach(function(prop) {
-        if (!feature.has(prop)) {
-            // Manejar la propiedad faltante, por ejemplo, asignar un valor predeterminado
-            feature = feature.set(prop, defaultValue);  // defaultValue es un valor que eliges
-        }
+        // Comprobar si la lista de nombres de propiedades contiene 'prop'
+        var hasProperty = feature.propertyNames().contains(prop);
+        
+        hasProperty.evaluate(function(hasProp) {
+            if (!hasProp) {
+                // Si no tiene la propiedad, asignar un valor predeterminado
+                feature = feature.set(prop, defaultValue);
+            }
+        });
     });
 
     return feature;
 }
-
 
 
 /*
