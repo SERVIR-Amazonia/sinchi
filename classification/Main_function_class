@@ -171,7 +171,7 @@ var RFprim=function (trainingPts,//
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
-
+    print("model 148",model)
     // Store for model performance exploration
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
