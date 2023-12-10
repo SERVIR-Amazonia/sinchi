@@ -203,7 +203,8 @@ var RFprim=function (trainingPts,//
 
 
 var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
-    /*
+  print("trainingPts 180", trainingPts)
+  /*
     Create LC Primitive image for each LC class in training points.
 
     args:
