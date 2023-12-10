@@ -142,7 +142,7 @@ var getTop20=function (dict) {
     return newList;
 }
 
-clase='nivel_1'
+
 var RFprim=function (trainingPts,inputStack, clase) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
@@ -191,7 +191,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     var schema = ee.List(ee.Classifier(model).schema());
     var output = inputs.classify(model, 'Probability')
                     .set({
-                        'Primitive': clase,
+                        'Primitive': 'nivel_1',
                         'importance': importanceTop20,
                         'schema': schema,
                         'model': model,
