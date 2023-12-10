@@ -203,7 +203,7 @@ var RFprim=function (trainingPts,//
 
 
 var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
-  print("trainingPts 180", trainingPts)
+  
   /*
     Create LC Primitive image for each LC class in training points.
 
@@ -219,6 +219,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     // Create LC Primitive image for each LC class in training points
     inputStack = ee.Image(inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
+    print("trainingPts 196", trainingPts);
 
     // List of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(className).distinct().sort();
