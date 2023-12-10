@@ -103,7 +103,10 @@ var formatPts=function (pts,clase) {
     // one point FC for each LC primitive
 
     // Create sets of binary training pts for each class represented in the full training pts collection
-   var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
+   var labels = ee.FeatureCollection(pts)
+   print("labels81",labels)
+   var labels=labels.aggregate_array(clase.toString()).distinct().sort();
+   print("labels83",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
