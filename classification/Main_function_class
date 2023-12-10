@@ -101,10 +101,9 @@ print("primitivos_funct 74",primitivos_funct)
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
     // one point FC for each LC primitive
-    print("pts78",pts)
 
     // Create sets of binary training pts for each class represented in the full training pts collection
-   var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
+   var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
@@ -117,7 +116,7 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
-    print("listOfPrimPts L 93_main",listOfPrimPts)
+    print("listOfPrimPts L93main",listOfPrimPts)
     
     return listOfPrimPts;
 };
