@@ -233,7 +233,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
             print("primPts 203", primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            print("img 206",img)
+            print("img 210",img)
             primList.push(img);
         });
     });
