@@ -78,9 +78,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 //convert nivel_1 a string
 
 
-
-
-
 // Función para convertir la propiedad 'nivel_1' de entero a string
 var convertNivel1ToString = function(feature) {
     // Obtener el valor actual de 'nivel_1' y convertirlo a string
@@ -253,7 +250,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
 
 //var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-
+var listOfPrimPts = formatPts(training_points,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
 // Printing a few features from each FeatureCollection in the list
