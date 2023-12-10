@@ -194,7 +194,7 @@ var RFprim=function (trainingPts,//
                         'model': model,
                         'oobError': oobTop20
                     });
-
+    print("output 171",output)
     return output;
 };
 
@@ -225,6 +225,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
             var label = labelsList[i];
             var primPts = formatPts(trainingPts, label, className); // Needs definition
             var img = RFprim(primPts, inputStack); // Needs definition
+            print("img 202", img)
             primList.push(img);
         }
     });
