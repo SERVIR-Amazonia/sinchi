@@ -329,24 +329,19 @@ var testingData_S1=classify.testingData;
 
 // Función para verificar y manejar propiedades faltantes
 function checkAndHandleMissingProperties(feature) {
-    var requiredProperties = ['blue', 'green', 'red'];  // y otras propiedades relevantes
+    var requiredProperties = ['blue', 'green', 'red']; // y otras propiedades relevantes
     var defaultValue = 0; // Define un valor por defecto adecuado
 
     requiredProperties.forEach(function(prop) {
-        // Comprobar si la lista de nombres de propiedades contiene 'prop'
-        var hasProperty = feature.propertyNames().contains(prop);
-        
-        hasProperty.evaluate(function(hasProp) {
-            if (!hasProp) {
-                // Si no tiene la propiedad, asignar un valor predeterminado
-                feature = feature.set(prop, defaultValue);
-            }
-        });
+        // Crear una condición que verifique si la propiedad existe
+        var condition = feature.propertyNames().contains(prop);
+
+        // Usar 'ee.Algorithms.If' para manejar la propiedad faltante
+        feature = ee.Feature(ee.Algorithms.If(condition, feature, feature.set(prop, defaultValue)));
     });
 
     return feature;
 }
-
 
 /*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
