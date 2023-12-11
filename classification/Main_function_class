@@ -265,9 +265,9 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
             print("img 241", img)
             primList.push(img);
         });
-        print("primList 244",primList);
+        //print("primList 244",primList);
     });
-     return ee.ImageCollection.fromImages(primList)
+    // return ee.ImageCollection.fromImages(primList)
     
 }   
     
