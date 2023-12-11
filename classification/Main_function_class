@@ -265,7 +265,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
             print("primPts 239",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
             print("img 241", img)
-            primList=primList.push(img);
+            primList.push(img);
         });
     });
     print("primList 244",primList);
