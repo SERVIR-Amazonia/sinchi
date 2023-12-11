@@ -141,9 +141,8 @@ var formatPts=function (pts,clase) {
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
     dict = ee.Dictionary(dict);
-    print("dict 106",dict)
     var values = dict.values().sort();
-    print("values 107",values)
+    //print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
     
     function kvReturn(key, passedObj) {
@@ -154,7 +153,7 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
-    print("newList 135",newList)
+    //print("newList 130",newList)
     return newList;
 }
 
@@ -222,7 +221,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model 200",model)
+    print("model 200",model);
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -263,12 +262,12 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 241",primPts)
+            print("primPts 240",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
             primList.push(img);
         });
     });
-    print("primList 214",primList);
+    print("primList 244",primList);
     var primitives = ee.ImageCollection.fromImages(primList);
     print("primitives 248",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
