@@ -262,10 +262,10 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 240",primPts)
+            print("primPts 239",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
             print("img 241", img)
-            primList.push(img);
+            primList=primList.push(img);
         });
     });
     print("primList 244",primList);
