@@ -62,8 +62,6 @@ var processedImage = moduloComposite.s2process(region, start_year, end_year, sta
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
 var image_covariates=image_covariates.clip(region);
 
-
-
 var imageGeometry = image_covariates.geometry();
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
@@ -276,7 +274,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
-
+print("primitives",primitives)
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
