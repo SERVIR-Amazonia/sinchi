@@ -294,20 +294,26 @@ var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}
 // Añade la banda al mapa
 
 //Map.addLayer(probabilityBand, visParams, 'Probability Band')
+//mostrar en mapa primeara imagen
 
-primitives.forEach(function(image) {
+var primitivesList = primitives.toList(primitives.size());
+
+// Iterar sobre la lista de imágenes
+for (var i = 0; i < primitivesList.size().getInfo(); i++) {
+    var image = ee.Image(primitivesList.get(i));
+    
     // Define los parámetros de exportación
     var exportParams = {
         'image': image,
-        'description': 'nombre_de_exportacion', // Añade un nombre único para cada exportación
-        'assetId': 'projects/pc300-samz-sinchi/assets/image', // Reemplaza con tu ruta de asset
+        'description': 'nombre_de_exportacion_' + i, // Añade un nombre único para cada exportación
+        'assetId': 'projects/pc300-samz-sinchi/assets/image_' + i, // Reemplaza con tu ruta de asset
         'scale': 500, // Ajusta la escala según tus datos
         'region': region // O define una región específica
     };
 
     // Exporta la imagen
     Export.image.toAsset(exportParams);
-});
+}
 // Agregar la primera imagen de la colección al mapa
 
 // Opcional: Centrar el mapa en la ubicación de la imagen
