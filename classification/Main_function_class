@@ -238,7 +238,6 @@ var RFprim=function (trainingPts,inputStack, clase) {
     return output;
 };
 
-
 var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     /*
     Create LC Primitive image for each LC class in training points.
