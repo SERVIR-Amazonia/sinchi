@@ -118,7 +118,8 @@ var formatPts=function (pts,clase) {
     // one point FC for each LC primitive
 
     // Create sets of binary training pts for each class represented in the full training pts collection
-   var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
+   //var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
+   var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
    print("labels83",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
@@ -132,10 +133,13 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
+    //var listOfPrimPts = ee.List(labels).map(binaryPts);
     print("listOfPrimPts L 93_main",listOfPrimPts)
     
     return listOfPrimPts;
 };
+
+
 
 
 var getTop20=function (dict) {
