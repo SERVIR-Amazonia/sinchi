@@ -280,6 +280,23 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, label) {
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
+// Asegúrate de que 'primitives' es una ImageCollection
+var firstPrimitiveImage = primitives.first();
+
+// Definir los parámetros de visualización para la imagen
+// Nota: Debes ajustar estos parámetros según las bandas y características de tu imagen
+var visParams = {
+  bands: ['Banda1', 'Banda2', 'Banda3'], // Reemplaza con las bandas adecuadas
+  min: 0,
+  max: 1,
+  palette: ['blue', 'green', 'red'] // Puedes ajustar la paleta de colores
+};
+
+// Agregar la primera imagen de la colección al mapa
+Map.addLayer(firstPrimitiveImage, visParams, 'Primera Imagen de Primitives');
+
+// Opcional: Centrar el mapa en la ubicación de la imagen
+Map.centerObject(firstPrimitiveImage);
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
