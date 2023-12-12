@@ -48,26 +48,18 @@ var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
 
-
 // Traer puntos de muestreo para semestre 1 
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
 var S1_training=visualizationResults.combinedResults_S1.training;
 var S1_testing=visualizationResults.combinedResults_S1.testing;
 
-print("S1_testing 32",S1_testing)
+
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
 var image_covariates=image_covariates.clip(region);
-
-var imageGeometry = image_covariates.geometry();
-
-// Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
-var S1_training = S1_training.filterBounds(imageGeometry);
-
-
 
 print("image_covariates2",image_covariates);
 
@@ -97,13 +89,7 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-var trainingDataUpdated = image_covariates.sampleRegions({
-        collection: trainingDataUpdated,
-        properties: ['nivel_1'],
-        scale: 20
-    });
 
-print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
@@ -136,13 +122,18 @@ var formatPts=function (pts,clase) {
 };
 
 
+
+
+
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
+    print("dict 105",dict)
     dict = ee.Dictionary(dict);
+    print("dict 105",dict)
     var values = dict.values().sort();
-    //print("values 107",values)
+    print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
-    
+    print("cutoff 109",cutoff)
     function kvReturn(key, passedObj) {
         passedObj = ee.List(passedObj);
         var val = ee.Number(dict.get(key));
@@ -151,25 +142,8 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
-    //print("newList 130",newList)
+    print("newList 116",newList)
     return newList;
-}
-
-
-// Función para verificar y manejar propiedades faltantes
-function checkAndHandleMissingProperties(feature) {
-    var requiredProperties = ['blue', 'green', 'red']; // y otras propiedades relevantes
-    var defaultValue = 0; // Define un valor por defecto adecuado
-
-    requiredProperties.forEach(function(prop) {
-        // Crear una condición que verifique si la propiedad existe
-        var condition = feature.propertyNames().contains(prop);
-
-        // Usar 'ee.Algorithms.If' para manejar la propiedad faltante
-        feature = ee.Feature(ee.Algorithms.If(condition, feature, feature.set(prop, defaultValue)));
-    });
-
-    return feature;
 }
 
 
@@ -178,13 +152,11 @@ var RFprim=function (trainingPts,inputStack, clase) {
     var inputs = ee.Image(inputStack);
     print("line 121 trainingPts",trainingPts)
     var samples = ee.FeatureCollection(trainingPts);
-    print("samples",samples);
-    // Aplicar esta función a todas las características en la colección
-    samples = samples.map(checkAndHandleMissingProperties);
+    print("samples",samples)
     var linea123=samples.sort('PRIM', false)
     print( linea123,"linea 123");
-    var linea125=linea123.first();
-    print("primeros features linea133",linea125)
+    var linea125=linea123.last();
+    print("linea133",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
@@ -202,24 +174,22 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
-    
+    print("model 151",model)
     // Store for model performance exploration
-    var explain=model.explain();
-    print("explain 190",explain);
-    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
+    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
-    print("importanceAll 188",importanceAll);
+    print("importanceAll 155",importanceAll)
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
-    
+    print("top20 154",top20)
     // Re-train model with top 20 important features
     model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model 200",model);
+    print("model 162",model)
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -232,12 +202,12 @@ var RFprim=function (trainingPts,inputStack, clase) {
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 213",output);
+    print("output 174",output);
     return output;
 };
 
 
-var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
+var createLCPrimitiveCollection=function(inputStack, trainingPts, className) {
     /*
     Create LC Primitive image for each LC class in training points.
 
@@ -255,26 +225,62 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
-    var labels = trainingPts.aggregate_array(clase).distinct().sort();
+    var labels = trainingPts.aggregate_array(className).distinct().sort();
+    var primList = [];
+    labels.evaluate(function(labelsList) {
+      print("labelsList 201",labelsList)
+        labelsList.forEach(function(label, index) {
+            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
+            print("primPts 203", primPts)
+            var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
+            print("img 206",img)
+            primList.push(img);
+        });
+    });
+    print("primList 210",primList);
+    var primitives = ee.ImageCollection.fromImages(primList);
+    print("primitives 211",primitives);
+    var region = ee.Image(inputStack).geometry().getInfo();
+    print("region 213",region);
+    var region = ee.Image(inputStack).geom
+    var trainingData = ee.FeatureCollection(trainingPts);
+    print("216 ",trainingData);
+
+    return {
+        collection: primitives,
+        region: region,
+        trainingData: trainingData
+    };
+}
+////////
+
+
+function primitives_to_collection(inputStack, trainingPts, className) {
+    // Create LC Primitive image for each LC class in training points
+    inputStack = ee.Image(inputStack);
+    trainingPts = ee.FeatureCollection(trainingPts);
+
+    // List of distinct LANDCOVER values
+    var labels = trainingPts.aggregate_array(className).distinct().sort();
+
     var primList = [];
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 239",primPts)
-            var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            print("img 241", img)
+            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
+            var img = RFprim(primPts, inputStack); // Run RF primitive model, get output image and metrics
             primList.push(img);
         });
-        //print("primList 244",primList);
     });
-    // return ee.ImageCollection.fromImages(primList)
-    
-}   
-    
-    
+
+    return ee.ImageCollection.fromImages(primList);
+}
+
+
+////
+
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
-print("primitives",primitives)
+
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
