@@ -269,20 +269,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
             primList.push(img);
         });
     });
-    print("primList 244",primList);
-    var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 248",primitives);
-    var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 50",region);
-    var region = ee.Image(inputStack).geom
-    var trainingData = ee.FeatureCollection(trainingPts);
-    print("trainingData 253 ",trainingData);
-
-    return {
-        collection: primitives,
-        region: region,
-        trainingData: trainingData
-    };
+    
 }
 
 
