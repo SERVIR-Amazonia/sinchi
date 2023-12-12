@@ -287,7 +287,7 @@ print("firstPrimitiveImage 258",firstPrimitiveImage)
 // Nota: Debes ajustar estos parámetros según las bandas y características de tu imagen
 
 
-probabilityBand = firstPrimitiveImage.select('probability')
+var probabilityBand = firstPrimitiveImage.select('probability')
 
 // Define los parámetros de visualización
 visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
