@@ -261,9 +261,11 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
 
 
-    var primList = labels.map(function(label) {
-        var primPts = ee.FeatureCollection(formatPts(trainingPts, clase).get(ee.Number.parse(label)));
-        return RFprim(primPts, inputStack, label);
+     var primList = ee.List([]);
+    labels.getInfo().forEach(function(label) {
+        var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts, clase)).get(ee.Number.parse(label)));
+        var img = RFprim(primPts, inputStack, label);
+        primList = primList.add(img);
     });
 
     return ee.ImageCollection.fromImages(primList);
