@@ -109,7 +109,7 @@ print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase);
-print("primitivos_funct 86",primitivos_funct)
+print("primitivos_funct 86",primitivos_funct);
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 
@@ -119,7 +119,7 @@ var formatPts=function (pts,clase) {
 
     // Create sets of binary training pts for each class represented in the full training pts collection
    var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
-   print("labels96",labels)
+   print("labels96",labels);
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
@@ -208,7 +208,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     // Store for model performance exploration
     var explain=model.explain();
     print("explain 190",explain);
-    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
+    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
     print("importanceAll 188",importanceAll);
 
@@ -262,9 +262,9 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 239",primPts)
+            print("primPts 239",primPts);
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            print("img 241", img)
+            print("img 241", img);
             primList.push(img);
         });
         print("primList 244",primList);
