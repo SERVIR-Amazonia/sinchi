@@ -269,7 +269,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
         });
         print("primList 244",primList);
     });
-     return ee.ImageCollection.fromImages(primList)
+     //return ee.ImageCollection.fromImages(primList);
     
 }   
     
