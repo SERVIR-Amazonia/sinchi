@@ -292,6 +292,14 @@ var visParams = {
   palette: ['blue', 'green', 'red'] // Puedes ajustar la paleta de colores
 };
 
+
+probabilityBand = firstPrimitiveImage.select('probability')
+
+// Define los parámetros de visualización
+visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
+// Añade la banda al mapa
+
+Map.addLayer(probabilityBand, visParams, 'Probability Band')
 // Agregar la primera imagen de la colección al mapa
 Map.addLayer(firstPrimitiveImage, visParams, 'Primera Imagen de Primitives');
 
