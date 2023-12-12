@@ -293,7 +293,7 @@ var probabilityBand = firstPrimitiveImage.select('probability')
 var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
 // Añade la banda al mapa
 
-Map.addLayer(probabilityBand, visParams, 'Probability Band')
+//Map.addLayer(probabilityBand, visParams, 'Probability Band')
 
 primitives.forEach(function(image) {
     // Define los parámetros de exportación
