@@ -108,8 +108,8 @@ var trainingDataUpdated = image_covariates.sampleRegions({
 print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
-var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
-print("primitivos_funct 74",primitivos_funct)
+var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase);
+print("primitivos_funct 86",primitivos_funct)
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 
@@ -119,7 +119,7 @@ var formatPts=function (pts,clase) {
 
     // Create sets of binary training pts for each class represented in the full training pts collection
    var labels = ee.FeatureCollection(pts).aggregate_array(clase.toString()).distinct().sort();
-   print("labels83",labels)
+   print("labels96",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
@@ -132,7 +132,7 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
-    print("listOfPrimPts L 93_main",listOfPrimPts)
+    print("listOfPrimPts L 93_main",listOfPrimPts);
     
     return listOfPrimPts;
 };
@@ -155,7 +155,7 @@ var getTop20=function (dict) {
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
     //print("newList 130",newList)
     return newList;
-}
+};
 
 
 // Función para verificar y manejar propiedades faltantes
@@ -178,15 +178,15 @@ function checkAndHandleMissingProperties(feature) {
 var RFprim=function (trainingPts,inputStack, clase) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
-    print("line 121 trainingPts",trainingPts)
+    print("line 121 trainingPts",trainingPts);
     var samples = ee.FeatureCollection(trainingPts);
     print("samples",samples);
     // Aplicar esta función a todas las características en la colección
     samples = samples.map(checkAndHandleMissingProperties);
-    var linea123=samples.sort('PRIM', false)
+    var linea123=samples.sort('PRIM', false);
     print( linea123,"linea 123");
     var linea125=linea123.first();
-    print("primeros features linea133",linea125)
+    print("primeros features linea133",linea125);
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
