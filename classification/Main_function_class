@@ -312,7 +312,7 @@ print('First three features of the first FeatureCollection:', firstThreeFeatures
 
 Map.addLayer(processedImage,visualizationParams,'processedImage');
 /////////////////
-//test simple classifier
+/*test simple classifier
 
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
@@ -324,8 +324,6 @@ var testingData_S1=classify.testingData;
 
 /////////////////
 
-
-/*
 var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
 
 var importance =modulo_classifier.importance(classifier_S1)
