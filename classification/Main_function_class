@@ -259,22 +259,15 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
 
     // list of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
-    var primList = [];
-    labels.evaluate(function(labelsList) {
-        labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 239",primPts)
-            var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-             primList = primList.add(img);
+
+
+    var primList = labels.map(function(label) {
+        var primPts = ee.FeatureCollection(formatPts(trainingPts, clase).get(ee.Number.parse(label)));
+        return RFprim(primPts, inputStack, label);
     });
 
     return ee.ImageCollection.fromImages(primList);
-    });
-    print("primList 246",primList);
-    return primList;
-
 }
-
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
