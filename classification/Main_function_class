@@ -291,12 +291,12 @@ var visParams = {
   max: 1,
   palette: ['blue', 'green', 'red'] // Puedes ajustar la paleta de colores
 };
-/*
+
 // Agregar la primera imagen de la colección al mapa
 Map.addLayer(firstPrimitiveImage, visParams, 'Primera Imagen de Primitives');
-*/
+
 // Opcional: Centrar el mapa en la ubicación de la imagen
-//Map.centerObject(firstPrimitiveImage);
+Map.centerObject(processedImage);
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
