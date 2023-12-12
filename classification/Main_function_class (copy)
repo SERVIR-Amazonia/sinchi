@@ -184,9 +184,9 @@ var RFprim=function (trainingPts,inputStack, clase) {
     // Aplicar esta función a todas las características en la colección
     samples = samples.map(checkAndHandleMissingProperties);
     var linea123=samples.sort('PRIM', false)
-    //print( linea123,"linea 123");
+    print( linea123,"linea 123");
     var linea125=linea123.first();
-    //print("primeros features linea133",linea125)
+    print("primeros features linea133",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
@@ -269,9 +269,21 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
             primList.push(img);
         });
     });
-    return ee.ImageCollection.fromImages(primList);
-    
-};
+    print("primList 244",primList);
+    var primitives = ee.ImageCollection.fromImages(primList);
+    print("primitives 248",primitives);
+    var region = ee.Image(inputStack).geometry().getInfo();
+    print("region 50",region);
+    var region = ee.Image(inputStack).geom
+    var trainingData = ee.FeatureCollection(trainingPts);
+    print("trainingData 253 ",trainingData);
+
+    return {
+        collection: primitives,
+        region: region,
+        trainingData: trainingData
+    };
+}
 ////////
 
 
