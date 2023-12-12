@@ -290,7 +290,7 @@ print("firstPrimitiveImage 258",firstPrimitiveImage)
 var probabilityBand = firstPrimitiveImage.select('probability')
 
 // Define los parámetros de visualización
-visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
+var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
 // Añade la banda al mapa
 
 Map.addLayer(probabilityBand, visParams, 'Probability Band')
