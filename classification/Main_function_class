@@ -274,7 +274,6 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
 }
 
 
-
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
