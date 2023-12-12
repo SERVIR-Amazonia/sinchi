@@ -269,6 +269,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
             primList.push(img);
         });
     });
+    print("primList 246",primList);
     return primList;
 
 }
