@@ -185,7 +185,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     samples = samples.map(checkAndHandleMissingProperties);
     var linea160=samples.sort('PRIM', false)
     print( linea160,"linea 161");
-    var linea125=linea123.first();
+    var linea125=linea160.first();
     print("primeros features linea163",linea125)
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
