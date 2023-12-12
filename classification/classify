@@ -4,14 +4,14 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
         properties: ['nivel_1'],
         scale: 20
     });
-    print(" trainingData 7 exports", trainingData);
+    print(" trainingData 7 classify.rf", trainingData);
     
     var testingData = inputImage.sampleRegions({
         collection: testingPts,
         properties: ['nivel_1'],
         scale: 20
     });
-    //print(" testinggData", testingData)
+    //print(" testingData", testingData)
     
     
 
