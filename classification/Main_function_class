@@ -55,7 +55,7 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 var S1_training=visualizationResults.combinedResults_S1.training;
 var S1_testing=visualizationResults.combinedResults_S1.testing;
 
-print("S1_testing 32",S1_testin)
+print("S1_testing 32",S1_testing)
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
