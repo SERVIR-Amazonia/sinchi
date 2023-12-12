@@ -99,7 +99,13 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
+var trainingDataUpdated = image_covariates.sampleRegions({
+        collection: trainingDataUpdated,
+        properties: ['nivel_1'],
+        scale: 20
+    });
 
+print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
@@ -132,18 +138,13 @@ var formatPts=function (pts,clase) {
 };
 
 
-
-
-
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
-    print("dict 104",dict)
     dict = ee.Dictionary(dict);
-    print("dict 106",dict)
     var values = dict.values().sort();
-    print("values 107",values)
+    //print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
-    print("cutoff 109",cutoff)
+    
     function kvReturn(key, passedObj) {
         passedObj = ee.List(passedObj);
         var val = ee.Number(dict.get(key));
@@ -152,10 +153,9 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
-    print("newList 116",newList)
+    //print("newList 130",newList)
     return newList;
 }
-
 
 
 // Función para verificar y manejar propiedades faltantes
@@ -173,7 +173,6 @@ function checkAndHandleMissingProperties(feature) {
 
     return feature;
 }
-
 
 
 var RFprim=function (trainingPts,inputStack, clase) {
@@ -205,25 +204,24 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
-    print("model 151",model);
+    
     // Store for model performance exploration
-    var explain=print(model.explain());
-    print("explain 185",explain);
+    var explain=model.explain();
+    print("explain 190",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
-    print("oobAll 154",oobAll)
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
-    print("importanceAll 155",importanceAll)
+    print("importanceAll 188",importanceAll);
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
-    print("top20 154",top20)
+    
     // Re-train model with top 20 important features
     model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model 167",model)
+    print("model 200",model);
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -236,7 +234,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 180",output);
+    print("output 213",output);
     return output;
 };
 
@@ -264,26 +262,19 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 207",primPts)
+            print("primPts 239",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
+            print("img 241", img)
             primList.push(img);
         });
+        print("primList 244",primList);
     });
-    print("primList 214",primList);
-    var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 216",primitives);
-    var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 213",region);
-    var region = ee.Image(inputStack).geom
-    var trainingData = ee.FeatureCollection(trainingPts);
-    print("216 ",trainingData);
+     return ee.ImageCollection.fromImages(primList)
+    
+}   
+    
+    
 
-    return {
-        collection: primitives,
-        region: region,
-        trainingData: trainingData
-    };
-}
 ////////
 
 
