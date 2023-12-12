@@ -109,7 +109,6 @@ print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 
-print("primitivos_funct 74",primitivos_funct)
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 
