@@ -296,7 +296,7 @@ var visParams = {
 Map.addLayer(firstPrimitiveImage, visParams, 'Primera Imagen de Primitives');
 */
 // Opcional: Centrar el mapa en la ubicación de la imagen
-Map.centerObject(firstPrimitiveImage);
+//Map.centerObject(firstPrimitiveImage);
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
