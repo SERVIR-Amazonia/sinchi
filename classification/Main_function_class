@@ -262,7 +262,8 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
 
      var primList = ee.List([]);
     labels.getInfo().forEach(function(label) {
-        var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts, clase)).get(ee.Number.parse(label)));
+var index = ee.Number.parse(label) - 1; // Ajuste del índice para que coincida con los valores de clase
+        var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts, clase)).get(index));
         var img = RFprim(primPts, inputStack, label);
         primList = primList.add(img);
     });
