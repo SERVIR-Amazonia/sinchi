@@ -274,7 +274,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, label) {
         var img = RFprim(primPts, inputStack, label);
         primList = primList.add(img);
     });
-
+    print("primList 251",primList)
     return ee.ImageCollection.fromImages(primList);
 }
 
