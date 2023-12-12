@@ -55,7 +55,7 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 var S1_training=visualizationResults.combinedResults_S1.training;
 var S1_testing=visualizationResults.combinedResults_S1.testing;
 
-print("S1_testing 32",S1_testing)
+print("S1_testing 32",S1_testin)
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 
@@ -99,13 +99,7 @@ var convertNivel1ToString = function(feature) {
 
 // Aplicar la función a cada Feature en el FeatureCollection
 var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-var trainingDataUpdated = image_covariates.sampleRegions({
-        collection: trainingDataUpdated,
-        properties: ['nivel_1'],
-        scale: 20
-    });
 
-print("trainingDataUpdated 83",trainingDataUpdated);
 var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 var primitivos_funct=modulo_classifier.primitives_class(S1_training,clase)
@@ -138,13 +132,18 @@ var formatPts=function (pts,clase) {
 };
 
 
+
+
+
 var getTop20=function (dict) {
     // If total input features count < 20, take them all, otherwise take top 20 most important
+    print("dict 104",dict)
     dict = ee.Dictionary(dict);
+    print("dict 106",dict)
     var values = dict.values().sort();
-    //print("values 107",values)
+    print("values 107",values)
     var cutoff = ee.Algorithms.If(values.size().gte(20), -20, values.size().multiply(-1));
-    
+    print("cutoff 109",cutoff)
     function kvReturn(key, passedObj) {
         passedObj = ee.List(passedObj);
         var val = ee.Number(dict.get(key));
@@ -153,9 +152,10 @@ var getTop20=function (dict) {
     }
 
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
-    //print("newList 130",newList)
+    print("newList 116",newList)
     return newList;
 }
+
 
 
 // Función para verificar y manejar propiedades faltantes
@@ -173,6 +173,7 @@ function checkAndHandleMissingProperties(feature) {
 
     return feature;
 }
+
 
 
 var RFprim=function (trainingPts,inputStack, clase) {
@@ -204,24 +205,25 @@ var RFprim=function (trainingPts,inputStack, clase) {
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
-    
+    print("model 151",model);
     // Store for model performance exploration
-    var explain=model.explain();
-    print("explain 190",explain);
+    var explain=print(model.explain());
+    print("explain 185",explain);
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
+    print("oobAll 154",oobAll)
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
-    print("importanceAll 188",importanceAll);
+    print("importanceAll 155",importanceAll)
 
     // Retrieve top 20 most important features
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
-    
+    print("top20 154",top20)
     // Re-train model with top 20 important features
     model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
         inputProperties: top20
     });
-    print("model 200",model);
+    print("model 167",model)
 
     var oobTop20 = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceTop20 = ee.Dictionary(model.explain()).get('importance');
@@ -234,7 +236,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 213",output);
+    print("output 180",output);
     return output;
 };
 
@@ -262,21 +264,19 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
     labels.evaluate(function(labelsList) {
         labelsList.forEach(function(label, index) {
             var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts,clase)).get(index)); // Ensure formatPts is defined
-            print("primPts 239",primPts)
+            print("primPts 207",primPts)
             var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            print("img 241", img)
             primList.push(img);
         });
-        print("primList 244",primList);
     });
-    print("primList 246",primList);
+    print("primList 214",primList);
     var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 248",primitives);
+    print("primitives 216",primitives);
     var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 50",region);
+    print("region 213",region);
     var region = ee.Image(inputStack).geom
     var trainingData = ee.FeatureCollection(trainingPts);
-    print("trainingData 253 ",trainingData);
+    print("216 ",trainingData);
 
     return {
         collection: primitives,
