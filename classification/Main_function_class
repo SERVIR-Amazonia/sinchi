@@ -179,7 +179,7 @@ function checkAndHandleMissingProperties(feature) {
 }
 
 
-var RFprim=function (trainingPts,inputStack, clase) {
+var RFprim=function (trainingPts,inputStack, label) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     print("line 121 trainingPts",trainingPts)
@@ -242,7 +242,7 @@ var RFprim=function (trainingPts,inputStack, clase) {
     return output;
 };
 
-var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
+var createLCPrimitiveCollection=function(inputStack, trainingPts, label) {
     /*
     Create LC Primitive image for each LC class in training points.
 
@@ -266,7 +266,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
 
      var primList = ee.List([]);
     labels.getInfo().forEach(function(label) {
-var index = ee.Number.parse(label) - 1; // Ajuste del índice para que coincida con los valores de clase
+    var index = ee.Number.parse(label) - 1; // Ajuste del índice para que coincida con los valores de clase
         var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts, clase)).get(index));
         var img = RFprim(primPts, inputStack, label);
         primList = primList.add(img);
