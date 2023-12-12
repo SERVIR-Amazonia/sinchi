@@ -269,47 +269,11 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
         });
         print("primList 244",primList);
     });
-    print("primList 246",primList);
-    var primitives = ee.ImageCollection.fromImages(primList);
-    print("primitives 248",primitives);
-    var region = ee.Image(inputStack).geometry().getInfo();
-    print("region 50",region);
-    var region = ee.Image(inputStack).geom
-    var trainingData = ee.FeatureCollection(trainingPts);
-    print("trainingData 253 ",trainingData);
-
-    return {
-        collection: primitives,
-        region: region,
-        trainingData: trainingData
-    };
-}
-////////
-
-
-function primitives_to_collection(inputStack, trainingPts, className) {
-    // Create LC Primitive image for each LC class in training points
-    inputStack = ee.Image(inputStack);
-    trainingPts = ee.FeatureCollection(trainingPts);
-
-    // List of distinct LANDCOVER values
-    var labels = trainingPts.aggregate_array(className).distinct().sort();
-
-    var primList = [];
-    labels.evaluate(function(labelsList) {
-        labelsList.forEach(function(label, index) {
-            var primPts = ee.FeatureCollection(ee.List(formatPts(trainingPts)).get(index)); // Ensure formatPts is defined
-            var img = RFprim(primPts, inputStack,clase); // Run RF primitive model, get output image and metrics
-            primList.push(img);
-        });
-    });
-
-    return ee.ImageCollection.fromImages(primList);
-}
-
-
-////
-
+     return ee.ImageCollection.fromImages(primList)
+    
+}   
+    
+    
 
 var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
