@@ -150,6 +150,8 @@ var getTop20=function (dict) {
 }
 
 
+
+
 var RFprim=function (trainingPts,inputStack, label) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
@@ -233,7 +235,7 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, label) {
      var primList = ee.List([]);
      labels.getInfo().forEach(function(label) {
         var labelIndex = ee.Number.parse(label).subtract(1).toInt(); // Convertir la etiqueta a índice
-        var formattedPtsList = formatPts(trainingPts,label);
+        var formattedPtsList = formatPts(trainingPts, clase);
 
         var primPts = ee.FeatureCollection(formattedPtsList.get(labelIndex)); // Usar el índice para obtener los puntos
        // print("primPts 245",primPts);
