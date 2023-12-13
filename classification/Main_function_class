@@ -93,27 +93,21 @@ Export.table.toAsset({
 });
 */
 var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
-print("trainingDataUpdated 76",trainingDataUpdated)
 
-
-
+//Crrat colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-// Asegúrate de que 'primitives' es una ImageCollection
+// Asegurarse de que 'primitives' es una ImageCollection
 var firstPrimitiveImage = primitives.first();
 print("firstPrimitiveImage 258",firstPrimitiveImage)
 
-// Definir los parámetros de visualización para la imagen
-// Nota: Debes ajustar estos parámetros según las bandas y características de tu imagen
-
-
+//Visualizar primera imagen
 var probabilityBand = firstPrimitiveImage.select('probability')
 
 // Define los parámetros de visualización
 var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
-// Añade la banda al mapa
-
-//Map.addLayer(probabilityBand, visParams, 'Probability Band')
+// Añadir la banda al mapa
+Map.addLayer(probabilityBand, visParams, 'Probability Band')
 //mostrar en mapa primeara imagen
 
 var primitivesList = primitives.toList(primitives.size());
