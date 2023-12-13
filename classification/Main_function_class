@@ -139,28 +139,8 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
 //
 //Assmeble max
 
-var assembleMaxProbability=function (collection) {
-  // Convert the image collection to a multiband image
-  var image = collection.toBands();
 
-  // Function to calculate the maximum probability classification
-  function maxProb(image) {
-    var maxProbClassification = image.toArray()
-      .arrayArgmax()
-      .arrayFlatten([['classification']])
-      .rename('classification');
-    return maxProbClassification;
-  }
-
-  // Calculate the maximum probability
-  var maxProbability = maxProb(image);
-
-  // Adjust for zero-based indexing and return the land cover image
-  var output = maxProbability.add(1).rename('LANDCOVER');
-  return output;
-}
-
-var assembleMax=assembleMaxProbability(primitives);
+var assembleMax=modelo_classify.assembleMaxProbability(primitives);
 print("passembleMax",assembleMax)
 // Example usage:
 // var landCover = assembleMaxProbability(yourImageCollection);
