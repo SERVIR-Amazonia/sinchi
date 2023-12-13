@@ -126,8 +126,8 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
     // Define los parámetros de exportación
     var exportParams = {
         'image': image,
-        'description': 'nombre_de_exportacion_' + i, // Añade un nombre único para cada exportación
-        'assetId': 'projects/pc300-samz-sinchi/assets/image_' + i, // Reemplaza con tu ruta de asset
+        'description': 'Primitive_' + i, // Añade un nombre único para cada exportación
+        'assetId': 'projects/pc300-samz-sinchi/assets/primitive_' + i, // Reemplaza con tu ruta de asset
         'scale': 500, // Ajusta la escala según tus datos
         'region': region // O define una región específica
     };
