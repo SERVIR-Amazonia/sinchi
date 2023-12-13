@@ -89,7 +89,7 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 
 var trainingDataUpdated=modulo_classifier.mapDataFromComposite(S1_training, S1_testing, image_covariates)
-
+print(" trainingDataUpdated 66",trainingDataUpdated)
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 // Asegúrate de que 'primitives' es una ImageCollection
