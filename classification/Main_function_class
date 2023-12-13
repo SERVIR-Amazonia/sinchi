@@ -161,7 +161,7 @@ var assembleMaxProbability=function (collection) {
 }
 
 var assembleMax=assembleMaxProbability(primitives);
-print("primitives 138",assembleMax)
+print("passembleMax",assembleMax)
 // Example usage:
 // var landCover = assembleMaxProbability(yourImageCollection);
 
