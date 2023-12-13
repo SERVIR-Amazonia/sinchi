@@ -93,13 +93,13 @@ print("trainingDataUpdated 101", trainingDataUpdated);
 Export.table.toAsset({
     collection: trainingDataUpdated,
     description: 'training_data_export',
-    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points/trainingDataUpdated'
+    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
 });
 
 // Exportar testingDataUpdated como un Asset
 Export.table.toAsset({
     collection: testingDataUpdated,
     description: 'testing_data_export',
-    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points/testingDataUpdated'
+    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
 });
 
