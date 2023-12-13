@@ -13,7 +13,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     });
     //print(" testingData", testingData)
     
-    
+
 
     var classifier = ee.Classifier.smileRandomForest(100).train({
         features: trainingData,
