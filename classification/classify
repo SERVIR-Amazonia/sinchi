@@ -43,37 +43,24 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
         return feature.set('nivel_1', nivel1String);
     };
 
-    // Aplicar la función convertNivel1ToString a cada Feature en S1_training y S1_testing
+    // Aplicar la función convertNivel1ToString a cada Feature en S1_training
     var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
-
-    // Obtener los valores de las covariables de imagen para cada punto
-    var covariatesForTraining = image_covariates.reduceRegions({
+    //print("trainingDataUpdated 48",trainingDataUpdated)
+    // Aplicar sampleRegions a trainingDataUpdated
+    trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
-        reducer: ee.Reducer.first(),
+        properties: ['nivel_1'],
         scale: 20
     });
+    //print("trainingDataUpdated 56",trainingDataUpdated)
 
-    var covariatesForTesting = image_covariates.reduceRegions({
-        collection: testingDataUpdated,
-        reducer: ee.Reducer.first(),
-        scale: 20
-    });
-
-    // Unir los nuevos atributos a las FeatureCollections originales
-    trainingDataUpdated = joinFeatureCollections(trainingDataUpdated, covariatesForTraining);
-    testingDataUpdated = joinFeatureCollections(testingDataUpdated, covariatesForTesting);
-
-    // Función para unir los atributos de dos FeatureCollections
-    function joinFeatureCollections(primary, secondary) {
-        return ee.FeatureCollection(primary.map(function(feature) {
-            return feature.copyProperties(secondary.filter(ee.Filter.equals('system:index', feature.get('system:index'))), null, null);
-        }));
-    }
+    // Aplicar la función convertNivel1ToString a cada Feature en S1_testing
+    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
     // Retornar ambos datasets actualizados
     return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
 };
+//Check and handle missing properties
 
 
 
