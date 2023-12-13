@@ -37,7 +37,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 
 
 
-function procesarDatos(S1_training, S1_testing, image_covariates) {
+exports.mapDataFromComposite=function(S1_training, S1_testing, image_covariates) {
     // Función para convertir la propiedad 'nivel_1' de entero a string
     var convertNivel1ToString = function(feature) {
         // Obtener el valor actual de 'nivel_1' y convertirlo a string
