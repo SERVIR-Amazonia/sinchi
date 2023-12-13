@@ -57,11 +57,8 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 print("S1_testing 32",S1_testing)
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
-
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
 var image_covariates=image_covariates.clip(region);
-
-
 
 var imageGeometry = image_covariates.geometry();
 
@@ -75,15 +72,12 @@ var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 
 //primitives
 /*
+//exportar los training points a un asset
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 //print("trainingDataUpdated 56",trainingDataUpdated)
-
-
-
-// Función para verificar y manejar propiedades faltantes
 
 // Exportar la colección de entrenamiento
 Export.table.toAsset({
