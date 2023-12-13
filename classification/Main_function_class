@@ -84,12 +84,9 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 //primitives
 
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
-
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 print("trainingDataUpdated 101", trainingDataUpdated);
-
-
 
 
 var formatPts=function (pts,clase) {
@@ -232,17 +229,13 @@ var createLCPrimitiveCollection=function(inputStack, trainingPts, label) {
         An object containing the ImageCollection, region, and training data
     */   
   
-  
     inputStack = ee.Image(inputStack);
-    print('Type of inputStack:', inputStack);
     trainingPts = ee.FeatureCollection(trainingPts);
 
     // list of distinct LANDCOVER values
     var labels = trainingPts.aggregate_array(clase).distinct().sort();
-
-
      var primList = ee.List([]);
- labels.getInfo().forEach(function(label) {
+     labels.getInfo().forEach(function(label) {
         var labelIndex = ee.Number.parse(label).subtract(1).toInt(); // Convertir la etiqueta a índice
         var formattedPtsList = formatPts(trainingPts, clase);
 
