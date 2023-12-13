@@ -251,7 +251,6 @@ exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
 };
 
 
-
 exports.importance=function(classifier){
   
   // Run .explain() to see what the classifer looks like
