@@ -78,7 +78,7 @@ var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
-var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
+var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 print("trainingDataUpdated 101", trainingDataUpdated);
 
 
