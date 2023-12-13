@@ -196,7 +196,7 @@ addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
 
-calculateConfusionMatrixB(assembleMax, S1_training)
+modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_training)
 
 
 
