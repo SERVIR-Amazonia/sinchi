@@ -114,7 +114,7 @@ function procesarDatos(S1_training, S1_testing, image_covariates) {
     return trainingDataUpdated;
 }
 
-trainingDataUpdated=procesarDatos(S1_training, S1_testing, image_covariates) 
+var trainingDataUpdated=procesarDatos(S1_training, S1_testing, image_covariates) 
 
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
