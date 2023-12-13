@@ -48,6 +48,7 @@ var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
 
+
 // Traer puntos de muestreo para semestre 1 
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
@@ -69,7 +70,8 @@ var imageGeometry = image_covariates.geometry();
 var S1_training = S1_training.filterBounds(imageGeometry);
 
 
-//print("image_covariates2",image_covariates);
+
+print("image_covariates2",image_covariates);
 
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 
@@ -95,14 +97,19 @@ var convertNivel1ToString = function(feature) {
     return feature.set('nivel_1', nivel1String);
 };
 
+// Aplicar la función a cada Feature en el FeatureCollection
+var trainingDataUpdated = S1_training.map(convertNivel1ToString);
+var trainingDataUpdated = image_covariates.sampleRegions({
+        collection: trainingDataUpdated,
+        properties: ['nivel_1'],
+        scale: 20
+    });
+
+print("trainingDataUpdated 83",trainingDataUpdated);
+var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
 
-var sampledPtsFromImg = modulo_classifier.samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
-
-var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
-var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
-print("trainingDataUpdated 101", trainingDataUpdated);
-
+//var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
 
 var formatPts=function (pts,clase) {
@@ -130,6 +137,7 @@ var formatPts=function (pts,clase) {
     
     return listOfPrimPts;
 };
+
 
 
 var getTop20=function (dict) {
@@ -395,7 +403,6 @@ var legend = ui.Panel({
     padding: '8px 15px'
   }
 });
-
 
 // Agregar título a la leyenda
 var legendTitle = ui.Label({
