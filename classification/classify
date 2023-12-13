@@ -36,7 +36,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 //// Classiffy with Prmitives
 
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
-exports.samplePtsFromImg = function(S1_training, S1_testing, image_covariates) {
+exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
     // Función interna para convertir la propiedad 'nivel_1' de entero a string
     var convertNivel1ToString = function(feature) {
         var nivel1String = ee.Number(feature.get('nivel_1')).format();
