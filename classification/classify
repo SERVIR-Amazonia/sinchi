@@ -43,22 +43,47 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
         return feature.set('nivel_1', nivel1String);
     };
 
-    // Aplicar la función convertNivel1ToString a cada Feature en S1_training
+    // Función para unir las propiedades de dos FeatureCollections
+    function joinFeatureCollections(originalFeatures, newPropertiesFeatures, joinKey) {
+        var filter = ee.Filter.equals({
+            leftField: joinKey,
+            rightField: joinKey
+        });
+
+        var join = ee.Join.saveAll({
+            matchesKey: 'newProperties',
+            ordering: joinKey,
+            ascending: true
+        });
+
+        return join.apply(originalFeatures, newPropertiesFeatures, filter).map(function(feature) {
+            var newProps = ee.Feature(ee.List(feature.get('newProperties')).get(0)).toDictionary();
+            return feature.set(newProps);
+        });
+    }
+
+    // Aplicar la función convertNivel1ToString a cada Feature en S1_training y S1_testing
     var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-    //print("trainingDataUpdated 48",trainingDataUpdated)
-    // Aplicar sampleRegions a trainingDataUpdated
-    trainingDataUpdated = image_covariates.sampleRegions({
+    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+
+    // Usar sampleRegions para extraer propiedades de la imagen
+    var extractedTrainingProperties = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
         scale: 20
     });
-    //print("trainingDataUpdated 56",trainingDataUpdated)
+    var extractedTestingProperties = image_covariates.sampleRegions({
+        collection: testingDataUpdated,
+        properties: ['nivel_1'],
+        scale: 20
+    });
 
-    // Aplicar la función convertNivel1ToString a cada Feature en S1_testing
-    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+    // Unir las propiedades extraídas con los Features originales
+    var finalTrainingData = joinFeatureCollections(trainingDataUpdated, extractedTrainingProperties, 'system:index');
+    var finalTestingData = joinFeatureCollections(testingDataUpdated, extractedTestingProperties, 'system:index');
 
     // Retornar ambos datasets actualizados
-    return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
+    return {trainingDataUpdated: finalTrainingData, testingDataUpdated: finalTestingData};
 };
 //Check and handle missing properties
 
