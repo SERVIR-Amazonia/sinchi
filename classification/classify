@@ -63,7 +63,7 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
 
 
 // Función para verificar y manejar propiedades faltantes
-function checkAndHandleMissingProperties(feature) {
+var checkAndHandleMissingProperties=function(feature) {
     var requiredProperties = ['blue', 'green', 'red']; // y otras propiedades relevantes
     var defaultValue = 0; // Define un valor por defecto adecuado
 
