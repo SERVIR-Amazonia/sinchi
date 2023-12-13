@@ -139,7 +139,6 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
 //
 //Assmeble max
 
-
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
 print("passembleMax",assembleMax)
 
