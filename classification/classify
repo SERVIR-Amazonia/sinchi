@@ -63,21 +63,7 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
 //Check and handle missing properties
 
 
-// Función para verificar y manejar propiedades faltantes
-var checkAndHandleMissingProperties=function(feature) {
-    var requiredProperties = ['blue', 'green', 'red']; // y otras propiedades relevantes
-    var defaultValue = 0; // Define un valor por defecto adecuado
 
-    requiredProperties.forEach(function(prop) {
-        // Crear una condición que verifique si la propiedad existe
-        var condition = feature.propertyNames().contains(prop);
-
-        // Usar 'ee.Algorithms.If' para manejar la propiedad faltante
-        feature = ee.Feature(ee.Algorithms.If(condition, feature, feature.set(prop, defaultValue)));
-    });
-
-    return feature;
-}
 
 /////////////////////////
 /// VAlidación ////
