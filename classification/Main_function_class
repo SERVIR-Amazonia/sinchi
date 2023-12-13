@@ -142,6 +142,26 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
 
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
 print("passembleMax",assembleMax)
+
+
+// Suponiendo que 'yourSingleBandImage' es tu imagen de GEE con 5 categorías
+var yourSingleBandImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
+
+// Define una paleta de colores para las 5 categorías
+// Los colores son solo ejemplos, puedes cambiarlos según tus preferencias
+var palette = [
+  'red',    // Color para la categoría 1
+  'blue',   // Color para la categoría 2
+  'green',  // Color para la categoría 3
+  'yellow', // Color para la categoría 4
+  'purple'  // Color para la categoría 5
+];
+
+// Añade la imagen al mapa con la paleta de colores
+Map.addLayer(yourSingleBandImage, {min: 1, max: 5, palette: palette}, 'Categorías');
+
+// Centra el mapa en la ubicación de tu imagen
+Map.centerObject(yourSingleBandImage);
 // Example usage:
 // var landCover = assembleMaxProbability(yourImageCollection);
 
