@@ -54,7 +54,8 @@ exports.samplePtsFromImg=function(S1_training, S1_testing, image_covariates, con
     return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
 }
 
-
+/////////////////////////
+/// VAlidación ////
 exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
     var confusionMatrix = testingSet.classify(RFclassifier)
         .errorMatrix({
