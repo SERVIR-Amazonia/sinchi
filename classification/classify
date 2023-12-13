@@ -173,7 +173,6 @@ var RFprim=function (trainingPts,inputStack, label) {
                         'model': model,
                         'oobError': oobTop20
                     });
-    print("output 213",output);
     return output;
 };
 
