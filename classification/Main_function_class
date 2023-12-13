@@ -113,7 +113,7 @@ var probabilityBand = firstPrimitiveImage.select('Probability')
 // Define los parámetros de visualización
 var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
 // Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
-Map.addLayer(probabilityBand, visParams, 'Probability Band '+ i)
+Map.addLayer(probabilityBand, visParams, 'Probability Band first')
 // Opcional: 
 Map.centerObject(processedImage);
 
