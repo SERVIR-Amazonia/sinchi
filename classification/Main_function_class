@@ -150,8 +150,6 @@ var getTop20=function (dict) {
 }
 
 
-
-
 var RFprim=function (trainingPts,inputStack, label) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
