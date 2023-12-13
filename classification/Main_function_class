@@ -97,7 +97,7 @@ var convertNivel1ToString = function(feature) {
 
 
 
-var sampledPtsFromImg = modulo_classfier.samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
+var sampledPtsFromImg = modulo_classifier.samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
