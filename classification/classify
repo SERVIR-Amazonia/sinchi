@@ -243,8 +243,7 @@ exports.calculateConfusionMatrixB =function(image, testingPts){
         geometries: true // Esto mantiene la geometría original
     });
     print("dataExtracted",dataExtracted)
-    var confusionMatrix = dataExtracted.classify(RFclassifier)
-        .errorMatrix({
+    var confusionMatrix = dataExtracted.errorMatrix({
             actual: 'nivel_1',
             predicted: 'LANDCOVER'
         });
