@@ -33,7 +33,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 };
 /////
 
-//// Classiffy with Prmitives
+//// Classiffy with Primitives
 
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
 exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
@@ -233,7 +233,29 @@ exports.assembleMaxProbability=function (collection) {
 
 
 /////////////////////////
-/// VAlidación ////
+/// Vaclidación ////
+
+exports.calculateConfusionMatrixB =function(image, testingPts){
+    var dataExtracted = image.sampleRegions({
+        collection: testingPts,
+        properties: ['nivel_1'],
+        scale: 20,
+        geometries: true // Esto mantiene la geometría original
+    });
+    print("dataExtracted",dataExtracted)
+    var confusionMatrix = dataExtracted.classify(RFclassifier)
+        .errorMatrix({
+            actual: 'nivel_1',
+            predicted: 'LANDCOVER'
+        });
+        //PRINT RESULTS
+        print('Confusion matrix:', confusionMatrix);
+      print('Overall Accuracy:', confusionMatrix.accuracy());
+      print('Producers Accuracy:', confusionMatrix.producersAccuracy());
+      print('Consumers Accuracy:', confusionMatrix.consumersAccuracy());
+      print('Kappa:', confusionMatrix.kappa());
+};
+
 exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
     var confusionMatrix = testingSet.classify(RFclassifier)
         .errorMatrix({
