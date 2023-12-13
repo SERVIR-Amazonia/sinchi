@@ -89,7 +89,7 @@ var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var filteredTrainingData = trainingDataUpdated.filter(ee.Filter.notNull(['geometry']));
 var filteredTestingData = testingDataUpdated.filter(ee.Filter.notNull(['geometry']));
-print("trainingDataUpdated 101", trainingDataUpdated);
+print("filteredTrainingDatad 101", filteredTrainingData);
 
 // Exportar trainingDataUpdated como un Asset
 Export.table.toAsset({
