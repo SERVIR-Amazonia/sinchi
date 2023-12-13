@@ -94,6 +94,23 @@ var region = aoi.buffer(10000);
 var mosaico_fecha1 = mosaico_fecha1.clip(region);
 var mosaico_fecha2 = mosaico_fecha2.clip(region);
 */
+
+
+
+
+//Imagen probability
+
+
+var imagen = ee.Image('projects/pc300-samz-sinchi/assets/clase_1');
+
+// Visualizar la imagen en el mapa
+// Reemplazar 'nombre_de_la_banda' con el nombre de la banda que quieres visualizar
+var visualizacion = {bands: ['nombre_de_la_banda'], min: 0, max: 255};
+Map.addLayer(imagen, visualizacion, 'Imagen Visualizada');
+
+// Centrar el mapa en la imagen
+Map.centerObject(imagen);
+
 //Mosaicos
 Map.addLayer(mosaico_fecha1, mosaicoVis_sem1, 'Mosaico semestre 1 2022');// Mosaico Semestre 1
 Map.addLayer(mosaico_fecha2, mosaicoVis_sem2, 'Mosaico semestre 2 2022');//Mosaico Semestre 2
