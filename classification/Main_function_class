@@ -97,7 +97,8 @@ var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/asset
 //Crear colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-
+var multibandImage = primitives.toBands();
+print("multibandImage 75",multibandImage)
 //mostrar en mapa primeara imagen
 var primitivesList = primitives.toList(primitives.size());
 
