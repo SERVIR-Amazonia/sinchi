@@ -82,11 +82,26 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 
 //primitives
-
+///////////////////////
+///// Prepar data////
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 print("trainingDataUpdated 101", trainingDataUpdated);
+
+// Exportar trainingDataUpdated como un Asset
+Export.table.toAsset({
+    collection: trainingDataUpdated,
+    description: 'training_data_export',
+    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points/trainingDataUpdated'
+});
+
+// Exportar testingDataUpdated como un Asset
+Export.table.toAsset({
+    collection: testingDataUpdated,
+    description: 'testing_data_export',
+    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points/testingDataUpdated'
+});
 
 
 var formatPts=function (pts,clase) {
