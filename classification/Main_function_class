@@ -81,3 +81,16 @@ var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 print("trainingDataUpdated 56",trainingDataUpdated)
 // Función para verificar y manejar propiedades faltantes
+
+// Exportar la colección de entrenamiento
+Export.table.toAsset({
+  collection: trainingDataUpdated,
+  description: 'training_data_export',
+  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdateds'
+});
+
+Export.table.toAsset({
+  collection: testingDataUpdated,
+  description: 'testing_data_export',
+  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdateds'
+});
