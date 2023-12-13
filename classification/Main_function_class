@@ -88,25 +88,32 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 //convert nivel_1 a string
 
 
-// Función para convertir la propiedad 'nivel_1' de entero a string
-var convertNivel1ToString = function(feature) {
-    // Obtener el valor actual de 'nivel_1' y convertirlo a string
-    var nivel1String = ee.Number(feature.get('nivel_1')).format();
+function procesarDatos(S1_training, S1_testing, image_covariates) {
+    // Función para convertir la propiedad 'nivel_1' de entero a string
+    var convertNivel1ToString = function(feature) {
+        // Obtener el valor actual de 'nivel_1' y convertirlo a string
+        var nivel1String = ee.Number(feature.get('nivel_1')).format();
 
-    // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
-    return feature.set('nivel_1', nivel1String);
-};
+        // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
+        return feature.set('nivel_1', nivel1String);
+    };
 
-// Aplicar la función a cada Feature en el FeatureCollection
-var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-var trainingDataUpdated = image_covariates.sampleRegions({
+    // Aplicar la función a cada Feature en el FeatureCollection
+    var trainingDataUpdated = S1_training.map(convertNivel1ToString);
+    trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
         scale: 20
     });
 
-print("trainingDataUpdated 83",trainingDataUpdated);
-var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+    // Imprimir el resultado actualizado de los datos de entrenamiento
+    print("trainingDataUpdated", trainingDataUpdated);
+
+    // Aplicar la función a los datos de prueba y retornar el resultado
+    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+    return testingDataUpdated;
+}
+
 
 
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
