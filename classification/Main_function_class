@@ -396,6 +396,7 @@ var legend = ui.Panel({
   }
 });
 
+
 // Agregar título a la leyenda
 var legendTitle = ui.Label({
   value: 'Leyenda',
