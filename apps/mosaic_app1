@@ -97,7 +97,7 @@ var mosaico_fecha2 = mosaico_fecha2.clip(region);
 
 
 
-
+/*
 //Imagen probability
 
 
@@ -108,7 +108,7 @@ var imagen = ee.Image('projects/pc300-samz-sinchi/assets/clase_1');
 //var visualizacion = {bands: ['Probability'], min: 0, max: 1};
 var visualizacion = {bands:['Probability'],'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']} 
 Map.addLayer(imagen, visualizacion, 'Imagen Visualizada');
-
+*/
 // Centrar el mapa en la imagen
 Map.centerObject(imagen);
 
