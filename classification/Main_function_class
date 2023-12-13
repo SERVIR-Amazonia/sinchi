@@ -139,7 +139,7 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
 //
 //Assmeble max
 
-assembleMaxProbability=function (collection) {
+var assembleMaxProbability=function (collection) {
   // Convert the image collection to a multiband image
   var image = collection.toBands();
 
