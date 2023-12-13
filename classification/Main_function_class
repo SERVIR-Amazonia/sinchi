@@ -102,7 +102,7 @@ var firstPrimitiveImage = primitives.first();
 print("firstPrimitiveImage 258",firstPrimitiveImage)
 
 //Visualizar primera imagen
-var probabilityBand = firstPrimitiveImage.select('probability')
+var probabilityBand = firstPrimitiveImage.select('Probability')
 
 // Define los parámetros de visualización
 var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
