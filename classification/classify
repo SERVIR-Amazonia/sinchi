@@ -45,7 +45,6 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
 
     // Aplicar la función convertNivel1ToString a cada Feature en S1_training
     var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-    print("trainingDataUpdated 48",trainingDataUpdated)
 
     // Aplicar sampleRegions a trainingDataUpdated
     trainingDataUpdated = image_covariates.sampleRegions({
