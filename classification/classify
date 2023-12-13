@@ -31,6 +31,31 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     };
     
 };
+/////
+
+//// Classiffy with Prmitives
+
+//Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
+exports.samplePtsFromImg=function(S1_training, S1_testing, image_covariates, convertNivel1ToString) {
+    // Aplicar la función a cada Feature en S1_training
+    var trainingDataUpdated = S1_training.map(convertNivel1ToString);
+
+    // Aplicar sampleRegions a trainingDataUpdated
+    trainingDataUpdated = image_covariates.sampleRegions({
+        collection: trainingDataUpdated,
+        properties: ['nivel_1'],
+        scale: 20
+    });
+
+    // Imprimir los datos de entrenamiento actualizados
+    print("trainingDataUpdated", trainingDataUpdated);
+
+    // Aplicar la función a cada Feature en S1_testing
+    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+
+    // Retornar ambos datasets actualizados
+    return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
+}
 
 
 exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
