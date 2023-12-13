@@ -193,10 +193,13 @@ var names = ['Categoría 1', 'Categoría 2', 'Categoría 3', 'Categoría 4', 'Ca
 
 // Añadir imagen y leyenda al mapa
 addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
-// Example usage:
-// var landCover = assembleMaxProbability(yourImageCollection);
 
-//var listOfPrimPts = formatPts(trainingDataUpdated,clase)
+
+
+
+
+
+
 
 /* Verificar primeros features in the list of feature collectiosn
 // Printing a few features from each FeatureCollection in the list
