@@ -80,6 +80,21 @@ var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, im
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 
+// Función para verificar y manejar propiedades faltantes
+var checkAndHandleMissingProperties=function(feature) {
+    var requiredProperties = ['blue', 'green', 'red']; // y otras propiedades relevantes
+    var defaultValue = 0; // Define un valor por defecto adecuado
+
+    requiredProperties.forEach(function(prop) {
+        // Crear una condición que verifique si la propiedad existe
+        var condition = feature.propertyNames().contains(prop);
+
+        // Usar 'ee.Algorithms.If' para manejar la propiedad faltante
+        feature = ee.Feature(ee.Algorithms.If(condition, feature, feature.set(prop, defaultValue)));
+    });
+
+    return feature;
+}
 
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
