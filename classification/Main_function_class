@@ -83,20 +83,6 @@ var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
 
 //primitives
 
-//convert nivel_1 a string
-
-
-// Función para convertir la propiedad 'nivel_1' de entero a string
-var convertNivel1ToString = function(feature) {
-    // Obtener el valor actual de 'nivel_1' y convertirlo a string
-    var nivel1String = ee.Number(feature.get('nivel_1')).format();
-
-    // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
-    return feature.set('nivel_1', nivel1String);
-};
-
-
-
 var sampledPtsFromImg = modulo_classifier.samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
