@@ -113,7 +113,7 @@ var probabilityBand = firstPrimitiveImage.select('Probability')
 // Define los parámetros de visualización
 var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
 // Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
-Map.addLayer(probabilityBand, visParams, 'Probability Band')
+Map.addLayer(probabilityBand, visParams, 'Probability Band'+ i)
 // Opcional: 
 Map.centerObject(processedImage);
 
@@ -128,8 +128,8 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
         'image': image,
         'description': 'Primitive_' + i, // Añade un nombre único para cada exportación
         'assetId': 'projects/pc300-samz-sinchi/assets/primitive_' + i, // Reemplaza con tu ruta de asset
-        'scale': 500, // Ajusta la escala según tus datos
-        'region': region // O define una región específica
+        'scale': 500, 
+        'region': region 
     };
 
     // Exporta la imagen
