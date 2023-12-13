@@ -68,17 +68,9 @@ var imageGeometry = image_covariates.geometry();
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
 var S1_training = S1_training.filterBounds(imageGeometry);
 
-
 //print("image_covariates2",image_covariates);
 
 var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
-
-var visualizationParams = {  "bands": ["swir1_p50", "nir_p50", "swir2_p50"],
-  "min": [200, 200,200],
-  "max": [5000,5000,50000],
-  "gamma": 0.5,
-  
-}; // Ajusta según  bandas
 
 
 //primitives
