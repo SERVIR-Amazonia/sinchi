@@ -48,6 +48,7 @@ var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
 
+
 // Traer puntos de muestreo para semestre 1 
 //Tenemos unafeature collection para muestreos de entrenamiento y validacion
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
@@ -95,35 +96,18 @@ var convertNivel1ToString = function(feature) {
     // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
     return feature.set('nivel_1', nivel1String);
 };
-//Funcioon para extraer los valores de entrenamiento y validacion de la imagen de covariables
-function samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString) {
-    // Aplicar la función a cada Feature en S1_training
-    var trainingDataUpdated = S1_training.map(convertNivel1ToString);
 
-    // Aplicar sampleRegions a trainingDataUpdated
-    trainingDataUpdated = image_covariates.sampleRegions({
+// Aplicar la función a cada Feature en el FeatureCollection
+var trainingDataUpdated = S1_training.map(convertNivel1ToString);
+var trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
         scale: 20
     });
 
-    // Imprimir los datos de entrenamiento actualizados
-    print("trainingDataUpdated", trainingDataUpdated);
+print("trainingDataUpdated 83",trainingDataUpdated);
+var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
-    // Aplicar la función a cada Feature en S1_testing
-    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
-
-    // Retornar ambos datasets actualizados
-    return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
-}
-
-
-
-var sampledPtsFromImg = samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
-
-var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
-var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
-print("trainingDataUpdated 101", trainingDataUpdated);
 
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
@@ -153,6 +137,7 @@ var formatPts=function (pts,clase) {
     
     return listOfPrimPts;
 };
+
 
 
 
