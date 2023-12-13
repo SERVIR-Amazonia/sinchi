@@ -254,31 +254,6 @@ exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
 ///////////
 ////Validation///
 
-// Función para convertir la propiedad 'nivel_1' de entero a string
-var convertNivel1ToString = function(feature) {
-    // Obtener el valor actual de 'nivel_1' y convertirlo a string
-    var nivel1String = ee.Number(feature.get('nivel_1')).format();
-
-    // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
-    return feature.set('nivel_1', nivel1String);
-};
-
-// Aplicar la función a cada Feature en el FeatureCollection
-var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-var trainingDataUpdated = image_covariates.sampleRegions({
-        collection: trainingDataUpdated,
-        properties: ['nivel_1'],
-        scale: 20
-    });
-
-print("trainingDataUpdated 83",trainingDataUpdated);
-var testingDataUpdated = S1_testing.map(convertNivel1ToString);
-
-
-//var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
-
-
-
 
 
 
