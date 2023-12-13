@@ -103,7 +103,7 @@ print("trainingDataUpdated 76",trainingDataUpdated)
 
 
 
-var primitives=createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
+var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 // Asegúrate de que 'primitives' es una ImageCollection
 var firstPrimitiveImage = primitives.first();
