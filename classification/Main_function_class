@@ -88,15 +88,21 @@ var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, im
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 
-var placeholderGeometry = ee.Geometry.Point([0, 0]);
 
+// Crear una geometría de reemplazo
+var placeholderGeometry = ee.Geometry.Point([10, 10]);
+
+// Función para asignar la geometría de reemplazo a los Features sin geometría
 var assignPlaceholderGeometry = function(feature) {
-    return ee.Feature(ee.Algorithms.If(
-        feature.geometry(),
-        feature,
-        feature.setGeometry(placeholderGeometry)
-    ));
+    // Verificar si el Feature tiene una geometría válida
+    if (feature.geometry()) {
+        return feature;
+    } else {
+        // Asignar la geometría de reemplazo
+        return feature.setGeometry(placeholderGeometry);
+    }
 };
+
 
 var trainingDataWithPlaceholder = trainingDataUpdated.map(assignPlaceholderGeometry);
 var testingDataWithPlaceholder = testingDataUpdated.map(assignPlaceholderGeometry);
