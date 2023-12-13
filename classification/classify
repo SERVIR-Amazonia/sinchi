@@ -124,7 +124,6 @@ var RFprim=function (trainingPts,inputStack, label) {
     print("samples",samples);
     // Aplicar esta función a todas las características en la colección
     var linea160=samples.sort('PRIM', false)
-    print( linea160,"linea 161");
     var linea125=linea160.first();
     print("primeros features linea163",linea125)
 
