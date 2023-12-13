@@ -74,7 +74,7 @@ var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 
 
 //primitives
-
+/*
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
@@ -97,5 +97,5 @@ Export.table.toAsset({
   description: 'testing_data_export',
   assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
 });
-
+*/
 var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
