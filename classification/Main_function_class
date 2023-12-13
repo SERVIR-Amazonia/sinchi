@@ -94,14 +94,31 @@ Export.table.toAsset({
 */
 var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
 
-//Crrat colección de primitivos
+//Crear colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
 
 //mostrar en mapa primeara imagen
-
 var primitivesList = primitives.toList(primitives.size());
 
+
+// Agregar la primera imagen de la colección al mapa
+// Asegurarse de que 'primitives' es una ImageCollection
+var firstPrimitiveImage = primitives.first();
+print("firstPrimitiveImage 258",firstPrimitiveImage)
+
+//Visualizar primera imagen
+var probabilityBand = firstPrimitiveImage.select('Probability')
+
+// Define los parámetros de visualización
+var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
+// Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
+Map.addLayer(probabilityBand, visParams, 'Probability Band')
+// Opcional: 
+Map.centerObject(processedImage);
+
+
+//// Exportar primitivos a un asset:
 // Iterar sobre la lista de imágenes
 for (var i = 0; i < primitivesList.size().getInfo(); i++) {
     var image = ee.Image(primitivesList.get(i));
@@ -118,20 +135,8 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
     // Exporta la imagen
     Export.image.toAsset(exportParams);
 }
-// Agregar la primera imagen de la colección al mapa
-// Asegurarse de que 'primitives' es una ImageCollection
-var firstPrimitiveImage = primitives.first();
-print("firstPrimitiveImage 258",firstPrimitiveImage)
 
-//Visualizar primera imagen
-var probabilityBand = firstPrimitiveImage.select('Probability')
 
-// Define los parámetros de visualización
-var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
-// Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
-Map.addLayer(probabilityBand, visParams, 'Probability Band')
-// Opcional: 
-Map.centerObject(processedImage);
 //var listOfPrimPts = formatPts(trainingDataUpdated,clase)
 
 /* Verificar primeros features in the list of feature collectiosn
