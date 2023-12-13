@@ -36,8 +36,14 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 //// Classiffy with Prmitives
 
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
-exports.samplePtsFromImg=function(S1_training, S1_testing, image_covariates, convertNivel1ToString) {
-    // Aplicar la función a cada Feature en S1_training
+exports.samplePtsFromImg = function(S1_training, S1_testing, image_covariates) {
+    // Función interna para convertir la propiedad 'nivel_1' de entero a string
+    var convertNivel1ToString = function(feature) {
+        var nivel1String = ee.Number(feature.get('nivel_1')).format();
+        return feature.set('nivel_1', nivel1String);
+    };
+
+    // Aplicar la función convertNivel1ToString a cada Feature en S1_training
     var trainingDataUpdated = S1_training.map(convertNivel1ToString);
 
     // Aplicar sampleRegions a trainingDataUpdated
@@ -47,12 +53,12 @@ exports.samplePtsFromImg=function(S1_training, S1_testing, image_covariates, con
         scale: 20
     });
 
-    // Aplicar la función a cada Feature en S1_testing
+    // Aplicar la función convertNivel1ToString a cada Feature en S1_testing
     var testingDataUpdated = S1_testing.map(convertNivel1ToString);
 
     // Retornar ambos datasets actualizados
     return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
-}
+};
 
 /////////////////////////
 /// VAlidación ////
