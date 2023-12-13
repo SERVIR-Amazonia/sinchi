@@ -111,7 +111,7 @@ function procesarDatos(S1_training, S1_testing, image_covariates) {
 
     // Aplicar la función a los datos de prueba y retornar el resultado
     var testingDataUpdated = S1_testing.map(convertNivel1ToString);
-    return testingDataUpdated;
+    return trainingDataUpdated;
 }
 
 
