@@ -80,6 +80,9 @@ var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, im
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 //print("trainingDataUpdated 56",trainingDataUpdated)
+
+
+
 // Función para verificar y manejar propiedades faltantes
 
 // Exportar la colección de entrenamiento
@@ -94,3 +97,6 @@ Export.table.toAsset({
   description: 'testing_data_export',
   assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
 });
+
+
+'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdateds'
