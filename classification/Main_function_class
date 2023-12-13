@@ -98,5 +98,4 @@ Export.table.toAsset({
   assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
 });
 
-
-'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdateds'
+var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
