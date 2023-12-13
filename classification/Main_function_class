@@ -99,3 +99,4 @@ Export.table.toAsset({
 });
 */
 var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
+print("trainingDataUpdated 76",trainingDataUpdated)
