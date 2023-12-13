@@ -96,18 +96,35 @@ var convertNivel1ToString = function(feature) {
     // Establecer el valor convertido de vuelta en la propiedad 'nivel_1'
     return feature.set('nivel_1', nivel1String);
 };
+//Funcioon para extraer los valores de entrenamiento y validacion de la imagen de covariables
+function samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString) {
+    // Aplicar la función a cada Feature en S1_training
+    var trainingDataUpdated = S1_training.map(convertNivel1ToString);
 
-// Aplicar la función a cada Feature en el FeatureCollection
-var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-var trainingDataUpdated = image_covariates.sampleRegions({
+    // Aplicar sampleRegions a trainingDataUpdated
+    trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: ['nivel_1'],
         scale: 20
     });
 
-print("trainingDataUpdated 83",trainingDataUpdated);
-var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+    // Imprimir los datos de entrenamiento actualizados
+    print("trainingDataUpdated", trainingDataUpdated);
 
+    // Aplicar la función a cada Feature en S1_testing
+    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
+
+    // Retornar ambos datasets actualizados
+    return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
+}
+
+
+
+var sampledPtsFromImg = samplePtsFromImg(S1_training, S1_testing, image_covariates, convertNivel1ToString);
+
+trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
+testingDataUpdated==sampledPtsFromImg.trainingDataUpdated;
+print("trainingDataUpdated 101", trainingDataUpdated);
 
 //var RFprim_class_funct=modulo_classifier.RFprim_class(S1_training, inputStack, clase)
 
