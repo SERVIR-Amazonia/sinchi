@@ -53,6 +53,7 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
         properties: ['nivel_1'],
         scale: 20
     });
+    print("trainingDataUpdated 56",trainingDataUpdated)
 
     // Aplicar la función convertNivel1ToString a cada Feature en S1_testing
     var testingDataUpdated = S1_testing.map(convertNivel1ToString);
