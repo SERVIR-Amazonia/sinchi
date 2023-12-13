@@ -79,7 +79,7 @@ var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, im
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
-
+print("trainingDataUpdated 56",trainingDataUpdated)
 // Función para verificar y manejar propiedades faltantes
 
 var formatPts=function (pts,clase) {
