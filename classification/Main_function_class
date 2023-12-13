@@ -299,7 +299,7 @@ var firstThreeFeatures = firstFeatureCollection.limit(3);
 print('First three features of the first FeatureCollection:', firstThreeFeatures);
 */
 
-Map.addLayer(processedImage,visualizationParams,'processedImage');
+
 /////////////////
 /*test simple classifier
 
