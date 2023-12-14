@@ -79,10 +79,6 @@ function balanceAndApplyCorrelation (featureCollection, estratos,estratoField) {
     testing: combinedTestingSet
   };
 }
-// Y luego exportar funciones
-exports.balanceSamples = balanceSamples;
-exports.splitAndJoinDataset = splitAndJoinDataset;
-exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
 exports.estratificarBalance=function(samplingPoints,estratoField){
