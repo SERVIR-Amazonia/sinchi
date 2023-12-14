@@ -112,7 +112,6 @@ exports.executeAndVisualize = function(samplingPoints,estratoField) {
 
 
 
-
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
 exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
     // Función interna para convertir la propiedad 'nivel_1' de entero a string
