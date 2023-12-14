@@ -191,7 +191,8 @@ print('First three features of the first FeatureCollection:', firstThreeFeatures
 
 
 /////////////////
-/*test simple classifier
+
+//test simple classifier
 
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
@@ -210,7 +211,7 @@ print("importance",importance)
 
 
 //print("classified_image_S1  ",classified_image_S1  );
-*/
+
 //////
 
 // Mostrar los resultados
