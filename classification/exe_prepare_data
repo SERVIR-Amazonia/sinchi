@@ -95,9 +95,9 @@ var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets
 var visualizationResults=module_extract_samples.executeAndVisualize(sampling_points_S1, clase) 
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;	
 
-
 var S1_training=visualizationResults.combinedResults_S1.training;	
-var S1_testing=visualizationResults.combinedResults_S1.testing;	
+var S1_testing=visualizationResults.combinedResults_S1.testing;
+
 
 
 
