@@ -192,7 +192,7 @@ print('First three features of the first FeatureCollection:', firstThreeFeatures
 
 /////////////////
 
-//test simple classifier
+//test simple RF classifier
 
 var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
