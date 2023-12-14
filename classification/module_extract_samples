@@ -92,13 +92,8 @@ exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
 exports.executeAndVisualize = function(samplingPoints) {
-  var combinedResults_S1 = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
-
-  // En lugar de imprimir directamente, retorna los resultados
-  return {
-    combinedResults_S1: combinedResults_S1,
-    combinedResults_S2: combinedResults_S2
-  };
+  var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
+  return combinedResults;
 };
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
 exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
