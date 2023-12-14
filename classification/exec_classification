@@ -1,7 +1,5 @@
 
 
-//var aoi = Region_100K.first().geometry();
-//var region = aoi.buffer(100);
 
 //Importar módulos
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
