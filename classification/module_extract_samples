@@ -1,8 +1,4 @@
 
-// Load the shapefile as a feature collection
-var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
-var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
-
 //Acá vienen puntos que representan un pixel dentro del polígono
 //Este proceso se realizó en R
 
