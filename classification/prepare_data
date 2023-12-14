@@ -1,5 +1,5 @@
-/*
-Este
+/**
+* Este modulo
 
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
