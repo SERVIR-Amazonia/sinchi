@@ -201,7 +201,7 @@ exports.assembleMaxProbability=function (collection) {
 
 
 /////////////////////////
-/// Vaclidación ////
+/// Validación ////
 
 exports.calculateConfusionMatrixB =function(image, testingPts){
     var dataExtracted = image.sampleRegions({
