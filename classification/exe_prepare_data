@@ -6,8 +6,7 @@
 // Declarar variables
 //var aoi = Region_100K.first().geometry();
 //var region = aoi.buffer(100);
-var region=geometry2;
-var geometry = region;
+
 var start_year = 2022;//año inicio del análisis
 exports.start_year = start_year; // Exportar la variable para que sea usada en otro módulo
 
@@ -58,6 +57,10 @@ var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
           [-73.67045552611457, 2.6322399358683044],
           [-74.88993794798957, 1.3805913351450838],
           [-76.03251607298957, 1.7979102902170863]]]); // Polígono usada para realizar pruebas
+
+
+var region=geometry2;
+var geometry = region;
 
 exports.geometry_test =geometry2;
 
