@@ -37,26 +37,6 @@ var firstPrimitiveImage = primitives.first();
 //print("firstPrimitiveImage 258",firstPrimitiveImage)
 
 
-/*
-//// Exportar primitivos a un asset:
-// Iterar sobre la lista de imágenes
-for (var i = 0; i < primitivesList.size().getInfo(); i++) {
-    var image = ee.Image(primitivesList.get(i));
-    
-    // Define los parámetros de exportación
-    var exportParams = {
-        'image': image,
-        'description': 'Primitive_' + i, // Añade un nombre único para cada exportación
-        'assetId': 'projects/pc300-samz-sinchi/assets/primitive_' + i, // Reemplaza con tu ruta de asset
-        'scale': 500, 
-        'region': region 
-    };
-
-    // Exporta la imagen
-    Export.image.toAsset(exportParams);
-}
-*/
-//
 //Assemeble max
 
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
