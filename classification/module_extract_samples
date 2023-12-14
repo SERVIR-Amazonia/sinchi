@@ -11,7 +11,7 @@ var muestrasBalanceadas = ee.List([]);
 
 // Definir una función para balancear las muestras
 // Exponer la función balanceSamples como un método del módulo.
-function balanceSamples (featureCollection, numSamplesPerClass) {
+function balanceSamples (featureCollection, numSamplesPerClass,estratoField) {
   var uniqueClassesList = featureCollection.aggregate_array('nivel_1').distinct();
   var balancedSamplesPerClass = uniqueClassesList.map(function(classValue) {
     var classSamples = featureCollection.filter(ee.Filter.eq('nivel_1', classValue));
@@ -58,14 +58,14 @@ function balanceAndApplyCorrelation (featureCollection, estratos,estratoField) {
   // Usa map para aplicar la correlación a cada estrato y acumula los conjuntos de entrenamiento y prueba
   var trainingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
-    var balancedSample = balanceSamples(estratoData, numSamplesPerClass);
+    var balancedSample = balanceSamples(estratoData, numSamplesPerClass,estratoField);
     var correlatedSample = splitAndJoinDataset(balancedSample);
     return correlatedSample.spatialJoinedSet;
   });
 
   var testingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
-    var balancedSample = balanceSamples(estratoData, numSamplesPerClass);
+    var balancedSample = balanceSamples(estratoData, numSamplesPerClass,estratoField);
     var correlatedSample = splitAndJoinDataset(balancedSample);
     return correlatedSample.testingSet;
   });
