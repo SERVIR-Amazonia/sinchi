@@ -32,7 +32,6 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     
 };
 /////
-
 //// Classiffy with Primitives
 
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
