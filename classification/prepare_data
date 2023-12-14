@@ -57,7 +57,7 @@ var processedImage = moduloComposite.s2process(region, start_year, end_year, sta
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
 var image_covariates=image_covariates.clip(region);
 
-var image_covariates=ee.image(image_covariates)
+var image_covariates=ee.Image(image_covariates)
 //export image covariates
 
 // Specify the parameters for exporting
