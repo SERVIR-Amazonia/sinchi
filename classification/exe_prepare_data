@@ -37,9 +37,9 @@ var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/training
       +semestre; 
 exports.TrainingDataPath=TrainingDataPath
 
-var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDatabalanced'
+var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDatabalancedS1'
       +semestre; 
-
+exports.TestingDataPath=TestingDataPath
 var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
 exports.image_covariatesPath=image_covariatesPath
 
