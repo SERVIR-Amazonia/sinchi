@@ -127,7 +127,6 @@ var sampledPtsFromImg = module_extract_samples.PreparePts(training, testing, ima
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
-//print("trainingDataUpdated 56",trainingDataUpdated)
 
 // Exportar la colección de entrenamiento
 Export.table.toAsset({
