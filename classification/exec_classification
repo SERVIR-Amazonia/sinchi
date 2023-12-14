@@ -123,7 +123,7 @@ modulo_classifier.calculateConfusionMatrixB(assembleMax, trainingDataUpdated)
 
 //test simple RF classifier
 
-var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
+var classify = modulo_classifier.rf(trainingDataUpdated, S1_testing,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 //var classified_image_S1=classify.classified_image;
