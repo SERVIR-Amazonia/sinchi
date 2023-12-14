@@ -46,7 +46,7 @@ var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
 
 
 //primitives
-/*
+
 //exportar los training points a un asset
 var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
 
@@ -66,48 +66,4 @@ Export.table.toAsset({
   description: 'testing_data_export',
   assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
 });
-*/
-var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
 
-//Crear colección de primitivos
-var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
-
-var multibandImage = primitives.toBands();
-print("multibandImage 75",multibandImage)
-//mostrar en mapa primeara imagen
-var primitivesList = primitives.toList(primitives.size());
-
-
-// Agregar la primera imagen de la colección al mapa
-// Asegurarse de que 'primitives' es una ImageCollection
-var firstPrimitiveImage = primitives.first();
-//print("firstPrimitiveImage 258",firstPrimitiveImage)
-
-//Visualizar primera imagen
-var probabilityBand = firstPrimitiveImage.select('Probability')
-
-// Define los parámetros de visualización
-var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
-// Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
-Map.addLayer(probabilityBand, visParams, 'Probability Band first')
-// Opcional: 
-Map.centerObject(processedImage);
-
-
-//// Exportar primitivos a un asset:
-// Iterar sobre la lista de imágenes
-for (var i = 0; i < primitivesList.size().getInfo(); i++) {
-    var image = ee.Image(primitivesList.get(i));
-    
-    // Define los parámetros de exportación
-    var exportParams = {
-        'image': image,
-        'description': 'Primitive_' + i, // Añade un nombre único para cada exportación
-        'assetId': 'projects/pc300-samz-sinchi/assets/primitive_' + i, // Reemplaza con tu ruta de asset
-        'scale': 500, 
-        'region': region 
-    };
-
-    // Exporta la imagen
-    Export.image.toAsset(exportParams);
-}
