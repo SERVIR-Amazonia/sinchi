@@ -102,7 +102,7 @@ addImageWithLegend(SingleBandImage, palette, names, 1, 5, 'Categorías');
 modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
 
-/*
+
 //test simple RF classifier
 
 var classify = modulo_classifier.rf(trainingDataUpdated, S1_testing,image_covariates);
@@ -122,7 +122,7 @@ print("importance",importance)
 
 
 //print("classified_image_S1  ",classified_image_S1  );
-*/
+
 //////
 
 // Mostrar los resultados
