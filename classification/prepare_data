@@ -50,7 +50,6 @@ var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation
 //el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
 var S1_training=visualizationResults.combinedResults_S1.training;
 var S1_testing=visualizationResults.combinedResults_S1.testing;
-print("S1_testing 30",S1_testing)
 
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
