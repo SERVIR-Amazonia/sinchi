@@ -91,10 +91,9 @@ exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
-exports.executeAndVisualize = function(samplingPoints) {
-  var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
-  return combinedResults;
-};
+
+exports.combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
+
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
 exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
     // Función interna para convertir la propiedad 'nivel_1' de entero a string
