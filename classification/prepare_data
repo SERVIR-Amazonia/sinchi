@@ -64,7 +64,7 @@ var image_covariates=image_covariates.clip(region);
 var exportParameters = {
     image: image_covariates,
     description: 'ExportedImageCovariates', // A description for the task
-    assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/imageCovariates', // Replace with your desired asset ID
+    assetId: 'projects/pc300-samz-sinchi/assets/imageCovariates', // Replace with your desired asset ID
     scale: 20, // Specify the scale in meters if necessary
     region: image_covariates.geometry(), // Define the region; here, we use the image's own geometry
     maxPixels: 1e9 // Adjust this value as needed to suit the size of your image
