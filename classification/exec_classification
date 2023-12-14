@@ -20,6 +20,7 @@ var geometry = region;
 
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
+print("trainingDataUpdated 23",trainingDataUpdated);
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
@@ -87,13 +88,13 @@ function addImageWithLegend(image, palette, names, min, max, layerName) {
 }
 
 // Ejecutar la funcion
-var yourSingleBandImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
+var SingleBandImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
 var palette = ['red', 'blue', 'green', 'yellow', 'purple']; // Paleta de colores
 var names = ['Territorios Artificializados', 'Territorios agricolas',
 'Bosques y áreas seminaturales', 'Areas humedas', 'Superficies de agua']; // Nombres de las categorías
 
 // Añadir imagen y leyenda al mapa
-addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
+addImageWithLegend(SingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
 //MAtriz de confusion y metricas para clasificador usando primitivos
