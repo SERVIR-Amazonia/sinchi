@@ -27,6 +27,13 @@ var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
 var region=geometry2;
 var geometry = region;
+//Decalrar variables
+var start_year = 2022;
+var start_month = 1;
+var start_day = 1;
+var end_year = 2022;
+var end_month = 7;
+var end_day = 31;
 
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
