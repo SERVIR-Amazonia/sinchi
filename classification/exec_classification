@@ -137,7 +137,7 @@ print("importance",importance)
 
 
 
-Map.addLayer(trainingDataUpdated, {color: 'grey'}, 'Training Points S2');
+Map.addLayer(trainingDataUpdated, {color: 'black'}, 'Training Points S2');
 /*
 //Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
 
