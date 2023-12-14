@@ -25,7 +25,7 @@ geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
           [-76.03251607298957, 1.7979102902170863]]]);
 var aoi = Region_100K.first().geometry();
 var region = aoi.buffer(100);
-var region=geometry;
+var region=geometry2;
 var geometry = region;
 //Decalrar variables
 var start_year = 2022;
