@@ -86,6 +86,12 @@ var moduloCovariates= require(
   );// Modulo que crea imagen con covariables
 
 
+
+// Cargar aarchivos shapefile con puntos de validación como feature collection
+var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S1_points');
+var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
+
+
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
