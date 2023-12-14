@@ -37,7 +37,7 @@ var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/training
       +semestre; 
 exports.TrainingDataPath=TrainingDataPath
 
-var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDatabalanced'
+var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
       +semestre; 
 exports.TestingDataPath=TestingDataPath
 
