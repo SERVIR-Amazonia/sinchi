@@ -20,7 +20,7 @@ var geometry = region;
 
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
-print("trainingDataUpdated 23",trainingDataUpdated);
+//print("trainingDataUpdated 23",trainingDataUpdated);
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
@@ -35,7 +35,7 @@ var primitivesList = primitives.toList(primitives.size());
 // Agregar la primera imagen de la colección al mapa
 // Asegurarse de que 'primitives' es una ImageCollection
 var firstPrimitiveImage = primitives.first();
-//print("firstPrimitiveImage 258",firstPrimitiveImage)
+print("firstPrimitiveImage 258",firstPrimitiveImage)
 
 
 //Assemeble max
