@@ -5,7 +5,6 @@
 var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 
 
-
 // Definir nivel_1 como el atributo a partir del cual se estratificarán las muestras.
 var estratoField = 'nivel_1';
 
@@ -92,10 +91,9 @@ exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
-exports.executeAndVisualize = function() {
-  var combinedResults_S1 = balanceAndApplyCorrelation(sampling_points_S1, estratos_S1);
-  var combinedResults_S2 = balanceAndApplyCorrelation(sampling_points_S2, estratos_S2);
-  
+exports.executeAndVisualize = function(samplingPoints) {
+  var combinedResults_S1 = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
+
   // En lugar de imprimir directamente, retorna los resultados
   return {
     combinedResults_S1: combinedResults_S1,
