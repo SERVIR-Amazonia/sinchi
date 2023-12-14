@@ -23,8 +23,8 @@ var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
           [-73.67045552611457, 2.6322399358683044],
           [-74.88993794798957, 1.3805913351450838],
           [-76.03251607298957, 1.7979102902170863]]]);
-var aoi = Region_100K.first().geometry();
-var region = aoi.buffer(100);
+//var aoi = Region_100K.first().geometry();
+//var region = aoi.buffer(100);
 var region=geometry2;
 var geometry = region;
 //Decalrar variables
@@ -66,7 +66,7 @@ Export.image.toAsset({
     description: 'ExportedImageCovariates', // A description for the task
     assetId: 'projects/pc300-samz-sinchi/assets/imageCovariates', // Replace with your desired asset ID
     scale: 20, // Specify the scale in meters if necessary
-    region: image_covariates.geometry(), // Define the region; here, we use the image's own geometry
+    region: image_covariates.geometry(), // Define the region (la misma gemetria de la imagen)
     maxPixels: 1e9 // Adjust this value as needed to suit the size of your image
 });
 
