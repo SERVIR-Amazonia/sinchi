@@ -32,13 +32,14 @@ var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region
 //var aoi = Region_100K.first().geometry();
 //var region = aoi.buffer(100);
 var region=geometry2;
+var clase ='nivel_1'// Campo que almacena el id de cada clase en la colección de puntos de entrenamiento y prueba 
 
-
+//Importar módulos
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
 var moduloComposite= require('users/an-sig/sinchi:classification/composition');
 var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
-var clase ='nivel_1'
+
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
