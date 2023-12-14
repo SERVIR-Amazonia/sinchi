@@ -34,38 +34,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
 /////
 //// Classiffy with Primitives
 
-//Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
-exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
-    // Función interna para convertir la propiedad 'nivel_1' de entero a string
-    var convertNivel1ToString = function(feature) {
-        var nivel1String = ee.Number(feature.get('nivel_1')).format();
-        return feature.set('nivel_1', nivel1String);
-    };
 
-    // Aplicar la función convertNivel1ToString a cada Feature en S1_training y S1_testing
-    var trainingDataUpdated = S1_training.map(convertNivel1ToString);
-    var testingDataUpdated = S1_testing.map(convertNivel1ToString);
-
-    // Utilizar sampleRegions para agregar los valores de las bandas a las features
-    // sin alterar su geometría
-    trainingDataUpdated = image_covariates.sampleRegions({
-        collection: trainingDataUpdated,
-        properties: ['nivel_1'],
-        scale: 20,
-        geometries: true // Esto mantiene la geometría original
-    });
-
-    testingDataUpdated = image_covariates.sampleRegions({
-        collection: testingDataUpdated,
-        properties: ['nivel_1'],
-        scale: 20,
-        geometries: true // Esto mantiene la geometría original
-    });
-
-    // Retornar ambos datasets actualizados
-    return {trainingDataUpdated: trainingDataUpdated, testingDataUpdated: testingDataUpdated};
-
-};
 var formatPts=function (pts,clase) {
     // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
     // one point FC for each LC primitive
