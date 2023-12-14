@@ -100,7 +100,6 @@ addImageWithLegend(SingleBandImage, palette, names, 1, 5, 'Categorías');
 //MAtriz de confusion y metricas para clasificador usando primitivos
 modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
-
 /*
 //test simple RF classifier
 
