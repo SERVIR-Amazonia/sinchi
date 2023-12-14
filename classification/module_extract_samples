@@ -103,11 +103,11 @@ exports.estratoBalance = function(samplingPoints,estratoField) {
 
 
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
-exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
+exports.PreparePts = function(S1_training, S1_testing, image_covariates,estratoField) {
     // Función interna para convertir la propiedad 'nivel_1' de entero a string
     var convertNivel1ToString = function(feature) {
-        var nivel1String = ee.Number(feature.get('nivel_1')).format();
-        return feature.set('nivel_1', nivel1String);
+        var nivel1String = ee.Number(feature.get(estratoField)).format();
+        return feature.set(estratoField, nivel1String);
     };
 
     // Aplicar la función convertNivel1ToString a cada Feature en S1_training y S1_testing
@@ -118,14 +118,14 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
     // sin alterar su geometría
     trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
-        properties: ['nivel_1'],
+        properties: [estratoField],
         scale: 20,
         geometries: true // Esto mantiene la geometría original
     });
 
     testingDataUpdated = image_covariates.sampleRegions({
         collection: testingDataUpdated,
-        properties: ['nivel_1'],
+        properties: [estratoField],
         scale: 20,
         geometries: true // Esto mantiene la geometría original
     });
