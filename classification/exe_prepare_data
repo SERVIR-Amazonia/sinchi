@@ -72,6 +72,7 @@ var moduloCovariates= require(
   'users/an-sig/sinchi:classification/covariates'
   );// Modulo que crea imagen con covariables
 
+var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
