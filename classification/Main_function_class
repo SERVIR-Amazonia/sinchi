@@ -174,23 +174,10 @@ var names = ['Territorios Artificializados', 'Territorios agricolas',
 addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
-
+//MAtriz de confusion y metricas para clasificador usando primitivos
 modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_testing)
 
 
-
-/* Verificar primeros features in the list of feature collectiosn
-// Printing a few features from each FeatureCollection in the list
-// Get the first FeatureCollection from the list
-var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
-
-// Print the first three features of this FeatureCollection
-var firstThreeFeatures = firstFeatureCollection.limit(3);
-print('First three features of the first FeatureCollection:', firstThreeFeatures);
-*/
-
-
-/////////////////
 
 //test simple RF classifier
 
