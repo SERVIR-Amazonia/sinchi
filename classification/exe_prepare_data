@@ -60,14 +60,18 @@ var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
           [-76.03251607298957, 1.7979102902170863]]]); // Polígono usada para realizar pruebas
 
 exports.geometry_test =geometry2;
+
 var module_extract_samples = require(
   'users/an-sig/sinchi:classification/module_extract_samples'
   ); // Modulo para extraer puntos de meustreo y validación
+  
 var moduloComposite= require(
   'users/an-sig/sinchi:classification/composition'
   ); // Modulo que construye la composición de imágenes Sentinel-2 para el periodo indicado
-var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
-var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
+var moduloCovariates= require(
+  'users/an-sig/sinchi:classification/covariates'
+  );// Modulo que crea imagen con covariables
+
 
 // Ejecutar la función y recibe los resultados
 var visualizationResults = module_extract_samples.executeAndVisualize();
