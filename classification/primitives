@@ -42,7 +42,7 @@ var S1_training = S1_training.filterBounds(imageGeometry);
 //primitives
 
 //exportar los training points a un asset
-var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
+var sampledPtsFromImg = module_extract_samples.PreparePts(S1_training, S1_testing, image_covariates);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
