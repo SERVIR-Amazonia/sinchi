@@ -61,17 +61,16 @@ var image_covariates=image_covariates.clip(region);
 //export image covariates
 
 // Specify the parameters for exporting
-var exportParameters = {
+Export.image.toAsset({
     image: image_covariates,
     description: 'ExportedImageCovariates', // A description for the task
     assetId: 'projects/pc300-samz-sinchi/assets/imageCovariates', // Replace with your desired asset ID
     scale: 20, // Specify the scale in meters if necessary
     region: image_covariates.geometry(), // Define the region; here, we use the image's own geometry
     maxPixels: 1e9 // Adjust this value as needed to suit the size of your image
-};
+});
 
-// Export the image to an asset
-Export.image.toAsset(exportParameters);
+
 var imageGeometry = image_covariates.geometry();
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
