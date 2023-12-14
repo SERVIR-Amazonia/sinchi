@@ -71,7 +71,7 @@ Export.image.toAsset({
 });
 
 */
-print("image_covariates 74",image_covariates)
+print("image_covariates 74",image_covariates);
 var imageGeometry = image_covariates.geometry();
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
