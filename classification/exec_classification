@@ -20,7 +20,7 @@ var geometry = region;
 
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
-//print("trainingDataUpdated 23",trainingDataUpdated);
+print("trainingDataUpdated 23",trainingDataUpdated);
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
