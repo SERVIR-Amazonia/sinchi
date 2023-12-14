@@ -92,7 +92,7 @@ return{
 };
 
 
-exports.executeAndVisualize = function(samplingPoints,estratoField) {	
+exports.estratoBalance = function(samplingPoints,estratoField) {	
   var estratos = samplingPoints.aggregate_array(estratoField).distinct();
   var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos,estratoField);	  
  	  
