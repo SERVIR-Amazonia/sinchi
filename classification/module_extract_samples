@@ -8,11 +8,7 @@ var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets
 
 var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 
-// Exponer la geometría y las colecciones de regiones como propiedades del módulo.
 
-
-exports.sampling_points_S1 = sampling_points_S1;
-exports.sampling_points_S2 = sampling_points_S2;
 
 // Definir nivel_1 como el atributo a partir del cual se estratificarán las muestras.
 var estratoField = 'nivel_1';
