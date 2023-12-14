@@ -29,10 +29,9 @@ var geometry2 =
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
 
-var aoi = Region_100K.first().geometry();
-var region = aoi.buffer(100);
+//var aoi = Region_100K.first().geometry();
+//var region = aoi.buffer(100);
 var region=geometry2;
-var geometry = region;
 
 
 var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
