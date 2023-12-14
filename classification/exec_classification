@@ -34,7 +34,7 @@ var S1_testing=visualizationResults.combinedResults_S1.testing;
 print("S1_testing 30",S1_testing)
 
 
-var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
+var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
