@@ -6,7 +6,7 @@ var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 
 
 // Definir nivel_1 como el atributo a partir del cual se estratificarán las muestras.
-var estratoField = 'nivel_1';
+//var estratoField = 'nivel_1';
 
 // Obtener una lista de valores únicos en el campo de estrato.
 
