@@ -92,12 +92,11 @@ var sampling_points_S1 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets
 var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/poli_2022_S2_points');
 
 
-var visualizationResults=module_extract_samples.estratoBalance(sampling_points_S1, clase) 
+var estratos_balanced=module_extract_samples.estratoBalance(sampling_points_S1, clase) 
 var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;	
 
-var S1_training=visualizationResults.training;	
-var S1_testing=visualizationResults.testing;
-
+var training=estratos_balanced.training;	
+var testing=estratos_balanced.testing;
 
 
 
@@ -134,12 +133,12 @@ print("image_covariates 120",image_covariates);
 var imageGeometry = image_covariates.geometry();
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
-var S1_training = S1_training.filterBounds(imageGeometry);
+var training = training.filterBounds(imageGeometry);
 
 //primitives
 
 //exportar los training points a un asset
-var sampledPtsFromImg = module_extract_samples.PreparePts(S1_training, S1_testing, image_covariates);
+var sampledPtsFromImg = module_extract_samples.PreparePts(training, testing, image_covariates);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
