@@ -230,11 +230,11 @@ exports.calculateConfusionMatrix = function(testingSet, RFclassifier) {
             predicted: 'classification'
         });
         // Print the results.
-      print('Confusion matrix:', confusionMatrix);
-      print('Overall Accuracy:', confusionMatrix.accuracy());
-      print('Producers Accuracy:', confusionMatrix.producersAccuracy());
-      print('Consumers Accuracy:', confusionMatrix.consumersAccuracy());
-      print('Kappa:', confusionMatrix.kappa());
+      print('Confusion matrix simple RF:', confusionMatrix);
+      print('Overall Accuracy simple RF:', confusionMatrix.accuracy());
+      print('Producers Accuracy RF:', confusionMatrix.producersAccuracy());
+      print('Consumers Accuracy RF:', confusionMatrix.consumersAccuracy());
+      print('Kappa RF:', confusionMatrix.kappa());
 
     return confusionMatrix;
 };
