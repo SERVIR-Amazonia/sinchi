@@ -67,7 +67,7 @@ function balanceAndApplyCorrelation (featureCollection, estratos) {
     return correlatedSample.spatialJoinedSet;
   });
 
-  var testingSets = estratos.map(function(estrato) {
+  var testingSets = estratos.map(function(estrato,estratoField) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
     var balancedSample = balanceSamples(estratoData, numSamplesPerClass);
     var correlatedSample = splitAndJoinDataset(balancedSample);
