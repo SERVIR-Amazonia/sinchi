@@ -1,0 +1,296 @@
+var Region_100K = ee.FeatureCollection("projects/pc300-samz-sinchi/assets/Region_100K");
+
+var aoi = Region_100K.first().geometry();
+var region = aoi.buffer(100);
+var region=geometry;
+var geometry = region;
+//Decalrar variables
+var start_year = 2022;
+var start_month = 1;
+var start_day = 1;
+var end_year = 2022;
+var end_month = 7;
+var end_day = 31;
+
+var module_extract_samples = require('users/an-sig/sinchi:classification/module_extract_samples');
+var moduloComposite= require('users/an-sig/sinchi:classification/composition');
+var moduloCovariates= require('users/an-sig/sinchi:classification/covariates');
+var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
+var clase ='nivel_1'
+// Ejecutar la función y recibe los resultados
+var visualizationResults = module_extract_samples.executeAndVisualize();
+var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
+
+
+// Traer puntos de muestreo para semestre 1 
+//Tenemos unafeature collection para muestreos de entrenamiento y validacion
+//el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
+var S1_training=visualizationResults.combinedResults_S1.training;
+var S1_testing=visualizationResults.combinedResults_S1.testing;
+print("S1_testing 30",S1_testing)
+
+print("S1_testing 32",S1_testing)
+var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
+
+var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry);
+var image_covariates=image_covariates.clip(region);
+
+var imageGeometry = image_covariates.geometry();
+
+// Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
+var S1_training = S1_training.filterBounds(imageGeometry);
+
+//print("image_covariates2",image_covariates);
+
+var bandInfo = processedImage.bandTypes();print('Band Information:', bandInfo);
+
+
+//primitives
+/*
+//exportar los training points a un asset
+var sampledPtsFromImg = modulo_classifier.PreparePts(S1_training, S1_testing, image_covariates);
+
+var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
+var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
+//print("trainingDataUpdated 56",trainingDataUpdated)
+
+// Exportar la colección de entrenamiento
+Export.table.toAsset({
+  collection: trainingDataUpdated,
+  description: 'training_data_export',
+  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
+});
+
+Export.table.toAsset({
+  collection: testingDataUpdated,
+  description: 'testing_data_export',
+  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
+});
+*/
+var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
+
+//Crear colección de primitivos
+var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
+
+var multibandImage = primitives.toBands();
+print("multibandImage 75",multibandImage)
+//mostrar en mapa primeara imagen
+var primitivesList = primitives.toList(primitives.size());
+
+
+// Agregar la primera imagen de la colección al mapa
+// Asegurarse de que 'primitives' es una ImageCollection
+var firstPrimitiveImage = primitives.first();
+//print("firstPrimitiveImage 258",firstPrimitiveImage)
+
+//Visualizar primera imagen
+var probabilityBand = firstPrimitiveImage.select('Probability')
+
+// Define los parámetros de visualización
+var visParams = {'min': 0, 'max': 1, 'palette': ['blue', 'green', 'red']}  
+// Añadir la banda al mapa yCentrar el mapa en la ubicación de la imagen
+Map.addLayer(probabilityBand, visParams, 'Probability Band first')
+// Opcional: 
+Map.centerObject(processedImage);
+
+
+//// Exportar primitivos a un asset:
+// Iterar sobre la lista de imágenes
+for (var i = 0; i < primitivesList.size().getInfo(); i++) {
+    var image = ee.Image(primitivesList.get(i));
+    
+    // Define los parámetros de exportación
+    var exportParams = {
+        'image': image,
+        'description': 'Primitive_' + i, // Añade un nombre único para cada exportación
+        'assetId': 'projects/pc300-samz-sinchi/assets/primitive_' + i, // Reemplaza con tu ruta de asset
+        'scale': 500, 
+        'region': region 
+    };
+
+    // Exporta la imagen
+    Export.image.toAsset(exportParams);
+}
+//
+//Assmeble max
+/*
+var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
+print("passembleMax",assembleMax)
+
+// Función para añadir una imagen y su leyenda al mapa
+function addImageWithLegend(image, palette, names, min, max, layerName) {
+    // Añade la imagen al mapa con la paleta de colores
+    Map.addLayer(image, {min: min, max: max, palette: palette}, layerName);
+
+    // Crear una leyenda
+    var legend = ui.Panel({
+        style: {
+            position: 'bottom-left',
+            padding: '8px 15px'
+        }
+    });
+
+    // Función para agregar los elementos de la leyenda
+    var addLegendItem = function(color, name) {
+        var colorBox = ui.Label({
+            style: {
+                backgroundColor: color,
+                // Asegúrate de que el tamaño de la caja de color sea suficiente
+                padding: '8px',
+                margin: '0 0 4px 0'
+            }
+        });
+
+        var description = ui.Label({
+            value: name,
+            style: { margin: '0 0 4px 6px' }
+        });
+
+        return ui.Panel({
+            widgets: [colorBox, description],
+            layout: ui.Panel.Layout.Flow('horizontal')
+        });
+    };
+
+    // Agregar los elementos de la leyenda
+    palette.forEach(function(color, index) {
+        legend.add(addLegendItem(color, names[index]));
+    });
+
+    // Añadir la leyenda al mapa
+    Map.add(legend);
+}
+
+// Ejemplo de uso de la función
+var yourSingleBandImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
+var palette = ['red', 'blue', 'green', 'yellow', 'purple']; // Paleta de colores
+var names = ['Categoría 1', 'Categoría 2', 'Categoría 3', 'Categoría 4', 'Categoría 5']; // Nombres de las categorías
+
+// Añadir imagen y leyenda al mapa
+addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
+
+
+
+//modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_testing)
+/*
+
+
+
+/* Verificar primeros features in the list of feature collectiosn
+// Printing a few features from each FeatureCollection in the list
+// Get the first FeatureCollection from the list
+var firstFeatureCollection = ee.FeatureCollection(primitivos_funct.get(0));
+
+// Print the first three features of this FeatureCollection
+var firstThreeFeatures = firstFeatureCollection.limit(3);
+print('First three features of the first FeatureCollection:', firstThreeFeatures);
+*/
+
+
+/////////////////
+/*test simple classifier
+
+var classify = modulo_classifier.rf(S1_training, S1_testing,image_covariates);
+//var classifiedImage  = classifiedImage .multiply(255).toByte();
+
+//var classified_image_S1=classify.classified_image;
+var classifier_S1=classify.rfclassifier;
+var trainingData_S1=classify.testingData;
+var testingData_S1=classify.testingData;
+
+/////////////////
+
+var confusion_matrix = modulo_classifier.calculateConfusionMatrix(testingData_S1,classifier_S1);
+
+var importance =modulo_classifier.importance(classifier_S1)
+print("importance",importance)
+
+
+//print("classified_image_S1  ",classified_image_S1  );
+*/
+//////
+
+// Mostrar los resultados
+//print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
+//print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
+//print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
+//print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
+
+// Agregar las capas de los puntos de muestreo al mapa
+Map.addLayer(visualizationResults.combinedResults_S1.training, {color: 'blue'}, 'Training Points S1');
+Map.addLayer(visualizationResults.combinedResults_S1.testing, {color: 'red'}, 'Testing Points S1');
+
+/*
+//Map.addLayer(visualizationResults.combinedResults_S2.training, {color: 'green'}, 'Training Points S2');
+//Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
+
+// Centrar el mapa en uno de los conjuntos de puntos
+Map.centerObject(visualizationResults.combinedResults_S1.training);
+var exportParams = {
+  image: classifiedImage,
+  description: 'classified_image_export',
+  fileNamePrefix: 'classified_image',
+  scale: 32,  // Debe coincidir con la resolución utilizada para el análisis
+  region: region,  // Especifica la región que deseas exportar
+  fileFormat: 'GeoTIFF',
+  maxPixels: 1e13  // Ajusta según las necesidades
+};
+Export.image.toDrive(exportParams);
+
+// Mostrar imagen clasificada en mapa:
+// Suponiendo que classifiedImage es tu imagen de clasificación
+
+// Definir la paleta de colores y nombres de clases
+var palette = ['red', 'green', 'blue', 'yellow', 'purple']; // Colores
+var classNames = ['Territorios Artificializados', 'Terriotrios Agrícolas',
+'Bosques y áreas seminaturales', 'Areas húmedas', 'Superficies de agua']; // Nombres
+
+// Parámetros de visualización para la imagen
+var visualizationParams = {
+  min: 1,
+  max: 5,
+  palette: palette
+};
+
+// Agregar la imagen al mapa
+//Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
+// Crear un panel para la leyenda
+var legend = ui.Panel({
+  style: {
+    position: 'bottom-left',
+    padding: '8px 15px'
+  }
+});
+
+
+// Agregar título a la leyenda
+var legendTitle = ui.Label({
+  value: 'Leyenda',
+  style: {
+    fontWeight: 'bold',
+    fontSize: '16px',
+    margin: '0 0 4px 0',
+    padding: '0'
+  }
+});
+legend.add(legendTitle);
+
+// Agregar las entradas de la leyenda
+classNames.forEach(function(name, index){
+  var color = palette[index];
+  var label = ui.Label({
+    value: name,
+    style: {
+      color: 'black',
+      backgroundColor: color,
+      margin: '2px',
+      padding: '2px'
+    }
+  });
+  legend.add(label);
+});
+
+// Agregar la leyenda al mapa
+Map.add(legend);
+
+*/
