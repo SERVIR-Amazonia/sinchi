@@ -37,6 +37,9 @@ var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/training
       +semestre; 
 exports.TrainingDataPath=TrainingDataPath
 
+var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
+      +semestre; 
+
 var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
 exports.image_covariatesPath=image_covariatesPath
 
@@ -136,6 +139,12 @@ Export.table.toAsset({
   assetId: TrainingDataPath
 });
 
+// Exportar la colección de entrenamiento
+Export.table.toAsset({
+  collection: testing,
+  description: 'testing_data_export',
+  assetId: TestingDataPath
+});
 
 
 
