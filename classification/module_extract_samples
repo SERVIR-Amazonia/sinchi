@@ -90,7 +90,6 @@ exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
 exports.estratificarBalance=function(samplingPoints,estratoField){
-var estratos = samplingPoints.aggregate_array(estratoField).distinct();
 var balanced_training=balanceAndApplyCorrelation(samplingPoints, estratos);
 print("balanced_training 95",balanced_training);
 return{
@@ -101,7 +100,13 @@ return{
 };
 
 
-
+exports.executeAndVisualize = function(samplingPoints,estratoField) {	
+  var estratos = samplingPoints.aggregate_array(estratoField).distinct();
+  var combinedResults = balanceAndApplyCorrelation(sampling_points, estratos);	  
+ 	  
+  // En lugar de imprimir directamente, retorna los resultados	  
+  return combinedResults
+};
 
 
 
