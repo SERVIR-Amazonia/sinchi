@@ -22,6 +22,8 @@ var geometry = region;
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
 print("trainingDataUpdated 23",trainingDataUpdated);
+var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
+print("testingDataBalanced 26",testingDataBalanced)
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
@@ -99,7 +101,7 @@ addImageWithLegend(SingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
 //MAtriz de confusion y metricas para clasificador usando primitivos
-modulo_classifier.calculateConfusionMatrixB(assembleMax, trainingDataUpdated)
+modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
 
 /*
