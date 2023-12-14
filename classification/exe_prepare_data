@@ -101,30 +101,26 @@ var testing=estratos_balanced.testing;
 var processedImage = moduloComposite.s2process(region, start_year, end_year, start_month, start_day,end_month, end_day);
 
 var image_covariates=moduloCovariates.returnCovariates(processedImage,geometry).clip(region);
+var image_covariates=ee.Image(image_covariates);
 
+var imageGeometry = image_covariates.geometry();
 
-var image_covariates=ee.Image(image_covariates)
-//export image covariates
-
-// Specify the parameters for exporting
+//Exportar iamgen con covariables a un asset
 /*
 Export.image.toAsset({
     image: image_covariates,
-    description: 'ExportedImageCovariates', // A description for the task
-    assetId: 'projects/pc300-samz-sinchi/assets/imageCovariates', // Replace with your desired asset ID
-    scale: 20, // Specify the scale in meters if necessary
-    region: image_covariates.geometry(), // Define the region (la misma gemetria de la imagen)
-    maxPixels: 1e9 // Adjust this value as needed to suit the size of your image
+    description: 'ExportedImageCovariates',
+    assetId: image_covariatesPath, 
+    scale: 20,
+    region: imageGeometry, // Define la región (la misma gemetria de la imagen)
+    maxPixels: 1e9 
 });
-
 */
-print("image_covariates 120",image_covariates);
-var imageGeometry = image_covariates.geometry();
+print("covariables 118",image_covariates);
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
 var training = training.filterBounds(imageGeometry);
 
-//primitives
 
 //exportar los training points a un asset
 var sampledPtsFromImg = module_extract_samples.PreparePts(training, testing, image_covariates);
