@@ -11,6 +11,7 @@ var moduloExecPrepData=require('users/an-sig/sinchi:classification/exe_prepare_d
 var clase =moduloExecPrepData.clase;
 var semestre =moduloExecPrepData.semestre;
 var TrainingDataPath=moduloExecPrepData.TrainingDataPath;
+var TestingDataPath=moduloExecPrepData.TestingDataPath
 var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
 var geometry_test=moduloExecPrepData.geometry_test;
