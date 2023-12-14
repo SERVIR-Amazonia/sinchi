@@ -95,6 +95,10 @@ var sampling_points_S2 = ee.FeatureCollection('projects/pc300-samz-sinchi/assets
 // Ejecutar la función y recibe los resultados
 var S1_training = module_extract_samples.estratificarBalance(sampling_points_S1, clase);
 
+ar S1_training=visualizationResults.combinedResults_S1.training;	
+ar S1_testing=visualizationResults.combinedResults_S1.testing;	
+
+
 
 //var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
 
@@ -146,6 +150,7 @@ Export.table.toAsset({
   description: 'training_data_export',
   assetId: TrainingDataPath
 });
+
 
 
 
