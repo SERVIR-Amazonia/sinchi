@@ -67,7 +67,7 @@ function balanceAndApplyCorrelation (featureCollection, estratos) {
     return correlatedSample.spatialJoinedSet;
   });
 
-  var testingSets = estratos.map(function(estrato,estratoField) {
+  var testingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
     var balancedSample = balanceSamples(estratoData, numSamplesPerClass);
     var correlatedSample = splitAndJoinDataset(balancedSample);
@@ -89,7 +89,7 @@ exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
-exports.estratificarBalance=function(sampling_points){
+exports.estratificarBalance=function(sampling_points,estratoField){
 var estratos = sampling_points.aggregate_array(estratoField).distinct();
 return balanceAndApplyCorrelation(samplingPoints, estratos);
 
