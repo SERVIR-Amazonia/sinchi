@@ -5,7 +5,6 @@
 
 //Importar módulos
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
-var moduloExecPrepData=require('users/an-sig/sinchi:classification/exec_classification');
 
 
 clase =moduloExecPrepData.clase;
