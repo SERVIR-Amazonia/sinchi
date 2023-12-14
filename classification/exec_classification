@@ -117,7 +117,7 @@ addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
 //MAtriz de confusion y metricas para clasificador usando primitivos
-modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_testing)
+modulo_classifier.calculateConfusionMatrixB(assembleMax, trainingDataUpdated)
 
 
 
