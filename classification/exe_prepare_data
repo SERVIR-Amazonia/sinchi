@@ -27,9 +27,17 @@ exports.end_day=end_day;
 
 var clase ='nivel_1';
 exports.clase =clase;
-var semestre='S1'
 
-var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'+semestre
+var semestre='S1'
+exports.semestre =semestre;
+
+// Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
+var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
+      +semestre; 
+exports.TrainingDataPath=TrainingDataPath
+
+var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
+exports.image_covariatesPath=image_covariatesPath
 
 var Region_100K = ee.FeatureCollection(
   "projects/pc300-samz-sinchi/assets/Region_100K"); //Dominio espacial de Amazonía Colombia
