@@ -21,18 +21,6 @@ var region=geometry_test;
 var geometry = region;
 
 
-// Ejecutar la función y recibe los resultados
-var visualizationResults = module_extract_samples.executeAndVisualize();
-var balanceAndApplyCorrelation=module_extract_samples.balanceAndApplyCorrelation;
-
-
-// Traer puntos de muestreo para semestre 1 
-//Tenemos unafeature collection para muestreos de entrenamiento y validacion
-//el atributo (columna) a traves del cual se hara la cllasificacion es nivel_1
-var S1_training=visualizationResults.combinedResults_S1.training;
-var S1_testing=visualizationResults.combinedResults_S1.testing;
-print("S1_testing 30",S1_testing)
-
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
 var image_covariates = ee.Image(image_covariatesPath)
