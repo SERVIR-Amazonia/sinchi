@@ -10,7 +10,7 @@ var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 
 // Exponer la geometría y las colecciones de regiones como propiedades del módulo.
 
-exports.Region_100K = Region_100K;
+
 exports.sampling_points_S1 = sampling_points_S1;
 exports.sampling_points_S2 = sampling_points_S2;
 
