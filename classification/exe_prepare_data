@@ -130,9 +130,5 @@ Export.table.toAsset({
   assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'+semestre
 });
 
-Export.table.toAsset({
-  collection: testingDataUpdated,
-  description: 'testing_data_export',
-  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
-});
+
 
