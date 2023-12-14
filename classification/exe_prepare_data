@@ -29,6 +29,7 @@ var clase ='nivel_1';
 exports.clase =clase;
 var semestre='S1'
 
+var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'+semestre
 
 var Region_100K = ee.FeatureCollection(
   "projects/pc300-samz-sinchi/assets/Region_100K"); //Dominio espacial de Amazonía Colombia
@@ -127,7 +128,7 @@ var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 Export.table.toAsset({
   collection: trainingDataUpdated,
   description: 'training_data_export',
-  assetId: 'projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated_'+semestre
+  assetId: TrainingDataPath
 });
 
 
