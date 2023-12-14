@@ -102,7 +102,7 @@ return{
 
 exports.executeAndVisualize = function(samplingPoints,estratoField) {	
   var estratos = samplingPoints.aggregate_array(estratoField).distinct();
-  var combinedResults = balanceAndApplyCorrelation(sampling_points, estratos);	  
+  var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos);	  
  	  
   // En lugar de imprimir directamente, retorna los resultados	  
   return combinedResults
