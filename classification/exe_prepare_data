@@ -142,7 +142,7 @@ Export.table.toAsset({
 
 // Exportar la colección de entrenamiento
 Export.table.toAsset({
-  collection: testing,
+  collection: testingDataUpdated,
   description: 'testing_data_export',
   assetId: TestingDataPath
 });
