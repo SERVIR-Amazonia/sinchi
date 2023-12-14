@@ -19,9 +19,9 @@ var geometry = region;
 
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
-print("trainingDataUpdated 23",trainingDataUpdated);
+
 var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
-print("testingDataBalanced 26",testingDataBalanced)
+
 var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
@@ -40,9 +40,8 @@ print("firstPrimitiveImage 38",firstPrimitiveImage)
 
 
 //Assemeble max
-
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
-print("passembleMax",assembleMax)
+
 
 // Función para añadir una imagen y su leyenda al mapa
 function addImageWithLegend(image, palette, names, min, max, layerName) {
@@ -105,7 +104,7 @@ modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
 //test simple RF classifier
 
-var classify = modulo_classifier.rf(trainingDataUpdated, S1_testing,image_covariates);
+var classify = modulo_classifier.rf(trainingDataUpdated, testingDataBalanced,image_covariates);
 //var classifiedImage  = classifiedImage .multiply(255).toByte();
 
 //var classified_image_S1=classify.classified_image;
