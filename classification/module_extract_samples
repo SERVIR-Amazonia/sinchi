@@ -57,8 +57,9 @@ function splitAndJoinDataset(data) {
 
 //Balancear muestras para cada clase y generar puntos de entrenamiento y test dentro de cada clase
 //aseegurandose que las muestras de entrenamiento dentro de cada clase 
-//se encuentren separadas por mas de 100 m entre si den
-function balanceAndApplyCorrelation (featureCollection, estratos) {
+//se encuentren separadas por mas de 100 m entre sí
+
+function balanceAndApplyCorrelation (featureCollection, estratos,estratoField) {
   // Usa map para aplicar la correlación a cada estrato y acumula los conjuntos de entrenamiento y prueba
   var trainingSets = estratos.map(function(estrato) {
     var estratoData = featureCollection.filter(ee.Filter.eq(estratoField, estrato));
@@ -102,13 +103,11 @@ return{
 
 exports.executeAndVisualize = function(samplingPoints,estratoField) {	
   var estratos = samplingPoints.aggregate_array(estratoField).distinct();
-  var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos);	  
+  var combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos,estratoField);	  
  	  
   // En lugar de imprimir directamente, retorna los resultados	  
   return combinedResults
 };
-
-
 
 
 
