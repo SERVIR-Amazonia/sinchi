@@ -35,7 +35,7 @@ var primitivesList = primitives.toList(primitives.size());
 // Agregar la primera imagen de la colección al mapa
 // Asegurarse de que 'primitives' es una ImageCollection
 var firstPrimitiveImage = primitives.first();
-print("firstPrimitiveImage 258",firstPrimitiveImage)
+print("firstPrimitiveImage 38",firstPrimitiveImage)
 
 
 //Assemeble max
