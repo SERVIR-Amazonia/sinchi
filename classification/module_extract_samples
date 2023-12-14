@@ -89,7 +89,7 @@ exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
-exports.estratificarBalance=function(sampling_points,estratoField){
+exports.estratificarBalance=function(samplingPoints,estratoField){
 var estratos = sampling_points.aggregate_array(estratoField).distinct();
 return balanceAndApplyCorrelation(samplingPoints, estratos);
 
