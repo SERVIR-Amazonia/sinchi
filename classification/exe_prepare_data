@@ -1,5 +1,6 @@
 /**
-* Este modulo 
+* Este modulo  realiza actividades de pre-procesamiento de 
+* las imágenes de Sentinel-2 y puntos de muestreo en la región de la Amazonía Colombiana.
 */
 
 
@@ -116,7 +117,6 @@ Export.image.toAsset({
     maxPixels: 1e9 
 });
 */
-print("covariables 118",image_covariates);
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
 var training = training.filterBounds(imageGeometry);
