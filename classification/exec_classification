@@ -35,7 +35,7 @@ print("S1_testing 30",S1_testing)
 
 
 var trainingDataUpdated = ee.FeatureCollection('projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated')
-var image_covariates = ee.Image('projects/pc300-samz-sinchi/assets/imageCovariates')
+var image_covariates = ee.Image(image_covariatesPath)
 
 //Crear colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
