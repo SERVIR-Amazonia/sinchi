@@ -122,7 +122,7 @@ for (var i = 0; i < primitivesList.size().getInfo(); i++) {
 */
 //
 //Assemeble max
-/*
+
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
 print("passembleMax",assembleMax)
 
@@ -180,8 +180,8 @@ addImageWithLegend(yourSingleBandImage, palette, names, 1, 5, 'Categorías');
 
 
 
-//modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_testing)
-/*
+modulo_classifier.calculateConfusionMatrixB(assembleMax, S1_testing)
+
 
 
 
