@@ -126,6 +126,7 @@ var training = training.filterBounds(imageGeometry);
 var sampledPtsFromImg = module_extract_samples.PreparePts(training, testing, image_covariates,clase);
 
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
+print("trainingDataUpdated 129",trainingDataUpdated);
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 
 // Exportar la colección de entrenamiento
