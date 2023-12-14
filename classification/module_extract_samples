@@ -5,14 +5,9 @@
 var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 
 
-// Definir nivel_1 como el atributo a partir del cual se estratificarán las muestras.
-//var estratoField = 'nivel_1';
-
-// Obtener una lista de valores únicos en el campo de estrato.
-
 // Inicializar una lista vacía para almacenar las muestras balanceadas de cada semestre
-var muestrasBalanceadas_S1 = ee.List([]);
-var muestrasBalanceadas_S2 = ee.List([]);
+var muestrasBalanceadas = ee.List([]);
+
 
 // Definir una función para balancear las muestras
 // Exponer la función balanceSamples como un método del módulo.
