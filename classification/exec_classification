@@ -13,7 +13,7 @@ var semestre =moduloExecPrepData.semestre;
 var TrainingDataPath=moduloExecPrepData.TrainingDataPath;
 var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
-var moduloExecPrepData.geometry_test;
+var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
 var geometry = region;
 
