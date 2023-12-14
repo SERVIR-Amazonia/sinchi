@@ -9,8 +9,6 @@ var numSamplesPerClass=140 //Numero de muestras a seleccionar por clase
 var estratoField = 'nivel_1';
 
 // Obtener una lista de valores únicos en el campo de estrato.
-var estratos_S1 = sampling_points_S1.aggregate_array(estratoField).distinct();
-var estratos_S2 = sampling_points_S2.aggregate_array(estratoField).distinct();
 
 // Inicializar una lista vacía para almacenar las muestras balanceadas de cada semestre
 var muestrasBalanceadas_S1 = ee.List([]);
@@ -91,9 +89,12 @@ exports.splitAndJoinDataset = splitAndJoinDataset;
 exports.balanceAndApplyCorrelation = balanceAndApplyCorrelation;
 
 // Llamar a la función para S1 y S2 y guarda los resultados
+var estratos=function(sampling_points){
+var estratos = sampling_points.aggregate_array(estratoField).distinct();
 
-exports.combinedResults = balanceAndApplyCorrelation(samplingPoints, estratos_S1);
+return balanceAndApplyCorrelation(samplingPoints, estratos);
 
+};
 //Funcion para extraer los valores de entrenamiento y validacion de la imagen de covariables
 exports.PreparePts = function(S1_training, S1_testing, image_covariates) {
     // Función interna para convertir la propiedad 'nivel_1' de entero a string
