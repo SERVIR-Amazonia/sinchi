@@ -29,6 +29,7 @@ var geometry =
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
 var moduloExecPrepData=require('users/an-sig/sinchi:classification/exe_prepare_data');
 
+// Obtener variables desde el módulo de preparación de datos
 
 var clase =moduloExecPrepData.clase;
 var semestre =moduloExecPrepData.semestre;
@@ -41,6 +42,7 @@ var region=geometry_test;
 var geometry = region;
 
 
+// Cargar los datos de entrenamiento y prueba con los valores de las covariables como atributos
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath);
 var testingDataBalanced = ee.FeatureCollection(TestingDataPath);
@@ -49,7 +51,9 @@ var image_covariates = ee.Image(image_covariatesPath);
 //Crear colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-var multibandImage = primitives.toBands();
+
+var multibandImage = primitives.toBands(); // Convertir colección de primitivs en imagen multibanda
+
 print("multibandImage 75",multibandImage)
 //mostrar en mapa primeara imagen
 var primitivesList = primitives.toList(primitives.size());
