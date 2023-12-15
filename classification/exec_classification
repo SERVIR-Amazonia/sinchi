@@ -4,7 +4,25 @@ var geometry =
     /* shown: false */
     ee.Geometry.MultiPoint();
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-
+/**
+ * Título: Clasificación de Coberturas de la Tierra
+ * Descripción: Este script es desarrollado en  JavaScript para ser ejecutado en Google Earth Engine.  
+ *            Ejecuta un flujo de trabajo completo de clasificación de cobertura de tierra.
+ *      
+ *            Luego evalúa la exactitud de la clasificación con los datos de validación generados 
+ *              con el módulo exec_prepare_data, los cuales fueron almacenados previamente en un asset.
+ *  Autora:   Liliana Castillo Villamor
+ *  Versión: 1.0
+ *  Detalles: El módulo ejecuta un flujo de trabajo completo de clasificación de cobertura de tierra 
+ *              usando las funciones disponibles en el módulo classify. 
+ *            Utiliza un enfoque de máxima probabilidad basado en los primitivos, 
+ *            los cuales se construyen a partir de la imagen de covariables generada previamente con el módulo exec_prepare_data. 
+ *            Luego evalúa la exactitud de la clasificación con los datos de validación generados con módulo exec_prepare_data, l
+ *            Estos datos de validaciónos fueron almacenados previamente en un asset.  
+ * Contacto:  lccastillov@gmail.com
+ * Referencias: El Script acá presentado adapta elementos desarrollados por Kyle Woodward para Python (https://github.com/kyle-woodward)
+ * 
+**/
 
 
 //Importar módulos
@@ -20,7 +38,7 @@ var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
 var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
-var ano=moduloExecPrepData.end_year
+var ano=moduloExecPrepData.end_year;
 
 
 var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
@@ -29,73 +47,28 @@ var geometry = region;
 
 
 // Cargar los datos de entrenamiento y prueba y la imagen de covariables
-//almacenados en un asset
+//nalmacenados en un asset
 
-var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
-var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
-var image_covariates = ee.Image(image_covariatesPath)
+var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath);
+var testingDataBalanced = ee.FeatureCollection(TestingDataPath);
+var image_covariates = ee.Image(image_covariatesPath);
 
 //Crear colección de imágenes de las clases de cobertura de tierra (primitivos)
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
-// Convertir colección de primitivos en una imagen multibanda
-var multibandImage = primitives.toBands();
+var multibandImage = primitives.toBands(); // Convertir colección de primitivos en una imagen multibanda
 
 
-//Assemble max
+// Ensamblar imagen de clasificación de máxima probabilidad a partir de la colección de primitivos
 var assembleMax=modulo_classifier.assembleMaxProbability(primitives);
 
 
-// Función para añadir una imagen y su leyenda al mapa
-function addImageWithLegend(image, palette, names, min, max, layerName) {
-    // Añade la imagen al mapa con la paleta de colores
-    Map.addLayer(image, {min: min, max: max, palette: palette}, layerName);
-
-    // Crear una leyenda
-    var legend = ui.Panel({
-        style: {
-            position: 'bottom-left',
-            padding: '8px 15px'
-        }
-    });
-
-    // Función para agregar los elementos de la leyenda
-    var addLegendItem = function(color, name) {
-        var colorBox = ui.Label({
-            style: {
-                backgroundColor: color,
-                // Asegúrate de que el tamaño de la caja de color sea suficiente
-                padding: '8px',
-                margin: '0 0 4px 0'
-            }
-        });
-
-        var description = ui.Label({
-            value: name,
-            style: { margin: '0 0 4px 6px' }
-        });
-
-        return ui.Panel({
-            widgets: [colorBox, description],
-            layout: ui.Panel.Layout.Flow('horizontal')
-        });
-    };
-
-    // Agregar los elementos de la leyenda
-    palette.forEach(function(color, index) {
-        legend.add(addLegendItem(color, names[index]));
-    });
-
-    // Añadir la leyenda al mapa
-    Map.add(legend);
-}
-
-// Ejecutar la funcion
+// Ejecutar la función para agregar la imagen clasificada al mapa
 var classifiedImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
 
 
 //Matriz de confusion y metricas para clasificador usando primitivos
-modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
+modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced);
 
 //Exportar imagen con superficie de clasificación
 
