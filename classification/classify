@@ -1,6 +1,4 @@
 // Función para entrenar un clasificador Random Forest sencillo con datos de entrenamiento y prueba, y una imagen de entrada.
-
-
 exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
   // Preparar los datos de entrenamiento muestreando las clases de la imagen de entrada
   //Extrae bandas de la imangen de entrada como atributos
