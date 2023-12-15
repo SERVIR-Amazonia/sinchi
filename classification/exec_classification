@@ -70,7 +70,7 @@ var classifiedImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con e
 //Matriz de confusion y metricas para clasificador usando primitivos
 modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced);
 
-//Exportar imagen con superficie de clasificación
+// Exportar la imagen clasificada al Asset de GEE
 
 Export.image.toAsset({
     image: classifiedImage,
