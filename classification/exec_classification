@@ -11,21 +11,25 @@ var geometry =
 var modulo_classifier=require('users/an-sig/sinchi:classification/classify');
 var moduloExecPrepData=require('users/an-sig/sinchi:classification/exe_prepare_data');
 
-
+//// Obtener variables desde el módulo de preparación de datos
 var clase =moduloExecPrepData.clase;
 var semestre =moduloExecPrepData.semestre;
 var TrainingDataPath=moduloExecPrepData.TrainingDataPath;
-var TestingDataPath=moduloExecPrepData.TestingDataPath
+var TestingDataPath=moduloExecPrepData.TestingDataPath;
 var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
 var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
 var ano=moduloExecPrepData.end_year
+
+
 var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
       +semestre+'_'+ ano); 
 var geometry = region;
 
 
+// Cargar los datos de entrenamiento y prueba y la imagen de covariables
+//almacenados en un asset
 
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
 var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
