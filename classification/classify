@@ -1,3 +1,6 @@
+
+
+
 exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
@@ -31,7 +34,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     
 };
 /////
-//// Classiffy with Primitives
+//// Classiffy using Primitives
 
 
 var formatPts=function (pts,clase) {
