@@ -22,7 +22,7 @@ var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
 var ano=moduloExecPrepData.end_year
 var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
-      +semestre+' '+ ano); 
+      +semestre+'_'+ ano); 
 var geometry = region;
 
 
