@@ -67,7 +67,6 @@ exports.region = /* color: #d63000 */ee.Geometry.Polygon(
 
 exports.geometry_test =region;
 
-var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
+exports.CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
       +semestre+'_'+ ano); 
-exports.CoberturaTierra=CoberturaTierra;
 
