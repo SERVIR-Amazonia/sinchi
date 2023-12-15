@@ -20,6 +20,7 @@ var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
 var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
+var CoberturaTierra=('')
 var geometry = region;
 
 
