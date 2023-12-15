@@ -38,7 +38,6 @@ var image_covariatesPath=moduloVarDefinition.image_covariatesPath;
 var Region_100K =moduloVarDefinition.Region_100K;
 var geometry_test=moduloVarDefinition.geometry_test;
 var region=geometry_test;
-var ano=moduloVarDefinition.end_year;
 var CoberturaTierra = moduloVarDefinition.CoberturaTierra
 var geometry = region;
 var start_year = moduloVarDefinition.start_year;//año inicio del análisis
