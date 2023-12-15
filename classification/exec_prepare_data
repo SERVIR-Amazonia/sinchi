@@ -26,6 +26,7 @@ var start_month =moduloVarDefinition.start_month;
 var start_day =moduloVarDefinition.start_day;
 var end_year=moduloVarDefinition.end_year;
 var end_month =moduloVarDefinition.end_month;
+var end_day =moduloVarDefinition.end_day;
 var ano=moduloVarDefinition.ano;
 
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
