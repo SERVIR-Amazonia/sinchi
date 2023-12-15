@@ -107,15 +107,6 @@ var apply_cld_shdw_mask = function(img) {
   return img.select('B.*').updateMask(not_cld_shdw);
 };
 
-// Función para estimar NDVI y agregarlo como banda.
-var add_ndvi = function(img) {
-  var ndvi = img.normalizedDifference(['nir', 'red']).rename('NDVI');
-  img = img.addBands(ndvi);
-  var covariates = ["blue", "green", "red", "nir", "swir1", 'swir2', 'NDVI'];
-  img = img.select(covariates);
-  return img;
-};
-
 
 // Función para procesar imágenes Sentinel-2.
 exports.s2process = function(region, start_year, end_year, start_month, start_day,end_month, end_day) {
