@@ -89,7 +89,7 @@ var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
   
     // s2_sr_col filtra la colección de imágenes SR de Sentinel-2 para el Área de Interés (AOI) y entre las fechas de inicio y fin indicadas.
     // y excluye imágenes con un porcentaje de píxeles nublados mayor al umbral definido en CLOUD_FILTER
-    var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR')
+    var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
         .filterBounds(aoi)
         .filterDate(start_date, end_date)
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', CLOUD_FILTER));
@@ -279,7 +279,7 @@ Export.image.toAsset({
    maxPixels:  1e13
 });
 
-/*
+
 
 //Visualizing the processed image
 Map.addLayer(mosaic_img.select('NDVI_p50'), {    min: -1,
@@ -287,4 +287,3 @@ max: 1,    palette: ['blue', 'white', 'green'] }, 'Processed NDVI');
 
 Map.centerObject(aoi, 8); // Setting the map center to the defined aoi and zoom level 12
 
-*/
