@@ -4,8 +4,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
         properties: ['nivel_1'],
         scale: 20
     });
-    print(" trainingData 7 classify.rf", trainingData);
-    
+
     var testingData = inputImage.sampleRegions({
         collection: testingPts,
         properties: ['nivel_1'],
@@ -41,7 +40,6 @@ var formatPts=function (pts,clase) {
 
     // Create sets of binary training pts for each class represented in the full training pts collection
     var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
-   print("labels83",labels)
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
@@ -55,7 +53,6 @@ var formatPts=function (pts,clase) {
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
     //var listOfPrimPts = ee.List(labels).map(binaryPts);
-    print("listOfPrimPts L 93_main",listOfPrimPts)
     
     return listOfPrimPts;
 };
@@ -78,7 +75,7 @@ var getTop20=function (dict) {
     var newList = dict.keys().iterate(kvReturn, ee.List([]));
     //print("newList 130",newList)
     return newList;
-}
+};
 
 
 
@@ -90,9 +87,9 @@ var RFprim=function (trainingPts,inputStack, label) {
     var samples = ee.FeatureCollection(trainingPts);
     print("samples",samples);
     // Aplicar esta función a todas las características en la colección
-    var linea160=samples.sort('PRIM', false)
-    var linea125=linea160.first();
-    print("primeros features linea163",linea125)
+    //var linea160=samples.sort('PRIM', false);
+    //var linea125=linea160.first();
+
 
     //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
 
