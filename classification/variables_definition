@@ -40,7 +40,8 @@ exports.Region_100K = ee.FeatureCollection(
   "projects/pc300-samz-sinchi/assets/Region_100K"); //Dominio espacial de Amazonía Colombia
 
 
-exports.region = /* color: #d63000 */ee.Geometry.Polygon(
+
+region = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-76.52690083861457, 0.9302446273087676],
           [-76.19731099486457, 0.8533496515477291],
           [-75.98857076048957, 0.9522143186707459],
@@ -64,7 +65,7 @@ exports.region = /* color: #d63000 */ee.Geometry.Polygon(
           [-73.67045552611457, 2.6322399358683044],
           [-74.88993794798957, 1.3805913351450838],
           [-76.03251607298957, 1.7979102902170863]]]); // Polígono usada para realizar pruebas
-
+exports.region=region
 exports.geometry_test =region;
 
 exports.CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
