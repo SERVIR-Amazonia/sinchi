@@ -4,7 +4,24 @@ var geometry =
     /* shown: false */
     ee.Geometry.MultiPoint();
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-
+/**
+ * Título: Clasificación de Coberturas de la Tierra
+ * Descripción: Este script es desarrollado en  JavaScript para ser ejecutado en Google Earth Engine.  
+ *            Ejecuta un flujo de trabajo completo de clasificación de cobertura de tierra.
+ *      
+ *            Luego evalúa la exactitud de la clasificación con los datos de validación generados 
+ *              con el módulo exec_prepare_data, los cuales fueron almacenados previamente en un asset.
+ *  Autora:   Liliana Castillo Villamor
+ *  Versión: 1.0
+ *  Detalles: El módulo ejecuta un flujo de trabajo completo de clasificación de cobertura de tierra 
+ *              usando las funciones disponibles en el módulo classify. 
+ *            Utiliza un enfoque de máxima probabilidad basado en los primitivos, 
+ *            los cuales se construyen a partir de la imagen de covariables generada previamente con el módulo exec_prepare_data. 
+ *            Luego evalúa la exactitud de la clasificación con los datos de validación generados con módulo exec_prepare_data, l
+ *            Estos datos de validaciónos fueron almacenados previamente en un asset.  
+ * Contacto: lccastillov@gmail.com
+ * 
+**/
 
 
 //Importar módulos
