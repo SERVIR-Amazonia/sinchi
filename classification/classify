@@ -1,7 +1,9 @@
-
+// Función para entrenar un clasificador Random Forest sencillo con datos de entrenamiento y prueba, y una imagen de entrada.
 
 
 exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
+  // Preparar los datos de entrenamiento muestreando las clases de la imagen de entrada
+  //Extrae bandas de la imangen de entrada como atributos
     var trainingData = inputImage.sampleRegions({
         collection: trainingPts,
         properties: ['nivel_1'],
@@ -9,6 +11,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     });
 
     var testingData = inputImage.sampleRegions({
+      // Preparar los datos de prueba muestreando las regiones de la imagen de entrada
         collection: testingPts,
         properties: ['nivel_1'],
         scale: 20
@@ -16,32 +19,35 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     //print(" testingData", testingData)
     
 
-
+    // Entrena el clasificador Random Forest
     var classifier = ee.Classifier.smileRandomForest(100).train({
+      
         features: trainingData,
         classProperty: 'nivel_1',
         inputProperties: inputImage.bandNames()
     });
 
-
+    // Retorna el resultado de la clasificación y los clasificadores
     return {
         classified_image: inputImage.classify(classifier),
         rfclassifier: classifier,
         trainingData:testingData,
         testingData:testingData
-        
     };
     
 };
-/////
-//// Classiffy using Primitives
+/*
+* Funciones para realizar la clasificaciónd e coberturas usaando primitivos
+*/
 
 
+// Formatear puntos de entrenamiento 
 var formatPts=function (pts,clase) {
-    // Turn a FC of training points containing full LC typology into a list of primitive point FCs, 
-    // one point FC for each LC primitive
+    // Convertir una colección de puntos de entrenamiento con tipología completa de 
+    //Cobertura de la tierra en una lista de colecciones de puntos para cada primitivo de Cobertura
 
-    // Create sets of binary training pts for each class represented in the full training pts collection
+
+    // Crear conjuntos de puntos de entrenamiento binarios para cada clase representada en la colección completa
     var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
     function binaryPts(l) {
         // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
