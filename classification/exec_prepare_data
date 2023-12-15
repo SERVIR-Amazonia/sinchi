@@ -99,7 +99,8 @@ var image_covariates=ee.Image(image_covariates);
 var imageGeometry = image_covariates.geometry();
 
 //Exportar iamgen con covariables a un asset
-/*
+
+
 Export.image.toAsset({
     image: image_covariates,
     description: 'ExportedImageCovariates',
@@ -108,7 +109,6 @@ Export.image.toAsset({
     region: imageGeometry, // Define la región (la misma gemetria de la imagen)
     maxPixels: 1e9 
 });
-*/
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
 var training = training.filterBounds(imageGeometry);
