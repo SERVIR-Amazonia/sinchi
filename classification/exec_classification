@@ -85,13 +85,13 @@ function addImageWithLegend(image, palette, names, min, max, layerName) {
 }
 
 // Ejecutar la funcion
-var SingleBandImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
+var classifiedImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con el ID de tu imagen
 var palette = ['red', 'blue', 'green', 'yellow', 'purple']; // Paleta de colores
 var names = ['Territorios Artificializados', 'Territorios agricolas',
 'Bosques y áreas seminaturales', 'Areas humedas', 'Superficies de agua']; // Nombres de las categorías
 
 // Añadir imagen y leyenda al mapa
-addImageWithLegend(SingleBandImage, palette, names, 1, 5, 'Categorías');
+addImageWithLegend(classifiedImage, palette, names, 1, 5, 'Categorías');
 
 
 //MAtriz de confusion y metricas para clasificador usando primitivos
@@ -109,76 +109,15 @@ modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
 Map.addLayer(trainingDataUpdated, {color: 'black'}, 'Training Points '+semestre);
 Map.addLayer(testingDataBalanced, {color: 'white'}, 'Testing Points S1 '+semestre);
-/*
-//Map.addLayer(visualizationResults.combinedResults_S2.testing, {color: 'yellow'}, 'Testing Points S2');
 
-// Centrar el mapa en uno de los conjuntos de puntos
-Map.centerObject(visualizationResults.combinedResults_S1.training);
-var exportParams = {
-  image: classifiedImage,
-  description: 'classified_image_export',
-  fileNamePrefix: 'classified_image',
-  scale: 32,  // Debe coincidir con la resolución utilizada para el análisis
-  region: region,  // Especifica la región que deseas exportar
-  fileFormat: 'GeoTIFF',
-  maxPixels: 1e13  // Ajusta según las necesidades
-};
-Export.image.toDrive(exportParams);
+//Exportar imagen con superficie de clasificación
 
-// Mostrar imagen clasificada en mapa:
-// Suponiendo que classifiedImage es tu imagen de clasificación
-
-// Definir la paleta de colores y nombres de clases
-var palette = ['red', 'green', 'blue', 'yellow', 'purple']; // Colores
-var classNames = ['Territorios Artificializados', 'Terriotrios Agrícolas',
-'Bosques y áreas seminaturales', 'Areas húmedas', 'Superficies de agua']; // Nombres
-
-// Parámetros de visualización para la imagen
-var visualizationParams = {
-  min: 1,
-  max: 5,
-  palette: palette
-};
-
-// Agregar la imagen al mapa
-//Map.addLayer(classifiedImage, visualizationParams, 'Imagen Clasificada');
-// Crear un panel para la leyenda
-var legend = ui.Panel({
-  style: {
-    position: 'bottom-left',
-    padding: '8px 15px'
-  }
+Export.image.toAsset({
+    image: classifiedImage,
+    description: 'Imagen clasificada',
+    assetId: CoberturaTierra, 
+    scale: 20,
+    region: geometry_test, 
+    maxPixels: 1e9 
 });
 
-
-// Agregar título a la leyenda
-var legendTitle = ui.Label({
-  value: 'Leyenda',
-  style: {
-    fontWeight: 'bold',
-    fontSize: '16px',
-    margin: '0 0 4px 0',
-    padding: '0'
-  }
-});
-legend.add(legendTitle);
-
-// Agregar las entradas de la leyenda
-classNames.forEach(function(name, index){
-  var color = palette[index];
-  var label = ui.Label({
-    value: name,
-    style: {
-      color: 'black',
-      backgroundColor: color,
-      margin: '2px',
-      padding: '2px'
-    }
-  });
-  legend.add(label);
-});
-
-// Agregar la leyenda al mapa
-Map.add(legend);
-
-*/
