@@ -18,7 +18,7 @@ var start_day = 1; //día inicio del análisis
 exports.start_day=start_day;
 
 var end_year = 2022; //año fin del análisis
-exports. end_year= end_year;
+exports.end_year= end_year;
 
 var end_month = 7; // mesfin del análisis
 exports.end_month=end_month;
