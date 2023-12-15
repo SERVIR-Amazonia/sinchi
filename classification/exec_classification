@@ -48,11 +48,8 @@ var end_month =moduloVarDefinition.end_month;
 var ano=moduloVarDefinition.ano;
 
 
-
-
 // Cargar los datos de entrenamiento y prueba y la imagen de covariables
-//nalmacenados en un asset
-
+//almacenados en un asset
 var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath);
 var testingDataBalanced = ee.FeatureCollection(TestingDataPath);
 var image_covariates = ee.Image(image_covariatesPath);
