@@ -132,19 +132,16 @@ var sampledPtsFromImg = module_extract_samples.PreparePts(training, testing, ima
 var trainingDataUpdated=sampledPtsFromImg.trainingDataUpdated;
 var testingDataUpdated=sampledPtsFromImg.testingDataUpdated;
 
-// Exportar la colección de entrenamiento
-Export.table.toAsset({
-  collection: trainingDataUpdated,
-  description: 'training_data_export',
-  assetId: TrainingDataPath
-});
+function exportDataToAsset(collection, description, assetId) {
+  Export.table.toAsset({
+    collection: collection,
+    description: description,
+    assetId: assetId
+  });
+}
 
-// Exportar la colección de entrenamiento
-Export.table.toAsset({
-  collection: testingDataUpdated,
-  description: 'testing_data_export',
-  assetId: TestingDataPath
-});
-
+// Uso de la función para exportar datos de entrenamiento y prueba
+exportDataToAsset(trainingDataUpdated, 'training_data_export', TrainingDataPath);
+exportDataToAsset(testingDataUpdated, 'testing_data_export', TestingDataPath);
 
 
