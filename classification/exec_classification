@@ -108,7 +108,7 @@ modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
 
 Map.addLayer(trainingDataUpdated, {color: 'black'}, 'Training Points '+semestre);
-Map.addLayer(testingDataBalanced, {color: 'white'}, 'Testing Points S1 '+semestre);
+Map.addLayer(testingDataBalanced, {color: 'white'}, 'Testing Points '+semestre);
 
 //Exportar imagen con superficie de clasificación
 
