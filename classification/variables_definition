@@ -65,11 +65,9 @@ exports.region = /* color: #d63000 */ee.Geometry.Polygon(
           [-74.88993794798957, 1.3805913351450838],
           [-76.03251607298957, 1.7979102902170863]]]); // Polígono usada para realizar pruebas
 
-
-
 var geometry = region;
 
-exports.geometry_test =geometry2;
+exports.geometry_test =region;
 
 var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
       +semestre+'_'+ ano); 
