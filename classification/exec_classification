@@ -31,15 +31,15 @@ var moduloExecPrepData=require('users/an-sig/sinchi:classification/exec_prepare_
 var moduloVarDefinition=require('users/an-sig/sinchi:classification/variables_definition');
 
 //// Obtener variables desde el módulo de preparación de datos
-var clase =moduloExecPrepData.clase;
-var semestre =moduloExecPrepData.semestre;
-var TrainingDataPath=moduloExecPrepData.TrainingDataPath;
-var TestingDataPath=moduloExecPrepData.TestingDataPath;
-var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
-var Region_100K =moduloExecPrepData.Region_100K;
-var geometry_test=moduloExecPrepData.geometry_test;
+var clase =moduloVarDefinition.clase;
+var semestre =moduloVarDefinition.semestre;
+var TrainingDataPath=moduloVarDefinition.TrainingDataPath;
+var TestingDataPath=moduloVarDefinition.TestingDataPath;
+var image_covariatesPath=moduloVarDefinition.image_covariatesPath;
+var Region_100K =moduloVarDefinition.Region_100K;
+var geometry_test=moduloVarDefinition.geometry_test;
 var region=geometry_test;
-var ano=moduloExecPrepData.end_year;
+var ano=moduloVarDefinition.end_year;
 
 
 var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
