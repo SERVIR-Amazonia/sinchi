@@ -22,6 +22,8 @@ exports.clase =clase;
 var semestre='S1'
 exports.semestre =semestre;
 
+var ano=end_year
+exports.ano =ano;
 
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
 var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
