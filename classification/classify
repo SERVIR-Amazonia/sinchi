@@ -109,7 +109,7 @@ var RFprim=function (trainingPts,inputStack, label) {
     
     // Store for model performance exploration
     var explain=model.explain();
-    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate')
+    var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
 
     // Retrieve top 20 most important features
@@ -163,7 +163,7 @@ exports.createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
         var img = RFprim(primPts, inputStack, label);
         primList = primList.add(img);
     });
-    print("primList 251",primList)
+    print("Lista de primitivos ",primList);
     return ee.ImageCollection.fromImages(primList);
 };
 
@@ -189,7 +189,7 @@ exports.assembleMaxProbability=function (collection) {
   // Adjust for zero-based indexing and return the land cover image
   var output = maxProbability.add(1).rename('LANDCOVER');
   return output;
-}
+};
 
 
 
@@ -245,7 +245,7 @@ exports.importance=function(classifier){
   var sum = importance.values().reduce(ee.Reducer.sum());
   
   var relativeImportance = importance.map(function(key, val) {
-     return (ee.Number(val).multiply(100)).divide(sum)
+     return (ee.Number(val).multiply(100)).divide(sum);
     });
   print(relativeImportance);
   
