@@ -80,7 +80,7 @@ var geometry = region;
 exports.geometry_test =geometry2;
 
 var module_extract_samples = require(
-  'users/an-sig/sinchi:classification/module_extract_samples'
+  'users/an-sig/sinchi:classification/extract_samples'
   ); // Modulo para extraer puntos de meustreo y validación
   
 var moduloComposite= require(
