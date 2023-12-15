@@ -89,7 +89,7 @@ var get_s2_sr_cld_col = function(aoi, start_date, end_date) {
   
     // s2_sr_col filtra la colección de imágenes SR de Sentinel-2 para el Área de Interés (AOI) y entre las fechas de inicio y fin indicadas.
     // y excluye imágenes con un porcentaje de píxeles nublados mayor al umbral definido en CLOUD_FILTER
-    var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+    var s2_sr_col = ee.ImageCollection('COPERNICUS/S2_SR')
         .filterBounds(aoi)
         .filterDate(start_date, end_date)
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', CLOUD_FILTER));
