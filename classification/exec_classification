@@ -39,10 +39,7 @@ var Region_100K =moduloVarDefinition.Region_100K;
 var geometry_test=moduloVarDefinition.geometry_test;
 var region=geometry_test;
 var ano=moduloVarDefinition.end_year;
-
-
-var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
-      +semestre+'_'+ ano); 
+var CoberturaTierra = moduloVarDefinition.CoberturaTierra
 var geometry = region;
 
 
