@@ -26,20 +26,19 @@ var ano=end_year
 exports.ano =ano;
 
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
-var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
+exports.TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
       +semestre; 
-exports.TrainingDataPath=TrainingDataPath
 
-var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
+
+exports.TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
       +semestre; 
-exports.TestingDataPath=TestingDataPath
 
-var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
-exports.image_covariatesPath=image_covariatesPath
+exports.image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
 
-var Region_100K = ee.FeatureCollection(
+
+exports.Region_100K = ee.FeatureCollection(
   "projects/pc300-samz-sinchi/assets/Region_100K"); //Dominio espacial de Amazonía Colombia
-exports.Region_100K =Region_100K;
+
 
 var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-76.52690083861457, 0.9302446273087676],
