@@ -174,7 +174,7 @@ exports.createLCPrimitiveCollection=function(inputStack, trainingPts, clase) {
 };
 
 
-// Ensamblar la máxima probabilidad
+// Ensamblar im´ágenes a partir  de la máxima probabilidad
 exports.assembleMaxProbability=function (collection) {
   // Convertir la colección de imágenes en una imagen multibanda
   var image = collection.toBands();
@@ -188,10 +188,10 @@ exports.assembleMaxProbability=function (collection) {
     return maxProbClassification;
   }
 
-  // Calculate the maximum probability
+  // Calcular la máxima probabilidad
   var maxProbability = maxProb(image);
 
-  // Adjust for zero-based indexing and return the land cover image
+  // Ajustar para la indexación basada en cero y retornar la imagen de cobertura de tierra
   var output = maxProbability.add(1).rename('LANDCOVER');
   return output;
 };
