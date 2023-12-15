@@ -50,7 +50,7 @@ var formatPts=function (pts,clase) {
     // Crear conjuntos de puntos de entrenamiento binarios para cada clase representada en la colección completa
     var labels = ee.FeatureCollection(pts).aggregate_array(clase).distinct().sort();
     function binaryPts(l) {
-        // Create prim and non prim sets with filters, reset prim to 1, non-prim to 0
+         // Crear conjuntos prim y non-prim con filtros, reiniciar prim a 1, non-prim a 0
         var prim = pts.filter(ee.Filter.eq(clase, l)).map(function(f) {
             return f.set('PRIM', 1);
         });
@@ -65,9 +65,9 @@ var formatPts=function (pts,clase) {
     return listOfPrimPts;
 };
 
-
+//// Obtener las 20 covariables más importantes
 var getTop20=function (dict) {
-    // If total input features count < 20, take them all, otherwise take top 20 most important
+    // Si el total de características es menor a 20, tomarlas todas, de lo contrario tomar las 20 más importantes
     dict = ee.Dictionary(dict);
     var values = dict.values().sort();
     //print("values 107",values)
@@ -87,9 +87,8 @@ var getTop20=function (dict) {
 
 
 
-
+// Función para entrenar y aplicar el clasificador Random Forest en un primitivo
 var RFprim=function (trainingPts,inputStack, label) {
-    // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     var samples = ee.FeatureCollection(trainingPts);
     
@@ -98,9 +97,7 @@ var RFprim=function (trainingPts,inputStack, label) {
     //var linea125=linea160.first();
 
 
-    //var classValue = ee.Number(ee.Feature(samples.sort('PRIM', false).first()).get(clase));
-
-    // Can experiment with classifier params for model performance
+    // Entrenar el clasificador Random Forest con parámetros específicos
     var classifier = ee.Classifier.smileRandomForest({
         numberOfTrees: 100,
         minLeafPopulation: 1,
@@ -108,14 +105,14 @@ var RFprim=function (trainingPts,inputStack, label) {
         seed: 51515
     }).setOutputMode('PROBABILITY');
 
-    // Train model with all features
+    // Entrenar el modelo con todas las covariables
     var model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
         inputProperties: inputs.bandNames()
     });
     
-    // Store for model performance exploration
+    // Almacenar los resultados del modelo para explorar el rendimiento
     var explain=model.explain();
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
