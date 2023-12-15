@@ -35,9 +35,10 @@ var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
 var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
 var image_covariates = ee.Image(image_covariatesPath)
 
-//Crear colección de primitivos
+//Crear colección de imágenes de las clases de cobertura de tierra (primitivos)
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
 
+// Convertir colección de primitivos en una imagen multibanda
 var multibandImage = primitives.toBands();
 
 
