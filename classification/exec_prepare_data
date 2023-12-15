@@ -39,7 +39,7 @@ var Region_100K=moduloVarDefinition.Region_100K;
 var region=moduloVarDefinition.region
 var geometry = region;
 
-exports.geometry_test =geometry2;
+exports.geometry_test =region;
 
 var module_extract_samples = require(
   'users/an-sig/sinchi:classification/extract_samples'
