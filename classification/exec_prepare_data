@@ -29,16 +29,11 @@ var end_month =moduloVarDefinition.end_month;
 var ano=moduloVarDefinition.ano;
 
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
-var TrainingDataPath=moduloVarDefinition.TrainingDataPath
+var TrainingDataPath=moduloVarDefinition.TrainingDataPath;
 
-var TestingDataPath=moduloVarDefinition.TestingDataPath
-var TestingDataPath=moduloVarDefinition.image_covariatesPath
-var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
-exports.image_covariatesPath=image_covariatesPath
-
-var Region_100K = ee.FeatureCollection(
-  "projects/pc300-samz-sinchi/assets/Region_100K"); //Dominio espacial de Amazonía Colombia
-exports.Region_100K =Region_100K;
+var TestingDataPath=moduloVarDefinition.TestingDataPath;
+var image_covariatesPath=moduloVarDefinition.image_covariatesPath;
+var Region_100K=moduloVarDefinition.Region_100K;
 
 var geometry2 = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-76.52690083861457, 0.9302446273087676],
