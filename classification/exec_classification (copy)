@@ -19,7 +19,8 @@ var geometry =
  *            los cuales se construyen a partir de la imagen de covariables generada previamente con el módulo exec_prepare_data. 
  *            Luego evalúa la exactitud de la clasificación con los datos de validación generados con módulo exec_prepare_data, l
  *            Estos datos de validaciónos fueron almacenados previamente en un asset.  
- * Contacto: lccastillov@gmail.com
+ * Contacto:  lccastillov@gmail.com
+ * Referencias: El Script acá presentado adapta elementos desarrollados por Kyle Woodward para Python (https://github.com/kyle-woodward)
  * 
 **/
 
