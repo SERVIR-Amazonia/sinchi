@@ -28,16 +28,11 @@ var end_year=moduloVarDefinition.end_year;
 var end_month =moduloVarDefinition.end_month;
 var ano=moduloVarDefinition.ano;
 
-
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
-var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
-      +semestre; 
-exports.TrainingDataPath=TrainingDataPath
+var TrainingDataPath=moduloVarDefinition.TrainingDataPath
 
-var TestingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/testingDataUpdated'
-      +semestre; 
-exports.TestingDataPath=TestingDataPath
-
+var TestingDataPath=moduloVarDefinition.TestingDataPath
+var TestingDataPath=moduloVarDefinition.image_covariatesPath
 var image_covariatesPath='projects/pc300-samz-sinchi/assets/imageCovariates'+semestre
 exports.image_covariatesPath=image_covariatesPath
 
