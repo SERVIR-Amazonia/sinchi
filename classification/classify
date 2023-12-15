@@ -203,7 +203,6 @@ exports.calculateConfusionMatrixB =function(image, testingPts){
         scale: 20,
         geometries: true // Esto mantiene la geometría original
     });
-    print("dataExtracted",dataExtracted)
     var confusionMatrix = dataExtracted.errorMatrix({
             actual: 'nivel_1',
             predicted: 'LANDCOVER'
