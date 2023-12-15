@@ -97,15 +97,6 @@ addImageWithLegend(classifiedImage, palette, names, 1, 5, 'Categorías');
 //MAtriz de confusion y metricas para clasificador usando primitivos
 modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced)
 
-//////
-
-// Mostrar los resultados
-//print("combinedResults_S1.training", visualizationResults.combinedResults_S1.training);
-//print("combinedResults_S1.testing", visualizationResults.combinedResults_S1.testing);
-//print("combinedResults_S2.training", visualizationResults.combinedResults_S2.training);
-//print("combinedResults_S2.testing", visualizationResults.combinedResults_S2.testing);
-
-
 
 Map.addLayer(trainingDataUpdated, {color: 'black'}, 'Training Points '+semestre);
 Map.addLayer(testingDataBalanced, {color: 'white'}, 'Testing Points '+semestre);
