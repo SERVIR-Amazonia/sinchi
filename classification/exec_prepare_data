@@ -93,7 +93,7 @@ Export.image.toAsset({
     region: imageGeometry, // Define la región (la misma gemetria de la imagen)
     maxPixels: 1e9 
 });
-// Actualizar el mensaje en la UI para indicar que la exportación ha comenzado
+// Actualizar el mensaje en la Interfaz de usuario indicando que la exportación ha comenzado
 updateUIMessage('Exportación de imagen de covariables iniciada. Este proceso puede demorar un poco.     Cuando haya terminado te aparecerá la imagen ExportedImageCovariates en la pestaña Tasks');
 
 
