@@ -84,7 +84,7 @@ var RFprim=function (trainingPts,inputStack, label) {
     // Train and apply RF Probability classifier on a Primitive
     var inputs = ee.Image(inputStack);
     var samples = ee.FeatureCollection(trainingPts);
-    print("samples",samples);
+    
     // Aplicar esta función a todas las características en la colección
     //var linea160=samples.sort('PRIM', false);
     //var linea125=linea160.first();
