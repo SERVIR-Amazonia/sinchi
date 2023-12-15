@@ -185,7 +185,7 @@ function Indices() {
           .reproject({
             crs: img.projection().crs(),
             scale: img.projection().nominalScale()
-          })
+          });
           return img.addBands(resampledRelieve.rename('relie'));
             };
     
@@ -299,7 +299,7 @@ function returnCovariates(img,boundary,fcRelieve) {
         image = indicesInstance.SVVI(image).unmask(0);
         //image = indicesInstance.addRelieve(image,fcRelieve).unmask(0);
         
-        image=normalize(image, boundary)
+        image=normalize(image, boundary);
         
 
         return image;
@@ -307,7 +307,6 @@ function returnCovariates(img,boundary,fcRelieve) {
 
     
     var bandNames = img.bandNames();
-   print("bandNames down",bandNames)
     var down = img.select(bandLow);
     var down=changeBandNames(down, '_p20')
     var down_composition=addIndices(down);
