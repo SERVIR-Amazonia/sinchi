@@ -37,7 +37,7 @@ exports.rf =function RFprim(trainingPts, testingPts,inputImage) {
     
 };
 /*
-* Funciones para realizar la clasificaciónd e coberturas usaando primitivos
+* Funciones para realizar la clasificación de coberturas usaando primitivos
 */
 
 
@@ -117,10 +117,10 @@ var RFprim=function (trainingPts,inputStack, label) {
     var oobAll = ee.Dictionary(model.explain()).get('outOfBagErrorEstimate');
     var importanceAll = ee.Dictionary(model.explain()).get('importance');
 
-    // Retrieve top 20 most important features
+    // Obtener las 20 covariables más importantes
     var top20 = getTop20(importanceAll); // Ensure getTop20 function is defined in your script
     
-    // Re-train model with top 20 important features
+    // Re-entrenar el modelo con las 20 características más importantes
     model = classifier.train({
         features: samples,
         classProperty: 'PRIM',
