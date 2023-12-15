@@ -41,7 +41,7 @@ exports.Region_100K = ee.FeatureCollection(
 
 
 
-region = /* color: #d63000 */ee.Geometry.Polygon(
+var region = /* color: #d63000 */ee.Geometry.Polygon(
         [[[-76.52690083861457, 0.9302446273087676],
           [-76.19731099486457, 0.8533496515477291],
           [-75.98857076048957, 0.9522143186707459],
