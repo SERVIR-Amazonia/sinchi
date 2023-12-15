@@ -20,7 +20,9 @@ var image_covariatesPath=moduloExecPrepData.image_covariatesPath;
 var Region_100K =moduloExecPrepData.Region_100K;
 var geometry_test=moduloExecPrepData.geometry_test;
 var region=geometry_test;
-var CoberturaTierra=('')
+var ano=moduloExecPrepData.TestingDataPath
+var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
+      +semestre+' '+ ano); 
 var geometry = region;
 
 
