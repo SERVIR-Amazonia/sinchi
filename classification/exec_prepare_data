@@ -8,29 +8,26 @@
 //var aoi = Region_100K.first().geometry();
 //var region = aoi.buffer(100);
 
-var start_year = 2022;//año inicio del análisis
-exports.start_year = start_year; // Exportar la variable para que sea usada en otro módulo
+var moduloVarDefinition=require('users/an-sig/sinchi:classification/variables_definition');
 
-var start_month = 1; //mes inicio del análisis
-exports.start_month=start_month;
+//// Obtener variables desde el módulo de preparación de datos
+var clase =moduloVarDefinition.clase;
+var semestre =moduloVarDefinition.semestre;
+var TrainingDataPath=moduloVarDefinition.TrainingDataPath;
+var TestingDataPath=moduloVarDefinition.TestingDataPath;
+var image_covariatesPath=moduloVarDefinition.image_covariatesPath;
+var Region_100K =moduloVarDefinition.Region_100K;
+var geometry_test=moduloVarDefinition.geometry_test;
+var region=geometry_test;
+var CoberturaTierra = moduloVarDefinition.CoberturaTierra;
+var geometry = region;
+var start_year = moduloVarDefinition.start_year;//año inicio del análisis
+var start_month =moduloVarDefinition.start_month;
+var start_day =moduloVarDefinition.start_day;
+var end_year=moduloVarDefinition.end_year;
+var end_month =moduloVarDefinition.end_month;
+var ano=moduloVarDefinition.ano;
 
-var start_day = 1; //día inicio del análisis
-exports.start_day=start_day;
-
-var end_year = 2022; //año fin del análisis
-exports.end_year= end_year;
-
-var end_month = 7; // mesfin del análisis
-exports.end_month=end_month;
-
-var end_day = 31; // día fin del análisis
-exports.end_day=end_day;
-
-var clase ='nivel_1';
-exports.clase =clase;
-
-var semestre='S1'
-exports.semestre =semestre;
 
 // Ruta donde se almacena asset con puntos de entrenamiento (incluyendo valores de covariables)
 var TrainingDataPath='projects/pc300-samz-sinchi/assets/sampling_points/trainingDataUpdated'
