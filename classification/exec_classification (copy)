@@ -54,7 +54,6 @@ var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, t
 
 var multibandImage = primitives.toBands(); // Convertir colección de primitivs en imagen multibanda
 
-print("multibandImage 75",multibandImage)
 //mostrar en mapa primeara imagen
 var primitivesList = primitives.toList(primitives.size());
 
