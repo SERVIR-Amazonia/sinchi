@@ -41,6 +41,14 @@ var region=geometry_test;
 var ano=moduloVarDefinition.end_year;
 var CoberturaTierra = moduloVarDefinition.CoberturaTierra
 var geometry = region;
+var start_year = moduloVarDefinition.start_year;//año inicio del análisis
+var start_month =moduloVarDefinition.start_month
+var start_day =moduloVarDefinition.start_day
+var end_year=moduloVarDefinition.end_year
+var end_month =moduloVarDefinition.end_month
+var ano=end_year
+
+
 
 
 // Cargar los datos de entrenamiento y prueba y la imagen de covariables
