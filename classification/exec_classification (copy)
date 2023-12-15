@@ -24,11 +24,9 @@ var geometry = region;
 
 
 
-var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath)
-
-var testingDataBalanced = ee.FeatureCollection(TestingDataPath)
-
-var image_covariates = ee.Image(image_covariatesPath)
+var trainingDataUpdated = ee.FeatureCollection(TrainingDataPath);
+var testingDataBalanced = ee.FeatureCollection(TestingDataPath);
+var image_covariates = ee.Image(image_covariatesPath);
 
 //Crear colección de primitivos
 var primitives=modulo_classifier.createLCPrimitiveCollection(image_covariates, trainingDataUpdated, clase) ;
