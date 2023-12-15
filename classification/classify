@@ -61,8 +61,7 @@ var formatPts=function (pts,clase) {
     }
 
     var listOfPrimPts = ee.List(labels).map(binaryPts);
-    //var listOfPrimPts = ee.List(labels).map(binaryPts);
-    
+
     return listOfPrimPts;
 };
 
