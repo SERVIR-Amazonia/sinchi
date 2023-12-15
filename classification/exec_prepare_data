@@ -100,6 +100,16 @@ var imageGeometry = image_covariates.geometry();
 
 //Exportar iamgen con covariables a un asset
 
+// Crear un panel en la interfaz de usuario para mostrar mensajes
+var uiPanel = ui.Panel();
+uiPanel.style().set('width', '300px');
+uiPanel.add(ui.Label('Preparando para exportar...'));
+Map.add(uiPanel);
+
+// Función para actualizar el mensaje
+function updateUIMessage(message) {
+  uiPanel.widgets().reset([ui.Label(message)]);
+}
 
 Export.image.toAsset({
     image: image_covariates,
@@ -109,6 +119,9 @@ Export.image.toAsset({
     region: imageGeometry, // Define la región (la misma gemetria de la imagen)
     maxPixels: 1e9 
 });
+// Actualizar el mensaje en la UI para indicar que la exportación ha comenzado
+updateUIMessage('Exportación iniciada. Por favor, espera.');
+
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
 var training = training.filterBounds(imageGeometry);
@@ -126,6 +139,7 @@ function exportDataToAsset(collection, description, assetId) {
     description: description,
     assetId: assetId
   });
+
 }
 
 // Uso de la función para exportar datos de entrenamiento y prueba
