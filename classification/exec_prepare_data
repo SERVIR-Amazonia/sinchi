@@ -120,7 +120,7 @@ Export.image.toAsset({
     maxPixels: 1e9 
 });
 // Actualizar el mensaje en la UI para indicar que la exportación ha comenzado
-updateUIMessage('Exportación iniciada. Este proceso puede demorar un poco. Cuando haya terminado en la pesata~ña de tareas te aparecerá la imagen ExportedImageCovariates ');
+updateUIMessage('Exportación de imagen de covariables iniciada. Este proceso puede demorar un poco. Cuando haya terminado en la pesataña de tareas te aparecerá la imagen ExportedImageCovariates ');
 
 
 // Filtrar el FeatureCollection para conservar solo los puntos dentro del extent de la imagen
