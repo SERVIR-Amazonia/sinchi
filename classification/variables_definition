@@ -68,3 +68,8 @@ var region=geometry2;
 var geometry = region;
 
 exports.geometry_test =geometry2;
+
+var CoberturaTierra = ('projects/pc300-samz-sinchi/assets/coberturas/'
+      +semestre+'_'+ ano); 
+exports.CoberturaTierra=CoberturaTierra;
+
