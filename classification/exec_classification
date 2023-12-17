@@ -76,7 +76,7 @@ var doubleclassifiedImage =classifiedImage.toDouble();
 // Exportar la imagen clasificada al Asset de GEE
 
 Export.image.toAsset({
-    image: doubleclassifiedImag,
+    image: doubleclassifiedImage,
     description: 'Imagen_clasificada',
     assetId: CoberturaTierra, 
     scale: 20,
