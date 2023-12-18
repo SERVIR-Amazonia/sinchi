@@ -89,7 +89,7 @@ Export.image.toAsset({
     image: image_covariates,
     description: 'ExportedImageCovariates',
     assetId: image_covariatesPath, 
-    scale: 10,
+    scale: 20,
     region: imageGeometry, // Define la región (la misma gemetria de la imagen)
     maxPixels: 1e13
 });
