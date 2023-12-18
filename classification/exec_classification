@@ -71,10 +71,13 @@ var classifiedImage = ee.Image(assembleMax); // Reemplaza 'tu_imagen_aqui' con e
 //Matriz de confusion y metricas para clasificador usando primitivos
 modulo_classifier.calculateConfusionMatrixB(assembleMax, testingDataBalanced);
 
+// Convertir la imagen clasificada al tipo de dato 'Double' 
+var doubleclassifiedImage =classifiedImage.toDouble();
+
 // Exportar la imagen clasificada al Asset de GEE
 
 Export.image.toAsset({
-    image: classifiedImage,
+    image: doubleclassifiedImage,
     description: 'Imagen_clasificada',
     assetId: CoberturaTierra, 
     scale: 20,

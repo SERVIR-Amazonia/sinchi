@@ -119,14 +119,14 @@ exports.PreparePts = function(S1_training, S1_testing, image_covariates,estratoF
     trainingDataUpdated = image_covariates.sampleRegions({
         collection: trainingDataUpdated,
         properties: [estratoField],
-        scale: 20,
+        scale: 10,
         geometries: true // Esto mantiene la geometría original
     });
 
     testingDataUpdated = image_covariates.sampleRegions({
         collection: testingDataUpdated,
         properties: [estratoField],
-        scale: 20,
+        scale: 10,
         geometries: true // Esto mantiene la geometría original
     });
 

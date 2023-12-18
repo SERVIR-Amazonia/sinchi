@@ -91,7 +91,7 @@ Export.image.toAsset({
     assetId: image_covariatesPath, 
     scale: 20,
     region: imageGeometry, // Define la región (la misma gemetria de la imagen)
-    maxPixels: 1e9 
+    maxPixels: 1e13
 });
 // Actualizar el mensaje en la Interfaz de usuario indicando que la exportación ha comenzado
 updateUIMessage('Exportación de imagen de covariables iniciada. Este proceso puede demorar un poco.     Cuando haya terminado te aparecerá la imagen ExportedImageCovariates en la pestaña Tasks');
